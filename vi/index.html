@@ -9,7 +9,8 @@
             name="description"
             content="Product and motion designer creating accessible, eye-catching designs. Available for full-time and freelance work."
         />
-        <!--Fonts -->
+
+        <!-- Critical fonts: Jacquard 12, DinaRemasterII, EB Garamond -->
         <link
             rel="preload"
             href="./font/DinaRemasterII.ttc"
@@ -20,10 +21,20 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Pixelify+Sans:wght@400..700&family=UnifrakturMaguntia&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap"
             rel="stylesheet"
         />
+
+        <!-- Secondary fonts: Libre Baskerville + Doto fallback -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Doto:wght@400&display=swap"
+            rel="stylesheet"
+            media="print"
+            onload="this.media='all'"
+        />
+
         <link rel="icon" type="image/x-icon" href="./images/fav.png" />
+        <link rel="stylesheet" href="./global.css" />
         <link rel="stylesheet" href="./styles.css" />
         <link
             href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
@@ -37,23 +48,22 @@
                 <header>
                     <nav>
                         <div id="logo-div">
-                            <h3 id="logo">VS</h3>
+                         <a href="./index.html"><h4 id="logo">VS</h4></a>
                         </div>
                         <div id="nav-inner">
                             <ul id="nav-inner-ul">
-                                <li>WORK</li>
-                                <li>PLAYGROUND</li>
-                                <li>CONTACT</li>
+                               <a href="./index.html#page-2"> <li>WORK</li></a>
+                              <a href="./index.html#page-3"><li>ABOUT</li></a>
+                              <a href="./story.html"><li>MY STORY</li></a>
+                             <li>CONTACT</li>
                             </ul>
-                            <h3 id="menu">MENU<i class="ri-add-line"></i></h3>
-                            <h3 id="extra"></h3>
+                            <h6 id="menu">MENU<i class="ri-add-line"></i></h6>
                         </div>
                     </nav>
                 </header>
                 <div id="hero-handle">
-                    <div id="hero-head"></div>
                     <div id="hero-head">
-                        <h1>Designer<mark>&</mark></h1>
+                        <h1>Designer &</h1>
                     </div>
                     <div id="main-head">
                         <h1>Developer</h1>
@@ -64,18 +74,16 @@
                 </div>
                 <div id="main-mid">
                     <div class="mid">
-                        <h3>available for full time & freelance work</h3>
+                        <h5>available for full time & freelance work</h5>
                     </div>
                 </div>
                 <div id="first-bottom">
                     <h5>
-                        Viktor Sekovski<i class="ri-arrow-right-up-line"></i>
-                    </h5>
-                    <h5>
-                        Unicorn Designer & Powerhouse Developer<i
+                        MultiMedia Creative<i
                             class="ri-arrow-right-up-line"
                         ></i>
                     </h5>
+                    <h5>Unicorn Designer | Powerhouse Dev</h5>
                     <div id="ex">
                         <div id="arrow-div">
                             <div class="arrow">
@@ -88,817 +96,322 @@
                     </div>
                 </div>
             </div>
-            <!-- -------------------------------- -->
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
 
-            <section class="cards" id="cards-section" aria-label="Services">
-                <details style="--rotation: 7deg">
-                    <summary
-                        aria-label="Web & Product Development - Click to learn more"
-                    >
-                        <h2>Web & Product Development</h2>
-                        <svg
-                            width="255"
-                            height="314"
-                            viewBox="0 0 255 314"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                        >
-                            <rect
-                                x="57.8967"
-                                y="22.5154"
-                                width="14.4742"
-                                height="160.825"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="101.319"
-                                y="22.5154"
-                                width="14.4742"
-                                height="131.876"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="144.742"
-                                y="94.8867"
-                                width="14.4742"
-                                height="73.9794"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="188.165"
-                                y="109.361"
-                                width="14.4742"
-                                height="73.9794"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="231.588"
-                                y="138.309"
-                                width="14.4742"
-                                height="88.4536"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="217.113"
-                                y="226.763"
-                                width="14.4742"
-                                height="41.8144"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="202.639"
-                                y="268.577"
-                                width="14.4742"
-                                height="45.0309"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="72.3711"
-                                y="284.66"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="57.8967"
-                                y="255.711"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="43.4227"
-                                y="226.763"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="28.9483"
-                                y="197.814"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="14.4744"
-                                y="168.866"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                y="139.917"
-                                width="14.4742"
-                                height="43.4227"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="43.4227"
-                                y="154.392"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="14.4744"
-                                y="139.917"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="72.3711"
-                                y="8.04126"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="115.794"
-                                y="80.4124"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="159.217"
-                                y="94.8867"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="86.8455"
-                                y="299.134"
-                                width="115.794"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="202.639"
-                                y="109.361"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="217.113"
-                                y="123.835"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <path
-                                d="M14.4744 154.392H43.4229V168.866H57.8971V183.34H72.3713V22.5154H101.32V154.392H115.794V94.8865H144.742V168.866H159.217V109.361H188.165V183.34H202.639V123.835H217.114V138.309H231.588V226.763H217.114V268.577H202.639V299.134H86.8455V284.66H72.3713V255.711H57.8971V226.763H43.4229V197.814H28.9486V168.866H14.4744V154.392Z"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="65.9391"
-                                y="14.4741"
-                                width="14.4742"
-                                height="160.825"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="109.361"
-                                y="14.4741"
-                                width="14.4742"
-                                height="131.876"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="152.784"
-                                y="86.8455"
-                                width="14.4742"
-                                height="73.9794"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="196.207"
-                                y="101.32"
-                                width="14.4742"
-                                height="73.9794"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="239.63"
-                                y="130.268"
-                                width="14.4742"
-                                height="88.4536"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="225.155"
-                                y="218.722"
-                                width="14.4742"
-                                height="41.8144"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="210.681"
-                                y="260.536"
-                                width="14.4742"
-                                height="45.0309"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="80.4131"
-                                y="276.619"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="65.9391"
-                                y="247.67"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="51.4647"
-                                y="218.722"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="36.9903"
-                                y="189.773"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="22.5164"
-                                y="160.825"
-                                width="14.4742"
-                                height="28.9484"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="8.04199"
-                                y="131.876"
-                                width="14.4742"
-                                height="43.4227"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="51.4647"
-                                y="146.351"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="22.5164"
-                                y="131.876"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="80.4131"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="123.836"
-                                y="72.3711"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="167.259"
-                                y="86.8455"
-                                width="28.9484"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="94.8875"
-                                y="291.093"
-                                width="115.794"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="210.681"
-                                y="101.32"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="225.155"
-                                y="115.794"
-                                width="14.4742"
-                                height="14.4742"
-                                fill="#111111"
-                            />
-                            <path
-                                d="M22.5164 146.35H51.4649V160.825H65.9391V175.299H80.4133V14.4741H109.362V146.35H123.836V86.8452H152.784V160.825H167.259V101.319H196.207V175.299H210.681V115.794H225.156V130.268H239.63V218.721H225.156V260.536H210.681V291.093H94.8875V276.618H80.4133V247.67H65.9391V218.721H51.4649V189.773H36.9906V160.825H22.5164V146.35Z"
-                                fill="#cccccc"
-                            />
-                        </svg>
-                    </summary>
-                    <div class="back">
-                        <p>
-                            I build <em>creative</em> and
-                            <em>accessible</em> websites from scratch,
-                            completely tailored to your design.
-                        </p>
-                        <p>
-                            Full <em>Design</em> & <em>Development</em> of
-                            Websites, Web Applications, Products & Digital
-                            Experiences.
-                        </p>
-                        <p>UI, UX, Custom Interaction & Accessibility!</p>
-                    </div>
-                </details>
-                <details style="--rotation: -6deg">
-                    <summary aria-label="Consultancy - Click to learn more">
-                        <h2>Brand Identity <br />& Strategy</h2>
-                        <svg
-                            viewBox="0 0 195 270"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                        >
-                            <rect
-                                x="45"
-                                y="15"
-                                width="105"
-                                height="165"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="30"
-                                y="30"
-                                width="135"
-                                height="135"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="15"
-                                y="45"
-                                width="165"
-                                height="105"
-                                fill="#111111"
-                            />
-                            <rect
-                                y="75"
-                                width="195"
-                                height="45"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="75"
-                                width="45"
-                                height="270"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="60"
-                                y="165"
-                                width="75"
-                                height="90"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="60"
-                                y="209"
-                                width="75"
-                                height="46"
-                                fill="#111111"
-                            />
-                            <path
-                                d="M60 45V30H90V15H105V30H135V45H150V60H165V90H180V105H165V135H150V150H135V165H120V194H75V165H60V150H45V135H30V105H15V90H30V60H45V45H60Z"
-                                fill="#cccccc"
-                            />
-                            <rect
-                                x="75"
-                                y="135"
-                                width="15"
-                                height="90"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="60"
-                                y="105"
-                                width="15"
-                                height="30"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="120"
-                                y="105"
-                                width="15"
-                                height="30"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="90"
-                                y="105"
-                                width="15"
-                                height="30"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="75"
-                                y="90"
-                                width="15"
-                                height="15"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="105"
-                                y="90"
-                                width="15"
-                                height="15"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="105"
-                                y="135"
-                                width="15"
-                                height="90"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="75"
-                                y="210"
-                                width="30"
-                                height="15"
-                                fill="#cccccc"
-                            />
-                            <rect
-                                x="90"
-                                y="240"
-                                width="30"
-                                height="15"
-                                fill="#cccccc"
-                            />
-                        </svg>
-                    </summary>
-                    <div class="back">
-                        <p>
-                            Crafting lived-in, expansive
-                            <em>brand universes</em> through research, design &
-                            storytelling.
-                        </p>
-                        <p>
-                            Level up your brand, increase engagement, metrics
-                            and sales across the board!
-                        </p>
-                        <ul>
-                            <li>Advertising</li>
-                            <li>Social Strategy</li>
-                            <li>(Unique Brand Voice</li>
-                            <li>Key Focus</li>
-                            <li></li>
-                            <li>Modernizing native tech stacks</li>
-                        </ul>
-                    </div>
-                </details>
-                <details style="--rotation: 4deg">
-                    <summary aria-label="Speaking - Click to learn more">
-                        <h2>Creative Production <br />& Content</h2>
-                        <svg
-                            viewBox="0 0 329 195"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                        >
-                            <rect
-                                x="110.85"
-                                y="15"
-                                width="105"
-                                height="165"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="95.8499"
-                                y="30"
-                                width="135"
-                                height="135"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="80.8499"
-                                y="45"
-                                width="165"
-                                height="105"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="65.8499"
-                                y="75"
-                                width="195"
-                                height="45"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="140.85"
-                                width="45"
-                                height="195"
-                                fill="#111111"
-                            />
-                            <path
-                                d="M125.85 45V30H155.85V15H170.85V30H200.85V45H215.85V60H230.85V90H245.85V105H230.85V135H215.85V150H200.85V165H170.85V180H155.85V165H125.85V150H110.85V135H95.8499V105H80.8499V90H95.8499V60H110.85V45H125.85Z"
-                                fill="#cccccc"
-                            />
-                            <rect
-                                x="44.0559"
-                                y="88.0706"
-                                width="30"
-                                height="15"
-                                transform="rotate(-11.7568 44.0559 88.0706)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="30.7969"
-                                y="97.9802"
-                                width="15"
-                                height="15"
-                                transform="rotate(-11.7568 30.7969 97.9802)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="17.7417"
-                                y="108.869"
-                                width="15"
-                                height="15"
-                                transform="rotate(-11.7568 17.7417 108.869)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="282.405"
-                                y="45.6143"
-                                width="15"
-                                height="15"
-                                transform="rotate(-11.7568 282.405 45.6143)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="234.965"
-                                y="48.3376"
-                                width="47"
-                                height="15"
-                                transform="rotate(-11.7568 234.965 48.3376)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="20.7981"
-                                y="123.554"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 20.7981 123.554)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="286.888"
-                                y="67.1526"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 286.888 67.1526)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="38.5398"
-                                y="135.183"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 38.5398 135.183)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="275.463"
-                                y="85.8733"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 275.463 85.8733)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="56.2815"
-                                y="146.812"
-                                width="30"
-                                height="15"
-                                transform="rotate(-11.7568 56.2815 146.812)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="249.149"
-                                y="106.671"
-                                width="30"
-                                height="15"
-                                transform="rotate(-11.7568 249.149 106.671)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="4.4827"
-                                y="118.778"
-                                width="15"
-                                height="15"
-                                transform="rotate(-11.7568 4.4827 118.778)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="4.4827"
-                                y="118.778"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 4.4827 118.778)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="298.517"
-                                y="49.4109"
-                                width="15"
-                                height="30"
-                                transform="rotate(-11.7568 298.517 49.4109)"
-                                fill="#111111"
-                            />
-                            <rect
-                                x="74.0232"
-                                y="158.441"
-                                width="197"
-                                height="15"
-                                transform="rotate(-11.7568 74.0232 158.441)"
-                                fill="#111111"
-                            />
-                        </svg>
-                    </summary>
-                    <div class="back">
-                        <p>
-                            I talk about how I think we <em>should</em> build
-                            for the web, focussing on where design, code, and
-                            accessibility overlap.
-                        </p>
-                        <p>
-                            My talks are often about motion and interaction, but
-                            accessibility is also an essential topic. I
-                            currently speak a lot about how CSS and JavaScript
-                            shape the way users experience a site, and what
-                            happens when you let native tools do more of the
-                            heavy lifting.
-                        </p>
-                    </div>
-                </details>
-            </section>
-
-            <br />
-            <br />
-            <br />
+            <div class="blurb">
+                <h2>I blend design, development & storytelling to craft unforgettable brand experiences</h2>
+            </div>
 
             <div id="page-2">
-                <h1>Work</h1>
+                <div id="work-top"><h1>Select</h1></div>
+                <div id="work-bottom"><h1>Work</h1></div>
+                <img
+                    src="./images/flower.svg"
+                    alt="Flower"
+                    loading="lazy"
+                />
+
                 <div id="first-ele" class="page2-ele">
-                    <a href="./veoma.html"><h2>veoma studio</h2></a>
-                    <h6>2021</h6>
+                    <h2>veoma studio</h2>
+                <h6>2021</h6>
                     <img
-                        src="./images/baron-capital.webp"
-                        alt="Veoma Studio project - Baron Capital branding and design work"
+                        src="./images/veo.png"
+                        alt="Veoma Logo"
+                        loading="lazy"
                     />
+                    <div class="page2-content">
+                        <div class="page2-content-inner">
+                            <div class="page2-tags">
+                                <span class="tag">Design</span
+                                ><span class="tag">Development</span
+                                ><span class="tag">Branding</span>
+                                <p><h3>Veoma: The Elegant Design Engine</h3>
+                                At Veoma, I joined a team focused on establishing the agency as a premium boutique—an elegant workshop for high-end design. Our communal mission was to craft a definitive visual language, equal parts historic sophistication and sharp modern expertise, ensuring we attracted the right quality of clientele.
+                                    <h3>What I Did</h3>
+                                    <ul>
+                                        <li>Brand Refinements for Clients: I was tasked with giving our clients a visual edge. We often focused on interactive elements, meaningful colors, prestine typography & key differentiations for branding.</li>
+                                        <li>Web Development: For customer projects, we engineered clean, direct websites with a shade of playfulness. Our focus was always on a simple, compelling user journey: show the work, clearly explain the services, and ensure the design emphasizes their unique market position. We mostly developed using website builders like Webflow, Readymag, Framer & Cargo, which looked absurdly amazing to me, then being a novice coder.</li>
+                                        <li>Leading Successful Products: My biggest win came from successfully guiding projects from concept to launch.Succesfully communicating and cordinating our customer and team to success.</li>
+                                    </ul>
+
+                                    <h5>What I Learned</h5>
+                                  Working at Veoma was less about tools and more about the human element of design. The tight, elegant constraints we placed on our work ended up teaching me the most valuable lessons:
+
+                                  <ul>
+                                        <li>How to translate abstract client desires into actionable design sprints and keep the whole team aligned on the vision for a successful product.</li>
+                                        <li>Deep customer understanding drove every design choice we made, from choosing the right typography to implementing the best visual styles.</li>
+                                        <li>The Builders Trap: looking super impressive at first, they proved limiting on creativity, sadly saying no to changing wishes, instead of yes anding our customers as we alwaysshould.</li>
+                                    </ul></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="page2-ele">
                     <h2>view from nowhere</h2>
                     <h6>2022</h6>
                     <img
-                        src="./images/lucid-motors.webp"
-                        alt="View From Nowhere project - Lucid Motors digital experience"
+                        src="./images/vfns.png"
+                        alt="View from Nowhere project"
+                        loading="lazy"
                     />
+                    <div class="page2-content">
+                        <div class="page2-content-inner"><p><div>
+                            <h3>View From Nowhere (vfns): The Abstract Game Lab</h3>
+
+                            <p>I started working at vfns, a narrative studio dedicated to converting the weirdest abstract concepts into video games. Our mission was simple: create short, low-tech, story & interaction-driven games that punch above their weight, providing a memorable experience that lingers in your mind.
+
+
+                            <h3>What I Did</h3>
+                            <ul>
+                                <li>Interface Architecture (UI/UX): I didn't just skin the interface; I engineered it. I focused heavily on UI design and flawless User Experience, building all the menus, interactive maps, inventory screens & heads-up displays to be perfectly intuitive and deeply immersive.</li>
+                                <li>Asset Creation: This was hands-on, pixel-by-pixel work. I manually created a lot of pgame assets—from pixel assets like character sprites and environmental tiles in Aseprite, to more draditional graphic design work like video game logo designs for games like Soleil. It was a rigorous exercise in visual economy.</li>
+                                <li>Game Story & Play Testing: I contributed directly to the narrative and core mechanics, collaborating on the full game story and engagement loop for multiple games. This meant laying out the foundations in a master game design doc, extensive play testing to refine the difficulty curves, lots of late night discussions to get the emotional pacing right & ensure we created an amazing product.</li>
+                            </ul>
+
+                            <h5>What I Learned</h5>
+                            <p>Working on game development was an intensive masterclass in constraint-based design. It taught me that truly great design is about anticipating every possible user action, regardless of the technology.</p>
+                            <ul>
+                                <li>UX is Everything: I learned that great UI design means nothing without flawless User Experience. In games, every millisecond of lag or confusion breaks immersion. This experience sharpened my ability to engineer interfaces that disappear when uneeded, but clear (you just know where to look) when needed.</li>
+                                <li>Abstract to Play: The biggest payoff was learning how to successfully take an abstract idea and engineer it into a tight, playable game loop, confirming that the most complex concepts can be delivered through simple, low-tech execution.</li>
+                                <li>Visual Discipline: Creating detailed, expressive pixel assets taught me immense discipline in color theory and graphic representation. Every single pixel must fight for its life to communicate a clear meaning.</li>
+                            </ul> <h5>Plus I absolutely fell in love with pixel fonts. Clearly!</h5>
+                        </div>
+                        </p></div>
+                    </div>
                 </div>
+
                 <div class="page2-ele">
                     <h2>nebesna</h2>
                     <h6>2023</h6>
                     <img
-                        src="./images/nfl.webp"
-                        alt="Nebesna project - NFL brand partnership design"
+                        src="./images/neb.png"
+                        alt="Nebesna project"
+                        loading="lazy"
                     />
+                    <div class="page2-content">
+                        <div class="page2-content-inner"><p>Details.</p></div>
+                    </div>
                 </div>
+
                 <div class="page2-ele">
                     <h2>doctors</h2>
                     <h6>2024</h6>
                     <img
-                        src="./images/placenew.webp"
-                        alt="Doctors project - Healthcare platform interface design"
+                        src="./images/doctors.png"
+                        alt="Doctors project"
+                        loading="lazy"
                     />
+                    <div class="page2-content">
+                        <div class="page2-content-inner">
+                            <p>
+
+                            </p><h3>Doctors: The Brand Upgrade I Engineered</h3>
+                            I took on Doctors, a medical brand that was a digital dinosaur—thirty years of established history, unclear brand identity, various logo versions and highly inconsistent products. My mission? Drag them into the 21st century without triggering an identity crisis among their loyal patient base.
+                                                <h3>What I Did</h3>
+                                                <ul>
+                            <li>I didn't just do a redesign; I performed
+                            a full Brand Upgrade—a deep-level system evolution.</li>
+                            <li>Logo Refreshed: Added a modern refreshed serif (Playfair Display), similar enough to the previous choice (Times New Roman), but providing so much more personality and elegance. Together with sophisticated seasonal color applications, the brand is dynamic, fresh and exiting.</li>
+                            <li>Visual System Overhaul: I deployed a clean, modernist approach to all marketing materials, based on Swiss Style, keeping the visuals simple, fluid, and elegant. Think of it as refactoring their entire visual library, which was early 2000s infomercial.</li>
+                            <li>Scalable Product Architecture: They had so many products, in inconsystent styles, colors & even industries. I cleaned up what cold be changed, created distinct color coded categories for each, while ensuring they all fit together in a cohesive whole. I take pride in building systems, not just one-off assets.</li>
+                            <li>Motion-Forward Content: I forced an emphasis on motion in video ads, highlighting product function, health benefits & distinctive packaging. Static content is not enough!</li>
+                            <li>Improved Product Photography: Most pictures were janky, low resolution & poorly rendered mockups. I set up a proper set and started taking delious product photos, got friends to model & act for me and lead great digital advertising campaigns.</li>
+                                                </ul>
+                                                 <h3>What I Learned</h3>
+                            This project hammered home a core truth: it's harder to work with what is, than start over. But gosh, it can be fun. I learned how complex it can be to make a comprehensive design system, how labourius it is to work with picture, how fun a photoshoot is and how engaging directing an ad is. </div>
                 </div>
+                </div>
+
                 <div class="page2-ele">
                     <h2>Anksioznost</h2>
                     <h6>2025</h6>
                     <img
-                        src="./images/somos.webp"
-                        alt="Anksioznost project - Mental health app design for Somos"
+                        src="./images/anksi.png"
+                        alt="Anksioznost project"
+                        loading="lazy"
                     />
+                    <div class="page2-content">
+                        <div class="page2-content-inner"><p>Details.</p></div>
+                    </div>
                 </div>
+
                 <div id="btn-div">
                     <button><a href="#page-2">View all work</a></button>
                 </div>
+            </div>
+
+            <div id="my-ding">
+                <div id="my-top"><h1>My</h1></div>
+                <div id="my-bottom"><h1>Process</h1></div>
             </div>
 
             <section id="chrome-scroll" aria-label="Chrome CSS Scroll Demo">
                 <div class="container chrome-container">
                     <div class="focal-marker" aria-hidden="true"></div>
                     <div class="text-container">
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
-                        <div class="text">So much awesomeness</div>
+                      <<div class="text"><h4>In a world overflowing with blandness</h4>
+                        </div>
+                        <div class="text">
+                            <h4>where every brand competes for</h4>
+                        </div>
+                        <div class="text"><h4>a single fleeting second of attention,</h4></div>
+                        <div class="text">
+                            <h4>most messages vanish before they’re even seen.</h4>
+                        </div>
+                        <div class="text">
+                            <h4><br>Even worse, they <em>fail</em></h4>
+                        </div>
+                        <div class="text">
+                            <h4>to grab your attention</h4>
+                        </div>
+                        <div class="text">
+                            <h4>despite making it</h4>
+                        </div>
+                        <div class="text">
+                            <h4>in front of your face</h4>
+                        </div>
+                        <div class="text">
+                           <h3><br>But I can break through</h3>
+                        </div>
+                        <div class="text">
+                            <h4>with relentless curiosity, creative discipline,</h4>
+                        </div>
+                        <div class="text">
+                            <h4>and a wide technical creative pallete</h4>
+                        </div>
+                        <div class="text"><h5><br> UI/UX, Web Design & Development</h5></div>
+                        <div class="text">
+                            <h5>Interactive Experiences, Video Games & Motion Design</h5>
+                        </div>
+                        <div class="text">
+                            <h5>Branding, Advertising & Copywriting</h5>
+                        </div>
+                        <div class="text">
+                            <h4>I've done it all and learned how to show</h4>
+                        </div>
+                        <div class="text">
+                            <h4>whole brand worlds through the smallest interaction</h4>
+                        </div>
+                        <div class="text">
+                            <h4>creating deep & meaningful interactions</h4>
+                        </div>
+                        <div class="text">
+                            <h4>on every channel</h4>
+                        </div>
+                        <div class="text"><h3><br>I create meaningful work that cuts through</h3></div>
+                        <div class="text"><h4><br>pulling from deep wells of culture, art,</h4></div>
+                        <div class="text"><h4>technical trickery, history</h4></div>
+                        <div class="text"><h4>& magnificent stories that let me reshape</h4></div>
+                        <div class="text"><h4>the best ideas into <em>engaging masterpieces</em></h4></div>
+                        <div class="text">
+                           <h4><br><br>Everything is a remix.</h4>
+                        </div>
+                        <div class="text"><h4>and my build intricate tappestries & collages</h4></div>
+                        <div class="text">
+                            <h4>in many mediums</h4>
+                        </div>
+                        <div class="text">
+                            <h4>filled with meaning, emotion & relevance</h4>
+                        </div>
+
+                        <div class="text">
+                            <h2><br>Contact Me</h2>
+                        </div>
+                        <div class="text">
+                            <h2>Today</h2>
+                        </div>
+                        <div class="text">
+                            <h5>For an Amazing Experience</h5>
+                        </div>
                     </div>
                 </div>
             </section>
-            <br />
-            <br />
-            <div id="skills" aria-label="Skills and Tools">
-                <div id="skil">
-                    <img src="./images/svg/adobe" alt="Adobe" />
-                    <img src="./images/svg/react.svg" alt="React" />
-                    <img src="./images/svg/ps.svg" alt="Photoshop" />
-                    <img src="./images/svg/css.svg" alt="CSS" />
-                    <img src="./images/svg/illustrator.svg" alt="Illustrator" />
-                    <img src="./images/svg/premiere.svg" alt="Premiere Pro" />
-                    <img
-                        src="./images/svg/adobe.svg"
-                        alt="Adobe Creative Cloud"
-                    />
-                    <img src="./images/svg/figma.svg" alt="Figma" />
-                    <img src="./images/svg/js.svg" alt="JavaScript" />
-                    <img src="./images/svg/type.svg" alt="Typography" />
-                    <img src="./images/svg/html.svg" alt="HTML" />
-                    <img src="./images/svg/game.svg" alt="Video Games" />
-                    <img src="./images/svg/react.svg" alt="React" />
-                    <img src="./images/svg/vs.svg" alt="Visual Studio Code" />
-                    <img src="./images/svg/ai.svg" alt="AI" />
-                    <img src="./images/svg/tailwind.svg" alt="Tailwind" />
-                    <img
-                        src="./images/svg/Under_armour.svg"
-                        alt="Under Armour"
-                    />
-                    <img src="./images/svg/Zappos.svg" alt="Zappos" />
-                </div>
+
+            <div class="skill" style="--t:20s">
+              <div>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Javascript</span>
+                <span>React</span>
+                <span>Node JS</span>
+                <span>SQL</span>
+                <span>Git</span>
+              </div>
+              <div>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Javascript</span>
+                <span>React JS</span>
+                <span>Node JS</span>
+                <span>SQL</span>
+                <span>Git</span>
+              </div>
             </div>
-            <br />
-            <!-- ----------------------------------------- -->
+
+            <div class="skill" style="--t:15s">
+              <div>
+                <span>Typescript</span>
+                <span>Lenis</span>
+                <span>WebGL</span>
+                <span>Tree JS</span>
+                <span>Bootstrap</span>
+                <span>Material UI</span>
+                <span>Tailwind</span>
+                <span>SCSS</span>
+              </div>
+              <div>
+                  <span>Typescript</span>
+                  <span>Lenis</span>
+                  <span>WebGL</span>
+                  <span>Tree JS</span>
+                  <span>Bootstrap</span>
+                  <span>Material UI</span>
+                  <span>Tailwind</span>
+                  <span>SCSS</span>
+
+              </div>
+            </div>
+
+            <div class="skill" style="--t:15s">
+              <div>
+                <span>Photoshop</span>
+                <span>Illustrator</span>
+                <span>Premiere Pro</span>
+                <span>InDesign</span>
+                <span>Figma</span>
+                <span>Canva</span>
+                <span>SEO</span>
+              </div>
+              <div>
+                  <span>Photoshop</span>
+                  <span>Illustrator</span>
+                  <span>Premiere Pro</span>
+                  <span>InDesign</span>
+                  <span>Figma</span>
+                  <span>Canva</span>
+                  <span>SEO</span>
+              </div>
+            </div>
+
             <div id="page-3">
                 <div id="t-f-div">
                     <img
                         src="./images/me-front.png"
                         alt="Portrait of Viktor Sekovski, product and motion designer"
+                        loading="lazy"
+                        class="fade-in-element"
                     />
                     <div id="t-s-div">
-                        <h1>ABOUT ME</h1>
-                        <p>
-                            I'm a product and motion designer who loves creating
-                            things that are not just eye candy but also fix
-                            life's little hiccups. When I'm not glued to my
-                            computer like a robot or scribbling on my iPad, you
-                            might catch me leveling up in video games, snapping
-                            photos like a wannabe pro, or watching football
-                            because football is life. My design philosophy? Keep
-                            it snazzy, make it work, and sprinkle in a bit of
-                            fun. I'm the designer you want on your team if you
-                            want people to exclaim, "I need that in my life!".
-                        </p>
-                        <button>
+                                <h1 class="fade-in-title">About Moi</h1>
+                                <p class="fade-in-element">
+                                    Viktor Sekovski is a Designer & Developer focused on crafting engaging content.
+                                    "Design is How It Works!" changed his life and he lives under that moto.
+                                    He has worked in a lot of different, but interconnected jobs like Web Developer,
+                                    UI Designer for video games, UX Designer, Graphic Designer, Creative Director, Content Creator,
+                                    Solo Game Developer (Using Web Tech) & even salesman; all connected through branding.
+                                    He loves travelling, reading, well made media & thought out experiences.
+                        </p><h5>Currently, working freelance and available!</h5>
+                        <button class="fade-in-element">
                             <a href="mailto:contact@viktorsekovski.com"
                                 >Let's Talk</a
                             >
@@ -906,14 +419,15 @@
                     </div>
                 </div>
                 <div id="third-bottom">
-                    <h5>oops, Almost forgot...</h5>
+                    <h5>oh, & while you're here...</h5>
                     <h5>
                         <a
                             href="https://youtube.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            >subscribe to my youtube channel
-                            <i class="ri-arrow-right-up-line"></i
+                            >learn more about me<i
+                                class="ri-arrow-right-up-line"
+                            ></i
                         ></a>
                     </h5>
                 </div>
@@ -922,64 +436,41 @@
             <footer>
                 <div id="foot-div">
                     <div id="foot-name">
-                        <h1>Viktor <mark>D</mark>&</h1>
-                        <h1>Sekovski <mark>D</mark></h1>
+                        <h1>Viktor D&</h1>
+                        <h1>Sekovski D</h1>
                     </div>
-                    <div></div>
                     <div id="copy">
-                        <h5>&copy 2025 Viktor Sekovski</h5>
+                        <h5>&copy; 2025</h5>
                     </div>
                     <div id="social">
-                        <h4 class="foot-head">
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >linkedin</a
-                            >
-                        </h4>
-                        <h4 class="foot-head">
-                            <a
-                                href="https://twitter.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >twitter</a
-                            >
-                        </h4>
-                        <h4 class="foot-head">
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >instagram</a
-                            >
-                        </h4>
-                        <h4 class="foot-head">
-                            <a
-                                href="https://youtube.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >youtube</a
-                            >
-                        </h4>
+                        <h5 class="foot-head">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">twitter</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">youtube</a>
+                        </h5>
                     </div>
                 </div>
             </footer>
-        </div>
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-slide">
             <nav id="slide-nav-menu">
                 <ul>
                     <li><a href="#work">WORK</a></li>
-                    <li><a href="#playground">PLAYGROUND</a></li>
+                    <li><a href="#playground">ABOUT</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
 
         <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
             integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
