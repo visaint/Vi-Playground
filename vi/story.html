@@ -3,15 +3,31 @@
     <head>
         <meta charset="UTF-8" />
         <title>my Story</title>
+        <link rel="icon" type="image/x-icon" href="./images/fav.png" />
+           <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Secondary fonts: Libre Baskerville + Doto fallback -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Doto:wght@400&display=swap"
+            rel="stylesheet"
+            media="print"
+            onload="this.media='all'"
+        />
+
         <link
             rel="stylesheet"
             href="https://public.codepenassets.com/css/normalize-5.0.0.min.css"
         />
-        <link rel="stylesheet" href="./global.css" />
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./styles.css" />
     </head>
 
     <body>
+          <div id="move-circle" aria-hidden="true"></div>
         <noscript>
             <style>
                 /* Fallback for non-JS users: make everything visible */
@@ -30,6 +46,19 @@
             </style>
         </noscript>
         <header>
+                    <nav>
+                        <div id="logo-div">
+                            <h4 id="logo">VS</h4>
+                        </div>
+                        <div id="nav-inner">
+                            <ul id="nav-inner-ul">
+                                <li>WORK</li>
+                                <li>ABOUT</li>
+                                <li>CONTACT</li>
+                            </ul>
+                            <h6 id="menu">MENU<i class="ri-add-line"></i></h6>
+                        </div>
+                    </nav>
             <div class="color-switcher">
                 <div
                     class="color-btn theme-original active"
@@ -68,15 +97,7 @@
             <div class="randomize-toggle">
                 <span class="randomize-btn">Randomize</span>
             </div>
-            <nav>
-                <div class="nav-item nav-top-left">Cosmic Spectrum</div>
-                <div class="nav-item nav-top-right">
-                    <span
-                        ><a href="mailto:hi@filip.fyi" class="email-link"
-                            >hi@filip.fyi</a
-                        >
-                        — 2024.25</span
-                    >
+
                     <div class="sound-toggle">
                         <svg class="sound-wave" viewBox="0 0 20 12">
                             <path
@@ -99,8 +120,9 @@
             <div class="bg-gradient bg-gradient-3"></div>
         </div>
         <div class="gradient-overlay"></div>
+
         <section class="hero-section">
-            <h1 class="hero-title split-text">My Journey</h1>
+    <h1 class="hero-title split-text">My Journey</h1>
             <div class="hero-content">
                 <div class="hero-nav">
                     <div>
@@ -246,6 +268,7 @@
                                     result="effect1_foregroundBlur"
                                 />
                             </filter>
+
                             <linearGradient
                                 id="grad0"
                                 x1="1306"
@@ -494,9 +517,49 @@
                 </div>
             </div>
         </div>
+
+         <footer>
+                <div id="foot-div">
+                    <div id="foot-name">
+                        <h1>Viktor D&</h1>
+                        <h1>Sekovski D</h1>
+                    </div>
+                    <div id="copy">
+                        <h5>&copy; 2025</h5>
+                    </div>
+                    <div id="social">
+                        <h5 class="foot-head">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">twitter</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">youtube</a>
+                        </h5>
+                    </div>
+                </div>
+            </footer>
+
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-slide">
+            <nav id="slide-nav-menu">
+                <ul>
+                    <li><a href="#work">WORK</a></li>
+                    <li><a href="#playground">ABOUT</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+        <script src="./global.js"></script>
         <script src="./script.js"></script>
     </body>
 </html>

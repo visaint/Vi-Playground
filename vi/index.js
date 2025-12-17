@@ -1,41 +1,4 @@
 // ===================================
-// BROWSER DETECTION
-// ===================================
-const isLowEnd =
-  navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-
-// ===================================
-// LENIS INITIALIZATION
-// ===================================
-let lenis;
-
-// Initialize Lenis for ALL browsers to ensure consistent smooth scrolling
-lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  smoothTouch: false, // Keep false to allow native touch feel on mobile, change to true if you want smooth drag on mobile too
-  touchMultiplier: 2,
-  infinite: false,
-  autoRaf: true,
-});
-
-lenis.on("scroll", ScrollTrigger.update);
-
-// Bind Lenis to GSAP ticker for performance
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-
-gsap.ticker.lagSmoothing(0);
-
-// ===================================
-// UTILITIES
-// ===================================
-const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-const lerp = (a, b, f) => a + (b - a) * f;
-
-// ===================================
 // SKILLS DRAG
 // ===================================
 function initSkillsDrag() {
@@ -156,24 +119,37 @@ function initPage2Animations() {
 // CHROME SCROLL ANIMATION
 // ===================================
 function initChromeScroll() {
-  const container = document.querySelector("#chrome-scroll");
-  if (!container) return;
+  // Find all chrome scroll containers (both original ID and new class)
+  const containers = [
+    document.querySelector("#chrome-scroll"),
+    ...document.querySelectorAll(".chrome-scroll-section")
+  ].filter(Boolean);
+  
+  if (!containers.length) return;
 
-  const items = Array.from(container.querySelectorAll(".text"));
-  if (!items.length) return;
+  // Map to track each container's state
+  const chromeScrollInstances = new Map();
+  
+  // Initialize each container
+  containers.forEach(container => {
+    const items = Array.from(container.querySelectorAll(".text"));
+    if (!items.length) return;
 
-  container.style.position = "relative";
-  const state = new Map();
-  items.forEach((el) => {
-    state.set(el, {
-      raw: 0,
-      easedExpo: 0,
-      easedQuart: 0,
-      easedQuartInv: 0,
-      easedInCubic: 0,
+    container.style.position = "relative";
+    const state = new Map();
+    items.forEach((el) => {
+      state.set(el, {
+        raw: 0,
+        easedExpo: 0,
+        easedQuart: 0,
+        easedQuartInv: 0,
+        easedInCubic: 0,
+      });
+      el.style.willChange = "transform, opacity, filter";
+      el.style.pointerEvents = "none";
     });
-    el.style.willChange = "transform, opacity, filter";
-    el.style.pointerEvents = "none";
+
+    chromeScrollInstances.set(container, { items, state });
   });
 
   let ticking = false;
@@ -187,31 +163,33 @@ function initChromeScroll() {
     const vh = window.innerHeight;
     const viewportCenter = vh / 2;
 
-    items.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
-      const raw = clamp(1 - distance / (vh * 0.6), 0, 1);
+    // Update all chrome scroll instances
+    chromeScrollInstances.forEach(({ items, state }) => {
+      items.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
+        const raw = clamp(1 - distance / (vh * 0.6), 0, 1);
 
-      const s = state.get(el);
-      const smooth = 0.18;
+        const s = state.get(el);
+        const smooth = 0.12; // Reduced for smoother, more responsive animation
 
-      s.raw = lerp(s.raw, raw, smooth);
-      s.easedExpo = lerp(s.easedExpo, clamp(easeOutExpo(raw), 0, 1), smooth);
-      s.easedQuart = lerp(s.easedQuart, clamp(easeOutQuart(raw), 0, 1), smooth);
-      s.easedQuartInv = lerp(
-        s.easedQuartInv,
-        clamp(easeOutQuart(1 - raw), 0, 1),
-        smooth,
-      );
-      s.easedInCubic = lerp(
-        s.easedInCubic,
-        clamp(easeInCubic(1 - raw), 0, 1),
-        smooth,
-      );
+        s.raw = lerp(s.raw, raw, smooth);
+        s.easedExpo = lerp(s.easedExpo, clamp(easeOutExpo(raw), 0, 1), smooth);
+        s.easedQuart = lerp(s.easedQuart, clamp(easeOutQuart(raw), 0, 1), smooth);
+        s.easedQuartInv = lerp(
+          s.easedQuartInv,
+          clamp(easeOutQuart(1 - raw), 0, 1),
+          smooth,
+        );
+        s.easedInCubic = lerp(
+          s.easedInCubic,
+          clamp(easeInCubic(1 - raw), 0, 1),
+          smooth,
+        );
 
-      el.style.setProperty("--chrome-progress-y", s.raw.toFixed(4));
-      el.style.setProperty("--chrome-eased-expo", s.easedExpo.toFixed(4));
-      el.style.setProperty("--chrome-eased-quart", s.easedQuart.toFixed(4));
+        el.style.setProperty("--chrome-progress-y", s.raw.toFixed(4));
+        el.style.setProperty("--chrome-eased-expo", s.easedExpo.toFixed(4));
+        el.style.setProperty("--chrome-eased-quart", s.easedQuart.toFixed(4));
       el.style.setProperty(
         "--chrome-eased-quart-inv",
         s.easedQuartInv.toFixed(4),
@@ -222,6 +200,7 @@ function initChromeScroll() {
       );
       el.style.setProperty("--chrome-blur", `${(1 - s.easedExpo) * 8}px`);
       el.style.zIndex = String(Math.round(s.easedExpo * 100) + 10);
+      });
     });
   };
 
@@ -285,158 +264,6 @@ function initImageHoverEffects() {
 }
 
 // ===================================
-// CUSTOM CURSOR
-// ===================================
-function initCustomCursor() {
-  const circle = document.querySelector("#move-circle");
-  if (!circle || window.innerWidth <= 1024) {
-    circle?.style.setProperty("display", "none");
-    return;
-  }
-
-  gsap.set(circle, { xPercent: -70, yPercent: -70 });
-
-  let mouseX = 0,
-    mouseY = 0,
-    currentX = 0,
-    currentY = 0;
-  let anchorActive = false,
-    anchorX = 0,
-    anchorY = 0;
-
-  window.addEventListener(
-    "mousemove",
-    (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    },
-    { passive: true },
-  );
-
-  const updateCursor = () => {
-    const targetX = anchorActive ? mouseX + (anchorX - mouseX) * 0.5 : mouseX;
-    const targetY = anchorActive ? mouseY + (anchorY - mouseY) * 0.5 : mouseY;
-    currentX += (targetX - currentX) * 0.15;
-    currentY += (targetY - currentY) * 0.15;
-    gsap.set(circle, { x: currentX, y: currentY });
-    requestAnimationFrame(updateCursor);
-  };
-
-  requestAnimationFrame(updateCursor);
-
-  try {
-    const rootStyles = getComputedStyle(document.documentElement);
-    const defaultRgb = (
-      rootStyles.getPropertyValue("--pink-rgb") || "238,143,161"
-    ).trim();
-    const blueRgb = (
-      rootStyles.getPropertyValue("--blue-rgb") || "4,77,166"
-    ).trim();
-
-    circle.style.setProperty("--cursor-rgb", defaultRgb);
-
-    if (isLowEnd) {
-      circle.style.setProperty("--cursor-glow-blur", "20px");
-      circle.style.setProperty("--cursor-glow-size", "10rem");
-      circle.style.setProperty("--cursor-glow-mid-alpha", "0.12");
-      circle.style.setProperty("--cursor-glow-alpha", "0.7");
-      circle.style.setProperty(
-        "--cursor-shadow-strong",
-        `0 0 12px rgba(${defaultRgb},0.10), 0 0 28px rgba(${defaultRgb},0.06)`,
-      );
-    }
-
-    const setCursorRgb = (rgb) => {
-      if (!rgb) return;
-      circle.style.setProperty("--cursor-rgb", rgb.trim());
-      circle.style.setProperty(
-        "--cursor-shadow-strong",
-        `0 0 48px rgba(${rgb.trim()},0.28), 0 0 112px rgba(${rgb.trim()},0.22)`,
-      );
-    };
-
-    const resetCursor = () => {
-      circle.style.setProperty("--cursor-rgb", defaultRgb);
-      circle.style.setProperty(
-        "--cursor-shadow-strong",
-        `0 0 48px rgba(${defaultRgb},0.22), 0 0 112px rgba(${defaultRgb},0.18)`,
-      );
-    };
-
-    document
-      .querySelectorAll("a, button, .page2-ele, [data-cursor-color]")
-      .forEach((el) => {
-        el.addEventListener(
-          "pointerenter",
-          () => {
-            const ds = el.dataset?.cursorColor;
-            if (ds) {
-              if (ds.includes(",")) {
-                setCursorRgb(ds);
-              } else if (ds[0] === "#") {
-                const hex = ds.substring(1);
-                const bigint = parseInt(hex, 16);
-                setCursorRgb(
-                  `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`,
-                );
-              } else {
-                setCursorRgb(rootStyles.getPropertyValue(ds).trim());
-              }
-            } else if (el.tagName === "A") {
-              setCursorRgb(blueRgb);
-            } else if (
-              el.tagName === "BUTTON" ||
-              el.classList.contains("page2-ele")
-            ) {
-              setCursorRgb(defaultRgb);
-            }
-          },
-          { passive: true },
-        );
-
-        el.addEventListener("pointerleave", resetCursor, { passive: true });
-      });
-
-    document.querySelectorAll(".page2-ele").forEach((el) => {
-      el.addEventListener(
-        "pointerenter",
-        () => {
-          const rect = el.getBoundingClientRect();
-          anchorX = rect.left + rect.width / 2;
-          anchorY = rect.top + rect.height / 2;
-          anchorActive = true;
-          circle.classList.add("page2-border", "glow");
-          circle.style.backgroundColor = "transparent";
-        },
-        { passive: true },
-      );
-
-      el.addEventListener(
-        "pointermove",
-        () => {
-          const rect = el.getBoundingClientRect();
-          anchorX = rect.left + rect.width / 2;
-          anchorY = rect.top + rect.height / 2;
-        },
-        { passive: true },
-      );
-
-      el.addEventListener(
-        "pointerleave",
-        () => {
-          anchorActive = false;
-          circle.classList.remove("page2-border", "glow");
-          circle.style.backgroundColor = "";
-        },
-        { passive: true },
-      );
-    });
-  } catch (e) {
-    // Cursor color fallback
-  }
-}
-
-// ===================================
 // INITIAL PAGE LOAD ANIMATIONS
 // ===================================
 function initLoadAnimations() {
@@ -469,8 +296,13 @@ function initLoadAnimations() {
     );
 
   document.querySelector("#first-bottom") &&
-    tl.from("#first-bottom", { opacity: 0, y: 20, duration: 0.5 }, "-=0.2");
+    tl.from("#first-bottom", { opacity: 0, y: 20, duration: 0.3 }, "-=0.2");
 }
+
+
+
+
+
 
 // ===================================
 // SCROLL TRIGGER ANIMATIONS
@@ -503,6 +335,22 @@ function initScrollAnimations() {
         end: "top 50%",
         toggleActions: "play none none reverse",
       },
+    });
+  }
+
+  // Grids fade-in animation using direct GSAP
+  const grids = document.querySelector(".grids");
+  if (grids) {
+    gsap.from(grids, {
+      opacity: 0,
+      y: 30,
+      duration: 5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: grids,
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+      }
     });
   }
 
@@ -577,13 +425,13 @@ function initScrollAnimations() {
       });
     }
   }
-  // Footer animation - slower and more dramatic
+  // Footer animation - faster
   const footer = document.querySelector("footer");
   if (footer) {
     gsap.from(footer, {
       y: 60,
       opacity: 0,
-      duration: 5,
+      duration: 1.2,
       ease: "power2.out",
       scrollTrigger: {
         trigger: footer,
@@ -594,11 +442,15 @@ function initScrollAnimations() {
   }
 }
 
-// ===================================
-// PAGE 2 EXPANDABLE ELEMENTS
-// ===================================
 function initPage2Expandable() {
   const elements = document.querySelectorAll(".page2-ele");
+  
+  // Cache container reference
+  const container = document.querySelector("#expandable-container");
+  
+  // Use event delegation for better performance
+  let activeElement = null;
+  let activeTimeline = null;
 
   elements.forEach((element) => {
     if (!element.querySelector(".page2-content")) {
@@ -609,56 +461,155 @@ function initPage2Expandable() {
 
     const content = element.querySelector(".page2-content");
 
+    // Optimized hover effects with throttling
+    let hoverTimeout;
+    element.addEventListener("mouseenter", () => {
+      if (!element.classList.contains("active") && element !== activeElement) {
+        clearTimeout(hoverTimeout);
+        gsap.to(element, {
+          scale: 1.02,
+          duration: 0.2,
+          ease: "power2.out"
+        });
+      }
+    });
+
+    element.addEventListener("mouseleave", () => {
+      if (!element.classList.contains("active") && element !== activeElement) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(() => {
+          gsap.to(element, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }, 100);
+      }
+    });
+
     element.addEventListener("click", (e) => {
+      const isActive = element.classList.contains("active");
+      
+      // If clicking inside content and element is active, close it
+      if (e.target.closest(".page2-content") && isActive) {
+        element.classList.remove("active");
+        activeElement = null;
+        
+        // Kill any running timeline
+        if (activeTimeline) {
+          activeTimeline.kill();
+        }
+        
+        // Create optimized timeline for closing
+        activeTimeline = gsap.timeline()
+          .to(element, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.out"
+          })
+          .to(content, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+              content.style.display = "none";
+              // Scroll container to center
+              if (container) {
+                container.scrollIntoView({ behavior: "smooth", block: "center" });
+              }
+            },
+          }, 0);
+        return;
+      }
+      
+      // Don't toggle if clicking inside content when not active
       if (e.target.closest(".page2-content")) return;
 
-      const isActive = element.classList.contains("active");
-
-      elements.forEach((el) => {
-        if (el !== element && el.classList.contains("active")) {
-          el.classList.remove("active");
-          const otherContent = el.querySelector(".page2-content");
-          if (otherContent) {
-            gsap.to(otherContent, {
-              height: 0,
-              opacity: 0,
-              duration: 0.4,
-              ease: "power2.inOut",
-              onComplete: () => {
-                otherContent.style.display = "none";
-              },
-            });
-          }
+      // Close other active element if exists
+      if (activeElement && activeElement !== element) {
+        activeElement.classList.remove("active");
+        const otherContent = activeElement.querySelector(".page2-content");
+        
+        if (activeTimeline) {
+          activeTimeline.kill();
         }
-      });
+        
+        activeTimeline = gsap.timeline()
+          .to(activeElement, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.out"
+          })
+          .to(otherContent, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+              otherContent.style.display = "none";
+            },
+          }, 0);
+      }
 
       if (isActive) {
+        // Closing current element
         element.classList.remove("active");
-        gsap.to(content, {
-          height: 0,
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.inOut",
-          onComplete: () => {
-            content.style.display = "none";
-          },
-        });
+        activeElement = null;
+        
+        if (activeTimeline) {
+          activeTimeline.kill();
+        }
+        
+        activeTimeline = gsap.timeline()
+          .to(element, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.out"
+          })
+          .to(content, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+              content.style.display = "none";
+              // Scroll container to center
+              if (container) {
+                container.scrollIntoView({ behavior: "smooth", block: "center" });
+              }
+            },
+          }, 0);
       } else {
+        // Opening element
         element.classList.add("active");
+        activeElement = element;
         content.style.display = "block";
+        
+        if (activeTimeline) {
+          activeTimeline.kill();
+        }
+        
+        // Set initial states
         gsap.set(content, { height: "auto", opacity: 0 });
         const naturalHeight = content.offsetHeight;
         gsap.set(content, { height: 0 });
-        gsap.to(content, {
-          height: naturalHeight,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            content.style.height = "auto";
-            // Removed automatic scrollIntoView here
-          },
-        });
+        
+        activeTimeline = gsap.timeline()
+          .to(element, {
+            scale: 1.02,
+            duration: 0.2,
+            ease: "power2.out"
+          })
+          .to(content, {
+            height: naturalHeight,
+            opacity: 1,
+            duration: 0.4,
+            ease: "power3.out",
+            onComplete: () => {
+              content.style.height = "auto";
+            },
+          }, 0);
       }
     });
   });
@@ -683,78 +634,6 @@ function initWordRolling() {
     words[count].classList.add("active");
     words[count].classList.remove("gone");
   }, 1000);
-}
-
-// ===================================
-// MOBILE MENU
-// ===================================
-function initMobileMenu() {
-  const menuBtn = document.querySelector("#menu");
-  const mobileSlide = document.querySelector("#mobile-slide");
-  const closeBtn = document.querySelector("#close-menu-btn");
-  const slideLinks = document.querySelectorAll("#slide-nav-menu li a");
-  const navUl = document.querySelector("#nav-inner-ul");
-  const menuIcon = menuBtn?.querySelector("i");
-
-  if (!menuBtn || !mobileSlide) return;
-
-  const toggleMenu = () => {
-    const isActive = mobileSlide.classList.contains("active");
-    if (isActive) {
-      mobileSlide.classList.remove("active");
-      menuBtn.classList.remove("active");
-      document.body.style.overflow = "auto";
-      if (menuIcon) menuIcon.className = "ri-add-line";
-    } else {
-      mobileSlide.classList.add("active");
-      menuBtn.classList.add("active");
-      document.body.style.overflow = "hidden";
-      if (menuIcon) menuIcon.className = "ri-close-line";
-    }
-  };
-
-  const closeMenu = () => {
-    mobileSlide.classList.remove("active");
-    menuBtn.classList.remove("active");
-    document.body.style.overflow = "auto";
-    if (menuIcon) menuIcon.className = "ri-add-line";
-  };
-
-  menuBtn.addEventListener("click", toggleMenu);
-  closeBtn?.addEventListener("click", closeMenu);
-
-  slideLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeMenu();
-      const targetId = link.getAttribute("href");
-      if (targetId?.startsWith("#")) {
-        document
-          .querySelector(targetId)
-          ?.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
-
-  mobileSlide.addEventListener(
-    "click",
-    (e) => e.target === mobileSlide && closeMenu(),
-  );
-  window.addEventListener("keydown", (e) => e.key === "Escape" && closeMenu());
-
-  const handleResize = () => {
-    if (window.innerWidth > 640) {
-      closeMenu();
-      navUl && (navUl.style.display = "flex");
-      menuBtn && (menuBtn.style.display = "none");
-    } else {
-      navUl && (navUl.style.display = "none");
-      menuBtn && (menuBtn.style.display = "flex");
-    }
-  };
-
-  window.addEventListener("resize", handleResize, { passive: true });
-  handleResize();
 }
 
 // ===================================
