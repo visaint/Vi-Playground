@@ -46,7 +46,7 @@ function initLenis() {
 }
 
 // ===================================
-// CUSTOM CURSOR
+// CUSTOM CURSOR (RE-ENABLED)
 // ===================================
 function initCustomCursor() {
   const circle = document.querySelector("#move-circle");
@@ -56,13 +56,12 @@ function initCustomCursor() {
     return;
   }
   
+  // Re-enable visibility logic
   if (window.innerWidth <= 1024) {
     circle.style.display = "none";
-    return;
+  } else {
+    circle.style.display = "flex";
   }
-
-  // Ensure cursor is visible
-  circle.style.display = "flex";
   
   if (typeof gsap === "undefined") {
     console.warn("GSAP not loaded for cursor");
@@ -91,8 +90,9 @@ function initCustomCursor() {
     const targetX = anchorActive ? mouseX + (anchorX - mouseX) * 0.5 : mouseX;
     const targetY = anchorActive ? mouseY + (anchorY - mouseY) * 0.5 : mouseY;
     
-    currentX += (targetX - currentX) * 0.15;
-    currentY += (targetY - currentY) * 0.15;
+    // Set smoothing factor (e.g., 0.14 from your original file)
+    currentX += (targetX - currentX) * 0.14; 
+    currentY += (targetY - currentY) * 0.14;
     
     gsap.set(circle, { x: currentX, y: currentY });
     rafId = requestAnimationFrame(updateCursor);
@@ -151,6 +151,7 @@ function initCustomCursor() {
         () => {
           const ds = el.dataset?.cursorColor;
           if (ds) {
+            // Logic to handle custom color based on dataset, hex, or CSS variable
             if (ds.includes(",")) {
               setCursorRgb(ds);
             } else if (ds[0] === "#") {
@@ -218,85 +219,74 @@ function initCustomCursor() {
   }
 }
 
-// ===================================
-// MOBILE MENU
-// ===================================
-function initMobileMenu() {
-  const menuBtn = document.querySelector("#menu");
-  const mobileSlide = document.querySelector("#mobile-slide");
-  const closeBtn = document.querySelector("#close-menu-btn");
-  const slideLinks = document.querySelectorAll("#slide-nav-menu li a");
-  const navUl = document.querySelector("#nav-inner-ul");
-  const menuIcon = menuBtn?.querySelector("i");
+function initMenuRefreshBehavior() {
+  const menuToggle = document.getElementById("menu-toggle");
+  if (!menuToggle) return;
 
-  if (!menuBtn || !mobileSlide) return;
-
-  const toggleMenu = () => {
-    const isActive = mobileSlide.classList.contains("active");
-    if (isActive) {
-      mobileSlide.classList.remove("active");
-      menuBtn.classList.remove("active");
-      document.body.style.overflow = "auto";
-      if (menuIcon) menuIcon.className = "ri-add-line";
-    } else {
-      mobileSlide.classList.add("active");
-      menuBtn.classList.add("active");
-      document.body.style.overflow = "hidden";
-      if (menuIcon) menuIcon.className = "ri-close-line";
+  const wasOpen = (() => {
+    try {
+      return sessionStorage.getItem("menu_was_open") === "1";
+    } catch {
+      return false;
     }
-  };
+  })();
 
-  const closeMenu = () => {
-    mobileSlide.classList.remove("active");
-    menuBtn.classList.remove("active");
-    document.body.style.overflow = "auto";
-    if (menuIcon) menuIcon.className = "ri-add-line";
-  };
+  try {
+    sessionStorage.removeItem("menu_was_open");
+  } catch {
+    // ignore
+  }
 
-  menuBtn.addEventListener("click", toggleMenu);
-  closeBtn?.addEventListener("click", closeMenu);
+  if (wasOpen || menuToggle.checked) {
+    menuToggle.checked = false;
 
-  slideLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeMenu();
-      const targetId = link.getAttribute("href");
-      if (targetId?.startsWith("#")) {
-        document
-          .querySelector(targetId)
-          ?.scrollIntoView({ behavior: "smooth" });
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    if (lenis && typeof lenis.scrollTo === "function") {
+      try {
+        lenis.scrollTo(0, { immediate: true });
+      } catch {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    requestAnimationFrame(() => {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "auto";
       }
     });
-  });
+  }
 
-  mobileSlide.addEventListener(
-    "click",
-    (e) => e.target === mobileSlide && closeMenu(),
-  );
-  window.addEventListener("keydown", (e) => e.key === "Escape" && closeMenu());
-
-  const handleResize = () => {
-    if (window.innerWidth > 640) {
-      closeMenu();
-      if (navUl) navUl.style.display = "flex";
-      if (menuBtn) menuBtn.style.display = "none";
-    } else {
-      if (navUl) navUl.style.display = "none";
-      if (menuBtn) menuBtn.style.display = "flex";
+  window.addEventListener("beforeunload", () => {
+    try {
+      sessionStorage.setItem("menu_was_open", menuToggle.checked ? "1" : "0");
+    } catch {
+      // ignore
     }
-  };
-
-  window.addEventListener("resize", handleResize, { passive: true });
-  handleResize();
+  });
 }
 
 // ===================================
 // GLOBAL INITIALIZATION
 // ===================================
 function initGlobal() {
+  // FIX: Disable browser's native scroll restoration immediately on load
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   initLenis();
   initCustomCursor();
-  initMobileMenu();
+  initMenuRefreshBehavior();
+
+  // CONSOLIDATED: Performance optimization for low-end devices moved from index.js
+  if (typeof gsap !== "undefined" && isLowEnd) {
+    gsap.globalTimeline.timeScale(1.2);
+  }
 }
 
 // ===================================
@@ -317,14 +307,13 @@ window.addEventListener(
     globalResizeTimer = setTimeout(() => {
       const circle = document.querySelector("#move-circle");
       if (circle) {
+        // Re-enable original visibility logic for the cursor
         circle.style.display = window.innerWidth <= 1024 ? "none" : "flex";
+      }
+      if (typeof ScrollTrigger !== "undefined") {
+        ScrollTrigger.refresh();
       }
     }, 250);
   },
   { passive: true },
 );
-
-// Performance optimization for low-end devices
-if (typeof gsap !== "undefined" && isLowEnd) {
-  gsap.globalTimeline.timeScale(1.2);
-}
