@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Viktor Sekovski - Designer Developer</title>
+        <meta
+            name="description"
+            content="Product and motion designer creating accessible, eye-catching designs. Available for full-time and freelance work."
+        />
+
+        <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+         <link rel="preload" 
+          href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossorigin>
+        <link rel="icon" type="image/x-icon" href="./images/fav.webp" />
+        <link rel="stylesheet" href="./styles.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    </head>
+    <body class="story">
+        <div id="move-circle" aria-hidden="true"></div>
+        <div id="main">
+            <div id="page-1">
+<header>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <nav>
+        <div id="logo-div">
+            <a href="/" id="logo-link">
+                <h4 id="logo">VS</h4>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="https://viktorsekovski.bearblog.dev/" class="blog-link">blog<i
+                            class="ri-arrow-right-up-line"
+                        ></i></a>
+            <label id="menu-btn" for="menu-toggle">
+                <span>menu<i class="ri-add-line"></i></span>
+            </label>
+        </div>
+    </nav>
+    <label for="menu-toggle" class="menu-overlay"></label>
+    <div class="slide-menu">
+        <label for="menu-toggle" class="menu-close" aria-label="Close menu">
+            <span></span>
+            <span></span>
+        </label>
+        <div class="menu-content">
+            <p>This website is meant to be scrolled, if you must hurry, here are shortcuts:</p>
+            <ul>
+                <li><a href="#page-2" class="menu-link">WORK</a></li>
+                <li><a href="#page-3" class="menu-link">ABOUT</a></li>
+                <li><a href="#my-ding" class="menu-link">SKILLS</a></li>
+                <li><a href="https://viktorsekovski.bearblog.dev/" class="menu-link">BLOG<i
+                            class="ri-arrow-right-up-line"
+                        ></i></a></li>
+                <li><a href="mailto:sekovskiviktor@gmail.com" class="menu-link">CONTACT<i
+                            class="ri-arrow-right-up-line"
+                        ></i></a></li>
+            </ul>
+            <p><br>Please do contact me for any inquries or work!</p>
+        </div>
+    </div>
+</header>
+                <div id="hero-handle">
+                    <div id="hero-head">
+                        <h1>Designer &</h1>
+                    </div>
+                    <div id="main-head">
+                        <h1>Developer</h1>
+                        <div id="mini">
+                            <h6>based in europe</h6>
+                        </div>
+                    </div>
+                </div>
+                <div id="main-mid">
+                    <div class="mid">
+                        <h5>available for full time & freelance work</h5>
+                    </div>
+                </div>
+                <div id="first-bottom">
+ <h5>
+                        MultiMedia Creative                    
+                        <!--<i
+                            class="ri-arrow-right-up-line"
+                        ></i>
+                    </h5> -->
+                    <h5>Unicorn Designer</h5>
+                    <h5>Powerhouse Dev</h5>
+                    <div id="ex">
+                        <div id="arrow-div">
+                            <div class="arrow">
+                                <i class="ri-arrow-down-fill"></i>
+                            </div>
+                            <div class="arrow">
+                                <i class="ri-arrow-down-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blurb">
+                <h2>I blend design, development & storytelling to craft unforgettable brand experiences</h2>
+            </div>
+
+            <div id="page-2">
+                <div id="work-top"><h1>Select</h1></div>
+                <div id="work-bottom"><h1>Work</h1></div>
+                <img
+                    src="./images/flower.svg"
+                    alt="Flower"
+                    loading="lazy"
+                />
+
+                  <div id="expandable-container">
+                    <div id="first-ele" 
+                         class="page2-ele" 
+                         hx-get="./partials/veoma.html" 
+                         hx-swap="innerHTML" 
+                         hx-target="#veoma-content"
+                         hx-trigger="click"
+                         hx-indicator="#veoma-content"
+                    >
+                        <h2>veoma studio</h2>
+                        <h6>2022</h6>
+                        <img src="./images/veo.webp" alt="Veoma Studio" loading="lazy" />
+                        
+                        <div id="veoma-content" class="page2-content"></div>
+                    </div>
+
+                    <div class="page2-ele"
+                         hx-get="./partials/vfns.html"
+                         hx-swap="innerHTML"
+                         hx-target="#vfn-content"
+                         hx-trigger="click"
+                         hx-indicator="#vfn-content"
+                    >
+                        <h2>view from nowhere</h2>
+                        <h6>2023</h6>
+                        <img src="./images/vfns.webp" alt="View from Nowhere" loading="lazy" />
+                        
+                        <div id="vfn-content" class="page2-content"></div>
+                    </div>
+
+                    <div class="page2-ele"
+                         hx-get="./partials/doctors.html"
+                         hx-swap="innerHTML"
+                         hx-target="#doctors-content"
+                         hx-trigger="click"
+                         hx-indicator="#doctors-content"
+                    >
+                        <h2>doctors</h2>
+                        <h6>2024</h6>
+                        <img src="./images/doctors.webp" alt="Doctors" loading="lazy" />
+                        
+                        <div id="doctors-content" class="page2-content"></div>
+                    </div>
+
+                    <div class="page2-ele"
+                         hx-get="./partials/nebesna.html"
+                         hx-swap="innerHTML"
+                         hx-target="#nebesna-content"
+                         hx-trigger="click"
+                         hx-indicator="#nebesna-content"
+                    >
+                        <h2>nebesna</h2>
+                        <h6>2025</h6>
+                        <img src="./images/neb.webp" alt="Nebesna" loading="lazy" />
+                        
+                        <div id="nebesna-content" class="page2-content"></div>
+                    </div>
+
+                    <div class="page2-ele"
+                         hx-get="./partials/anksioznost.html"
+                         hx-swap="innerHTML"
+                         hx-target="#anksioznost-content"
+                         hx-trigger="click"
+                         hx-indicator="#anksioznost-content"
+                    >
+                        <h2>anksioznost</h2>
+                        <h6>2025</h6>
+                        <img src="./images/anksi.webp" alt="Anksioznost" loading="lazy" />
+                        
+                        <div id="anksioznost-content" class="page2-content"></div>
+                    </div>
+                </div>
+                <div id="btn-div">
+                    <button><a href="#page-2">View more work</a></button>
+                </div>
+            </div>
+
+            
+<section class="chrome-scroll-section last extended-bottom" aria-label="Chrome CSS Scroll Demo">
+    <div class="container chrome-container">
+        <div class="focal-marker" aria-hidden="true"></div>
+        <div class="text-container">
+            <div class="text">
+                <h4>You Found Your</h4>
+            </div>
+            <div class="text" id="unicorn">
+                <h2>Unicorn!</h2>
+            </div>
+            <div class="text">
+                <h4>I want to craft</h4>
+            </div>
+            <div class="text">
+                <h4>every aspectof <em>your brand</em></h4>
+            </div>
+            <div class="text">
+                <h4>to <em>improve</em> engagement,</h4>
+            </div>
+            <div class="text">
+                <h4>retention & satisfaction</h4>
+            </div>
+            <div class="text">
+                <h4>for a <em>fraction</em> of agency costs.</h4>
+            </div>
+            <div class="text">
+                <h4><br>Don't entrust your brand</h4>
+            </div>
+            <div class="text">
+                <h4>to an intern</h4>
+            </div>
+            <div class="text">
+                <h4><em>hire me</em> to obsess</h4>
+            </div>
+            <div class="text">
+                <h4>over every aspect!</h4>
+            </div>
+            <div class="text">
+                <h5>6+ years of professional experience!</h5>
+            </div>
+            <div class="text">
+                <h2><br>Contact Me</h2>
+            </div>
+            <div class="text">
+                <h2>Today</h2>
+            </div>
+            <div class="text">
+                <h5>For a quick and efficient solution!</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="contact">
+    <a href="mailto:sekovskiviktor@gmail.com">
+        <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" /></a>
+</div>
+
+        <div>
+            <div class="skill" style="--t:20s">
+              <div>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Javascript</span>
+                <span>React</span>
+                <span>Node JS</span>
+                <span>SQL</span>
+                <span>Git</span>
+              </div>
+              <div>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Javascript</span>
+                <span>React JS</span>
+                <span>Node JS</span>
+                <span>SQL</span>
+                <span>Git</span>
+              </div>
+            </div>
+
+            <div class="skill" style="--t:15s">
+              <div>
+                <span>Typescript</span>
+                <span>Next JS</span>
+                <span>Lenis</span>
+                <span>WebGL</span>
+                <span>Tree JS</span>
+                <span>Bootstrap</span>
+                <span>Material UI</span>
+                <span>Tailwind</span>
+                <span>SCSS</span>
+              </div>
+              <div>
+                  <span>Typescript</span>
+                  <span>Next JS</span>
+                  <span>Lenis</span>
+                  <span>WebGL</span>
+                  <span>Tree JS</span>
+                  <span>Bootstrap</span>
+                  <span>Material UI</span>
+                  <span>Tailwind</span>
+                  <span>SCSS</span>
+
+              </div>
+            </div>
+
+            <div class="skill" style="--t:15s">
+              <div>
+                <span>Photoshop</span>
+                <span>Illustrator</span>
+                <span>Premiere Pro</span>
+                <span>InDesign</span>
+                <span>Figma</span>
+                <span>Affinity</span>
+                <span>Aseprite</span>
+                <span>Canva</span>
+                <span>SEO</span>
+                <span>UX</span>
+                <span>UI</span>
+                <span>Typography</span>
+                <span>Animation</span>
+                <span>Video</span>
+                <span>Audio</span>
+              </div>
+              <div>
+                <span>Photoshop</span>
+                <span>Illustrator</span>
+                <span>Premiere Pro</span>
+                <span>InDesign</span>
+                <span>Figma</span>
+                <span>Affinity</span>
+                <span>Aseprite</span>
+                <span>Canva</span>
+                <span>SEO</span>
+                <span>UX</span>
+                <span>UI</span>
+                <span>Typography</span>
+                <span>Animation</span>
+                <span>Video</span>
+                <span>Audio</span>
+              </div>
+            </div>
+        </div>
+            <div id="page-3">
+                <div id="t-f-div">
+                    <img
+                        src="./images/me-front.webp"
+                        alt="Portrait of Viktor Sekovski, product and motion designer"
+                        loading="lazy"
+                        class="fade-in-element"
+                    />
+                    <div id="t-s-div">
+                                <h1 class="fade-in-title">About</h1>
+                                <p class="fade-in-element">
+                                   Viktor Sekovski is a remote-first designer & developer with an unconventional background spanning multiple industries & creative disciplines. He specializes in turning complexity into intuitive & emotionally resonant experiences that feel just right. 
+                                   <br><br>With 5+ years crafting everything from video game interfaces to high-converting e-commerce platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive attention to the human computer interaction. 
+                                   <br><br>He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across channels & highly memorable.</h5>
+                        <button class="fade-in-element">
+                            <a href="mailto:sekovskiviktor@gmail.com"
+                                >Let's Talk</a
+                            >
+                        </button>
+                    </div>
+                </div>
+                <div id="third-bottom">
+                    <h5>oh, while you're here...</h5>
+                    <h5>
+                        <a
+                            href="https://viktorsekovski.bearblog.dev"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >learn more about me<i
+                                class="ri-arrow-right-up-line"
+                            ></i
+                        ></a>
+                    </h5>
+                </div>
+            </div>
+</div>
+             <div class="grids" id="grids">
+                <div class="grid">
+                    <div class="item is-blue">Web Design</div>
+                    <div class="item is-white">User Experience</div>
+                    <div class="item is-orange">Excellent User Interface</div>
+                    <div class="item is-pink">Web Development</div>
+                </div>
+
+                <div class="grid">
+                    <div class="item is-white">Graphic Design</div>
+                    <div class="item is-pink">Brand Worldbuilding</div>
+                    <div class="item is-blue">Advertising</div>
+                    <div class="item is-white">Product Design</div>
+                </div>
+
+                <div class="grid">
+                    <div class="item is-orange">Game Design</div>
+                    <div class="item is-white">Assets & Worldbuilding</div>
+                    <div class="item is-pink">Narrative Design</div>
+                    <div class="item is-blue">Game Development</div>
+                </div>
+            </div>
+
+            <div id="my-ding">
+                <div id="my-top"><h1>My</h1></div>
+                <div id="my-bottom"><h1>Process</h1></div>
+            </div>
+
+            <section id="chrome-scroll" aria-label="Chrome CSS Scroll Demo">
+                <div class="container chrome-container">
+                    <div class="focal-marker" aria-hidden="true"></div>
+                    <div class="text-container">
+                      <div class="text"><h4>In an overstuffed world</h4>
+                        </div>
+                         <div class="text">
+                            <h4>where attention is fleeting</h4>
+                        </div>
+                        <div class="text">
+                            <h4>but competition fierce</h4>
+                        </div>
+                        <div class="text">
+                            <h4>most messages<em>vanish</em>,</h4>
+                        </div>
+                        <div class="text">
+                            <h4>before being seen.</h4>
+                        </div>
+                        <div class="text">
+                            <h4><br>Even worse, they <em>fail</em></h4>
+                        </div>
+                        <div class="text">
+                            <h4>to grab your attention</h4>
+                        </div>
+                        <div class="text">
+                            <h4>despite making it</h4>
+                        </div>
+                        <div class="text">
+                            <h4>in front of your face</h4>
+                        </div>
+                        <div class="text">
+                           <h3><br>But I can break through</h3>
+                        </div>
+                        <div class="text"><h4><br>with relentless creativity,</h4></div>
+                        <div class="text">
+                            <h4>wide technical expertise</h4>
+                        </div>
+                        <div class="text">
+                            <h4>& unmatched skill diversity</h4>
+                        </div>
+                        <div class="text">
+                            <h5>I create meaningful interactions</h5>
+                        </div>
+                        <div class="text">
+                            <h5>that remain in customers' heads</h5>
+                        </div>
+                        <div class="text">
+                           <h3><br><br>Everything is a remix,</h3>
+                        </div>
+                        <div class="text"><h4>so I build intricate tappestries</h4></div>
+                        <div class="text"><h4>& phenomenal collages</h4></div>
+                        <div class="text">
+                            <h4>in various mediums</h4>
+                        </div>
+                        <div class="text">
+                            <h4>filled with <em>meaning,</em></h4>
+                        </div>
+                        <div class="text">
+                            <h4><em>emotion & relevance</em></h3>
+                        </div>
+                        <div class="text">
+                            <h5>using every tool available.</h5>
+                        </div>
+                        <div class="text">
+                            <h2><br>Contact Me</h2>
+                        </div>
+                        <div class="text">
+                            <h2>Today</h2>
+                        </div>
+                        <div class="text">
+                            <h5>For an Amazing Experience</h5>
+                        </div>
+                        <div style="height: 30vh;"></div>
+                    </div>
+                </div>
+            </section>
+
+<div class="contact">
+                <a href="mailto:sekovskiviktor@gmail.com">
+                    <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" />
+                </a>
+            </div>
+
+            <footer>
+                <div id="foot-div">
+                    <div id="foot-name">
+                        <h1>
+                            Viktor <span class="spaced">D&</span><br>
+                            Sekovski D
+                        </h1>
+                        <h6>SekovskiViktor@gmail.com</h6>
+                    </div>
+                    <div id="social">
+                      <h5 class="foot-head">
+                            <a href="https://www.linkedin.com/in/viktorsekovski/" target="_blank" rel="noopener noreferrer">linkedin</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://viktorsekovski.bearblog.dev/" target="_blank" rel="noopener noreferrer">blog</a>
+                        </h5>
+                      <!--    <h5 class="foot-head">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">twitter</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
+                        </h5>
+                        <h5 class="foot-head">
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">youtube</a>
+                        </h5> -->
+                    </div>
+                </div>
+                <div id="foot-bottom">
+                    <h6>Copyright © 2026 Viktor Sekovski. All rights reserved.</h6>
+                </div>
+            </footer>
+
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="./global.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>
