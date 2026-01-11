@@ -90,7 +90,7 @@ body {
     min-height: 100vh;
     width: 100%;
     line-height: 1.5;
-    overflow-x: visible;
+    overflow-x: hidden;
     overflow-y: auto;
     cursor: none;
     overscroll-behavior-y: none;
@@ -117,6 +117,17 @@ body {
         -100% 250%,
         center;
     animation: driftA 180s ease-in-out infinite alternate;
+}
+
+/* Prevent horizontal overflow globally */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Show default cursor on mobile and low-end systems */
@@ -818,6 +829,23 @@ nav {
     align-items: flex-start;
 }
 
+/* Triangle Indicator */
+.triangle-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--pink);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.page2-ele.active .triangle-indicator {
+    transform: rotate(180deg);
+}
+
 .page2-ele h2 {
     white-space: nowrap;
     overflow: hidden;
@@ -841,6 +869,23 @@ nav {
 .page2-ele.active {
     flex-direction: column;
     align-items: flex-start;
+}
+
+/* Triangle Indicator */
+.triangle-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--pink);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.page2-ele.active .triangle-indicator {
+    transform: rotate(180deg);
 }
 
 /* --------------------------------------------------------------------------
@@ -956,7 +1001,7 @@ nav {
     gap: 5px;
     line-height: 1.4;
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.9rem, 1.1vw, 1.2vw);
+    font-size: clamp(14px, 1.5vw, 2rem);
     text-decoration: underline dashed var(--orange);
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
@@ -1079,31 +1124,33 @@ nav {
     justify-content: flex-start;
     margin-top: clamp(20px, 4.17vw, 60px);
 }
-#btn-div button {
-    background-color: transparent;
-    border: 1.5px solid rgba(255, 255, 255, 0.685);
-    border-radius: 30px;
-    border-top: 1.5px solid rgba(255, 255, 255, 0.883);
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.883);
-    padding: clamp(0.4rem, 0.69vw, 0.6rem) clamp(1rem, 1.39vw, 1.5rem);
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+button {
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--pink);
+  background-color: transparent;
+  border: 1.5px solid var(--lightgrey);
+  border-radius: 25px;
+  border-top: 1.5px solid var(--lightgrey);
+  border-bottom: 1.5px solid var(--lightgrey);
+  text-decoration: none;
+  line-height: normal;
+  font-family: "DinaRemasterII", "Doto", monospace;
+  font-size: clamp(16px, 1.8vw, 2.5rem);
+  transition: all 0.2s ease-in-out;
+  box-shadow: none;
+  cursor: url("./images/hand.svg") 5 0, pointer;
 }
-#btn-div button a {
-    transition: all 0.2s ease-in-out;
-    font-size: clamp(1rem, 1.39vw, 1.3rem);
-    font-family: "DinaRemasterII", "Doto", monospace;
+
+nav a:hover,
+button:hover {
+  border-color: var(--bordergrey);
+  color: var(--orange);
+  box-shadow: none;
 }
-#btn-div button:hover {
-    background-color: var(--pink);
-    border-color: var(--pink);
-}
-#btn-div button:hover a {
-    color: var(--white);
-}
+
 
 /* ==========================================================================
    CONTACT SECTION CENTERING & CLEANUP
@@ -1718,7 +1765,7 @@ h1 .spaced1 {
 }
 
 .foot-head {
-    text-transform: uppercase;
+    text-transform: none; /* Override the general h5 uppercase rule */
     position: relative;
     overflow: hidden;
 }
