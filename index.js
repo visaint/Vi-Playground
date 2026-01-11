@@ -68,11 +68,6 @@ function initPage2Animations() {
 // CHROME SCROLL ANIMATION
 // ===================================
 function initChromeScroll() {
-  // Disable on mobile for performance
-  if (window.innerWidth <= 768 || 'ontouchstart' in window) {
-    return;
-  }
-
   const containers = [
     document.querySelector("#chrome-scroll"),
     ...document.querySelectorAll(".chrome-scroll-section")
@@ -178,17 +173,7 @@ function initImageHoverEffects() {
     const image = element.querySelector("img");
     if (!image) return;
 
-    // Fixed positioning to avoid border interference
-    gsap.set(image, { 
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      xPercent: -50, 
-      yPercent: -25, 
-      opacity: 0,
-      zIndex: 50,
-      pointerEvents: "none"
-    });
+    gsap.set(image, { xPercent: -50, yPercent: -25, opacity: 0 });
 
     element.addEventListener("mouseenter", () => {
       gsap.to(image, { opacity: 1, duration: 0.3, ease: "power1.out" });
@@ -202,13 +187,9 @@ function initImageHoverEffects() {
       if (mouseMoveTimeout) return;
       mouseMoveTimeout = setTimeout(() => {
         const bounds = element.getBoundingClientRect();
-        // Constrain movement within element bounds to prevent border issues
-        const x = Math.max(0, Math.min(bounds.width, event.clientX - bounds.left));
-        const y = Math.max(0, Math.min(bounds.height, event.clientY - bounds.top));
-        
         gsap.to(image, {
-          x: x - bounds.width / 2,
-          y: y - bounds.height / 2,
+          x: event.clientX - bounds.left,
+          y: event.clientY - bounds.top,
           rotation: clamp(event.movementX * 0.5, -15, 15),
           duration: 0.6,
           ease: "power2.out",
@@ -447,46 +428,62 @@ if (DOM.page3) {
   });
 }
 // ===================================
-// PAGE 2 EXPANDABLE CONTENT (SIMPLIFIED)
+// PAGE 2 EXPANDABLE CONTENT
 // ===================================
 function initPage2Expandable() {
   if (!DOM.page2Elements.length) return;
   
   DOM.page2Elements.forEach((element) => {
     const content = element.querySelector(".page2-content");
-    const projectContent = element.querySelector(".project-content");
-    const h2 = element.querySelector("h2");
     let isAnimating = false;
 
-    // Map h2 text to partial files
-    const partialMap = {
-      "veoma studio": "./partials/veoma.html",
-      "view from nowhere": "./partials/vfns.html",
-      "doctors": "./partials/doctors.html",
-      "nebesna": "./partials/nebesna.html",
-      "anksioznost": "./partials/anksioznost.html"
-    };
+    content.addEventListener("click", (e) => {
+      const isClickOnContent = e.target.closest('img, p, ul, li, h3, h4, h5, h6, a, button, figure');
+      if (isClickOnContent) {
+        e.stopPropagation();
+      }
+    });
 
-    // Create triangle indicator
-    const triangle = document.createElement('div');
-    triangle.className = 'triangle-indicator';
-    triangle.innerHTML = '▼';
-    element.appendChild(triangle);
-
-    // Click on entire page2-ele div triggers open/close
-    element.addEventListener("click", (e) => {
-      // Prevent clicks on content from triggering
-      if (e.target.closest('.page2-content')) return;
-      
-      e.preventDefault();
-      e.stopPropagation();
-      
+    element.addEventListener("htmx:afterSwap", () => {
       if (isAnimating) return;
-      isAnimating = true;
 
-      if (element.classList.contains("active")) {
-        // Close animation
-        triangle.style.transform = 'rotate(0deg)';
+      element.classList.add("active");
+      gsap.set(content, { height: "auto", opacity: 1 });
+
+      const fullHeight = content.offsetHeight;
+
+      gsap.fromTo(
+        content,
+        { height: 0, opacity: 0 },
+        {
+          height: fullHeight,
+          opacity: 1,
+          duration: 0.45,
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.set(content, { height: "auto" });
+            ScrollTrigger.refresh();
+          }
+        }
+      );
+    });
+
+    element.addEventListener("click", (e) => {
+      const hasContent = content.innerHTML.trim().length > 0;
+
+      if (element.classList.contains("active") && hasContent) {
+        const selection = window.getSelection();
+        if (selection.toString().length > 0) return;
+        
+        const isClickOnContent = e.target.closest('img, p, ul, li, h3, h4, h5, h6, a, button, figure');
+        if (isClickOnContent) return;
+        
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (isAnimating) return;
+        isAnimating = true;
+
         const currentHeight = content.offsetHeight;
         gsap.set(content, { height: currentHeight });
 
@@ -497,50 +494,12 @@ function initPage2Expandable() {
           ease: "power2.inOut",
           onComplete: () => {
             element.classList.remove("active");
-            projectContent.innerHTML = "";
+            content.innerHTML = "";
             gsap.set(content, { height: "auto", opacity: 1 });
             isAnimating = false;
             ScrollTrigger.refresh();
           }
         });
-      } else {
-        // Load content and open animation
-        const partialUrl = partialMap[h2.textContent.trim()];
-        if (!partialUrl) {
-          isAnimating = false;
-          return;
-        }
-
-        fetch(partialUrl)
-          .then(response => response.text())
-          .then(html => {
-            projectContent.innerHTML = html;
-            element.classList.add("active");
-            triangle.style.transform = 'rotate(180deg)';
-            gsap.set(content, { height: "auto", opacity: 1 });
-
-            const fullHeight = content.offsetHeight;
-
-            gsap.fromTo(
-              content,
-              { height: 0, opacity: 0 },
-              {
-                height: fullHeight,
-                opacity: 1,
-                duration: 0.45,
-                ease: "power2.out",
-                onComplete: () => {
-                  gsap.set(content, { height: "auto" });
-                  isAnimating = false;
-                  ScrollTrigger.refresh();
-                }
-              }
-            );
-          })
-          .catch(error => {
-            console.error('Error loading partial:', error);
-            isAnimating = false;
-          });
       }
     });
   });
@@ -593,76 +552,24 @@ function initMenuLinkHandlers() {
 }
 
 // ===================================
-// INITIALIZATION - CRITICAL (Runs on DOMContentLoaded)
+// INITIALIZATION
 // ===================================
-function initCriticalFunctionality() {
-  DOM.init(); // Must run first to cache elements
+function startAnimations() {
+  DOM.init(); // Cache all DOM elements first
   
-  // Handlers required for basic site navigation/interaction
-  initMenuLinkHandlers();
-  
-  // Non-animation fixes
-  initChromeScroll(); 
-}
-
-// ===================================
-// PRELOADER
-// ===================================
-function hidePreloader() {
-    const preloader = document.getElementById("preloader");
-    const mainContent = document.getElementById("main-content");
-
-    if (preloader) {
-        // Use a short delay with GSAP for a smooth fade-out effect
-        gsap.to(preloader, {
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.inOut",
-            onComplete: () => {
-                preloader.classList.add('hidden'); // Hide completely
-            }
-        });
-    }
-
-    if (mainContent) {
-        // Fade in the content
-        mainContent.classList.add('visible');
-    }
-}
-
-// ===================================
-// INITIALIZATION - DEFERRED (Runs on window.load)
-// ===================================
-function initAnimationDeferred() {
-  // Heavy-lifting animation initialization moved here:
   initPage2Animations();
   initImageHoverEffects();
   initLoadAnimations();
+  initChromeScroll();
   initPage2Expandable();
+  initMenuLinkHandlers();
   initIntersectionObserver();
-  initScrollAnimations(); // This was already here, but now everything else joins it
 
-  // Final refresh after all animations are set up
-  if (typeof ScrollTrigger !== "undefined") {
-      ScrollTrigger.refresh();
-  }
-  
-  // Hide preloader after everything is loaded
-  hidePreloader();
+  window.addEventListener("load", () => {
+    initScrollAnimations();
+    ScrollTrigger.refresh();
+  });
 }
-
-// ===================================
-// AUTO-INITIALIZATION BLOCK (Integrates with your new global.js flow)
-// We replace the original 'startAnimations' logic with our new split functions.
-// ===================================
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCriticalFunctionality);
-} else {
-  initCriticalFunctionality();
-}
-
-// Ensure deferred animations run after all assets are loaded.
-window.addEventListener("load", initAnimationDeferred);
 
 let resizeTimer;
 window.addEventListener(
@@ -675,7 +582,7 @@ window.addEventListener(
         DOM.miniCircle.style.display = window.innerWidth <= 1024 ? "none" : "flex";
       }
     }, 250);
-},
+  },
   { passive: true },
 );
 
