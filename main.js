@@ -12,10 +12,16 @@ function initLenis() {
   
   const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
   
+  // CRITICAL FIX: Disable Lenis entirely on mobile to prevent scroll blocking
+  if (isMobile) {
+    console.log('Mobile detected - Lenis disabled for performance');
+    return;
+  }
+  
   lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: !isMobile,
+    smooth: true,
     smoothTouch: false,
     touchMultiplier: 2
   });
@@ -51,7 +57,7 @@ const DOM = {
   page2Elements: null,
   logo: null,
   menuBtn: null,
-  blogLink: null,
+  headerLinks: null,
   heroHead: null,
   mainHead: null,
   miniH6: null,
@@ -66,7 +72,7 @@ const DOM = {
     this.page2Elements = document.querySelectorAll(".page2-ele");
     this.logo = document.querySelector("#logo");
     this.menuBtn = document.querySelector("#menu-btn");
-    this.blogLink = document.querySelector(".blog-link");
+    this.headerLinks = document.querySelectorAll(".header-link");
     this.heroHead = document.querySelector("#hero-head h1");
     this.mainHead = document.querySelector("#main-head h1");
     this.miniH6 = document.querySelector("#mini h6");
@@ -134,6 +140,22 @@ function initChromeScroll() {
   if (!containers.length) return;
 
   const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  
+  // CRITICAL MOBILE FIX: Disable complex chrome scroll on mobile
+  if (isMobile) {
+    console.log('Mobile detected - Chrome scroll simplified');
+    containers.forEach(container => {
+      const items = Array.from(container.querySelectorAll(".text"));
+      items.forEach(el => {
+        // Set static visible state for mobile
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.filter = 'none';
+      });
+    });
+    return;
+  }
+  
   const chromeScrollInstances = new Map();
   
   containers.forEach(container => {
@@ -151,9 +173,7 @@ function initChromeScroll() {
         easedInCubic: 0,
       });
       
-      if (!isMobile) {
-        el.style.willChange = "transform, opacity, filter";
-      }
+      el.style.willChange = "transform, opacity, filter";
       el.style.pointerEvents = "none";
     });
 
@@ -175,84 +195,57 @@ function initChromeScroll() {
       items.forEach((el) => {
         const rect = el.getBoundingClientRect();
         
-        const offscreenMargin = isMobile ? 300 : 200;
+        const offscreenMargin = 200;
         if (rect.top > vh + offscreenMargin || rect.bottom < -offscreenMargin) return;
 
         const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
         const raw = clamp(1 - distance / (vh * 0.6), 0, 1);
 
         const s = state.get(el);
-        const smooth = isMobile ? 0.18 : 0.12;
+        const smooth = 0.12;
 
         s.raw = lerp(s.raw, raw, smooth);
         s.easedExpo = lerp(s.easedExpo, clamp(easeOutExpo(raw), 0, 1), smooth);
         s.easedQuart = lerp(s.easedQuart, clamp(easeOutQuart(raw), 0, 1), smooth);
-        
-        if (!isMobile) {
-          s.easedQuartInv = lerp(
-            s.easedQuartInv,
-            clamp(easeOutQuart(1 - raw), 0, 1),
-            smooth,
-          );
-          s.easedInCubic = lerp(
-            s.easedInCubic,
-            clamp(easeInCubic(1 - raw), 0, 1),
-            smooth,
-          );
-        }
+        s.easedQuartInv = lerp(
+          s.easedQuartInv,
+          clamp(easeOutQuart(1 - raw), 0, 1),
+          smooth,
+        );
+        s.easedInCubic = lerp(
+          s.easedInCubic,
+          clamp(easeInCubic(1 - raw), 0, 1),
+          smooth,
+        );
 
-        const precision = isMobile ? 2 : 3;
+        const precision = 3;
         const progress = s.raw.toFixed(precision);
         const expo = s.easedExpo.toFixed(precision);
         const quart = s.easedQuart.toFixed(precision);
         const blur = ((1 - s.easedExpo) * 8).toFixed(1);
         const zIndex = Math.round(s.easedExpo * 100) + 10;
+        const quartInv = s.easedQuartInv.toFixed(precision);
+        const inCubic = s.easedInCubic.toFixed(precision);
         
-        if (isMobile) {
-          el.style.cssText = `
-            --chrome-progress-y: ${progress};
-            --chrome-eased-expo: ${expo};
-            --chrome-eased-quart: ${quart};
-            --chrome-blur: ${blur}px;
-            z-index: ${zIndex};
-            pointer-events: none;
-          `;
-        } else {
-          const quartInv = s.easedQuartInv.toFixed(precision);
-          const inCubic = s.easedInCubic.toFixed(precision);
-          
-          el.style.cssText = `
-            --chrome-progress-y: ${progress};
-            --chrome-eased-expo: ${expo};
-            --chrome-eased-quart: ${quart};
-            --chrome-eased-quart-inv: ${quartInv};
-            --chrome-eased-in-cubic: ${inCubic};
-            --chrome-blur: ${blur}px;
-            z-index: ${zIndex};
-            will-change: transform, opacity, filter;
-            pointer-events: none;
-          `;
-        }
+        el.style.cssText = `
+          --chrome-progress-y: ${progress};
+          --chrome-eased-expo: ${expo};
+          --chrome-eased-quart: ${quart};
+          --chrome-eased-quart-inv: ${quartInv};
+          --chrome-eased-in-cubic: ${inCubic};
+          --chrome-blur: ${blur}px;
+          z-index: ${zIndex};
+          will-change: transform, opacity, filter;
+          pointer-events: none;
+        `;
       });
     });
   };
 
-  let scrollTimeout;
   const onScroll = () => {
-    if (isMobile) {
-      if (scrollTimeout) return;
-      scrollTimeout = setTimeout(() => {
-        if (!ticking) {
-          requestAnimationFrame(compute);
-          ticking = true;
-        }
-        scrollTimeout = null;
-      }, 32);
-    } else {
-      if (!ticking) {
-        requestAnimationFrame(compute);
-        ticking = true;
-      }
+    if (!ticking) {
+      requestAnimationFrame(compute);
+      ticking = true;
     }
   };
 
@@ -266,7 +259,7 @@ function initChromeScroll() {
       }
     });
   }, { 
-    rootMargin: isMobile ? '50px' : '100px'
+    rootMargin: '100px'
   });
 
   containers.forEach(container => observer.observe(container));
@@ -278,7 +271,7 @@ function initChromeScroll() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       requestAnimationFrame(compute);
-    }, isMobile ? 250 : 100);
+    }, 100);
   }, { passive: true });
 }
 
@@ -287,6 +280,10 @@ function initChromeScroll() {
 // ===================================
 function initImageHoverEffects() {
   if (!DOM.page2Elements.length) return;
+  
+  // MOBILE FIX: Disable hover effects on mobile entirely
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  if (isMobile) return;
 
   DOM.page2Elements.forEach((element) => {
     const image = element.querySelector("img");
@@ -350,11 +347,37 @@ function initImageHoverEffects() {
 // INITIAL PAGE LOAD ANIMATIONS (Reusable)
 // ===================================
 function initLoadAnimations() {
+  // MOBILE FIX: Reduce animations on mobile
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  
+  if (isMobile) {
+    // Instant display on mobile - no animations
+    if (DOM.logo) DOM.logo.style.opacity = '1';
+    if (DOM.menuBtn) DOM.menuBtn.style.opacity = '1';
+    if (DOM.headerLinks) DOM.headerLinks.forEach(link => link.style.opacity = '1');
+    
+    const navInnerUl = document.querySelector("#nav-inner-ul");
+    if (navInnerUl) navInnerUl.style.opacity = '1';
+    
+    if (DOM.heroHead) DOM.heroHead.style.opacity = '1';
+    if (DOM.mainHead) DOM.mainHead.style.opacity = '1';
+    if (DOM.miniH6) DOM.miniH6.style.opacity = '1';
+    
+    const midElements = document.querySelectorAll(".mid h5");
+    midElements.forEach(el => el.style.opacity = '1');
+    
+    if (DOM.firstBottom) DOM.firstBottom.style.opacity = '1';
+    return;
+  }
+  
+  // Desktop animations
   const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.1 });
 
   DOM.logo && tl.from(DOM.logo, { y: 40, opacity: 0, duration: 0.5 });
   DOM.menuBtn && tl.from(DOM.menuBtn, { y: 40, opacity: 0, duration: 0.5 }, "-=0.3");
-  DOM.blogLink && tl.from(DOM.blogLink, { y: 40, opacity: 0, duration: 0.5 }, "-=0.3");
+  DOM.headerLinks && DOM.headerLinks.forEach((link, index) => 
+    tl.from(link, { y: 40, opacity: 0, duration: 0.5 }, `-=0.3${index > 0 ? `-${index * 0.1}` : ''}`)
+  );
 
   if (window.innerWidth > 600) {
     const navInnerUl = document.querySelector("#nav-inner-ul");
@@ -406,6 +429,31 @@ function initIntersectionObserver() {
 // ===================================
 function initScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
+  // MOBILE FIX: Disable ScrollTrigger animations on mobile for performance
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  if (isMobile) {
+    console.log('Mobile detected - ScrollTrigger animations disabled');
+    // Make elements visible immediately on mobile
+    const elements = [
+      '.blurb h2',
+      '#page-2',
+      '#page-3 #t-f-div img',
+      '#page-3 #t-s-div',
+      '.grids',
+      '#my-top h1',
+      '#my-bottom h1',
+      'footer'
+    ];
+    elements.forEach(selector => {
+      const el = document.querySelector(selector);
+      if (el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+    return;
+  }
   
   gsap.registerPlugin(ScrollTrigger);
 
@@ -539,13 +587,7 @@ function initPage2Expandable() {
     
     let isAnimating = false;
 
-    // Prevent htmx requests when clicking inside expanded content
-    content.addEventListener("click", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-    });
-
-    // Handle htmx content loading
+    // After HTMX loads content, expand it
     element.addEventListener("htmx:afterSwap", () => {
       if (isAnimating) return;
 
@@ -572,21 +614,18 @@ function initPage2Expandable() {
       );
     });
 
-    // Main click handler for page2-ele
+    // Click handler: toggle open/close, but ignore clicks on expanded content
     element.addEventListener("click", (e) => {
-      // Don't do anything if clicking inside expanded content
+      // If clicking inside the expanded content area, do nothing
       if (e.target.closest('.page2-content')) {
         return;
       }
 
-      const hasContent = content.innerHTML.trim().length > 0;
       const isActive = element.classList.contains("active");
+      const hasContent = content.innerHTML.trim().length > 0;
 
-      // If element is active and has content, close it
+      // If already open and has content, close it
       if (isActive && hasContent) {
-        e.preventDefault();
-        e.stopPropagation();
-
         if (isAnimating) return;
         isAnimating = true;
 
@@ -609,6 +648,7 @@ function initPage2Expandable() {
           }
         });
       }
+      // If not open, HTMX will handle loading content (htmx:afterSwap will expand)
     });
   });
 }
@@ -629,7 +669,7 @@ function initMenuLinkHandlers() {
 
       e.preventDefault();
 
-      if (typeof lenis !== 'undefined') {
+      if (typeof lenis !== 'undefined' && lenis) {
         lenis.stop();
       }
       if (typeof ScrollTrigger !== 'undefined') {
@@ -647,7 +687,7 @@ function initMenuLinkHandlers() {
       });
 
       setTimeout(() => {
-        if (typeof lenis !== 'undefined') {
+        if (typeof lenis !== 'undefined' && lenis) {
           lenis.start();
         }
         if (typeof ScrollTrigger !== 'undefined') {
