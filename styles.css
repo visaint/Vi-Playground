@@ -134,28 +134,92 @@ body {
     color: var(--grey);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    will-change: background-position;
     cursor: url("./images/mouse.svg") 5 5, auto;
-    /* Background Gradient Animation */
+    
+    /* OPTIMIZED: Both gradients same size */
     background:
-        radial-gradient(circle at 20% 20%, var(--orange) 0%, #6600ff00 8%),
-        radial-gradient(circle at 80% 70%, var(--orange) 0%, #00d4ff00 8%),
-        radial-gradient(circle at 60% 80%, var(--pink) 0%, #ff4dff00 10%),
-        linear-gradient(120deg, var(--white), var(--white));
+        radial-gradient(circle at 25% 15%, var(--orange) 0%, transparent 12%),
+        radial-gradient(circle at 75% 80%, var(--pink) 0%, transparent 12%),
+        var(--white);
     background-size:
-        1440px 1440px,
-        1260px 1260px,
-        1620px 1620px,
+        1100px 1100px,    /* Orange */
+        1100px 1100px,    /* Pink - same size */
         auto;
     background-position:
-        -200% -200%,
-        300% -150%,
-        -100% 250%,
+        -80% -120%,
+        140% 150%,
         center;
-    animation: driftA 180s ease-in-out infinite alternate;
 }
 
-/* Prevent horizontal overflow globally */
+/* Desktop only: Subtle drift animation */
+@media (min-width: 769px) and (hover: hover) {
+    body {
+        animation: subtleDrift 120s ease-in-out infinite alternate;
+        will-change: background-position;
+    }
+}
+
+/* Mobile: Static background with matched sizes */
+@media (max-width: 768px), (hover: none) {
+    body {
+        background:
+            radial-gradient(circle at 30% 10%, var(--orange) 0%, transparent 18%),
+            radial-gradient(circle at 70% 85%, var(--pink) 0%, transparent 18%),
+            var(--white);
+        background-size: 100vw 100vh, 100vw 100vh, auto; /* Same size */
+        background-position: center top, center bottom, center;
+        background-attachment: fixed;
+        animation: none;
+        will-change: auto;
+    }
+}
+
+/* OPTIMIZED: Fixed positions that won't be affected by page height changes */
+@keyframes subtleDrift {
+    0% {
+        background-position:
+            -80px -120px,    /* Orange: Fixed top-left */
+            140px 150px,     /* Pink: Fixed bottom-right */
+            center;
+    }
+    50% {
+        background-position:
+            20px 10px,       /* Orange: Near top-center */
+            90px 130px,      /* Pink: Lower-right, pulled up */
+            center;
+    }
+    100% {
+        background-position:
+            -60px -80px,    /* Orange: Upper-left, high */
+            120px 110px,     /* Pink: Lower-right, comfortable position */
+            center;
+    }
+}
+
+/* Pause animation when page not visible (saves CPU) */
+/* Pause animation when page not visible (saves CPU) */
+body.paused {
+    animation-play-state: paused;
+}
+
+/* Stabilize background during htmx content expansion (only during loading, not closing) */
+body.htmx-request {
+    animation-play-state: paused !important;
+}
+
+/* Expand indicator triangle */
+.expand-indicator {
+    color: var(--pink);
+    font-size: 2em;
+    transition: transform 0.3s ease;
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.page2-ele.active .expand-indicator {
+    transform: rotate(180deg);
+}
 * {
     max-width: 100%;
     box-sizing: border-box;
@@ -164,31 +228,6 @@ body {
 img, video, iframe {
     max-width: 100%;
     height: auto;
-}
-
-
-@keyframes driftA {
-    0% {
-        background-position:
-            -200% -200%,
-            300% -150%,
-            -100% 250%,
-            center;
-    }
-    50% {
-        background-position:
-            150% -100%,
-            -150% 200%,
-            250% 150%,
-            center;
-    }
-    100% {
-        background-position:
-            -100% 200%,
-            200% 250%,
-            -200% -150%,
-            center;
-    }
 }
 
 img {
@@ -1457,17 +1496,6 @@ button:hover {
     transition: left 0.6s ease;
 }
 
-.skill div span:hover {
-    background: var(--pink);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 12px rgba(238, 143, 161, 0.3);
-}
-
-.skill div span:hover::before {
-    left: 100%;
-}
-
-
 /* ==========================================================================
    11. PAGE 3 - ABOUT SECTION
    ========================================================================== */
@@ -1567,7 +1595,6 @@ button:hover {
 }
 #third-bottom h5:nth-child(1) {
     color: var(--blue);
-    cursor: default;
 }
 #third-bottom h5 a {
     cursor: url("./images/hand.svg") 7 0, pointer;
