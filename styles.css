@@ -9,12 +9,9 @@
     font-display: swap;
 }
 
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
-@font-face {
-    font-family: 'Doto';
-    font-weight: 800;
-    font-display: swap;
-}
 
 :root {
     /* Colors */
