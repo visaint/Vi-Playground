@@ -1,52 +1,4 @@
 /* ==========================================================================
-   0. PRELOADER
-   ========================================================================== */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    color: var(--blue);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-}
-
-#preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-#main-content {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-#main-content.visible {
-    opacity: 1;
-}
-
-.preloader-content h1 {
-    font-family: "DinaRemasterII", monospace;
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-/* ==========================================================================
    1. FONTS & VARIABLES
    ========================================================================== */
 @font-face {
@@ -1945,20 +1897,21 @@ h1 .spaced1 {
 
 /* Image Hover Effects Removed - Mobile Only */
 @media (max-width: 768px), (hover: none) {
-    .page2-ele img {
-        position: static !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transition: none !important;
-        transform: none !important;
+    /* Only hide initial thumbnail images, not HTMX-loaded images */
+    .page2-ele > img:first-of-type {
+        display: none !important;
+    }
+    
+    .page2-ele:hover > img:first-of-type {
+        display: none !important;
+    }
+    
+    /* Keep HTMX-loaded images visible */
+    .page2-content img {
+        display: block !important;
         width: 100% !important;
         height: auto !important;
         margin: 1rem 0 !important;
-    }
-    
-    .page2-ele:hover > img {
-        opacity: 1 !important;
-        transform: none !important;
     }
 }
 
@@ -1986,6 +1939,47 @@ h1 .spaced1 {
     /* Disable Lenis scroll blocking classes */
     body.htmx-request {
         animation-play-state: paused !important;
+    }
+}
+
+/* ==========================================================================
+   17. MOBILE HEADER
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* Hide desktop navigation items */
+    .nav-right .header-link {
+        display: none !important;
+    }
+    
+    /* Mobile header styling */
+    header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+        background-color: var(--white) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        border-bottom: 1px solid var(--bordergrey) !important;
+        padding: 15px 20px !important;
+    }
+    
+    /* Ensure logo and menu button are visible */
+    #logo-div {
+        display: block !important;
+    }
+    
+    #menu-btn {
+        display: flex !important;
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+    
+    /* Adjust main content to account for fixed header */
+    #page-1 {
+        padding-top: 80px !important;
     }
 }
 
