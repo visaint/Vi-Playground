@@ -9,10 +9,6 @@
     font-display: swap;
 }
 
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
-
 :root {
     /* Colors */
     --orange: #F48F6E;
@@ -24,8 +20,8 @@
     --grey: #606060;
 
     /* Cursor Configuration */
-    --cursor-glow-size: 20rem;
-    --cursor-glow-blur: 56px;
+    --cursor-glow-size: 10rem;
+    --cursor-glow-blur: 24px;
     --cursor-glow-alpha: 0.96;
     --cursor-glow-mid-alpha: 0.2;
     --cursor-glow-outer-alpha: 0;
@@ -98,7 +94,12 @@ body {
     overflow-y: auto;
     cursor: none;
     overscroll-behavior-y: none;
-
+    font-family: "Libre Baskerville", serif;
+    font-size: clamp(16px, 1.6vw, 2.3vw);
+    color: var(--grey);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: background-position;
     /* Background Gradient Animation */
     background:
         radial-gradient(circle at 20% 20%, var(--orange) 0%, #6600ff00 8%),
@@ -182,7 +183,7 @@ button {
 
 #main {
     width: 100%;
-    max-width: 1440px; /* Correctly centers the content here */
+    max-width: 1440px; 
     margin: 0 auto;
     overflow-x: hidden;
     overflow-y: visible;
@@ -194,17 +195,6 @@ button {
 /* ==========================================================================
    3. TYPOGRAPHY
    ========================================================================== */
-/* Global Font Settings - Note: This is aggressive but kept per design */
-* {
-    color: var(--orange);
-    font-family: "Libre Baskerville", serif;
-    font-size: clamp(16px, 1.8vw, 2.5vw);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "kern" 1;
-    font-kerning: normal;
-}
 
 b,
 strong {
@@ -998,14 +988,6 @@ nav {
     gap: 20px; /* Standardized from 30px */
 }
 
-.project-description p {
-    font-family: "Libre Baskerville", serif;
-    font-size: clamp(1rem, 1.5vw, 1.15rem); /* Fixed: was mixing px and rem */
-    line-height: 1.6; /* Increased for better readability */
-    color: var(--grey);
-    margin: 0;
-}
-
 /* --- Right Column: Image Gallery --- */
 .project-gallery-col {
     display: flex;
@@ -1582,7 +1564,6 @@ nav {
     text-align: left !important;
     width: 100%;
     line-height: 1.65;
-    font-size: clamp(0.9rem, 1.11vw, 1.2rem);
 }
 
 #page-3 img {
