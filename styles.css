@@ -146,8 +146,8 @@ body {
         1100px 1100px,    /* Pink - same size */
         auto;
     background-position:
-        -80% -120%,
-        140% 150%,
+        -80% 50%,
+        140% 250%,
         center;
 }
 
@@ -167,7 +167,7 @@ body {
             radial-gradient(circle at 70% 85%, var(--pink) 0%, transparent 18%),
             var(--white);
         background-size: 100vw 100vh, 100vw 100vh, auto; /* Same size */
-        background-position: center top, center bottom, center;
+        background-position: center top, center bottom + 20%, center;
         background-attachment: fixed;
         animation: none;
         will-change: auto;
@@ -178,20 +178,20 @@ body {
 @keyframes subtleDrift {
     0% {
         background-position:
-            -80px -120px,    /* Orange: Fixed top-left */
-            140px 150px,     /* Pink: Fixed bottom-right */
+            -80px 200px,    /* Orange: Moved down */
+            140px 350px,     /* Pink: Moved down */
             center;
     }
     50% {
         background-position:
-            20px 10px,       /* Orange: Near top-center */
-            90px 130px,      /* Pink: Lower-right, pulled up */
+            20px 250px,       /* Orange: Moved down */
+            90px 380px,      /* Pink: Moved down */
             center;
     }
     100% {
         background-position:
-            -60px -80px,    /* Orange: Upper-left, high */
-            120px 110px,     /* Pink: Lower-right, comfortable position */
+            -60px 180px,    /* Orange: Moved down */
+            120px 320px,     /* Pink: Moved down */
             center;
     }
 }
@@ -374,7 +374,7 @@ nav {
 
 #logo {
     font-family: "Jacquard 12", "DinaRemasterII", "Libre Baskerville", serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(2rem, 5vw, 4rem);
     color: var(--pink);
     display: block;
     font-weight: 400;
@@ -386,7 +386,7 @@ nav {
     gap: 20px;
 }
 
-.blog-link {
+.header-link {
     font-family: "DinaRemasterII", "Doto", monospace;
     font-size: clamp(30px, 1vw, 1.5rem);
     color: var(--pink);
@@ -395,7 +395,7 @@ nav {
     display: inline-block;
 }
 
-.blog-link::after {
+.header-link::after {
     content: "";
     width: 0;
     height: 2px;
@@ -406,11 +406,11 @@ nav {
     transition: width 0.2s ease-in-out;
 }
 
-.blog-link:hover {
+.header-link:hover {
     color: var(--blue);
 }
 
-.blog-link:hover::after {
+.header-link:hover::after {
     width: 100%;
 }
 
@@ -1697,6 +1697,13 @@ h1 .spaced1 {
 
 .foot-head a {
     font-family: "DinaRemasterII", "Doto", monospace;
+    font-size: clamp(14px, 1.8vw, 2.2rem);
+    color: var(--grey);
+    transition: color 0.2s ease-in-out;
+}
+
+.foot-head a:hover {
+    color: var(--blue);
 }
 
 .foot-head::after {
@@ -1707,6 +1714,7 @@ h1 .spaced1 {
     left: 100%;
     bottom: 0;
     background-color: var(--blue);
+    color: var(--blue);
     transition: left 0.2s ease-in-out;
 }
 
@@ -1763,7 +1771,7 @@ h1 .spaced1 {
         gap: 15px;
     }
 
-    .blog-link {
+    .header-link {
         font-size: clamp(1.2rem, 3vw, 1.4rem);
     }
 
@@ -1901,6 +1909,87 @@ h1 .spaced1 {
 }
 
 /* ==========================================================================
+   16. MOBILE PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Background Gradient Performance - Mobile Only */
+@media (max-width: 768px), (hover: none) {
+    body {
+        animation: none !important;
+        will-change: auto !important;
+        background-attachment: fixed !important;
+    }
+}
+
+/* Skills Slider Disabled - Mobile Only */
+@media (max-width: 768px), (hover: none) {
+    .skill {
+        animation: none !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-type: x mandatory !important;
+    }
+    
+    .skill div {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        animation: none !important;
+        scroll-snap-align: start !important;
+    }
+    
+    .skill span {
+        flex: 0 0 auto !important;
+        padding: 0 1rem !important;
+    }
+}
+
+/* Image Hover Effects Removed - Mobile Only */
+@media (max-width: 768px), (hover: none) {
+    .page2-ele img {
+        position: static !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transition: none !important;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 1rem 0 !important;
+    }
+    
+    .page2-ele:hover > img {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* CSS Overrides for Scroll - Mobile Only */
+@media (max-width: 768px), (hover: none) {
+    html, body {
+        overflow-y: auto !important;
+        height: auto !important;
+    }
+    
+    html.lenis,
+    html.lenis.lenis-smooth {
+        overflow-y: auto !important;
+        height: auto !important;
+        scroll-behavior: auto !important;
+    }
+    
+    #main {
+        height: auto !important;
+        overflow-y: auto !important;
+        transform: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Disable Lenis scroll blocking classes */
+    body.htmx-request {
+        animation-play-state: paused !important;
+    }
+}
+
+/* ==========================================================================
    15. BROWSER FIXES & UTILITIES
    ========================================================================== */
 /* Reduced Motion */
@@ -1977,22 +2066,4 @@ h1 .spaced1 {
     h6 {
         letter-spacing: 0.01em;
     }
-}
-
-/* ==========================================================================
-   VEOMA GALLERY
-   ========================================================================== */
-.veoma-gallery {
-    margin-top: clamp(40px, 6vw, 80px);
-    padding: 0 clamp(20px, 3vw, 40px);
-}
-
-.veoma-gallery h3 {
-    font-family: "DinaRemasterII", "Doto", monospace;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    color: var(--blue);
-    text-align: center;
-    margin-bottom: clamp(30px, 4vw, 60px);
-    text-transform: uppercase;
-    letter-spacing: 2px;
 }
