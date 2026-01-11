@@ -1,9 +1,7 @@
 // ===================================
 // BROWSER DETECTION
 // ===================================
-// Detect low-power devices (<= 4 cores) to disable heavy effects
-const isLowEnd =
-  navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
 
 // ===================================
 // UTILITIES
@@ -15,18 +13,14 @@ const lerp = (a, b, f) => a + (b - a) * f;
 // LENIS INITIALIZATION
 // ===================================
 let lenis;
-
 function initLenis() {
-  if (typeof Lenis === "undefined") {
-    console.warn("Lenis not loaded");
-    return;
-  }
+  if (typeof Lenis === "undefined") return;
 
   lenis = new Lenis({
     duration: 1.0, 
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    smoothTouch: false, // Disabled on touch for native feel/performance
+    smoothTouch: false,
     touchMultiplier: 2,
     infinite: false,
     autoRaf: true,
@@ -36,12 +30,8 @@ function initLenis() {
     lenis.on("scroll", ScrollTrigger.update);
   }
 
-  // Sync with GSAP Ticker to prevent layout jitter
   if (typeof gsap !== "undefined") {
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    // Disable lag smoothing to keep scroll synced with visual updates
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
   }
 }
@@ -50,79 +40,67 @@ function initLenis() {
 // CUSTOM CURSOR (OPTIMIZED)
 // ===================================
 function initCustomCursor() {
-  const circle = document.querySelector("#move-circle");
+  const circle = document.getElementById("move-circle");
+  if (!circle) return;
   
-  // Early return if cursor element is missing
-  if (!circle) {
-    console.warn("Cursor element #move-circle not found");
-    return;
-  }
-  
-  // Optimization: Disable entirely on touch devices to save resources
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth <= 1024) {
+  // Disable on touch devices immediately
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
     circle.style.display = "none";
-    return; // Stop execution here for mobile
-  } else {
-    circle.style.display = "flex";
-  }
-  
-  if (typeof gsap === "undefined") {
-    console.warn("GSAP not loaded for cursor");
     return;
   }
+  
+  circle.style.display = "flex";
 
-  gsap.set(circle, { xPercent: -50, yPercent: -50 });
+  // PERFORMANCE: use quickSetter to bypass property parsing overhead
+  const setX = gsap.quickSetter(circle, "x", "px");
+  const setY = gsap.quickSetter(circle, "y", "px");
 
+  // Initial center
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
   let currentX = mouseX;
   let currentY = mouseY;
+  
   let anchorActive = false;
   let anchorX = 0;
   let anchorY = 0;
   let rafId = null;
 
-  // PERFORMANCE: Threshold to stop the animation loop
-  const settleThreshold = 0.1;
-
-  const onMouseMove = (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    // PERFORMANCE: Only restart the loop if it has stopped
-    if (!rafId) {
-      rafId = requestAnimationFrame(updateCursor);
-    }
-  };
-
-  window.addEventListener("mousemove", onMouseMove, { passive: true });
+  // Center the cursor visually using transform once
+  gsap.set(circle, { xPercent: -50, yPercent: -50 });
 
   const updateCursor = () => {
     const targetX = anchorActive ? mouseX + (anchorX - mouseX) * 0.5 : mouseX;
     const targetY = anchorActive ? mouseY + (anchorY - mouseY) * 0.5 : mouseY;
     
-    // Lerp smoothing (0.14 factor)
+    // Lerp smoothing
     currentX += (targetX - currentX) * 0.14; 
     currentY += (targetY - currentY) * 0.14;
     
-    // PERFORMANCE: Calculate distance to target
+    setX(currentX);
+    setY(currentY);
+    
+    // Stop loop if settled
     const dist = Math.abs(targetX - currentX) + Math.abs(targetY - currentY);
-
-    // PERFORMANCE: If settled and not anchored, stop the loop to save battery/CPU
-    if (dist < settleThreshold && !anchorActive) {
-      currentX = targetX;
-      currentY = targetY;
-      gsap.set(circle, { x: currentX, y: currentY });
-      rafId = null; // Kill the loop
+    if (dist < 0.1 && !anchorActive) {
+      setX(targetX);
+      setY(targetY);
+      rafId = null;
     } else {
-      gsap.set(circle, { x: currentX, y: currentY });
       rafId = requestAnimationFrame(updateCursor);
     }
   };
 
-  // Kickstart
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!rafId) rafId = requestAnimationFrame(updateCursor);
+  }, { passive: true });
+
+  // Start loop
   rafId = requestAnimationFrame(updateCursor);
 
+  // COLOR LOGIC
   try {
     const rootStyles = getComputedStyle(document.documentElement);
     const defaultRgb = (rootStyles.getPropertyValue("--pink-rgb") || "238,143,161").trim();
@@ -130,195 +108,117 @@ function initCustomCursor() {
 
     circle.style.setProperty("--cursor-rgb", defaultRgb);
 
-    // Apply reduced effects for low-end devices
     if (isLowEnd) {
-      circle.style.setProperty("--cursor-glow-blur", "20px");
-      circle.style.setProperty("--cursor-glow-size", "10rem");
-      circle.style.setProperty("--cursor-glow-mid-alpha", "0.12");
-      circle.style.setProperty("--cursor-glow-alpha", "0.7");
-      circle.style.setProperty(
-        "--cursor-shadow-strong",
-        `0 0 12px rgba(${defaultRgb},0.10), 0 0 28px rgba(${defaultRgb},0.06)`,
-      );
+       // Simplify low-end visuals
+       circle.style.setProperty("--cursor-glow-blur", "20px");
+       circle.style.setProperty("--cursor-glow-size", "10rem");
+       circle.style.boxShadow = "none"; // Remove heavy shadows
     }
 
-    const setCursorRgb = (rgb) => {
-      if (!rgb) return;
-      const trimmed = rgb.trim();
-      circle.style.setProperty("--cursor-rgb", trimmed);
-      // Skip heavy shadow update on low-end
-      if (!isLowEnd) {
-        circle.style.setProperty(
-          "--cursor-shadow-strong",
-          `0 0 48px rgba(${trimmed},0.28), 0 0 112px rgba(${trimmed},0.22)`,
-        );
-      }
+    const setCursorColor = (rgb) => {
+        circle.style.setProperty("--cursor-rgb", rgb);
+        if (!isLowEnd) {
+             circle.style.setProperty("--cursor-shadow-strong", 
+                `0 0 48px rgba(${rgb},0.28), 0 0 112px rgba(${rgb},0.22)`);
+        }
     };
 
-    const resetCursor = () => {
-      circle.style.setProperty("--cursor-rgb", defaultRgb);
-      if (!isLowEnd) {
-        circle.style.setProperty(
-          "--cursor-shadow-strong",
-          `0 0 48px rgba(${defaultRgb},0.22), 0 0 112px rgba(${defaultRgb},0.18)`,
-        );
-      }
-    };
+    // Event Delegation for hover effects to reduce listeners
+    document.body.addEventListener("pointerover", (e) => {
+        const target = e.target;
+        
+        // 1. Magnetic Elements (Page 2)
+        const page2Ele = target.closest(".page2-ele");
+        if (page2Ele) {
+            if (!rafId) rafId = requestAnimationFrame(updateCursor);
+            const rect = page2Ele.getBoundingClientRect();
+            anchorX = rect.left + rect.width / 2;
+            anchorY = rect.top + rect.height / 2;
+            anchorActive = true;
+            circle.classList.add("page2-border", "glow");
+            circle.style.backgroundColor = "transparent";
+            return;
+        } 
 
-    // Event Delegation could be better here, but maintaining current logic for specific selectors
-    const interactiveElements = document.querySelectorAll(
-      "a, button, .page2-ele, [data-cursor-color]"
-    );
-    
-    interactiveElements.forEach((el) => {
-      el.addEventListener(
-        "pointerenter",
-        () => {
-          // Restart loop on hover just in case it was idle
-          if (!rafId) rafId = requestAnimationFrame(updateCursor);
-
-          const ds = el.dataset?.cursorColor;
-          if (ds) {
-            if (ds.includes(",")) {
-              setCursorRgb(ds);
-            } else if (ds[0] === "#") {
-              // Hex to RGB conversion
-              const hex = ds.substring(1);
-              const bigint = parseInt(hex, 16);
-              setCursorRgb(
-                `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`,
-              );
+        // 2. Color triggers
+        const colorTrigger = target.closest("a, button, [data-cursor-color]");
+        if (colorTrigger) {
+            if (!rafId) rafId = requestAnimationFrame(updateCursor);
+            
+            const ds = colorTrigger.dataset?.cursorColor;
+            if (ds) {
+                if (ds.includes(",")) setCursorColor(ds);
+                else if (ds.startsWith("#")) {
+                    // Hex convert could be here, but simpler to rely on rgb vars
+                    setCursorColor(defaultRgb); 
+                } else {
+                    const varColor = rootStyles.getPropertyValue(ds);
+                    if(varColor) setCursorColor(varColor.trim());
+                }
+            } else if (colorTrigger.tagName === "A") {
+                setCursorColor(blueRgb);
             } else {
-              const cssVar = rootStyles.getPropertyValue(ds);
-              if (cssVar) setCursorRgb(cssVar.trim());
+                setCursorColor(defaultRgb);
             }
-          } else if (el.tagName === "A") {
-            setCursorRgb(blueRgb);
-          } else {
-            setCursorRgb(defaultRgb);
-          }
-        },
-        { passive: true },
-      );
+        }
+    }, { passive: true });
 
-      el.addEventListener("pointerleave", resetCursor, { passive: true });
-    });
+    document.body.addEventListener("pointerout", (e) => {
+        const target = e.target;
+        if (target.closest(".page2-ele")) {
+            anchorActive = false;
+            circle.classList.remove("page2-border", "glow");
+            circle.style.backgroundColor = "";
+        }
+        if (target.closest("a, button, [data-cursor-color]")) {
+            circle.style.setProperty("--cursor-rgb", defaultRgb);
+            if (!isLowEnd) {
+                 circle.style.setProperty("--cursor-shadow-strong", 
+                    `0 0 48px rgba(${defaultRgb},0.22), 0 0 112px rgba(${defaultRgb},0.18)`);
+            }
+        }
+    }, { passive: true });
 
-    // Page2 Magnetic Elements
-    document.querySelectorAll(".page2-ele").forEach((el) => {
-      el.addEventListener(
-        "pointerenter",
-        () => {
-          if (!rafId) rafId = requestAnimationFrame(updateCursor);
-          
-          const rect = el.getBoundingClientRect();
-          anchorX = rect.left + rect.width / 2;
-          anchorY = rect.top + rect.height / 2;
-          anchorActive = true;
-          circle.classList.add("page2-border", "glow");
-          circle.style.backgroundColor = "transparent";
-        },
-        { passive: true },
-      );
-
-      // No pointermove listener needed here as mouseX/Y are global
-
-      el.addEventListener(
-        "pointerleave",
-        () => {
-          anchorActive = false;
-          circle.classList.remove("page2-border", "glow");
-          circle.style.backgroundColor = "";
-        },
-        { passive: true },
-      );
-    });
-  } catch (e) {
-    console.error("Cursor initialization error:", e);
-  }
+  } catch (e) { console.warn("Cursor Error", e); }
 }
 
 function initMenuRefreshBehavior() {
   const menuToggle = document.getElementById("menu-toggle");
   if (!menuToggle) return;
 
-  const wasOpen = (() => {
-    try { return sessionStorage.getItem("menu_was_open") === "1"; } catch { return false; }
-  })();
-
-  try { sessionStorage.removeItem("menu_was_open"); } catch {}
+  const wasOpen = sessionStorage.getItem("menu_was_open") === "1";
+  sessionStorage.removeItem("menu_was_open");
 
   if (wasOpen || menuToggle.checked) {
     menuToggle.checked = false;
-
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
-    }
-
-    if (lenis && typeof lenis.scrollTo === "function") {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    
+    if (lenis?.scrollTo) lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
 
     requestAnimationFrame(() => {
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "auto";
-      }
+        if ("scrollRestoration" in history) history.scrollRestoration = "auto";
     });
   }
 
   window.addEventListener("beforeunload", () => {
-    try {
-      sessionStorage.setItem("menu_was_open", menuToggle.checked ? "1" : "0");
-    } catch {}
+    sessionStorage.setItem("menu_was_open", menuToggle.checked ? "1" : "0");
   });
 }
 
 // ===================================
-// GLOBAL INITIALIZATION
+// GLOBAL INIT
 // ===================================
 function initGlobal() {
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   initLenis();
   initCustomCursor();
   initMenuRefreshBehavior();
-
-  // Speed up GSAP on low-end devices to hide potential frame drops
-  if (typeof gsap !== "undefined" && isLowEnd) {
-    gsap.globalTimeline.timeScale(1.2);
-  }
+  if (typeof gsap !== "undefined" && isLowEnd) gsap.globalTimeline.timeScale(1.2);
 }
 
-// ===================================
-// AUTO-INITIALIZE
-// ===================================
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initGlobal);
 } else {
   initGlobal();
 }
-
-// Optimized Resize Handler
-let globalResizeTimer;
-window.addEventListener(
-  "resize",
-  () => {
-    clearTimeout(globalResizeTimer);
-    globalResizeTimer = setTimeout(() => {
-      const circle = document.querySelector("#move-circle");
-      if (circle) {
-        // Use modern media query check instead of hardcoded width
-        const isMobile = window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth <= 1024;
-        circle.style.display = isMobile ? "none" : "flex";
-      }
-      if (typeof ScrollTrigger !== "undefined") {
-        ScrollTrigger.refresh();
-      }
-    }, 250);
-  },
-  { passive: true },
-);
