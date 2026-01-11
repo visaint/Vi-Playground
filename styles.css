@@ -1,4 +1,52 @@
 /* ==========================================================================
+   0. PRELOADER
+   ========================================================================== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    color: var(--blue);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#main-content {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#main-content.visible {
+    opacity: 1;
+}
+
+.preloader-content h1 {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ==========================================================================
    1. FONTS & VARIABLES
    ========================================================================== */
 @font-face {
@@ -8,10 +56,6 @@
     font-style: normal;
     font-display: swap;
 }
-
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
 
 :root {
     /* Colors */
@@ -23,19 +67,7 @@
     --lightgrey: #9E9E9E;
     --grey: #606060;
 
-    /* Cursor Configuration */
-    --cursor-glow-size: 20rem;
-    --cursor-glow-blur: 56px;
-    --cursor-glow-alpha: 0.96;
-    --cursor-glow-mid-alpha: 0.2;
-    --cursor-glow-outer-alpha: 0;
-    --cursor-shadow-strong:
-        0 0 48px rgba(var(--pink), 0.22),
-        0 0 112px rgba(var(--pink), 0.18);
-    --cursor-shadow-soft:
-        0 0 24px rgba(var(--pink), 0.12),
-        0 0 56px rgba(var(--pink), 0.09);
-
+    
     /* Animation & Layout */
     --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
     --spacing-sm: 1rem;
@@ -94,11 +126,16 @@ body {
     min-height: 100vh;
     width: 100%;
     line-height: 1.5;
-    overflow-x: visible;
+    overflow-x: hidden;
     overflow-y: auto;
-    cursor: none;
     overscroll-behavior-y: none;
-
+    font-family: "Libre Baskerville", serif;
+    font-size: clamp(16px, 1.6vw, 2.3vw);
+    color: var(--grey);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: background-position;
+    cursor: url("./images/mouse.svg") 5 5, auto;
     /* Background Gradient Animation */
     background:
         radial-gradient(circle at 20% 20%, var(--orange) 0%, #6600ff00 8%),
@@ -118,20 +155,17 @@ body {
     animation: driftA 180s ease-in-out infinite alternate;
 }
 
-/* Show default cursor on mobile and low-end systems */
-@media (max-width: 768px), (pointer: coarse) {
-    body {
-        cursor: auto;
-    }
+/* Prevent horizontal overflow globally */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-/* Hide custom cursor elements on mobile/low-end */
-@media (max-width: 768px), (pointer: coarse) {
-    .cursor-dot,
-    .cursor-glow {
-        display: none;
-    }
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
 }
+
 
 @keyframes driftA {
     0% {
@@ -168,21 +202,19 @@ img {
 a {
     text-decoration: none;
     color: inherit;
-    cursor:
-        url("./images/hand.svg") 5 0,
-        pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
 }
 
 button {
     border: none;
     background: none;
-    cursor: url("./images/hand.svg") 7 0;
+    cursor: url("./images/hand.svg") 7 0, pointer;
     font-family: inherit;
 }
 
 #main {
     width: 100%;
-    max-width: 1440px; /* Correctly centers the content here */
+    max-width: 1440px; 
     margin: 0 auto;
     overflow-x: hidden;
     overflow-y: visible;
@@ -194,17 +226,6 @@ button {
 /* ==========================================================================
    3. TYPOGRAPHY
    ========================================================================== */
-/* Global Font Settings - Note: This is aggressive but kept per design */
-* {
-    color: var(--orange);
-    font-family: "Libre Baskerville", serif;
-    font-size: clamp(16px, 1.8vw, 2.5vw);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "kern" 1;
-    font-kerning: normal;
-}
 
 b,
 strong {
@@ -284,68 +305,6 @@ h6 {
     text-transform: uppercase;
 }
 
-/* ==========================================================================
-   4. CUSTOM CURSOR
-   ========================================================================== */
-#move-circle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    width: 18px;
-    height: 18px;
-    border-radius: 35%;
-    background-color: var(--bordergrey);
-    filter: blur(5px);
-    mix-blend-mode: normal;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform, box-shadow, opacity;
-    transition:
-        box-shadow 220ms var(--ease),
-        opacity 220ms var(--ease),
-        filter 220ms var(--ease);
-}
-
-#move-circle::after {
-    content: "";
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    transform: translate(-50%, -50%);
-    width: var(--cursor-glow-size);
-    height: var(--cursor-glow-size);
-    border-radius: 25%;
-    pointer-events: none;
-    background: radial-gradient(
-        circle at center,
-        rgba(var(--cursor-rgb), var(--cursor-glow-alpha)) 15%,
-        rgba(var(--cursor-rgb), var(--cursor-glow-mid-alpha)) 30%,
-        rgba(var(--cursor-rgb), 0.08) 60%,
-        rgba(var(--cursor-rgb), var(--cursor-glow-outer-alpha)) 90%
-    );
-    filter: blur(var(--cursor-glow-blur));
-    z-index: 1;
-    transition:
-        opacity 180ms var(--ease),
-        transform 180ms var(--ease),
-        filter 180ms var(--ease);
-}
-
-#move-circle.glow {
-    box-shadow: var(--cursor-shadow-strong);
-    opacity: 0.01;
-    animation: fadeOut 0.45s forwards;
-} 
-
-#move-circle h4 {
-    font-family: "DinaRemasterII", "Libre Baskerville", monospace;
-    font-size: 3rem;
-    color: var(--grey);
-    opacity: 0.3;
-}
 
 /* ==========================================================================
    5. NAVIGATION (DESKTOP)
@@ -370,7 +329,7 @@ nav {
 #logo-link {
     text-decoration: none;
     color: inherit;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
     display: block;
 }
 
@@ -418,7 +377,7 @@ nav {
 
 #menu-btn {
     display: flex;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
     position: relative;
     z-index: 100;
     pointer-events: auto;
@@ -497,9 +456,7 @@ nav {
     visibility: hidden;
     transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
     z-index: 1490;
-        cursor:
-        url("./images/hand.svg") 5 0,
-        pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
 }
 
  .slide-menu {
@@ -524,7 +481,7 @@ nav {
     right: 18px;
     width: 44px;
     height: 44px;
-    cursor: pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
 }
 
  .menu-close span {
@@ -813,7 +770,7 @@ nav {
     border-bottom: 4px dotted var(--pink);
     position: relative;
     z-index: 10;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
     transition: transform 0.8s var(--ease);
     transform-origin: center;
     will-change: transform;
@@ -826,6 +783,23 @@ nav {
 .page2-ele.active {
     flex-direction: column;
     align-items: flex-start;
+}
+
+/* Triangle Indicator */
+.triangle-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--pink);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.3s ease;
+    cursor: url("./images/hand.svg") 7 0, pointer;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.page2-ele.active .triangle-indicator {
+    transform: rotate(180deg);
 }
 
 .page2-ele h2 {
@@ -853,6 +827,23 @@ nav {
     align-items: flex-start;
 }
 
+/* Triangle Indicator */
+.triangle-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--pink);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.3s ease;
+    cursor: url("./images/hand.svg") 7 0, pointer;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.page2-ele.active .triangle-indicator {
+    transform: rotate(180deg);
+}
+
 /* --------------------------------------------------------------------------
    Hover Preview Image
    -------------------------------------------------------------------------- */
@@ -868,9 +859,9 @@ nav {
     z-index: 50;
 }
 
+/* Disabled problematic hover effect */
 .page2-ele:hover > img {
     opacity: 1;
-    animation: fadeOut 1.5s forwards;
 }
 
 @keyframes fadeOut {
@@ -966,7 +957,7 @@ nav {
     gap: 5px;
     line-height: 1.4;
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.9rem, 1.1vw, 1.2vw);
+    font-size: clamp(14px, 1.5vw, 2rem);
     text-decoration: underline dashed var(--orange);
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
@@ -998,14 +989,6 @@ nav {
     gap: 20px; /* Standardized from 30px */
 }
 
-.project-description p {
-    font-family: "Libre Baskerville", serif;
-    font-size: clamp(1rem, 1.5vw, 1.15rem); /* Fixed: was mixing px and rem */
-    line-height: 1.6; /* Increased for better readability */
-    color: var(--grey);
-    margin: 0;
-}
-
 /* --- Right Column: Image Gallery --- */
 .project-gallery-col {
     display: flex;
@@ -1030,8 +1013,9 @@ nav {
     transition: transform 0.35s var(--ease);
 }
 
+/* Disabled problematic hover effect */
 .gallery-item:hover img {
-    transform: scale(1.02);
+    transform: scale(1);
 }
 
 /* ==========================================================================
@@ -1097,31 +1081,33 @@ nav {
     justify-content: flex-start;
     margin-top: clamp(20px, 4.17vw, 60px);
 }
-#btn-div button {
-    background-color: transparent;
-    border: 1.5px solid rgba(255, 255, 255, 0.685);
-    border-radius: 30px;
-    border-top: 1.5px solid rgba(255, 255, 255, 0.883);
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.883);
-    padding: clamp(0.4rem, 0.69vw, 0.6rem) clamp(1rem, 1.39vw, 1.5rem);
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+button {
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--pink);
+  background-color: transparent;
+  border: 1.5px solid var(--lightgrey);
+  border-radius: 25px;
+  border-top: 1.5px solid var(--lightgrey);
+  border-bottom: 1.5px solid var(--lightgrey);
+  text-decoration: none;
+  line-height: normal;
+  font-family: "DinaRemasterII", "Doto", monospace;
+  font-size: clamp(16px, 1.8vw, 2.5rem);
+  transition: all 0.2s ease-in-out;
+  box-shadow: none;
+  cursor: url("./images/hand.svg") 7 0, pointer;
 }
-#btn-div button a {
-    transition: all 0.2s ease-in-out;
-    font-size: clamp(1rem, 1.39vw, 1.3rem);
-    font-family: "DinaRemasterII", "Doto", monospace;
+
+nav a:hover,
+button:hover {
+  border-color: var(--bordergrey);
+  color: var(--orange);
+  box-shadow: none;
 }
-#btn-div button:hover {
-    background-color: var(--pink);
-    border-color: var(--pink);
-}
-#btn-div button:hover a {
-    color: var(--white);
-}
+
 
 /* ==========================================================================
    CONTACT SECTION CENTERING & CLEANUP
@@ -1189,177 +1175,69 @@ nav {
 }
 
 /* --------------------------------------------------------------------------
-   Background colors (non-hover)
+   Grid Colors & Hover
    -------------------------------------------------------------------------- */
 
-.grid .item.is-blue:not(:hover) {
-    background-color: var(--blue);
-}
+/* Base colors */
+.grid .item.is-blue { background-color: var(--blue); color: var(--white); }
+.grid .item.is-orange { background-color: var(--orange); color: var(--white); }
+.grid .item.is-pink { background-color: var(--pink); color: var(--white); }
+.grid .item.is-white { background-color: var(--white); color: var(--grey); }
 
-.grid .item.is-orange:not(:hover) {
-    background-color: var(--orange);
-}
-
-.grid .item.is-pink:not(:hover) {
-    background-color: var(--pink);
-}
-
-.grid .item.is-white:not(:hover) {
-    background-color: var(--white);
-}
-
-/* --------------------------------------------------------------------------
-   Text contrast by background
-   -------------------------------------------------------------------------- */
-
-/* Light background → dark text */
-.grid .item.is-white {
-    color: var(--grey);
-}
-
-/* Saturated backgrounds → light text */
-.grid .item.is-blue,
-.grid .item.is-orange,
-.grid .item.is-pink {
-    color: var(--white);
-}
-
-/* --------------------------------------------------------------------------
-   Hover behavior
-   -------------------------------------------------------------------------- */
-
-.grid .item:not(:hover) {
-    width: 25%;
+/* Hover: expand only */
+.grid .item { 
+    width: 25%; 
+    transition: all 1.2s var(--ease);
 }
 
 .grid .item:hover {
-    min-height: 300px;
     width: 34%;
+    min-height: 300px;
     z-index: 10;
 }
 
-.grid .item.is-orange:hover::after {
-    background-color: var(--blue);
+/* --------------------------------------------------------------------------
+   Mobile Grid - Static Layout
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .grid {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .grid .item {
+        width: calc(50% - 4px);
+        min-height: 150px;
+        aspect-ratio: 1;
+        font-size: clamp(12px, 4vw, 1.2rem);
+        transition: none; /* Disable transitions */
+    }
+    
+    .grid .item:hover {
+        width: calc(50% - 4px);
+        min-height: 150px;
+        z-index: 1;
+    }
 }
 
-.grid .item.is-pink:hover::after {
-    background-color: var(--grey);
+@media (max-width: 480px) {
+    .grid {
+        gap: 6px;
+    }
+    
+    .grid .item {
+        width: 100%;
+        min-height: 120px;
+        aspect-ratio: 1.2;
+        font-size: clamp(14px, 5vw, 1.4rem);
+    }
+    
+    .grid .item:hover {
+        width: 100%;
+        min-height: 120px;
+    }
 }
 
-.grid .item.is-white:hover::after {
-    background-color: var(--orange);
-}
-
-.grid .item.is-blue:hover::after {
-    background-color: var(--pink);
-}
-
-/* Hover color transitions - preserve original colors */
-.grid .item.is-blue:hover::before {
-    background-color: var(--blue);
-    color: var(--white);
-}
-
-.grid .item.is-orange:hover::before {
-    background-color: var(--orange);
-    color: var(--white);
-}
-
-.grid .item.is-pink:hover::before {
-    background-color: var(--pink);
-    color: var(--white);
-}
-
-.grid .item.is-white:hover::before {
-    background-color: var(--white);
-    color: var(--grey);
-}
-
-.grid .item.is-pink:hover::before {
-    background-color: var(--pink);
-    color: var(--white);
-}
-
-.grid .item.is-white:hover::before {
-    background-color: var(--white);
-    color: var(--grey);
-}
-
-@keyframes fill90 {
-    from { height: 0%; }
-    to { height: 90%; }
-}
-
-@keyframes fill85 {
-    from { height: 0%; }
-    to { height: 85%; }
-}
-
-@keyframes fill80 {
-    from { height: 0%; }
-    to { height: 80%; }
-}
-
-@keyframes fill75 {
-    from { height: 0%; }
-    to { height: 75%; }
-}
-
-@keyframes fill70 {
-    from { height: 0%; }
-    to { height: 70%; }
-}
-
-@keyframes fill65 {
-    from { height: 0%; }
-    to { height: 65%; }
-}
-
-@keyframes fill60 {
-    from { height: 0%; }
-    to { height: 60%; }
-}
-
-@keyframes fill55 {
-    from { height: 0%; }
-    to { height: 55%; }
-}
-
-@keyframes fill95 {
-    from { height: 0%; }
-    to { height: 95%; }
-}
-
-/* Hover color transitions - preserve original colors */
-.grid .item.is-blue:hover {
-    background-color: var(--blue);
-    color: var(--white);
-}
-
-.grid .item.is-orange:hover {
-    background-color: var(--orange);
-    color: var(--white);
-}
-
-.grid .item.is-pink:hover {
-    background-color: var(--pink);
-    color: var(--white);
-}
-
-.grid .item.is-white:hover {
-    background-color: var(--white);
-    color: var(--grey);
-}
-
-.grid .item.is-pink:hover::before {
-    background-color: var(--pink);
-    color: var(--white);
-}
-
-.grid .item.is-white:hover::before {
-    background-color: var(--white);
-    color: var(--grey);
-}
 
 /* ==========================================================================
    9. MY PROCESS & CHROME SCROLL
@@ -1496,50 +1374,99 @@ nav {
         transparent
     );
     opacity: 0.6;
-    margin: 0 auto; /* FIX: Centers the skill section horizontally */
+    margin: 0 auto; 
 }
 
 .skill div {
     white-space: nowrap;
-    animation: animate calc(var(--t) * 1.5) linear infinite alternate;
+    animation: animate calc(var(--t) * 2.5) linear infinite alternate;
     animation-delay: calc(var(--t) / -1);
+    will-change: transform; /* Performance hint */
 }
 
-.scroll div:nth-child(2) {
-    animation: animate2 calc(var(--t) * 1.5) linear infinite alternate;
+.skill div:nth-child(2) {
+    animation: animate2 calc(var(--t) * 2.5) linear infinite alternate;
     animation-delay: calc(var(--t) / -2);
+    will-change: transform; /* Performance hint */
 }
 
+/* Optimized keyframes - reduced movement for performance */
 @keyframes animate {
-    0% {
-        transform: translateX(30%);
-    }
-    100% {
-        transform: translateX(-30%);
-    }
+    0% { transform: translateX(20%); }
+    100% { transform: translateX(-20%); }
 }
 
 @keyframes animate2 {
-    0% {
-        transform: translateX(0);
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-40%); }
+}
+
+/* Mobile-optimized animations */
+@media (max-width: 768px) {
+    .skill div {
+        animation: mobileAnimate 8s linear infinite alternate;
+        transform: translateZ(0); /* Force GPU layer */
+        contain: layout style paint; /* Isolate animation repaints */
     }
-    100% {
-        transform: translateX(-60%);
+    
+    .skill div:nth-child(2) {
+        animation: mobileAnimate2 8s linear infinite alternate;
+        transform: translateZ(0);
+        contain: layout style paint;
+    }
+    
+    @keyframes mobileAnimate {
+        0% { transform: translateZ(0) translateX(10%); }
+        100% { transform: translateZ(0) translateX(-10%); }
+    }
+    
+    @keyframes mobileAnimate2 {
+        0% { transform: translateZ(0) translateX(0%); }
+        100% { transform: translateZ(0) translateX(-20%); }
     }
 }
 
 .skill div span {
     display: inline-flex;
     margin: 7px;
-    padding: 5px 5px;
+    padding: 5px 8px;
     border-radius: 5px;
     letter-spacing: 0.3em;
     background: var(--orange);
     color: #fff;
-    transition: 0.5s;
     font-family: "DinaRemasterII", "Doto", monospace;
-    font-size: 0.8rem;
+    font-size: clamp(13px, 1.2rem, 1.6rem);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
+
+.skill div span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.skill div span:hover {
+    background: var(--pink);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(238, 143, 161, 0.3);
+}
+
+.skill div span:hover::before {
+    left: 100%;
+}
+
 
 /* ==========================================================================
    11. PAGE 3 - ABOUT SECTION
@@ -1582,7 +1509,6 @@ nav {
     text-align: left !important;
     width: 100%;
     line-height: 1.65;
-    font-size: clamp(0.9rem, 1.11vw, 1.2rem);
 }
 
 #page-3 img {
@@ -1611,7 +1537,7 @@ nav {
     background-color: transparent;
     padding: clamp(0.3rem, 0.42vw, 0.5rem) clamp(0.8rem, 1.11vw, 1rem);
     transition: all 0.2s ease-in-out;
-    cursor: url("./images/hand.svg") 5 0, pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1644,7 +1570,7 @@ nav {
     cursor: default;
 }
 #third-bottom h5 a {
-    cursor: url("./images/hand.svg") 5 0, pointer;
+    cursor: url("./images/hand.svg") 7 0, pointer;
 }
 #third-bottom h5 a::after {
     content: "";
@@ -1737,7 +1663,7 @@ h1 .spaced1 {
 }
 
 .foot-head {
-    text-transform: uppercase;
+    text-transform: none; /* Override the general h5 uppercase rule */
     position: relative;
     overflow: hidden;
 }
