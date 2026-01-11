@@ -428,62 +428,46 @@ if (DOM.page3) {
   });
 }
 // ===================================
-// PAGE 2 EXPANDABLE CONTENT
+// PAGE 2 EXPANDABLE CONTENT (SIMPLIFIED)
 // ===================================
 function initPage2Expandable() {
   if (!DOM.page2Elements.length) return;
   
   DOM.page2Elements.forEach((element) => {
     const content = element.querySelector(".page2-content");
+    const projectContent = element.querySelector(".project-content");
+    const h2 = element.querySelector("h2");
     let isAnimating = false;
 
-    content.addEventListener("click", (e) => {
-      const isClickOnContent = e.target.closest('img, p, ul, li, h3, h4, h5, h6, a, button, figure');
-      if (isClickOnContent) {
-        e.stopPropagation();
-      }
-    });
+    // Map h2 text to partial files
+    const partialMap = {
+      "veoma studio": "./partials/veoma.html",
+      "view from nowhere": "./partials/vfns.html",
+      "doctors": "./partials/doctors.html",
+      "nebesna": "./partials/nebesna.html",
+      "anksioznost": "./partials/anksioznost.html"
+    };
 
-    element.addEventListener("htmx:afterSwap", () => {
-      if (isAnimating) return;
+    // Create triangle indicator
+    const triangle = document.createElement('div');
+    triangle.className = 'triangle-indicator';
+    triangle.innerHTML = '▼';
+    element.appendChild(triangle);
 
-      element.classList.add("active");
-      gsap.set(content, { height: "auto", opacity: 1 });
-
-      const fullHeight = content.offsetHeight;
-
-      gsap.fromTo(
-        content,
-        { height: 0, opacity: 0 },
-        {
-          height: fullHeight,
-          opacity: 1,
-          duration: 0.45,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.set(content, { height: "auto" });
-            ScrollTrigger.refresh();
-          }
-        }
-      );
-    });
-
+    // Click on entire page2-ele div triggers open/close
     element.addEventListener("click", (e) => {
-      const hasContent = content.innerHTML.trim().length > 0;
+      // Prevent clicks on content from triggering
+      if (e.target.closest('.page2-content')) return;
+      
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (isAnimating) return;
+      isAnimating = true;
 
-      if (element.classList.contains("active") && hasContent) {
-        const selection = window.getSelection();
-        if (selection.toString().length > 0) return;
-        
-        const isClickOnContent = e.target.closest('img, p, ul, li, h3, h4, h5, h6, a, button, figure');
-        if (isClickOnContent) return;
-        
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (isAnimating) return;
-        isAnimating = true;
-
+      if (element.classList.contains("active")) {
+        // Close animation
+        triangle.style.transform = 'rotate(0deg)';
         const currentHeight = content.offsetHeight;
         gsap.set(content, { height: currentHeight });
 
@@ -494,12 +478,50 @@ function initPage2Expandable() {
           ease: "power2.inOut",
           onComplete: () => {
             element.classList.remove("active");
-            content.innerHTML = "";
+            projectContent.innerHTML = "";
             gsap.set(content, { height: "auto", opacity: 1 });
             isAnimating = false;
             ScrollTrigger.refresh();
           }
         });
+      } else {
+        // Load content and open animation
+        const partialUrl = partialMap[h2.textContent.trim()];
+        if (!partialUrl) {
+          isAnimating = false;
+          return;
+        }
+
+        fetch(partialUrl)
+          .then(response => response.text())
+          .then(html => {
+            projectContent.innerHTML = html;
+            element.classList.add("active");
+            triangle.style.transform = 'rotate(180deg)';
+            gsap.set(content, { height: "auto", opacity: 1 });
+
+            const fullHeight = content.offsetHeight;
+
+            gsap.fromTo(
+              content,
+              { height: 0, opacity: 0 },
+              {
+                height: fullHeight,
+                opacity: 1,
+                duration: 0.45,
+                ease: "power2.out",
+                onComplete: () => {
+                  gsap.set(content, { height: "auto" });
+                  isAnimating = false;
+                  ScrollTrigger.refresh();
+                }
+              }
+            );
+          })
+          .catch(error => {
+            console.error('Error loading partial:', error);
+            isAnimating = false;
+          });
       }
     });
   });
