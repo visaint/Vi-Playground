@@ -2,6 +2,9 @@
 // MAIN.JS - Reusable across all pages
 // ===================================
 
+// Add JS detection class
+document.documentElement.classList.add('js-enabled');
+
 // ===================================
 // LENIS SMOOTH SCROLL INITIALIZATION
 // ===================================
@@ -66,6 +69,7 @@ const DOM = {
   page2: null,
   page3: null,
   grids: null,
+  servicesArrow: null,
   
   init() {
     this.miniCircle = document.querySelector("#move-circle");
@@ -141,21 +145,7 @@ function initChromeScroll() {
 
   const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
   
-  // CRITICAL MOBILE FIX: Disable complex chrome scroll on mobile
-  if (isMobile) {
-    console.log('Mobile detected - Chrome scroll simplified');
-    containers.forEach(container => {
-      const items = Array.from(container.querySelectorAll(".text"));
-      items.forEach(el => {
-        // Set static visible state for mobile
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-        el.style.filter = 'none';
-      });
-    });
-    return;
-  }
-  
+  // Use JavaScript fallback for mobile and browsers without scroll-driven animation support
   const chromeScrollInstances = new Map();
   
   containers.forEach(container => {
