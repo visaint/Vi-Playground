@@ -153,16 +153,11 @@ function initChromeScroll() {
     }
   };
 
-  // Single observer for all containers
   const observer = new IntersectionObserver((entries) => {
     const isAnyIntersecting = entries.some(entry => entry.isIntersecting);
     if (isAnyIntersecting) {
       window.addEventListener("scroll", onScroll, { passive: true });
       compute();
-    } else {
-      // Only remove if NONE are intersecting (simplified for performance)
-       // A more robust way is to check if *no* observed containers are visible
-       // For now, keeping the listener active if at least one is visible is safer
     }
   }, { rootMargin: '100px' });
 
@@ -222,7 +217,12 @@ function initImageHoverEffects() {
 // INITIAL PAGE LOAD ANIMATIONS
 // ===================================
 function initHeaderAnimations() {
-  // Mobile animations ENABLED per request
+  if (isMobile()) {
+    const elements = document.querySelectorAll("#logo, #menu-btn, .header-link");
+    elements.forEach(el => el.style.opacity = '1');
+    return;
+  }
+
   const logo = document.querySelector("#logo");
   const menuBtn = document.querySelector("#menu-btn");
   const headerLinks = document.querySelectorAll(".header-link");
@@ -253,7 +253,6 @@ function initFooterAnimations() {
 }
 
 function initLoadAnimations() {
-  // Mobile animations ENABLED per request
   const els = {
     heroHead: document.querySelector("#hero-head h1"),
     mainHead: document.querySelector("#main-head h1"),
@@ -263,6 +262,14 @@ function initLoadAnimations() {
     firstBottom: document.querySelector("#first-bottom"),
     midElements: document.querySelectorAll(".mid h5")
   };
+
+  if (isMobile()) {
+    Object.values(els).forEach(el => {
+        if (el instanceof NodeList) el.forEach(e => e.style.opacity = '1');
+        else if (el) el.style.opacity = '1';
+    });
+    return;
+  }
 
   const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.1 });
 
@@ -285,10 +292,9 @@ window.initFooterAnimations = initFooterAnimations;
 
 // ===================================
 // INTERSECTION OBSERVER (Fade-ins)
-// Includes Services section now
 // ===================================
 function initIntersectionObserver() {
-  // Combine About section elements AND Service items
+  // Added .service-item to this observer list
   const targets = document.querySelectorAll('.fade-in-element, .service-item');
   if (!targets.length) return;
 
@@ -311,8 +317,8 @@ function initIntersectionObserver() {
   });
 
   targets.forEach(el => {
-    // Override potential CSS animations (specifically for service-items)
-    el.style.animation = 'none'; 
+    // Force CSS animation to none so GSAP takes over completely
+    el.style.animation = 'none';
     gsap.set(el, { opacity: 0, y: 30 });
     observer.observe(el);
   });
@@ -394,7 +400,7 @@ function initPage2Expandable() {
       if (isAnimating) return;
       element.classList.add("active");
       
-      const fullHeight = content.offsetHeight; // Get height before animating
+      const fullHeight = content.offsetHeight; 
       gsap.fromTo(content, 
         { height: 0, opacity: 0 },
         { 
@@ -474,11 +480,11 @@ function initPage() {
   initLenis();
   initPage2Animations();
   initImageHoverEffects();
-  initLoadAnimations(); // Mobile animations now active
+  initLoadAnimations();
   initChromeScroll();
   initPage2Expandable();
   initMenuLinkHandlers();
-  initIntersectionObserver(); // Services animations included here
+  initIntersectionObserver();
 
   window.addEventListener("load", () => {
     initScrollAnimations();
