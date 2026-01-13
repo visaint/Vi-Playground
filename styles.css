@@ -276,12 +276,13 @@ nav.nav-scrolled {
 #menu-toggle:checked ~ body, body:has(#menu-toggle:checked) { overflow: hidden; }
 #menu-toggle:checked ~ .slide-menu { transform: translateX(0); }
 
-.menu-content { width: 80%; }
+.menu-content { width: 80%; height: 100%; display: flex; align-items: center; }
 .menu-content ul {
     list-style: none; display: flex; flex-direction: column;
-    gap: 1.5rem; text-align: right; align-items: flex-end; padding: 0.5rem 0;
+    gap: 0.8rem; text-align: right; align-items: flex-end; padding: 0.5rem 0;
 }
-.menu-content li { margin-bottom: 0.15rem; }
+.menu-content li:nth-child(1) { margin-bottom: -0.4rem; }
+.menu-content li:nth-child(2) { margin-bottom: 0.4rem; }
 
 .menu-link {
     font-family: "DinaRemasterII", monospace;
@@ -300,6 +301,11 @@ nav.nav-scrolled {
     background-color: var(--blue); transition: width 0.2s ease-in-out;
 }
 .menu-link:hover::after { width: 100%; }
+
+.menu-submenu {
+    list-style: none; display: flex; flex-direction: column;
+    gap: 0.4rem; margin-top: 0.2rem;
+}
 
 .menu-bullet { color: var(--grey); font-size: 0.9em; opacity: 0.8; }
 .menu-bullet:before { content: '▹'; margin-right: 0.3rem; font-size: 0.7em; }
@@ -789,7 +795,7 @@ footer { border-top: 2px dashed var(--bordergrey); padding: 4rem 2rem 2rem; marg
     .project-description { gap: 15px; }
     .project-gallery-col { gap: 15px; }
     .gallery-item { max-height: 80vh; }
-    .slide-menu { width: 50vw; }
+    .slide-menu { width: 30vw; }
     #t-f-div { flex-direction: column; }
     #page-3 img { width: 60%; max-width: 400px; margin-top: 5vh; margin-bottom: -5rem; }
     #name { margin-top: 25vh; }
@@ -885,7 +891,7 @@ footer { border-top: 2px dashed var(--bordergrey); padding: 4rem 2rem 2rem; marg
 }
 
 @media (max-width: 480px) {
-    .slide-menu { width: 80vw; }
+    .slide-menu { width: 70vw; }
     #hero-head h1, #main-head h1 {
         font-size: min(30vw, calc((100vw - 20px) / 5));
      }
