@@ -276,13 +276,46 @@ nav.nav-scrolled {
 #menu-toggle:checked ~ body, body:has(#menu-toggle:checked) { overflow: hidden; }
 #menu-toggle:checked ~ .slide-menu { transform: translateX(0); }
 
-.menu-content { width: 80%; height: 100%; display: flex; align-items: center; }
-.menu-content ul {
-    list-style: none; display: flex; flex-direction: column;
-    gap: 0.8rem; text-align: right; align-items: flex-end; padding: 0.5rem 0;
+/* --- Main Layout --- */
+.menu-content { 
+    width: 80%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
 }
-.menu-content li:nth-child(1) { margin-bottom: -0.4rem; }
-.menu-content li:nth-child(2) { margin-bottom: 0.4rem; }
+
+/* The Main Menu List */
+.menu-content > ul {
+    list-style: none; 
+    display: flex; 
+    flex-direction: column;
+    /* REDUCED GAP: Controls space between Home group and other items */
+    gap: 0.8rem; 
+    text-align: right; 
+    align-items: flex-end; 
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+/* The Nested Submenu Grouping */
+.menu-submenu {
+    list-style: none; 
+    display: flex; 
+    flex-direction: column;
+    /* Tighter spacing for the bulleted items */
+    gap: 0.4rem; 
+    /* Small margin to keep it tucked under "Home" */
+    margin-top: 0.3rem; 
+    /* Adds a little breathing room before the next main menu item */
+    margin-bottom: 0.2rem;
+    align-items: flex-end; 
+}
+
+/* --- Links & Typography --- */
+.home-trigger { 
+    font-weight: bold; 
+    font-size: 1.3em; 
+}
 
 .menu-link {
     font-family: "DinaRemasterII", monospace;
@@ -291,37 +324,25 @@ nav.nav-scrolled {
     text-transform: uppercase;
     position: relative;
     transition: color 0.2s;
-    padding: 0.3rem 1rem;
+    /* Vertical padding reduced to help with tight spacing */
+    padding: 0.1rem 1rem;
+    display: inline-block;
+    text-decoration: none;
 }
 
-.menu-link:hover { color: var(--blue); }
-.menu-link::after {
-    content: ""; width: 0; height: 2px;
-    position: absolute; bottom: -2px; right: 0;
-    background-color: var(--blue); transition: width 0.2s ease-in-out;
-}
-.menu-link:hover::after { width: 100%; }
-
-.menu-submenu {
-    list-style: none; display: flex; flex-direction: column;
-    gap: 0.4rem; margin-top: 0.2rem;
+.menu-bullet { 
+    color: var(--grey) !important; 
+    font-size: 1.1em !important; 
+    opacity: 0.8 !important; 
+    font-weight: normal !important;
+    padding: 0.1rem 1rem !important;
 }
 
-.menu-bullet { color: var(--grey); font-size: 0.9em; opacity: 0.8; }
-.menu-bullet:before { content: '▹'; margin-right: 0.3rem; font-size: 0.7em; }
-
-.menu-close {
-    position: absolute; top: 2rem; right: 2rem;
-    width: 44px; height: 44px;
-    cursor: url("./images/hand.svg") 7 0, pointer;
+.menu-bullet:before { 
+    content: '▹'; 
+    margin-right: 0.3rem; 
+    font-size: 0.7em; 
 }
-.menu-close span {
-    position: absolute; top: 50%; left: 50%; width: 28px; height: 3px;
-    background: var(--pink); transform-origin: center;
-}
-.menu-close span:first-child { transform: translate(-50%, -50%) rotate(45deg); }
-.menu-close span:last-child { transform: translate(-50%, -50%) rotate(-45deg); }
-.orange-arrow i { color: var(--blue); }
 
 /* ==========================================================================
    6. LAYOUT: MAIN & HERO
