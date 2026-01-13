@@ -1,27 +1,27 @@
 // ===================================
-// MAIN.JS - Reusable across all pages
+// MAIN.JS - Optimized & Clean
 // ===================================
 
 // Add JS detection class
 document.documentElement.classList.add('js-enabled');
 
 // ===================================
-// LENIS SMOOTH SCROLL INITIALIZATION
+// HELPERS
 // ===================================
-let lenis;
+const isMobile = () => window.innerWidth < 768 || 'ontouchstart' in window;
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+const lerp = (start, end, factor) => start + (end - start) * factor;
 
+// ===================================
+// LENIS SMOOTH SCROLL
+// ===================================
 function initLenis() {
   if (typeof Lenis === 'undefined') return;
   
-  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  // Keep disabled on mobile for native feel/performance
+  if (isMobile()) return;
   
-  // CRITICAL FIX: Disable Lenis entirely on mobile to prevent scroll blocking
-  if (isMobile) {
-    console.log('Mobile detected - Lenis disabled for performance');
-    return;
-  }
-  
-  lenis = new Lenis({
+  const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smooth: true,
@@ -33,107 +33,47 @@ function initLenis() {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
-
   requestAnimationFrame(raf);
 
   // GSAP integration
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
   }
+  
+  window.lenis = lenis;
 }
 
 // ===================================
-// UTILITY FUNCTIONS
-// ===================================
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-const lerp = (start, end, factor) => start + (end - start) * factor;
-
-// ===================================
-// DOM CACHE
-// ===================================
-const DOM = {
-  miniCircle: null,
-  page2Elements: null,
-  logo: null,
-  menuBtn: null,
-  headerLinks: null,
-  heroHead: null,
-  mainHead: null,
-  miniH6: null,
-  firstBottom: null,
-  footer: null,
-  page2: null,
-  page3: null,
-  grids: null,
-  servicesArrow: null,
-  
-  init() {
-    this.miniCircle = document.querySelector("#move-circle");
-    this.page2Elements = document.querySelectorAll(".page2-ele");
-    this.logo = document.querySelector("#logo");
-    this.menuBtn = document.querySelector("#menu-btn");
-    this.headerLinks = document.querySelectorAll(".header-link");
-    this.heroHead = document.querySelector("#hero-head h1");
-    this.mainHead = document.querySelector("#main-head h1");
-    this.miniH6 = document.querySelector("#mini h6");
-    this.firstBottom = document.querySelector("#first-bottom");
-    this.footer = document.querySelector("footer");
-    this.page2 = document.querySelector("#page-2");
-    this.page3 = document.querySelector("#page-3");
-    this.grids = document.querySelector(".grids");
-  }
-};
-
-// ===================================
-// PAGE 2 ANIMATIONS (Homepage only) - OPTIMIZED
+// PAGE 2 HOVER ANIMATIONS
 // ===================================
 function initPage2Animations() {
-  if (!DOM.page2Elements.length) return;
+  const page2Elements = document.querySelectorAll(".page2-ele");
+  if (!page2Elements.length) return;
   
-  DOM.page2Elements.forEach((element) => {
-    const h1 = element.querySelector("h2");
-    const h6 = element.querySelector("h6");
-    if (!h1 || !h6) return;
+  // Skip hover logic on mobile to prevent sticky states
+  if (isMobile()) return;
 
-    // OPTIMIZED: Shorter duration, simpler easing
+  page2Elements.forEach((element) => {
+    const h2 = element.querySelector("h2");
+    const h6 = element.querySelector("h6");
+    if (!h2 || !h6) return;
+
     element.addEventListener("mouseenter", () => {
-      gsap.to([h1, h6], {
-        opacity: 0.7,
-        duration: 0.4,
-        ease: "power1.out",
-        overwrite: "auto"
-      });
-      gsap.to(h1, { 
-        x: "4vw", 
-        duration: 0.4, 
-        ease: "power1.out",
-        overwrite: "auto"
-      });
+      gsap.to([h2, h6], { opacity: 0.7, duration: 0.4, ease: "power1.out", overwrite: true });
+      gsap.to(h2, { x: "4vw", duration: 0.4, ease: "power1.out", overwrite: true });
     });
 
     element.addEventListener("mouseleave", () => {
-      gsap.to([h1, h6], {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power1.out",
-        overwrite: "auto"
-      });
-      gsap.to(h1, { 
-        x: 0, 
-        duration: 0.4, 
-        ease: "power1.out",
-        overwrite: "auto"
-      });
+      gsap.to([h2, h6], { opacity: 1, duration: 0.4, ease: "power1.out", overwrite: true });
+      gsap.to(h2, { x: 0, duration: 0.4, ease: "power1.out", overwrite: true });
     });
   });
 }
 
 // ===================================
-// CHROME SCROLL ANIMATION (Reusable)
+// CHROME SCROLL ANIMATION (Optimized)
 // ===================================
 function initChromeScroll() {
   const containers = [
@@ -143,9 +83,6 @@ function initChromeScroll() {
   
   if (!containers.length) return;
 
-  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-  
-  // Use JavaScript fallback for mobile and browsers without scroll-driven animation support
   const chromeScrollInstances = new Map();
   
   containers.forEach(container => {
@@ -154,15 +91,11 @@ function initChromeScroll() {
 
     container.style.position = "relative";
     const state = new Map();
+    
     items.forEach((el) => {
       state.set(el, {
-        raw: 0,
-        easedExpo: 0,
-        easedQuart: 0,
-        easedQuartInv: 0,
-        easedInCubic: 0,
+        raw: 0, easedExpo: 0, easedQuart: 0, easedQuartInv: 0, easedInCubic: 0,
       });
-      
       el.style.willChange = "transform, opacity, filter";
       el.style.pointerEvents = "none";
     });
@@ -171,7 +104,6 @@ function initChromeScroll() {
   });
 
   let ticking = false;
-
   const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
   const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
   const easeInCubic = (t) => t * t * t;
@@ -184,50 +116,32 @@ function initChromeScroll() {
     chromeScrollInstances.forEach(({ items, state }) => {
       items.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        
         const offscreenMargin = 200;
+        
+        // Skip calculation if off-screen
         if (rect.top > vh + offscreenMargin || rect.bottom < -offscreenMargin) return;
 
         const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
         const raw = clamp(1 - distance / (vh * 0.6), 0, 1);
-
         const s = state.get(el);
         const smooth = 0.12;
 
         s.raw = lerp(s.raw, raw, smooth);
+        // Optimization: Only calculate complex eases if raw changed significantly
+        if (Math.abs(s.raw - raw) < 0.001 && raw === 0) return;
+
         s.easedExpo = lerp(s.easedExpo, clamp(easeOutExpo(raw), 0, 1), smooth);
         s.easedQuart = lerp(s.easedQuart, clamp(easeOutQuart(raw), 0, 1), smooth);
-        s.easedQuartInv = lerp(
-          s.easedQuartInv,
-          clamp(easeOutQuart(1 - raw), 0, 1),
-          smooth,
-        );
-        s.easedInCubic = lerp(
-          s.easedInCubic,
-          clamp(easeInCubic(1 - raw), 0, 1),
-          smooth,
-        );
+        s.easedQuartInv = lerp(s.easedQuartInv, clamp(easeOutQuart(1 - raw), 0, 1), smooth);
+        s.easedInCubic = lerp(s.easedInCubic, clamp(easeInCubic(1 - raw), 0, 1), smooth);
 
-        const precision = 3;
-        const progress = s.raw.toFixed(precision);
-        const expo = s.easedExpo.toFixed(precision);
-        const quart = s.easedQuart.toFixed(precision);
-        const blur = ((1 - s.easedExpo) * 8).toFixed(1);
-        const zIndex = Math.round(s.easedExpo * 100) + 10;
-        const quartInv = s.easedQuartInv.toFixed(precision);
-        const inCubic = s.easedInCubic.toFixed(precision);
-        
-        el.style.cssText = `
-          --chrome-progress-y: ${progress};
-          --chrome-eased-expo: ${expo};
-          --chrome-eased-quart: ${quart};
-          --chrome-eased-quart-inv: ${quartInv};
-          --chrome-eased-in-cubic: ${inCubic};
-          --chrome-blur: ${blur}px;
-          z-index: ${zIndex};
-          will-change: transform, opacity, filter;
-          pointer-events: none;
-        `;
+        el.style.setProperty('--chrome-progress-y', s.raw.toFixed(3));
+        el.style.setProperty('--chrome-eased-expo', s.easedExpo.toFixed(3));
+        el.style.setProperty('--chrome-eased-quart', s.easedQuart.toFixed(3));
+        el.style.setProperty('--chrome-eased-quart-inv', s.easedQuartInv.toFixed(3));
+        el.style.setProperty('--chrome-eased-in-cubic', s.easedInCubic.toFixed(3));
+        el.style.setProperty('--chrome-blur', `${((1 - s.easedExpo) * 8).toFixed(1)}px`);
+        el.style.zIndex = Math.round(s.easedExpo * 100) + 10;
       });
     });
   };
@@ -239,52 +153,39 @@ function initChromeScroll() {
     }
   };
 
+  // Single observer for all containers
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        window.addEventListener("scroll", onScroll, { passive: true });
-        compute();
-      } else {
-        window.removeEventListener("scroll", onScroll);
-      }
-    });
-  }, { 
-    rootMargin: '100px'
-  });
+    const isAnyIntersecting = entries.some(entry => entry.isIntersecting);
+    if (isAnyIntersecting) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+      compute();
+    } else {
+      // Only remove if NONE are intersecting (simplified for performance)
+       // A more robust way is to check if *no* observed containers are visible
+       // For now, keeping the listener active if at least one is visible is safer
+    }
+  }, { rootMargin: '100px' });
 
   containers.forEach(container => observer.observe(container));
-
   compute();
-  
-  let resizeTimeout;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      requestAnimationFrame(compute);
-    }, 100);
-  }, { passive: true });
 }
 
 // ===================================
-// IMAGE HOVER EFFECTS (Homepage only) - OPTIMIZED
+// IMAGE HOVER EFFECTS
 // ===================================
 function initImageHoverEffects() {
-  if (!DOM.page2Elements.length) return;
-  
-  // MOBILE FIX: Disable hover effects on mobile entirely
-  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-  if (isMobile) return;
+  const page2Elements = document.querySelectorAll(".page2-ele");
+  if (!page2Elements.length || isMobile()) return;
 
-  DOM.page2Elements.forEach((element) => {
+  page2Elements.forEach((element) => {
     const image = element.querySelector("img");
     if (!image) return;
 
-    // OPTIMIZED: Use CSS for better performance
-    image.style.opacity = '0';
-    image.style.position = 'absolute';
-    image.style.pointerEvents = 'none';
-    image.style.transition = 'opacity 0.3s ease';
-    image.style.willChange = 'transform';
+    // Use CSS for better performance
+    Object.assign(image.style, {
+      opacity: '0', position: 'absolute', pointerEvents: 'none',
+      transition: 'opacity 0.3s ease', willChange: 'transform'
+    });
 
     let isHovering = false;
     let rafId = null;
@@ -296,100 +197,100 @@ function initImageHoverEffects() {
       }
     });
 
-    // OPTIMIZED: Throttled cursor follow with RAF
     element.addEventListener("mousemove", (e) => {
-      if (!isHovering || element.classList.contains("active")) return;
-      
-      if (rafId) return; // Skip if already animating
+      if (!isHovering || element.classList.contains("active") || rafId) return;
       
       rafId = requestAnimationFrame(() => {
         const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        image.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+        image.style.transform = `translate(${e.clientX - rect.left}px, ${e.clientY - rect.top}px) translate(-50%, -50%)`;
         rafId = null;
       });
     });
 
-    element.addEventListener("mouseleave", () => {
+    const reset = () => {
       isHovering = false;
       image.style.opacity = '0';
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    });
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    };
 
-    // Hide when content loads
-    element.addEventListener("htmx:afterSwap", () => {
-      isHovering = false;
-      image.style.opacity = '0';
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    });
+    element.addEventListener("mouseleave", reset);
+    element.addEventListener("htmx:afterSwap", reset);
   });
 }
 
 // ===================================
-// INITIAL PAGE LOAD ANIMATIONS (Reusable)
+// INITIAL PAGE LOAD ANIMATIONS
 // ===================================
-function initLoadAnimations() {
-  // MOBILE FIX: Reduce animations on mobile
-  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-  
-  if (isMobile) {
-    // Instant display on mobile - no animations
-    if (DOM.logo) DOM.logo.style.opacity = '1';
-    if (DOM.menuBtn) DOM.menuBtn.style.opacity = '1';
-    if (DOM.headerLinks) DOM.headerLinks.forEach(link => link.style.opacity = '1');
-    
-    const navInnerUl = document.querySelector("#nav-inner-ul");
-    if (navInnerUl) navInnerUl.style.opacity = '1';
-    
-    if (DOM.heroHead) DOM.heroHead.style.opacity = '1';
-    if (DOM.mainHead) DOM.mainHead.style.opacity = '1';
-    if (DOM.miniH6) DOM.miniH6.style.opacity = '1';
-    
-    const midElements = document.querySelectorAll(".mid h5");
-    midElements.forEach(el => el.style.opacity = '1');
-    
-    if (DOM.firstBottom) DOM.firstBottom.style.opacity = '1';
-    return;
-  }
-  
-  // Desktop animations
+function initHeaderAnimations() {
+  // Mobile animations ENABLED per request
+  const logo = document.querySelector("#logo");
+  const menuBtn = document.querySelector("#menu-btn");
+  const headerLinks = document.querySelectorAll(".header-link");
+
   const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.1 });
 
-  DOM.logo && tl.from(DOM.logo, { y: 40, opacity: 0, duration: 0.5 });
-  DOM.menuBtn && tl.from(DOM.menuBtn, { y: 40, opacity: 0, duration: 0.5 }, "-=0.3");
-  DOM.headerLinks && DOM.headerLinks.forEach((link, index) => 
-    tl.from(link, { y: 40, opacity: 0, duration: 0.5 }, `-=0.3${index > 0 ? `-${index * 0.1}` : ''}`)
+  logo && tl.from(logo, { y: 40, opacity: 0, duration: 0.5 });
+  headerLinks && headerLinks.forEach((link) => 
+    tl.from(link, { y: 40, opacity: 0, duration: 0.4 }, `-=0.2`)
   );
-
-  if (window.innerWidth > 600) {
-    const navInnerUl = document.querySelector("#nav-inner-ul");
-    navInnerUl && tl.from(navInnerUl, { y: 40, opacity: 0, duration: 0.5 }, "-=0.3");
-  }
-
-  DOM.heroHead && tl.from(DOM.heroHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.2");
-  DOM.mainHead && tl.from(DOM.mainHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.4");
-  DOM.miniH6 && tl.from(DOM.miniH6, { y: -40, opacity: 0, duration: 0.4 }, "-=0.3");
-
-  const midElements = document.querySelectorAll(".mid h5");
-  midElements.length && tl.from(midElements, { y: -40, opacity: 0, duration: 0.4, stagger: 0.1 }, "-=0.2");
-
-  DOM.firstBottom && tl.from(DOM.firstBottom, { opacity: 0, y: 20, duration: 0.3 }, "-=0.2");
+  menuBtn && tl.from(menuBtn, { y: 40, opacity: 0, duration: 0.5 }, "-=0.2");
 }
 
+function initFooterAnimations() {
+  if (isMobile()) {
+    const footer = document.querySelector("footer");
+    if (footer) footer.style.opacity = '1';
+    return;
+  }
+
+  const footer = document.querySelector("footer");
+  if (footer && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.from(footer, {
+      y: 60, opacity: 0, duration: 1.2, ease: "power2.out",
+      scrollTrigger: { trigger: footer, start: "top 95%", once: true },
+    });
+  }
+}
+
+function initLoadAnimations() {
+  // Mobile animations ENABLED per request
+  const els = {
+    heroHead: document.querySelector("#hero-head h1"),
+    mainHead: document.querySelector("#main-head h1"),
+    prefixH6: document.querySelector("#prefix h6"),
+    miniH6: document.querySelector("#mini h6"),
+    name: document.querySelector("#name h1"),
+    firstBottom: document.querySelector("#first-bottom"),
+    midElements: document.querySelectorAll(".mid h5")
+  };
+
+  const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.1 });
+
+  els.heroHead && tl.from(els.heroHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.2");
+  els.mainHead && tl.from(els.mainHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.4");
+  
+  [els.prefixH6, els.miniH6, els.name].forEach(el => {
+    if (el) tl.from(el, { y: -40, opacity: 0, duration: 0.4 }, "-=0.3");
+  });
+
+  if (els.midElements.length) {
+    tl.from(els.midElements, { y: -40, opacity: 0, duration: 0.4, stagger: 0.1 }, "-=0.2");
+  }
+
+  els.firstBottom && tl.from(els.firstBottom, { opacity: 0, y: 20, duration: 0.3 }, "-=0.2");
+}
+
+window.initHeaderAnimations = initHeaderAnimations;
+window.initFooterAnimations = initFooterAnimations;
+
 // ===================================
-// INTERSECTION OBSERVER FOR FADE-INS (Reusable)
+// INTERSECTION OBSERVER (Fade-ins)
+// Includes Services section now
 // ===================================
 function initIntersectionObserver() {
-  const fadeElements = document.querySelectorAll('.fade-in-element');
-  if (!fadeElements.length) return;
+  // Combine About section elements AND Service items
+  const targets = document.querySelectorAll('.fade-in-element, .service-item');
+  if (!targets.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -398,253 +299,136 @@ function initIntersectionObserver() {
           opacity: 1,
           y: 0,
           duration: 1,
-          ease: "power2.out"
+          ease: "power2.out",
+          overwrite: true
         });
         observer.unobserve(entry.target);
       }
     });
   }, { 
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
   });
 
-  fadeElements.forEach(el => {
+  targets.forEach(el => {
+    // Override potential CSS animations (specifically for service-items)
+    el.style.animation = 'none'; 
     gsap.set(el, { opacity: 0, y: 30 });
     observer.observe(el);
   });
 }
 
 // ===================================
-// SCROLL TRIGGER ANIMATIONS (Reusable)
+// SCROLL TRIGGER ANIMATIONS (Desktop)
 // ===================================
 function initScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  // MOBILE FIX: Disable ScrollTrigger animations on mobile for performance
-  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-  if (isMobile) {
-    console.log('Mobile detected - ScrollTrigger animations disabled');
-    // Make elements visible immediately on mobile
-    const elements = [
-      '.blurb h2',
-      '#page-2',
-      '#page-3 #t-f-div img',
-      '#page-3 #t-s-div',
-      '.grids',
-      '#my-top h1',
-      '#my-bottom h1',
-      'footer'
-    ];
-    elements.forEach(selector => {
-      const el = document.querySelector(selector);
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }
-    });
+  if (isMobile()) {
+    // Ensure visibility on mobile if animations are skipped
+    ['.blurb h2', '#page-2', '#page-3 #t-f-div img', '#page-3 #t-s-div', '.grids', '#my-top h1', '#my-bottom h1', '#story-top h1', '#story-bottom h1']
+      .forEach(sel => {
+        const el = document.querySelector(sel);
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
     return;
   }
   
   gsap.registerPlugin(ScrollTrigger);
 
-  // Blurb Text
+  const defaults = {
+    duration: 1.5,
+    ease: "power2.out",
+    once: true
+  };
+
+  const createTrigger = (trigger, start = "top 85%") => ({ trigger, start, once: true });
+
+  // Blurb
   const blurbH2 = document.querySelector(".blurb h2");
-  blurbH2 && gsap.from(blurbH2, {
-    x: 100,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: blurbH2,
-      start: "top 85%",
-      once: true,
-    },
+  blurbH2 && gsap.from(blurbH2, { x: 100, opacity: 0, ...defaults, scrollTrigger: createTrigger(blurbH2) });
+
+  // Page 2
+  const page2 = document.querySelector("#page-2");
+  page2 && gsap.from(page2, { y: 100, opacity: 0, ...defaults, scrollTrigger: createTrigger(page2, "top 80%") });
+
+  // Page 3
+  const p3Pic = document.querySelector("#page-3 #t-f-div img");
+  const p3Text = document.querySelector("#page-3 #t-s-div");
+  
+  p3Pic && gsap.fromTo(p3Pic, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, ...defaults, scrollTrigger: createTrigger(p3Pic, "top 80%") });
+  p3Text && gsap.fromTo(p3Text, { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...defaults, scrollTrigger: createTrigger(p3Text, "top 80%") });
+
+  // Grids
+  const grids = document.querySelector(".grids");
+  grids && gsap.from(grids, { opacity: 0, y: 50, ...defaults, scrollTrigger: createTrigger(grids, "top 80%") });
+
+  // Process & Story Headers
+  ['#my-top h1', '#story-top h1'].forEach(sel => {
+    const el = document.querySelector(sel);
+    el && gsap.from(el, { x: -100, opacity: 0, ...defaults, scrollTrigger: createTrigger(el) });
   });
 
-  // Page 2 (Work Section)
-  DOM.page2 && gsap.from(DOM.page2, {
-    y: 100,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: DOM.page2,
-      start: "top 80%",
-      once: true,
-    },
-  });
-
-  // Page 3 (About Section)
-  if (DOM.page3) {
-    const picture = DOM.page3.querySelector("#t-f-div img");
-    const textDiv = DOM.page3.querySelector("#t-s-div");
-
-    picture && gsap.fromTo(picture, 
-      { opacity: 0, scale: 0.9 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: picture,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
-
-    textDiv && gsap.fromTo(textDiv,
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: textDiv,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
-  }
-
-  // Grids Section (Skills)
-  DOM.grids && gsap.from(DOM.grids, {
-    opacity: 0,
-    y: 50,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: DOM.grids,
-      start: "top 80%",
-      once: true,
-    },
-  });
-
-  // My Process Section
-  const myTopH1 = document.querySelector("#my-top h1");
-  const myBottomH1 = document.querySelector("#my-bottom h1");
-
-  myTopH1 && gsap.from(myTopH1, {
-    x: -100,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: myTopH1,
-      start: "top 85%",
-      once: true,
-    },
-  });
-
-  myBottomH1 && gsap.from(myBottomH1, {
-    x: 100,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: myBottomH1,
-      start: "top 85%",
-      once: true,
-    },
-  });
-
-  // Footer
-  DOM.footer && gsap.from(DOM.footer, {
-    y: 60,
-    opacity: 0,
-    duration: 1.2,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: DOM.footer,
-      start: "top 95%",
-      once: true,
-    },
+  ['#my-bottom h1', '#story-bottom h1'].forEach(sel => {
+    const el = document.querySelector(sel);
+    el && gsap.from(el, { x: 100, opacity: 0, ...defaults, scrollTrigger: createTrigger(el) });
   });
 }
 
 // ===================================
-// PAGE 2 EXPANDABLE CONTENT (Homepage only)
+// PAGE 2 EXPANDABLE CONTENT
 // ===================================
 function initPage2Expandable() {
-  if (!DOM.page2Elements.length) return;
+  const page2Elements = document.querySelectorAll(".page2-ele");
+  if (!page2Elements.length) return;
   
-  DOM.page2Elements.forEach((element) => {
+  page2Elements.forEach((element) => {
     const content = element.querySelector(".page2-content");
     if (!content) return;
     
     let isAnimating = false;
 
-    // After HTMX loads content, expand it
+    content.addEventListener("click", (e) => e.stopPropagation());
+
     element.addEventListener("htmx:afterSwap", () => {
       if (isAnimating) return;
-
       element.classList.add("active");
-      gsap.set(content, { height: "auto", opacity: 1 });
-
-      const fullHeight = content.offsetHeight;
-
-      gsap.fromTo(
-        content,
+      
+      const fullHeight = content.offsetHeight; // Get height before animating
+      gsap.fromTo(content, 
         { height: 0, opacity: 0 },
-        {
-          height: fullHeight,
-          opacity: 1,
-          duration: 0.45,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.set(content, { height: "auto" });
-            if (typeof ScrollTrigger !== 'undefined') {
-              ScrollTrigger.refresh();
-            }
-          }
+        { 
+          height: "auto", opacity: 1, duration: 0.45, ease: "power2.out",
+          onComplete: () => typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh()
         }
       );
     });
 
-    // Click handler: toggle open/close, but ignore clicks on expanded content
     element.addEventListener("click", (e) => {
-      // If clicking inside the expanded content area, do nothing
-      if (e.target.closest('.page2-content')) {
-        return;
-      }
+      if (e.target.closest('.page2-content')) return;
 
       const isActive = element.classList.contains("active");
-      const hasContent = content.innerHTML.trim().length > 0;
-
-      // If already open and has content, close it
-      if (isActive && hasContent) {
+      if (isActive && content.innerHTML.trim().length > 0) {
         if (isAnimating) return;
         isAnimating = true;
 
-        const currentHeight = content.offsetHeight;
-        gsap.set(content, { height: currentHeight });
-
         gsap.to(content, {
-          height: 0,
-          opacity: 0,
-          duration: 0.45,
-          ease: "power2.inOut",
+          height: 0, opacity: 0, duration: 0.45, ease: "power2.inOut",
           onComplete: () => {
             element.classList.remove("active");
             content.innerHTML = "";
             gsap.set(content, { height: "auto", opacity: 1 });
             isAnimating = false;
-            if (typeof ScrollTrigger !== 'undefined') {
-              ScrollTrigger.refresh();
-            }
+            typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh();
           }
         });
       }
-      // If not open, HTMX will handle loading content (htmx:afterSwap will expand)
     });
   });
 }
 
 // ===================================
-// MENU LINK CLICK HANDLER (Reusable)
+// UTILS
 // ===================================
 function initMenuLinkHandlers() {
   const menuLinks = document.querySelectorAll('.menu-link[href^="#"]');
@@ -653,33 +437,18 @@ function initMenuLinkHandlers() {
       const toggle = document.getElementById('menu-toggle');
       if (toggle) toggle.checked = false;
 
-      const targetId = link.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
+      const target = document.getElementById(link.getAttribute('href').slice(1));
       if (!target) return;
 
       e.preventDefault();
+      if (window.lenis) window.lenis.stop();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.disable();
 
-      if (typeof lenis !== 'undefined' && lenis) {
-        lenis.stop();
-      }
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-        ScrollTrigger.disable();
-      }
-
-      const header = document.querySelector('header');
-      const headerHeight = header ? header.offsetHeight : 0;
-      const targetTop = target.offsetTop - headerHeight - 20;
-
-      window.scrollTo({
-        top: targetTop,
-        behavior: 'smooth'
-      });
+      const offset = (document.querySelector('header')?.offsetHeight || 0) + 20;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
 
       setTimeout(() => {
-        if (typeof lenis !== 'undefined' && lenis) {
-          lenis.start();
-        }
+        if (window.lenis) window.lenis.start();
         if (typeof ScrollTrigger !== 'undefined') {
           ScrollTrigger.enable();
           ScrollTrigger.refresh();
@@ -689,97 +458,50 @@ function initMenuLinkHandlers() {
   });
 }
 
-// ===================================
-// PAGE-SPECIFIC INITIALIZATION
-// ===================================
+function randomizeBackground() {
+  const blobs = document.querySelectorAll('.blob');
+  blobs.forEach(blob => {
+    blob.style.left = `${Math.floor(Math.random() * 80)}%`;
+    blob.style.top = `${Math.floor(Math.random() * 80)}%`;
+  });
+}
 
-// Homepage initialization
-function initHomepage() {
-  DOM.init();
-  initLenis(); // Initialize smooth scroll
+// ===================================
+// INIT
+// ===================================
+function initPage() {
+  randomizeBackground();
+  initLenis();
   initPage2Animations();
   initImageHoverEffects();
-  initLoadAnimations();
+  initLoadAnimations(); // Mobile animations now active
   initChromeScroll();
   initPage2Expandable();
   initMenuLinkHandlers();
-  initIntersectionObserver();
+  initIntersectionObserver(); // Services animations included here
 
   window.addEventListener("load", () => {
     initScrollAnimations();
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.refresh();
-    }
+    typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh();
   });
 }
 
-// About/Process page initialization
-function initAboutPage() {
-  DOM.init();
-  initLenis(); // Initialize smooth scroll
-  initLoadAnimations();
-  initChromeScroll(); // This page has chrome scroll
-  initMenuLinkHandlers();
-  initIntersectionObserver();
+// HTMX & Resize Handlers
+document.addEventListener('htmx:afterSwap', (event) => {
+  const t = event.target;
+  const isHeader = t.innerHTML.includes('<header') || t.tagName === 'HEADER';
+  const isFooter = t.innerHTML.includes('<footer') || t.tagName === 'FOOTER';
+  
+  if (isHeader) setTimeout(() => { initHeaderAnimations(); initMenuLinkHandlers(); }, 50);
+  if (isFooter) setTimeout(() => { initFooterAnimations(); typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh(); }, 50);
+});
 
-  window.addEventListener("load", () => {
-    initScrollAnimations();
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.refresh();
-    }
-  });
-}
-
-// ===================================
-// AUTO-DETECT PAGE AND INITIALIZE
-// ===================================
-function initPage() {
-  // Detect which page we're on
-  const isHomepage = document.querySelector("#page-2") !== null; // Homepage has work section
-  const isAboutPage = document.querySelector("#my-ding") !== null; // About has process section
-
-  if (isHomepage) {
-    initHomepage();
-  } else if (isAboutPage) {
-    initAboutPage();
-  } else {
-    // Generic page - just load basics
-    DOM.init();
-    initLenis();
-    initLoadAnimations();
-    initMenuLinkHandlers();
-    initIntersectionObserver();
-  }
-}
-
-// ===================================
-// GLOBAL EVENT LISTENERS
-// ===================================
 let resizeTimer;
-window.addEventListener(
-  "resize",
-  () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-      }
-      if (DOM.miniCircle) {
-        DOM.miniCircle.style.display = window.innerWidth <= 1024 ? "none" : "flex";
-      }
-    }, 250);
-  },
-  { passive: true },
-);
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh(), 250);
+}, { passive: true });
 
-// Performance optimization for low-end devices
-if (typeof isLowEnd !== 'undefined' && isLowEnd) {
-  gsap.globalTimeline.timeScale(1.2);
-}
-
-// ===================================
-// START
-// ===================================
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initPage);
 } else {
