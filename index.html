@@ -1,100 +1,58 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Vi Saint - Designer Developer</title>
-        <meta
-            name="description"
-            content="Product and motion designer creating accessible, eye-catching designs. Available for full-time and freelance work."
-        />
 
-        <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-         <link rel="preload" 
-          href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" 
-          as="font" 
-          type="font/woff2" 
-          crossorigin>
-        <link rel="icon" type="image/x-icon" href="./images/fav.webp" />
-        <link rel="stylesheet" href="./styles.css" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-        />
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    </head>
-    <body class="story">
-        <div id="move-circle" aria-hidden="true"></div>
-        <div id="main">
-            <div id="page-1">
-<header>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <nav>
-        <div id="logo-div">
-            <a href="/" id="logo-link">
-                <h4 id="logo">VS</h4>
-            </a>
-        </div>
-        <div class="nav-right">
-            <a href="https://viktorsekovski.bearblog.dev/" class="header-link">blog<i
-                            class="ri-arrow-right-up-line"
-                        ></i></a>
-            <a href="./my-process.html" class="header-link">my process<i
-                            class="ri-arrow-right-up-line"
-                        ></i></a>
-            <label id="menu-btn" for="menu-toggle">
-                <span>menu<i class="ri-add-line"></i></span>
-            </label>
-        </div>
-    </nav>
-    <label for="menu-toggle" class="menu-overlay"></label>
-    <div class="slide-menu">
-        <label for="menu-toggle" class="menu-close" aria-label="Close menu">
-            <span></span>
-            <span></span>
-        </label>
-        <div class="menu-content">
-            <p>This website is meant to be scrolled, if you must hurry, here are shortcuts:</p>
-            <ul>
-                <li><a href="#page-2" class="menu-link">WORK</a></li>
-                <li><a href="#page-3" class="menu-link">ABOUT</a></li>
-                <li><a href="#my-ding" class="menu-link">SKILLS</a></li>
-                <li><a href="./my-process.html" class="menu-link">MY PROCESS</a></li>
-                <li><a href="https://viktorsekovski.bearblog.dev/" class="menu-link header-link">BLOG<i
-                            class="ri-arrow-right-up-line"
-                        ></i></a></li>
-                <li><a href="mailto:sekovskiviktor@gmail.com" class="menu-link">CONTACT<i
-                            class="ri-arrow-right-up-line"
-                        ></i></a></li>
-            </ul>
-            <p><br>Please do contact me for any inquries or work!</p>
-        </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vi Saint - Designer Developer</title>
+    <meta name="description" content="Product and motion designer creating accessible, eye-catching designs. Available for full-time and freelance work." />
+
+    <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/x-icon" href="./images/fav.webp" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body class="story">
+    <div class="organic-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
     </div>
-</header>
-                <div id="hero-handle">
-                    <div id="hero-head">
-                        <h1>Designer &</h1>
+    </div>
+    <div id="main">
+        <div id="page-1">
+            <!-- Header loaded via HTMX -->
+            <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
+            <div id="hero-handle">
+                <div id="name">
+                    <h1>Vi Saint</h1>
+                </div>
+                <div id="hero-head">
+                    <div id="prefix">
+                        <h6>the only</h6>
                     </div>
-                    <div id="main-head">
-                        <h1>Developer</h1>
-                        <div id="mini">
-                            <h6>based in europe</h6>
-                        </div>
+                    <h1>Designer &</h1>
+                </div>
+                <div id="main-head">
+                    <h1>Developer</h1>
+                    <div id="mini">
+                        <h6>based in europe</h6>
                     </div>
                 </div>
-                <div id="main-mid">
-                    <div class="mid">
-                        <h5>available for full time & freelance work</h5>
-                    </div>
-                </div>
-                <div id="first-bottom">
- <h5>
-                        Vi Saint                    
-                        <!--<i
+            </div>
+            <div id="first-bottom">
+                <h5>
+                    Multimedia Creative
+                    <!--<i
                             class="ri-arrow-right-up-line"
                         ></i>
                     </h5> -->
@@ -110,457 +68,364 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="blurb">
-                <h2>I blend design, development & storytelling to craft unforgettable brand experiences</h2>
-            </div>
-
-            <div id="page-2">
-                <div id="work-top"><h1>Select</h1></div>
-                <div id="work-bottom"><h1>Work</h1></div>
-                <img
-                    src="./images/flower.svg"
-                    alt="Flower"
-                    loading="lazy"
-                />
-
-                  <div id="expandable-container">
-                    <div id="first-ele" 
-                         class="page2-ele" 
-                         hx-get="./partials/veoma.html" 
-                         hx-swap="innerHTML" 
-                         hx-target="#veoma-content"
-                         hx-trigger="click"
-                         hx-indicator="#veoma-content"
-                    >
-                    <span class="expand-indicator">▼</span> 
-                        <h2>veoma studio</h2>
-                        <h6>2022</h6>
-                        <img src="./images/veo.webp" alt="Veoma Studio" loading="lazy" />
-                        <div id="veoma-content" class="page2-content"></div>
-                    </div>
-
-                    <div class="page2-ele"
-                         hx-get="./partials/vfns.html"
-                         hx-swap="innerHTML"
-                         hx-target="#vfn-content"
-                         hx-trigger="click"
-                         hx-indicator="#vfn-content"
-                    >
-                    <span class="expand-indicator">▼</span> 
-                        <h2>view from nowhere</h2>
-                        <h6>2023</h6>
-                        <img src="./images/vfns.webp" alt="View from Nowhere" loading="lazy" />
-                        
-                        <div id="vfn-content" class="page2-content"></div>
-                    </div>
-
-                    <div class="page2-ele"
-                         hx-get="./partials/doctors.html"
-                         hx-swap="innerHTML"
-                         hx-target="#doctors-content"
-                         hx-trigger="click"
-                         hx-indicator="#doctors-content"
-                    >
-                    <span class="expand-indicator">▼</span> 
-                        <h2>doctors</h2>
-                        <h6>2024</h6>
-                        <img src="./images/doctors.webp" alt="Doctors" loading="lazy" />
-                        
-                        <div id="doctors-content" class="page2-content"></div>
-                    </div>
-
-                    <div class="page2-ele"
-                         hx-get="./partials/nebesna.html"
-                         hx-swap="innerHTML"
-                         hx-target="#nebesna-content"
-                         hx-trigger="click"
-                         hx-indicator="#nebesna-content"
-                    >
-                    <span class="expand-indicator">▼</span> 
-                        <h2>nebesna</h2>
-                        <h6>2025</h6>
-                        <img src="./images/neb.webp" alt="Nebesna" loading="lazy" />
-                        
-                        <div id="nebesna-content" class="page2-content"></div>
-                    </div>
-
-                    <div class="page2-ele"
-                         hx-get="./partials/anksioznost.html"
-                         hx-swap="innerHTML"
-                         hx-target="#anksioznost-content"
-                         hx-trigger="click"
-                         hx-indicator="#anksioznost-content"
-                    >
-                    <span class="expand-indicator">▼</span> 
-                        <h2>anksioznost</h2>
-                        <h6>2025</h6>
-                        <img src="./images/anksi.webp" alt="Anksioznost" loading="lazy" />
-                        
-                        <div id="anksioznost-content" class="page2-content"></div>
-                    </div>
-                </div>
-                <!-- <div id="btn-div">
-                    <button><a href="#page-2">View more work</a></button>
-                </div> -->
-            </div>
-
-            
-<section class="chrome-scroll-section last extended-bottom" aria-label="Chrome CSS Scroll Demo">
-    <div class="container chrome-container">
-        <div class="focal-marker" aria-hidden="true"></div>
-        <div class="text-container">
-            <div class="text">
-                <h4>You Found Your</h4>
-            </div>
-            <div class="text" id="unicorn">
-                <h2>Unicorn!</h2>
-            </div>
-            <div class="text">
-                <h4>I want to craft</h4>
-            </div>
-            <div class="text">
-                <h4>every aspectof <em>your brand</em></h4>
-            </div>
-            <div class="text">
-                <h4>to <em>improve</em> engagement,</h4>
-            </div>
-            <div class="text">
-                <h4>retention & satisfaction</h4>
-            </div>
-            <div class="text">
-                <h4>for a <em>fraction</em> of agency costs.</h4>
-            </div>
-            <div class="text">
-                <h4><br>Don't entrust your brand</h4>
-            </div>
-            <div class="text">
-                <h4>to an intern</h4>
-            </div>
-            <div class="text">
-                <h4><em>hire me</em> to obsess</h4>
-            </div>
-            <div class="text">
-                <h4>over every aspect!</h4>
-            </div>
-            <div class="text">
-                <h5>6+ years of professional experience!</h5>
-            </div>
-            <div class="text">
-                <h2><br>Contact Me</h2>
-            </div>
-            <div class="text">
-                <h2>Today</h2>
-            </div>
-            <div class="text">
-                <h5>For a quick and efficient solution!</h5>
             </div>
         </div>
-    </div>
-</section>
 
-<div class="contact">
-    <a href="mailto:sekovskiviktor@gmail.com">
-        <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" /></a>
-</div>
+        <div class="blurb">
+            <h2>I blend design, development & storytelling to craft unforgettable experiences & sticky products</h2>
+        </div>
+
+        <div id="page-2">
+            <div class="head">
+                <h1>Select</h1>
+            </div>
+            <div class="tail">
+                <h1>Work</h1>
+            </div>
+            <img src="./images/flower.svg" alt="Flower" loading="lazy" />
+
+            <div id="expandable-container">
+                <div id="first-ele" class="page2-ele" hx-get="./partials/veoma.html" hx-swap="innerHTML" hx-target="#veoma-content" hx-trigger="click" hx-indicator="#veoma-content">
+                    <span class="expand-indicator">▼</span>
+                    <h2>veoma studio</h2>
+                    <h6>2022</h6>
+                    <img src="./images/veo.webp" alt="Veoma Studio" loading="lazy" />
+                    <div id="veoma-content" class="page2-content"></div>
+                </div>
+
+                <div class="page2-ele" hx-get="./partials/vfns.html" hx-swap="innerHTML" hx-target="#vfn-content" hx-trigger="click" hx-indicator="#vfn-content">
+                    <span class="expand-indicator">▼</span>
+                    <h2>view from nowhere</h2>
+                    <h6>2023</h6>
+                    <img src="./images/vfns.webp" alt="View from Nowhere" loading="lazy" />
+
+                    <div id="vfn-content" class="page2-content"></div>
+                </div>
+
+                <div class="page2-ele" hx-get="./partials/doctors.html" hx-swap="innerHTML" hx-target="#doctors-content" hx-trigger="click" hx-indicator="#doctors-content">
+                    <span class="expand-indicator">▼</span>
+                    <h2>doctors</h2>
+                    <h6>2024</h6>
+                    <img src="./images/doctors.webp" alt="Doctors" loading="lazy" />
+
+                    <div id="doctors-content" class="page2-content"></div>
+                </div>
+
+                <div class="page2-ele" hx-get="./partials/nebesna.html" hx-swap="innerHTML" hx-target="#nebesna-content" hx-trigger="click" hx-indicator="#nebesna-content">
+                    <span class="expand-indicator">▼</span>
+                    <h2>nebesna</h2>
+                    <h6>2025</h6>
+                    <img src="./images/neb.webp" alt="Nebesna" loading="lazy" />
+
+                    <div id="nebesna-content" class="page2-content"></div>
+                </div>
+
+                <div class="page2-ele" hx-get="./partials/anksioznost.html" hx-swap="innerHTML" hx-target="#anksioznost-content" hx-trigger="click" hx-indicator="#anksioznost-content">
+                    <span class="expand-indicator">▼</span>
+                    <h2>anksioznost</h2>
+                    <h6>2025</h6>
+                    <img src="./images/anksi.webp" alt="Anksioznost" loading="lazy" />
+
+                    <div id="anksioznost-content" class="page2-content"></div>
+                </div>
+            </div>
+            <!-- <div id="btn-div">
+                    <button><a href="#page-2">View more work</a></button>
+                </div> -->
+        </div>
+
+        <section class="chrome-scroll-section last extended-bottom" aria-label="Chrome CSS Scroll Demo">
+            <div class="container chrome-container">
+                <div class="focal-marker" aria-hidden="true"></div>
+                <div class="text-container">
+                    <div class="text">
+                        <h4>You Found Your</h4>
+                    </div>
+                    <div class="text" id="unicorn">
+                        <h2>Unicorn!</h2>
+                    </div>
+                    <div class="text">
+                        <h4>I want to craft</h4>
+                    </div>
+                    <div class="text">
+                        <h4>every aspectof <em>your brand</em></h4>
+                    </div>
+                    <div class="text">
+                        <h4>to <em>improve</em> engagement,</h4>
+                    </div>
+                    <div class="text">
+                        <h4>retention & satisfaction</h4>
+                    </div>
+                    <div class="text">
+                        <h4>for a <em>fraction</em> of agency costs.</h4>
+                    </div>
+                    <div class="text">
+                        <h4><br>Don't entrust your brand</h4>
+                    </div>
+                    <div class="text">
+                        <h4>to an intern</h4>
+                    </div>
+                    <div class="text">
+                        <h4><em>hire me</em> to obsess</h4>
+                    </div>
+                    <div class="text">
+                        <h4>over every aspect!</h4>
+                    </div>
+                    <div class="text">
+                        <h5>6+ years of professional experience!</h5>
+                    </div>
+                    <div class="text">
+                        <h2><br>Contact Me</h2>
+                    </div>
+                    <div class="text">
+                        <h2>Today</h2>
+                    </div>
+                    <div class="text">
+                        <h5>For a quick and efficient solution!</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="contact">
+            <a href="mailto:sekovskiviktor@gmail.com">
+                <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" /></a>
+        </div>
 
         <div>
             <div class="skill" style="--t:20s">
-              <div>
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>Javascript</span>
-                <span>React</span>
-                <span>Node JS</span>
-                <span>SQL</span>
-                <span>Git</span>
-              </div>
-              <div>
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>Javascript</span>
-                <span>React JS</span>
-                <span>Node JS</span>
-                <span>SQL</span>
-                <span>Git</span>
-              </div>
+                <div>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>Javascript</span>
+                    <span>React</span>
+                    <span>Node JS</span>
+                    <span>SQL</span>
+                    <span>Git</span>
+                </div>
+                <div>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>Javascript</span>
+                    <span>React JS</span>
+                    <span>Node JS</span>
+                    <span>SQL</span>
+                    <span>Git</span>
+                </div>
             </div>
 
             <div class="skill" style="--t:15s">
-              <div>
-                <span>Typescript</span>
-                <span>Next JS</span>
-                <span>Lenis</span>
-                <span>WebGL</span>
-                <span>Tree JS</span>
-                <span>Bootstrap</span>
-                <span>Material UI</span>
-                <span>Tailwind</span>
-                <span>SCSS</span>
-              </div>
-              <div>
-                  <span>Typescript</span>
-                  <span>Next JS</span>
-                  <span>Lenis</span>
-                  <span>WebGL</span>
-                  <span>Tree JS</span>
-                  <span>Bootstrap</span>
-                  <span>Material UI</span>
-                  <span>Tailwind</span>
-                  <span>SCSS</span>
+                <div>
+                    <span>Typescript</span>
+                    <span>Next JS</span>
+                    <span>Lenis</span>
+                    <span>WebGL</span>
+                    <span>Tree JS</span>
+                    <span>Bootstrap</span>
+                    <span>Material UI</span>
+                    <span>Tailwind</span>
+                    <span>SCSS</span>
+                </div>
+                <div>
+                    <span>Typescript</span>
+                    <span>Next JS</span>
+                    <span>Lenis</span>
+                    <span>WebGL</span>
+                    <span>Tree JS</span>
+                    <span>Bootstrap</span>
+                    <span>Material UI</span>
+                    <span>Tailwind</span>
+                    <span>SCSS</span>
 
-              </div>
+                </div>
             </div>
 
             <div class="skill" style="--t:15s">
-              <div>
-                <span>Photoshop</span>
-                <span>Illustrator</span>
-                <span>Premiere Pro</span>
-                <span>InDesign</span>
-                <span>Figma</span>
-                <span>Affinity</span>
-                <span>Aseprite</span>
-                <span>Canva</span>
-                <span>SEO</span>
-                <span>UX</span>
-                <span>UI</span>
-                <span>Typography</span>
-                <span>Animation</span>
-                <span>Video</span>
-                <span>Audio</span>
-              </div>
-              <div>
-                <span>Photoshop</span>
-                <span>Illustrator</span>
-                <span>Premiere Pro</span>
-                <span>InDesign</span>
-                <span>Figma</span>
-                <span>Affinity</span>
-                <span>Aseprite</span>
-                <span>Canva</span>
-                <span>SEO</span>
-                <span>UX</span>
-                <span>UI</span>
-                <span>Typography</span>
-                <span>Animation</span>
-                <span>Video</span>
-                <span>Audio</span>
-              </div>
+                <div>
+                    <span>Photoshop</span>
+                    <span>Illustrator</span>
+                    <span>Premiere Pro</span>
+                    <span>InDesign</span>
+                    <span>Figma</span>
+                    <span>Affinity</span>
+                    <span>Aseprite</span>
+                    <span>Canva</span>
+                    <span>SEO</span>
+                    <span>UX</span>
+                    <span>UI</span>
+                    <span>Typography</span>
+                    <span>Animation</span>
+                    <span>Video</span>
+                    <span>Audio</span>
+                </div>
+                <div>
+                    <span>Photoshop</span>
+                    <span>Illustrator</span>
+                    <span>Premiere Pro</span>
+                    <span>InDesign</span>
+                    <span>Figma</span>
+                    <span>Affinity</span>
+                    <span>Aseprite</span>
+                    <span>Canva</span>
+                    <span>SEO</span>
+                    <span>UX</span>
+                    <span>UI</span>
+                    <span>Typography</span>
+                    <span>Animation</span>
+                    <span>Video</span>
+                    <span>Audio</span>
+                </div>
             </div>
         </div>
-            <div id="page-3">
-                <div id="t-f-div">
-                    <img
-                        src="./images/me-front.webp"
-                        alt="Portrait of Vi Saint, product and motion designer"
-                        loading="lazy"
-                        class="fade-in-element"
-                    />
-                    <div id="t-s-div">
-                                <h1 class="fade-in-title">About</h1>
-                                <p class="fade-in-element">
-                                   Vi Saint is a remote-first designer & developer with an unconventional background spanning multiple industries & creative disciplines. He specializes in turning complexity into intuitive & emotionally resonant experiences that feel just right. 
-                                   <br><br>With 5+ years crafting everything from video game interfaces to high-converting e-commerce platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive attention to the human computer interaction. 
-                                   <br><br>He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across channels & highly memorable.</h5>
-                        <button class="fade-in-element">
+        <div id="page-3">
+            <div id="t-f-div">
+                <img src="./images/me-front.webp" alt="Portrait of Vi Saint, product and motion designer" loading="lazy" class="fade-in-element" />
+                <div id="t-s-div">
+                    <h1 class="fade-in-title">About</h1>
+                    <p class="fade-in-element about-paragraph">
+                        Vi Saint is a remote-first designer & developer with an unconventional background spanning multiple industries & creative disciplines. He specializes in turning complexity into intuitive & emotionally resonant experiences that feel just right.</p>
+                    <p class="fade-in-element about-paragraph">
+                        With 5+ years crafting everything from video game interfaces to high-converting e-commerce platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive attention to the human computer interaction.</p>
+                    <p class="fade-in-element about-paragraph">
+                        He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across channels & highly memorable.</p>
+                    <button class="fade-in-element">
                             <a href="mailto:sekovskiviktor@gmail.com"
                                 >Let's Talk</a
                             >
                         </button>
-                    </div>
-                </div>
-                <div id="third-bottom">
-                    <h5>oh, while you're here...</h5>
-                    <h5>
-                        <a
-                            href="./my-process.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >learn more about my process<i
-                                class="ri-arrow-right-up-line"
-                            ></i
-                        ></a>
-                    </h5>
                 </div>
             </div>
-</div>
- <div class="services-arrow" id="grids">
-                <!-- Design Services -->
+        </div>
+    </div>
+
+    <div class="title fade-in-element">
+        <h1>Services</h1>
+    </div>
+    <div class="services-arrow" id="grids">
+        <div class="services-grid">
+            <!-- LEFT COLUMN -->
+            <div class="service-column">
+                <!-- Product Design -->
                 <div class="service-category">
-                    <h3 class="category-title">Design</h3>
-                    
-                    <input type="checkbox" id="service-web-design" class="service-toggle">
-                    <label for="service-web-design" class="service-item" style="--delay: 0s;">
-                        <span class="expand-indicator">▼</span> Web Design
-                    </label>
-                    <div class="service-content">
-                        <p>Creating responsive, accessible websites that blend aesthetics with functionality. I design with performance in mind, ensuring every pixel serves a purpose.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Let's build something →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-ux" class="service-toggle">
-                    <label for="service-ux" class="service-item" style="--delay: 0.1s;">
-                        <span class="expand-indicator">▼</span> User Experience
-                    </label>
-                    <div class="service-content">
-                        <p>Research-driven UX that puts users first. I map journeys, test assumptions, and create intuitive flows that feel effortless.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Improve your UX →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-ui" class="service-toggle">
-                    <label for="service-ui" class="service-item" style="--delay: 0.2s;">
-                        <span class="expand-indicator">▼</span> User Interface
-                    </label>
-                    <div class="service-content">
-                        <p>Polished interfaces that balance beauty and usability. From design systems to micro-interactions, every detail matters.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Craft your UI →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-graphic" class="service-toggle">
-                    <label for="service-graphic" class="service-item" style="--delay: 0.3s;">
-                        <span class="expand-indicator">▼</span> Graphic Design
-                    </label>
-                    <div class="service-content">
-                        <p>Visual storytelling through typography, color, and composition. I create graphics that capture attention and communicate clearly.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Get visual →</a>
-                    </div>
-
                     <input type="checkbox" id="service-product" class="service-toggle">
-                    <label for="service-product" class="service-item" style="--delay: 0.4s;">
-                        <span class="expand-indicator">▼</span> Product Design
-                    </label>
+                    <label for="service-product" class="service-item" style="--delay: 0s;">
+                    <span class="expand-indicator">▼</span> Product Design
+                </label>
                     <div class="service-content">
-                        <p>End-to-end product design from concept to launch. I solve problems, iterate rapidly, and ship products people love.</p>
+                        <p>End-to-end digital product experiences from research to launch. I handle UX strategy, interface design, and web design—creating cohesive products that users love and businesses need.</p>
+                        <ul class="service-sublist">
+                            <li>UX Research & Strategy</li>
+                            <li>User Interface Design</li>
+                            <li>Web Design</li>
+                            <li>Prototyping & Testing</li>
+                        </ul>
                         <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your product →</a>
                     </div>
                 </div>
 
-                <!-- Development Services -->
+                <!-- Brand & Visual Identity -->
                 <div class="service-category">
-                    <h3 class="category-title">Development</h3>
-                    
-                    <input type="checkbox" id="service-web-dev" class="service-toggle">
-                    <label for="service-web-dev" class="service-item" style="--delay: 0.5s;">
-                        <span class="expand-indicator">▼</span> Web Development
-                    </label>
+                    <input type="checkbox" id="service-brand" class="service-toggle">
+                    <label for="service-brand" class="service-item" style="--delay: 0.1s;">
+                    <span class="expand-indicator">▼</span> Brand & Visual Identity
+                </label>
                     <div class="service-content">
-                        <p>Clean, performant code that brings designs to life. Specializing in modern frameworks, animations, and accessible implementation.</p>
+                        <p>Comprehensive brand universes that feel cohesive and alive. From positioning to visual systems, I craft identities that resonate across every touchpoint.</p>
+                        <ul class="service-sublist">
+                            <li>Brand Strategy & Positioning</li>
+                            <li>Visual Identity Systems</li>
+                            <li>Graphic Design</li>
+                            <li>Brand Worldbuilding</li>
+                        </ul>
+                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your brand →</a>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div class="service-category">
+                    <input type="checkbox" id="service-web-dev" class="service-toggle">
+                    <label for="service-web-dev" class="service-item" style="--delay: 0.2s;">
+                    <span class="expand-indicator">▼</span> Web Development
+                </label>
+                    <div class="service-content">
+                        <p>Clean, performant code that brings designs to life. Specializing in modern frameworks, smooth animations, and accessible implementation that works beautifully.</p>
+                        <ul class="service-sublist">
+                            <li>Frontend Development</li>
+                            <li>React & Modern Frameworks</li>
+                            <li>Animation & Interactions</li>
+                            <li>Performance Optimization</li>
+                        </ul>
                         <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Start building →</a>
                     </div>
+                </div>
+            </div>
 
-                    <input type="checkbox" id="service-game-dev" class="service-toggle">
-                    <label for="service-game-dev" class="service-item" style="--delay: 0.6s;">
-                        <span class="expand-indicator">▼</span> Game Development
-                    </label>
+            <!-- RIGHT COLUMN -->
+            <div class="service-column">
+                <!-- Game & Interactive Experiences -->
+                <div class="service-category">
+                    <input type="checkbox" id="service-game" class="service-toggle">
+                    <label for="service-game" class="service-item" style="--delay: 0.3s;">
+                    <span class="expand-indicator">▼</span> Game & Interactive Experiences
+                </label>
                     <div class="service-content">
-                        <p>Interactive experiences and game mechanics that engage. From prototypes to polished gameplay, I build worlds players remember.</p>
+                        <p>Engaging game mechanics and interactive worlds from concept to completion. I design systems, build prototypes, and create the assets that bring experiences to life.</p>
+                        <ul class="service-sublist">
+                            <li>Game Design & Mechanics</li>
+                            <li>Game Development</li>
+                            <li>Assets & Worldbuilding</li>
+                            <li>Interactive Prototypes</li>
+                        </ul>
                         <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Create your game →</a>
                     </div>
                 </div>
 
-                <!-- Branding Services -->
+                <!-- Creative Strategy -->
                 <div class="service-category">
-                    <h3 class="category-title">Branding</h3>
-                    
-                    <input type="checkbox" id="service-brand" class="service-toggle">
-                    <label for="service-brand" class="service-item" style="--delay: 0.7s;">
-                        <span class="expand-indicator">▼</span> Brand Worldbuilding
-                    </label>
+                    <input type="checkbox" id="service-strategy" class="service-toggle">
+                    <label for="service-strategy" class="service-item" style="--delay: 0.4s;">
+                    <span class="expand-indicator">▼</span> Creative Strategy
+                </label>
                     <div class="service-content">
-                        <p>Comprehensive brand universes that resonate across touchpoints. I craft identities that feel cohesive, memorable, and alive.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your world →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-advertising" class="service-toggle">
-                    <label for="service-advertising" class="service-item" style="--delay: 0.8s;">
-                        <span class="expand-indicator">▼</span> Advertising
-                    </label>
-                    <div class="service-content">
-                        <p>Strategic campaigns that cut through noise. I create ads that stop scrolls, spark conversations, and drive results.</p>
+                        <p>Strategic thinking that drives results. From advertising campaigns to narrative design, I create compelling stories that cut through noise and connect with audiences.</p>
+                        <ul class="service-sublist">
+                            <li>Advertising & Campaigns</li>
+                            <li>Narrative Design</li>
+                            <li>Content Strategy</li>
+                            <li>Art Direction</li>
+                        </ul>
                         <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Launch your campaign →</a>
                     </div>
                 </div>
 
-                <!-- Game Design Services -->
+                <!-- Design Systems -->
                 <div class="service-category">
-                    <h3 class="category-title">Game Design</h3>
-                    
-                    <input type="checkbox" id="service-game-design" class="service-toggle">
-                    <label for="service-game-design" class="service-item" style="--delay: 0.9s;">
-                        <span class="expand-indicator">▼</span> Game Design
-                    </label>
+                    <input type="checkbox" id="service-systems" class="service-toggle">
+                    <label for="service-systems" class="service-item" style="--delay: 0.5s;">
+                    <span class="expand-indicator">▼</span> Design Systems
+                </label>
                     <div class="service-content">
-                        <p>Thoughtful game systems and balanced mechanics. I design loops that hook players and keep them coming back.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Design your mechanics →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-assets" class="service-toggle">
-                    <label for="service-assets" class="service-item" style="--delay: 1s;">
-                        <span class="expand-indicator">▼</span> Assets & Worldbuilding
-                    </label>
-                    <div class="service-content">
-                        <p>Rich environments and cohesive asset libraries. From concept art to in-game assets, I build immersive worlds.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Create your assets →</a>
-                    </div>
-
-                    <input type="checkbox" id="service-narrative" class="service-toggle">
-                    <label for="service-narrative" class="service-item" style="--delay: 1.1s;">
-                        <span class="expand-indicator">▼</span> Narrative Design
-                    </label>
-                    <div class="service-content">
-                        <p>Story-driven experiences that interweave gameplay and narrative. I write worlds you can feel, not just read about.</p>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Tell your story →</a>
+                        <p>Scalable design systems that bring consistency and speed to growing teams. I build component libraries, documentation, and frameworks that empower everyone.</p>
+                        <ul class="service-sublist">
+                            <li>Component Libraries</li>
+                            <li>Design Tokens & Guidelines</li>
+                            <li>Documentation</li>
+                            <li>Design Ops</li>
+                        </ul>
+                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Scale your design →</a>
                     </div>
                 </div>
             </div>
-            <footer>
-                <div id="foot-div">
-                    <div id="foot-name">
-                        <h1>
-                            Viktor <span class="spaced">D&</span><br>
-                            Sekovski D
-                        </h1>
-                        <h6>SekovskiViktor@gmail.com</h6>
-                    </div>
-                    <div id="social">
-                      <h5 class="foot-head">
-                            <a href="https://www.linkedin.com/in/viktorsekovski/" target="_blank" rel="noopener noreferrer">linkedin</a>
-                        </h5>
-                        <h5 class="foot-head">
-                            <a href="https://viktorsekovski.bearblog.dev/" target="_blank" rel="noopener noreferrer">blog</a>
-                        </h5>
-                      <!--    <h5 class="foot-head">
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">twitter</a>
-                        </h5>
-                        <h5 class="foot-head">
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
-                        </h5>
-                        <h5 class="foot-head">
-                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">youtube</a>
-                        </h5> -->
-                    </div>
-                </div>
-                <div id="foot-bottom">
-                    <h6>Copyright © 2026 Vi Saint. All rights reserved.</h6>
-                </div>
-            </footer>
+        </div>
+    </div>
+    </div>
+    <!-- Footer loaded via HTMX -->
+    <div hx-get="./footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
 
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script src="./main.js"></script>
-    </body>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./main.js"></script>
+</body>
+
 </html>

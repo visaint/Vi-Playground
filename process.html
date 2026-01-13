@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>My Process - Vi Saint</title>
+        <meta
+            name="description"
+            content="Learn about Vi Saint's creative process and approach to design and development."
+        />
+
+        <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+         <link rel="preload" 
+          href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossorigin>
+        <link rel="icon" type="image/x-icon" href="./images/fav.webp" />
+        <link rel="stylesheet" href="./styles.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    </head>
+    <body class="story">
+        <div class="organic-bg" aria-hidden="true">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="blob blob-4"></div>
+            <div class="blob blob-5"></div>
+        </div>
+        <div id="move-circle" aria-hidden="true"></div>
+        <div id="main">
+            <div id="page-1">
+                <!-- Header loaded via HTMX -->
+                <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
+
+            <div id="my-ding">
+                <div id="my-top"><h1>My</h1></div>
+                <div id="my-bottom"><h1>Process</h1></div>
+            </div>
+
+            <section id="chrome-scroll" aria-label="Chrome CSS Scroll Demo">
+                <div class="container chrome-container">
+                    <div class="focal-marker" aria-hidden="true"></div>
+                    <div class="text-container">
+                      <div class="text"><h4>In an overstuffed world</h4>
+                        </div>
+                         <div class="text">
+                            <h4>where attention is fleeting</h4>
+                        </div>
+                        <div class="text">
+                            <h4>but competition fierce</h4>
+                        </div>
+                        <div class="text">
+                            <h4>most messages<em>vanish</em>,</h4>
+                        </div>
+                        <div class="text">
+                            <h4>before being seen.</h4>
+                        </div>
+                        <div class="text">
+                            <h4><br>Even worse, they <em>fail</em></h4>
+                        </div>
+                        <div class="text">
+                            <h4>to grab your attention</h4>
+                        </div>
+                        <div class="text">
+                            <h4>despite making it</h4>
+                        </div>
+                        <div class="text">
+                            <h4>in front of your face</h4>
+                        </div>
+                        <div class="text">
+                           <h3><br>But I can break through</h3>
+                        </div>
+                        <div class="text"><h4><br>with relentless creativity,</h4></div>
+                        <div class="text">
+                            <h4>wide technical expertise</h4>
+                        </div>
+                        <div class="text">
+                            <h4>& unmatched skill diversity</h4>
+                        </div>
+                        <div class="text">
+                            <h5>I create meaningful interactions</h5>
+                        </div>
+                        <div class="text">
+                            <h5>that remain in customers' heads</h5>
+                        </div>
+                        <div class="text">
+                            <h5>using every tool available.</h5>
+                        </div>
+                        <div class="text">
+                            <h2><br>Contact Me</h2>
+                        </div>
+                        <div class="text">
+                            <h2>Today</h2>
+                        </div>
+                        <div class="text">
+                            <h5>For an Amazing Experience</h5>
+                        </div>
+                        <div style="height: 30vh;"></div>
+                    </div>
+                </div>
+            </section>
+
+<div class="contact">
+                <a href="mailto:sekovskiviktor@gmail.com">
+                    <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" />
+                </a>
+            </div>
+
+            <!-- Footer loaded via HTMX -->
+            <div hx-get="./footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
+
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="./main.js"></script>
+    </body>
+</html>
