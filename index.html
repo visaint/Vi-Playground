@@ -2,17 +2,65 @@
 <html lang="en">
 
 <head>
+    <!-- META TAGS FOR index.html (Homepage) -->
+
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Vi Saint - Designer Developer</title>
-    <meta name="description" content="Product and motion designer creating accessible, eye-catching designs. Available for full-time and freelance work." />
 
-    <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
+    <title>Vi Saint - Designer & Developer | Product Design & Web Development</title>
+    <meta name="description"
+        content="Vi Saint is a remote-first designer and developer specializing in product design, brand identity, and web development. Creating accessible, eye-catching digital experiences." />
+    <meta name="keywords"
+        content="product designer, web developer, UI UX designer, brand identity, visual design, frontend developer, portfolio" />
+    <meta name="author" content="Vi Saint" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://visaint.space/" />
+    <meta property="og:title" content="Vi Saint - Designer & Developer" />
+    <meta property="og:description"
+        content="Remote-first designer and developer creating accessible, eye-catching digital experiences. Specializing in product design, brand identity, and web development." />
+    <meta property="og:image" content="https://visaint.space/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Vi Saint" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://visaint.space/" />
+    <meta name="twitter:title" content="Vi Saint - Designer & Developer" />
+    <meta name="twitter:description"
+        content="Remote-first designer and developer creating accessible, eye-catching digital experiences." />
+    <meta name="twitter:image" content="https://visaint.space/images/twitter-card.jpg" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://visaint.space/" />
+
+    <!-- Favicon links -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Web manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Theme color for mobile browsers (light and dark mode) -->
+    <meta name="theme-color" content="#044da6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#606060" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Vi Saint">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" as="font" type="font/woff2" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <link rel="preload"
+        href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" as="font"
+        type="font/woff2" crossorigin>
     <link rel="icon" type="image/x-icon" href="./fav/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
@@ -26,17 +74,54 @@
     <link rel="stylesheet" href="./styles.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- STRUCTURED DATA (Schema.org JSON-LD) -->
+    <!-- Add this just before closing </head> tag on ALL pages -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vi Saint",
+      "alternateName": "Viktor Sekovski",
+      "url": "https://visaint.space",
+      "image": "https://visaint.space/images/me-front.webp",
+      "sameAs": [
+        "https://notes.visaint.space",
+        "https://visiant.bearblog.dev",
+        "https://github.com/ViktorSekovski"
+      ],
+      "jobTitle": "Designer & Developer",
+      "description": "Remote-first product and motion designer creating accessible, eye-catching designs. Specializing in product design, brand identity, web development, and game design.",
+      "knowsAbout": [
+        "Product Design",
+        "UX Design",
+        "UI Design",
+        "Web Development",
+        "Frontend Development",
+        "Brand Identity",
+        "Visual Design",
+        "Game Design",
+        "Motion Design",
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Product Designer & Web Developer",
+        "occupationLocation": {
+          "@type": "Country",
+          "name": "Europe"
+        },
+        "description": "Creating end-to-end digital product experiences from research to launch, specializing in UX strategy, interface design, and web development."
+      }
+    }
+    </script>
 </head>
 
 <body class="story">
-    <div class="organic-bg" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob blob-4"></div>
-        <div class="blob blob-5"></div>
-    </div>
-    </div>
+    <div hx-get="./blob.html" hx-trigger="load" hx-swap="outerHTML"></div>
     <div id="main">
         <div id="page-1">
             <!-- Header loaded via HTMX -->
@@ -94,7 +179,8 @@
             <img src="./images/flower.svg" alt="Flower" loading="lazy" />
 
             <div id="expandable-container">
-                <div id="first-ele" class="page2-ele" hx-get="./partials/veoma.html" hx-swap="innerHTML" hx-target="#veoma-content" hx-trigger="click" hx-indicator="#veoma-content">
+                <div id="first-ele" class="page2-ele" hx-get="./partials/veoma.html" hx-swap="innerHTML"
+                    hx-target="#veoma-content" hx-trigger="click" hx-indicator="#veoma-content">
                     <span class="expand-indicator">▼</span>
                     <h2>veoma studio</h2>
                     <h6>2022</h6>
@@ -102,7 +188,8 @@
                     <div id="veoma-content" class="page2-content"></div>
                 </div>
 
-                <div class="page2-ele" hx-get="./partials/vfns.html" hx-swap="innerHTML" hx-target="#vfn-content" hx-trigger="click" hx-indicator="#vfn-content">
+                <div class="page2-ele" hx-get="./partials/vfns.html" hx-swap="innerHTML" hx-target="#vfn-content"
+                    hx-trigger="click" hx-indicator="#vfn-content">
                     <span class="expand-indicator">▼</span>
                     <h2>view from nowhere</h2>
                     <h6>2023</h6>
@@ -111,7 +198,8 @@
                     <div id="vfn-content" class="page2-content"></div>
                 </div>
 
-                <div class="page2-ele" hx-get="./partials/doctors.html" hx-swap="innerHTML" hx-target="#doctors-content" hx-trigger="click" hx-indicator="#doctors-content">
+                <div class="page2-ele" hx-get="./partials/doctors.html" hx-swap="innerHTML" hx-target="#doctors-content"
+                    hx-trigger="click" hx-indicator="#doctors-content">
                     <span class="expand-indicator">▼</span>
                     <h2>doctors</h2>
                     <h6>2024</h6>
@@ -120,7 +208,8 @@
                     <div id="doctors-content" class="page2-content"></div>
                 </div>
 
-                <div class="page2-ele" hx-get="./partials/nebesna.html" hx-swap="innerHTML" hx-target="#nebesna-content" hx-trigger="click" hx-indicator="#nebesna-content">
+                <div class="page2-ele" hx-get="./partials/nebesna.html" hx-swap="innerHTML" hx-target="#nebesna-content"
+                    hx-trigger="click" hx-indicator="#nebesna-content">
                     <span class="expand-indicator">▼</span>
                     <h2>nebesna</h2>
                     <h6>2025</h6>
@@ -129,7 +218,8 @@
                     <div id="nebesna-content" class="page2-content"></div>
                 </div>
 
-                <div class="page2-ele" hx-get="./partials/anksioznost.html" hx-swap="innerHTML" hx-target="#anksioznost-content" hx-trigger="click" hx-indicator="#anksioznost-content">
+                <div class="page2-ele" hx-get="./partials/anksioznost.html" hx-swap="innerHTML"
+                    hx-target="#anksioznost-content" hx-trigger="click" hx-indicator="#anksioznost-content">
                     <span class="expand-indicator">▼</span>
                     <h2>anksioznost</h2>
                     <h6>2025</h6>
@@ -200,7 +290,7 @@
         </section>
 
         <div class="contact">
-            <a href="mailto:sekovskiviktor@gmail.com">
+            <a href="mailto:hello@visaint.space">
                 <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" /></a>
         </div>
 
@@ -291,20 +381,24 @@
         </div>
         <div id="page-3">
             <div id="t-f-div">
-                <img src="./images/me-front.webp" alt="Portrait of Vi Saint, product and motion designer" loading="lazy" class="fade-in-element" />
+                <img src="./images/me-front.webp" alt="Portrait of Vi Saint, product and motion designer" loading="lazy"
+                    class="fade-in-element" />
                 <div id="t-s-div">
                     <h1 class="fade-in-title">About</h1>
                     <p class="fade-in-element about-paragraph">
-                        Vi Saint is a remote-first designer & developer with an unconventional background spanning multiple industries & creative disciplines. He specializes in turning complexity into intuitive & emotionally resonant experiences that feel just right.</p>
+                        Vi Saint is a remote-first designer & developer with an unconventional background spanning
+                        multiple industries & creative disciplines. He specializes in turning complexity into intuitive
+                        & emotionally resonant experiences that feel just right.</p>
                     <p class="fade-in-element about-paragraph">
-                        With 5+ years crafting everything from video game interfaces to high-converting e-commerce platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive attention to the human computer interaction.</p>
+                        With 5+ years crafting everything from video game interfaces to high-converting e-commerce
+                        platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive
+                        attention to the human computer interaction.</p>
                     <p class="fade-in-element about-paragraph">
-                        He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across channels & highly memorable.</p>
+                        He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across
+                        channels & highly memorable.</p>
                     <button class="fade-in-element">
-                            <a href="mailto:sekovskiviktor@gmail.com"
-                                >Let's Talk</a
-                            >
-                        </button>
+                        <a href="mailto:hellow@visaint.space">Let's Talk</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -321,17 +415,19 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-product" class="service-toggle">
                     <label for="service-product" class="service-item" style="--delay: 0s;">
-                    <span class="expand-indicator">▼</span> Product Design
-                </label>
+                        <span class="expand-indicator">▼</span> Product Design
+                    </label>
                     <div class="service-content">
-                        <p>End-to-end digital product experiences from research to launch. I handle UX strategy, interface design, and web design—creating cohesive products that users love and businesses need.</p>
+                        <p>End-to-end digital product experiences from research to launch. I handle UX strategy,
+                            interface design, and web design—creating cohesive products that users love and businesses
+                            need.</p>
                         <ul class="service-sublist">
                             <li>UX Research & Strategy</li>
                             <li>User Interface Design</li>
                             <li>Web Design</li>
                             <li>Prototyping & Testing</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your product →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Build your product →</a>
                     </div>
                 </div>
 
@@ -339,17 +435,18 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-brand" class="service-toggle">
                     <label for="service-brand" class="service-item" style="--delay: 0.1s;">
-                    <span class="expand-indicator">▼</span> Brand & Visual Identity
-                </label>
+                        <span class="expand-indicator">▼</span> Brand & Visual Identity
+                    </label>
                     <div class="service-content">
-                        <p>Comprehensive brand universes that feel cohesive and alive. From positioning to visual systems, I craft identities that resonate across every touchpoint.</p>
+                        <p>Comprehensive brand universes that feel cohesive and alive. From positioning to visual
+                            systems, I craft identities that resonate across every touchpoint.</p>
                         <ul class="service-sublist">
                             <li>Brand Strategy & Positioning</li>
                             <li>Visual Identity Systems</li>
                             <li>Graphic Design</li>
                             <li>Brand Worldbuilding</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your brand →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Build your brand →</a>
                     </div>
                 </div>
 
@@ -357,17 +454,18 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-web-dev" class="service-toggle">
                     <label for="service-web-dev" class="service-item" style="--delay: 0.2s;">
-                    <span class="expand-indicator">▼</span> Web Development
-                </label>
+                        <span class="expand-indicator">▼</span> Web Development
+                    </label>
                     <div class="service-content">
-                        <p>Clean, performant code that brings designs to life. Specializing in modern frameworks, smooth animations, and accessible implementation that works beautifully.</p>
+                        <p>Clean, performant code that brings designs to life. Specializing in modern frameworks, smooth
+                            animations, and accessible implementation that works beautifully.</p>
                         <ul class="service-sublist">
                             <li>Frontend Development</li>
                             <li>React & Modern Frameworks</li>
                             <li>Animation & Interactions</li>
                             <li>Performance Optimization</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Start building →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Start building →</a>
                     </div>
                 </div>
             </div>
@@ -378,17 +476,18 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-game" class="service-toggle">
                     <label for="service-game" class="service-item" style="--delay: 0.3s;">
-                    <span class="expand-indicator">▼</span> Game & Interactive Experiences
-                </label>
+                        <span class="expand-indicator">▼</span> Game & Interactive Experiences
+                    </label>
                     <div class="service-content">
-                        <p>Engaging game mechanics and interactive worlds from concept to completion. I design systems, build prototypes, and create the assets that bring experiences to life.</p>
+                        <p>Engaging game mechanics and interactive worlds from concept to completion. I design systems,
+                            build prototypes, and create the assets that bring experiences to life.</p>
                         <ul class="service-sublist">
                             <li>Game Design & Mechanics</li>
                             <li>Game Development</li>
                             <li>Assets & Worldbuilding</li>
                             <li>Interactive Prototypes</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Create your game →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Create your game →</a>
                     </div>
                 </div>
 
@@ -396,17 +495,18 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-strategy" class="service-toggle">
                     <label for="service-strategy" class="service-item" style="--delay: 0.4s;">
-                    <span class="expand-indicator">▼</span> Creative Strategy
-                </label>
+                        <span class="expand-indicator">▼</span> Creative Strategy
+                    </label>
                     <div class="service-content">
-                        <p>Strategic thinking that drives results. From advertising campaigns to narrative design, I create compelling stories that cut through noise and connect with audiences.</p>
+                        <p>Strategic thinking that drives results. From advertising campaigns to narrative design, I
+                            create compelling stories that cut through noise and connect with audiences.</p>
                         <ul class="service-sublist">
                             <li>Advertising & Campaigns</li>
                             <li>Narrative Design</li>
                             <li>Content Strategy</li>
                             <li>Art Direction</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Launch your campaign →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Launch your campaign →</a>
                     </div>
                 </div>
 
@@ -414,17 +514,18 @@
                 <div class="service-category">
                     <input type="checkbox" id="service-systems" class="service-toggle">
                     <label for="service-systems" class="service-item" style="--delay: 0.5s;">
-                    <span class="expand-indicator">▼</span> Design Systems
-                </label>
+                        <span class="expand-indicator">▼</span> Design Systems
+                    </label>
                     <div class="service-content">
-                        <p>Scalable design systems that bring consistency and speed to growing teams. I build component libraries, documentation, and frameworks that empower everyone.</p>
+                        <p>Scalable design systems that bring consistency and speed to growing teams. I build component
+                            libraries, documentation, and frameworks that empower everyone.</p>
                         <ul class="service-sublist">
                             <li>Component Libraries</li>
                             <li>Design Tokens & Guidelines</li>
                             <li>Documentation</li>
                             <li>Design Ops</li>
                         </ul>
-                        <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Scale your design →</a>
+                        <a href="mailto:hello@visaint.space" class="service-contact">Scale your design →</a>
                     </div>
                 </div>
             </div>
@@ -435,8 +536,12 @@
     <div hx-get="./footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
 
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./main.js"></script>
 </body>
 
