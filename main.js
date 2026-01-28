@@ -17,10 +17,10 @@ const lerp = (start, end, factor) => start + (end - start) * factor;
 // ===================================
 function initLenis() {
   if (typeof Lenis === 'undefined') return;
-  
+
   // Keep disabled on mobile for native feel/performance
   if (isMobile()) return;
-  
+
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -41,7 +41,7 @@ function initLenis() {
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
   }
-  
+
   window.lenis = lenis;
 }
 
@@ -51,7 +51,7 @@ function initLenis() {
 function initPage2Animations() {
   const page2Elements = document.querySelectorAll(".page2-ele");
   if (!page2Elements.length) return;
-  
+
   // Skip hover logic on mobile to prevent sticky states
   if (isMobile()) return;
 
@@ -80,18 +80,18 @@ function initChromeScroll() {
     document.querySelector("#chrome-scroll"),
     ...document.querySelectorAll(".chrome-scroll-section")
   ].filter(Boolean);
-  
+
   if (!containers.length) return;
 
   const chromeScrollInstances = new Map();
-  
+
   containers.forEach(container => {
     const items = Array.from(container.querySelectorAll(".text"));
     if (!items.length) return;
 
     container.style.position = "relative";
     const state = new Map();
-    
+
     items.forEach((el) => {
       state.set(el, {
         raw: 0, easedExpo: 0, easedQuart: 0, easedQuartInv: 0, easedInCubic: 0,
@@ -117,7 +117,7 @@ function initChromeScroll() {
       items.forEach((el) => {
         const rect = el.getBoundingClientRect();
         const offscreenMargin = 200;
-        
+
         // Skip calculation if off-screen
         if (rect.top > vh + offscreenMargin || rect.bottom < -offscreenMargin) return;
 
@@ -194,7 +194,7 @@ function initImageHoverEffects() {
 
     element.addEventListener("mousemove", (e) => {
       if (!isHovering || element.classList.contains("active") || rafId) return;
-      
+
       rafId = requestAnimationFrame(() => {
         const rect = element.getBoundingClientRect();
         image.style.transform = `translate(${e.clientX - rect.left}px, ${e.clientY - rect.top}px) translate(-50%, -50%)`;
@@ -230,7 +230,7 @@ function initHeaderAnimations() {
   const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.1 });
 
   logo && tl.from(logo, { y: 40, opacity: 0, duration: 0.5 });
-  headerLinks && headerLinks.forEach((link) => 
+  headerLinks && headerLinks.forEach((link) =>
     tl.from(link, { y: 40, opacity: 0, duration: 0.4 }, `-=0.2`)
   );
   menuBtn && tl.from(menuBtn, { y: 40, opacity: 0, duration: 0.5 }, "-=0.2");
@@ -252,6 +252,57 @@ function initFooterAnimations() {
   }
 }
 
+function initContactPageAnimations() {
+  if (isMobile()) {
+    // Ensure visibility on mobile
+    const elements = document.querySelectorAll('.contact-intro, .contact-form, .contact-footer-text');
+    elements.forEach(el => el.style.opacity = '1');
+    return;
+  }
+
+  const contactIntro = document.querySelector('.contact-intro');
+  const formGroups = document.querySelectorAll('.form-group, .form-row');
+  const submitBtn = document.querySelector('.form-submit');
+  const footerText = document.querySelector('.contact-footer-text');
+
+  if (!contactIntro && !formGroups.length) return;
+
+  const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.3 });
+
+  // Animate contact intro section
+  if (contactIntro) {
+    const flower = contactIntro.querySelector('.contact-flower');
+    const h5 = contactIntro.querySelector('h5');
+    const p = contactIntro.querySelector('p');
+
+    flower && tl.from(flower, { scale: 0, rotation: -180, opacity: 0, duration: 0.6 });
+    h5 && tl.from(h5, { y: 30, opacity: 0, duration: 0.5 }, "-=0.3");
+    p && tl.from(p, { y: 20, opacity: 0, duration: 0.5 }, "-=0.2");
+  }
+
+  // Animate form groups
+  if (formGroups.length) {
+    tl.from(formGroups, {
+      y: 40,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.08
+    }, "-=0.2");
+  }
+
+  // Animate submit button
+  if (submitBtn) {
+    tl.from(submitBtn, { y: 30, opacity: 0, scale: 0.95, duration: 0.5 }, "-=0.3");
+  }
+
+  // Animate footer text
+  if (footerText) {
+    tl.from(footerText, { y: 20, opacity: 0, duration: 0.4 }, "-=0.2");
+  }
+}
+
+window.initContactPageAnimations = initContactPageAnimations;
+
 function initLoadAnimations() {
   const els = {
     heroHead: document.querySelector("#hero-head h1"),
@@ -265,8 +316,8 @@ function initLoadAnimations() {
 
   if (isMobile()) {
     Object.values(els).forEach(el => {
-        if (el instanceof NodeList) el.forEach(e => e.style.opacity = '1');
-        else if (el) el.style.opacity = '1';
+      if (el instanceof NodeList) el.forEach(e => e.style.opacity = '1');
+      else if (el) el.style.opacity = '1';
     });
     return;
   }
@@ -275,7 +326,7 @@ function initLoadAnimations() {
 
   els.heroHead && tl.from(els.heroHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.2");
   els.mainHead && tl.from(els.mainHead, { y: "30vw", opacity: 0, duration: 0.6 }, "-=0.4");
-  
+
   [els.prefixH6, els.miniH6, els.name].forEach(el => {
     if (el) tl.from(el, { y: -40, opacity: 0, duration: 0.4 }, "-=0.3");
   });
@@ -285,6 +336,11 @@ function initLoadAnimations() {
   }
 
   els.firstBottom && tl.from(els.firstBottom, { opacity: 0, y: 20, duration: 0.3 }, "-=0.2");
+
+  // Check if we're on the contact page and animate its specific elements
+  if (document.body.classList.contains('contact')) {
+    setTimeout(() => initContactPageAnimations(), 100);
+  }
 }
 
 window.initHeaderAnimations = initHeaderAnimations;
@@ -311,7 +367,7 @@ function initIntersectionObserver() {
         observer.unobserve(entry.target);
       }
     });
-  }, { 
+  }, {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   });
@@ -329,7 +385,7 @@ function initIntersectionObserver() {
 // ===================================
 function initScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  
+
   if (isMobile()) {
     // Ensure visibility on mobile if animations are skipped
     ['.blurb h2', '#page-2', '#page-3 #t-f-div img', '#page-3 #t-s-div', '.grids', '#my-top h1', '#my-bottom h1', '#story-top h1', '#story-bottom h1']
@@ -339,7 +395,7 @@ function initScrollAnimations() {
       });
     return;
   }
-  
+
   gsap.registerPlugin(ScrollTrigger);
 
   const defaults = {
@@ -361,7 +417,7 @@ function initScrollAnimations() {
   // Page 3
   const p3Pic = document.querySelector("#page-3 #t-f-div img");
   const p3Text = document.querySelector("#page-3 #t-s-div");
-  
+
   p3Pic && gsap.fromTo(p3Pic, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, ...defaults, scrollTrigger: createTrigger(p3Pic, "top 80%") });
   p3Text && gsap.fromTo(p3Text, { opacity: 0, y: 60 }, { opacity: 1, y: 0, ...defaults, scrollTrigger: createTrigger(p3Text, "top 80%") });
 
@@ -387,11 +443,11 @@ function initScrollAnimations() {
 function initPage2Expandable() {
   const page2Elements = document.querySelectorAll(".page2-ele");
   if (!page2Elements.length) return;
-  
+
   page2Elements.forEach((element) => {
     const content = element.querySelector(".page2-content");
     if (!content) return;
-    
+
     let isAnimating = false;
 
     content.addEventListener("click", (e) => e.stopPropagation());
@@ -399,11 +455,11 @@ function initPage2Expandable() {
     element.addEventListener("htmx:afterSwap", () => {
       if (isAnimating) return;
       element.classList.add("active");
-      
-      const fullHeight = content.offsetHeight; 
-      gsap.fromTo(content, 
+
+      const fullHeight = content.offsetHeight;
+      gsap.fromTo(content,
         { height: 0, opacity: 0 },
-        { 
+        {
           height: "auto", opacity: 1, duration: 0.45, ease: "power2.out",
           onComplete: () => typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh()
         }
@@ -497,7 +553,7 @@ document.addEventListener('htmx:afterSwap', (event) => {
   const t = event.target;
   const isHeader = t.innerHTML.includes('<header') || t.tagName === 'HEADER';
   const isFooter = t.innerHTML.includes('<footer') || t.tagName === 'FOOTER';
-  
+
   if (isHeader) setTimeout(() => { initHeaderAnimations(); initMenuLinkHandlers(); }, 50);
   if (isFooter) setTimeout(() => { initFooterAnimations(); typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh(); }, 50);
 });

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://visaint.space/sitemap.xml
+Sitemap: https://notes.visaint.space/sitemap.xml
+
+# Crawl-delay (optional, uncomment if needed)
+# Crawl-delay: 10

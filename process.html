@@ -1,25 +1,113 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>My Process - Vi Saint</title>
-        <meta
-            name="description"
-            content="Learn about Vi Saint's creative process and approach to design and development."
-        />
 
-        <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-         <link rel="preload" 
-          href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" 
-          as="font" 
-          type="font/woff2" 
-          crossorigin>
-            <link rel="icon" type="image/x-icon" href="./fav/favicon.ico">
+<head>
+    <!-- META TAGS FOR process.html (My Process Page) -->
+
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>My Process - Vi Saint | Design & Development Workflow</title>
+    <meta name="description"
+        content="Discover Vi Saint's design and development process. From research and strategy to prototyping and launch, learn how I create unforgettable digital experiences." />
+    <meta name="keywords"
+        content="design process, development workflow, UX process, product design methodology, creative process" />
+    <meta name="author" content="Vi Saint" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://visaint.space/process.html" />
+    <meta property="og:title" content="My Process - Vi Saint" />
+    <meta property="og:description"
+        content="Discover Vi Saint's design and development process. From research and strategy to prototyping and launch." />
+    <meta property="og:image" content="https://visaint.space/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Vi Saint" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://visaint.space/process.html" />
+    <meta name="twitter:title" content="My Process - Vi Saint" />
+    <meta name="twitter:description"
+        content="Discover Vi Saint's design and development process from research to launch." />
+    <meta name="twitter:image" content="https://visaint.space/images/twitter-card.jpg" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://visaint.space/process.html" />
+
+    <!-- Favicon links -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Web manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Theme color for mobile browsers (light and dark mode) -->
+    <meta name="theme-color" content="#044da6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#606060" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Vi Saint">
+    <!-- STRUCTURED DATA (Schema.org JSON-LD) -->
+    <!-- Add this just before closing </head> tag on ALL pages -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vi Saint",
+      "alternateName": "Viktor Sekovski",
+      "url": "https://visaint.space",
+      "image": "https://visaint.space/images/me-front.webp",
+      "sameAs": [
+        "https://notes.visaint.space",
+        "https://visiant.bearblog.dev",
+        "https://github.com/ViktorSekovski"
+      ],
+      "jobTitle": "Designer & Developer",
+      "description": "Remote-first product and motion designer creating accessible, eye-catching designs. Specializing in product design, brand identity, web development, and game design.",
+      "knowsAbout": [
+        "Product Design",
+        "UX Design",
+        "UI Design",
+        "Web Development",
+        "Frontend Development",
+        "Brand Identity",
+        "Visual Design",
+        "Game Design",
+        "Motion Design",
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Product Designer & Web Developer",
+        "occupationLocation": {
+          "@type": "Country",
+          "name": "Europe"
+        },
+        "description": "Creating end-to-end digital product experiences from research to launch, specializing in UX strategy, interface design, and web development."
+      }
+    }
+    </script>
+
+    <!-- Critical fonts: Jacquard 12, DinaRemasterII, Libre Baskerville -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <link rel="preload"
+        href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" as="font"
+        type="font/woff2" crossorigin>
+    <link rel="icon" type="image/x-icon" href="./fav/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./fav/apple-touch-icon.png">
@@ -29,46 +117,42 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Vi Saint">
-        <link rel="stylesheet" href="./styles.css" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-        />
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    </head>
-    <body class="story">
-        <div class="organic-bg" aria-hidden="true">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
-            <div class="blob blob-3"></div>
-            <div class="blob blob-4"></div>
-            <div class="blob blob-5"></div>
-        </div>
-        <div id="move-circle" aria-hidden="true"></div>
-        <div id="main">
-            <div id="page-1">
-                <!-- Header loaded via HTMX -->
-                <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
+    <link rel="stylesheet" href="./styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body class="story">
+    <div hx-get="./blob.html" hx-trigger="load" hx-swap="outerHTML"></div>
+    <div id="main">
+        <div id="page-1">
+            <!-- Header loaded via HTMX -->
+            <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
 
             <div id="my-ding">
-                <div id="my-top"><h1>My</h1></div>
-                <div id="my-bottom"><h1>Process</h1></div>
+                <div id="my-top">
+                    <h1>My</h1>
+                </div>
+                <div id="my-bottom">
+                    <h1>Process</h1>
+                </div>
             </div>
 
-            <section id="chrome-scroll" aria-label="Chrome CSS Scroll Demo">
+            <section class="chrome-scroll-section last extended-bottom" aria-label="Chrome CSS Scroll Demo">
                 <div class="container chrome-container">
                     <div class="focal-marker" aria-hidden="true"></div>
                     <div class="text-container">
-                      <div class="text"><h4>In an overstuffed world</h4>
+                        <div class="text">
+                            <h4>In an overstuffed world</h4>
                         </div>
-                         <div class="text">
+                        <div class="text">
                             <h4>where attention is fleeting</h4>
                         </div>
                         <div class="text">
                             <h4>but competition fierce</h4>
                         </div>
                         <div class="text">
-                            <h4>most messages<em>vanish</em>,</h4>
+                            <h4>most messages <em>vanish</em>,</h4>
                         </div>
                         <div class="text">
                             <h4>before being seen.</h4>
@@ -86,9 +170,11 @@
                             <h4>in front of your face</h4>
                         </div>
                         <div class="text">
-                           <h3><br>But I can break through</h3>
+                            <h3><br>But I can break through</h3>
                         </div>
-                        <div class="text"><h4><br>with relentless creativity,</h4></div>
+                        <div class="text">
+                            <h4><br>with relentless creativity,</h4>
+                        </div>
                         <div class="text">
                             <h4>wide technical expertise</h4>
                         </div>
@@ -118,28 +204,161 @@
                 </div>
             </section>
 
-<div class="contact">
+            <div class="contact">
                 <a href="mailto:sekovskiviktor@gmail.com">
                     <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" />
                 </a>
             </div>
 
+            <div class="title fade-in-element">
+                <h1>Services</h1>
+            </div>
+
+            <div class="services-arrow" id="grids">
+                <div id="expandable-container" style="display: flex; flex-direction: column; gap: 0;">
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-product" class="service-toggle">
+                        <label for="service-product" class="service-item page2-ele"
+                            style="border-top: 4px dotted var(--pink); border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Product Design</h2>
+                            <h6>Strategy</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>End-to-end digital product experiences from research to launch. I handle UX strategy,
+                                interface design, and web design—creating cohesive products that users love and
+                                businesses need.</p>
+                            <ul class="service-sublist">
+                                <li>UX Research & Strategy</li>
+                                <li>User Interface Design</li>
+                                <li>Web Design</li>
+                                <li>Prototyping & Testing</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your product →</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-brand" class="service-toggle">
+                        <label for="service-brand" class="service-item page2-ele"
+                            style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Brand Identity</h2>
+                            <h6>Visuals</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Comprehensive brand universes that feel cohesive and alive. From positioning to visual
+                                systems, I craft identities that resonate across every touchpoint.</p>
+                            <ul class="service-sublist">
+                                <li>Brand Strategy & Positioning</li>
+                                <li>Visual Identity Systems</li>
+                                <li>Graphic Design</li>
+                                <li>Brand Worldbuilding</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Build your brand →</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-web-dev" class="service-toggle">
+                        <label for="service-web-dev" class="service-item page2-ele"
+                            style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Web Development</h2>
+                            <h6>Frontend</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Clean, performant code that brings designs to life. Specializing in modern frameworks,
+                                smooth animations, and accessible implementation that works beautifully.</p>
+                            <ul class="service-sublist">
+                                <li>Frontend Development</li>
+                                <li>React & Modern Frameworks</li>
+                                <li>Animation & Interactions</li>
+                                <li>Performance Optimization</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Start building →</a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-game" class="service-toggle">
+                        <label for="service-game" class="service-item page2-ele"
+                            style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Interactive</h2>
+                            <h6>Gaming</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Engaging game mechanics and interactive worlds from concept to completion. I design
+                                systems, build prototypes, and create the assets that bring experiences to life.</p>
+                            <ul class="service-sublist">
+                                <li>Game Design & Mechanics</li>
+                                <li>Game Development</li>
+                                <li>Assets & Worldbuilding</li>
+                                <li>Interactive Prototypes</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Create your game →</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-strategy" class="service-toggle">
+                        <label for="service-strategy" class="service-item page2-ele"
+                            style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Creative Strategy</h2>
+                            <h6>Narrative</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Strategic thinking that drives results. From advertising campaigns to narrative design, I
+                                create compelling stories that cut through noise and connect with audiences.</p>
+                            <ul class="service-sublist">
+                                <li>Advertising & Campaigns</li>
+                                <li>Narrative Design</li>
+                                <li>Content Strategy</li>
+                                <li>Art Direction</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Launch your campaign →</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="service-systems" class="service-toggle">
+                        <label for="service-systems" class="service-item page2-ele"
+                            style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Design Systems</h2>
+                            <h6>Scale</h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Scalable design systems that bring consistency and speed to growing teams. I build
+                                component libraries, documentation, and frameworks that empower everyone.</p>
+                            <ul class="service-sublist">
+                                <li>Component Libraries</li>
+                                <li>Design Tokens & Guidelines</li>
+                                <li>Documentation</li>
+                                <li>Design Ops</li>
+                            </ul>
+                            <a href="mailto:sekovskiviktor@gmail.com" class="service-contact">Scale your design →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <!-- Footer loaded via HTMX -->
             <div hx-get="./footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
 
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script src="./main.js"></script>
-    </body>
+            <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+                integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+                integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="./main.js"></script>
+</body>
+
 </html>
