@@ -291,7 +291,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: clamp(20px, 2.08vw, 30px);
+    padding: clamp(30px, 2.4vw, 45px);
     position: fixed;
     top: 0;
     left: 0;
@@ -324,10 +324,14 @@ nav.nav-scrolled {
     display: block;
 }
 
+#logo:hover {
+    color: var(--orange);
+}
+
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 60px;
 }
 
 .header-link,
@@ -389,7 +393,7 @@ nav.nav-scrolled {
     top: 0;
     right: 0;
     width: 30vw;
-    max-width: 280px;
+    max-width: 340px;
     height: 100vh;
     background-color: var(--white);
     transform: translateX(100%);
@@ -452,7 +456,7 @@ body:has(#menu-toggle:checked) {
 
 .menu-link {
     font-family: "DinaRemasterII", monospace;
-    font-size: 1.2em;
+    font-size: clamp(30px, 2.2vw, 40px);
     color: var(--pink);
     text-transform: uppercase;
     position: relative;
@@ -497,6 +501,7 @@ body:has(#menu-toggle:checked) {
     transition: transform 0.3s ease;
 }
 
+
 .menu-close span:first-child {
     transform: rotate(45deg) translateY(5px);
 }
@@ -527,6 +532,7 @@ body:has(#menu-toggle:checked) {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 40px;
 }
 
 #name {
@@ -618,22 +624,8 @@ body:has(#menu-toggle:checked) {
 }
 
 /* Hero Sections - Process & Story */
-#my-ding,
-#story-hero {
-    width: 100%;
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: 0;
-}
-
 #my-top,
-#my-bottom,
-#story-top,
-#story-bottom {
+#my-bottom {
     padding: 0 clamp(40px, 8vw, 120px);
     overflow: hidden;
     width: 100%;
@@ -641,26 +633,25 @@ body:has(#menu-toggle:checked) {
     justify-content: center;
 }
 
-#my-top,
-#story-top {
+#my-top {
     text-align: center;
     margin-bottom: -2vw;
 }
 
-#my-bottom,
-#story-bottom {
+#my-bottom {
     text-align: center;
 }
 
 #my-top h1,
-#my-bottom h1,
-#story-top h1,
-#story-bottom h1 {
+#my-bottom h1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
     font-size: clamp(8vw, 16vw, 20vw);
-    line-height: 0.75;
+    line-height: 0.8;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 /* ==========================================================================
@@ -854,7 +845,7 @@ body:has(#menu-toggle:checked) {
 
 .service-content p {
     font-family: "Libre Baskerville", serif;
-    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
     line-height: 1.6;
     color: var(--grey);
     margin-bottom: 1rem;
@@ -871,7 +862,7 @@ body:has(#menu-toggle:checked) {
 
 .service-sublist li {
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
     color: var(--pink);
     position: relative;
     padding-left: 1rem;
@@ -886,8 +877,8 @@ body:has(#menu-toggle:checked) {
 
 .service-contact {
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.8rem, 0.95vw, 0.9rem);
-    color: var(--pink);
+    font-size: clamp(1.4rem, 1.6vw, 1.7rem);
+    color: var(--orange);
     text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
@@ -1139,17 +1130,17 @@ body.js-enabled .chrome-scroll-section .text {
 #t-s-div button {
     margin-top: 2rem;
     padding: 1rem 2rem;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--white);
     border-radius: 50px;
     font-family: "DinaRemasterII", monospace;
     transition: all 0.3s;
-    background: transparent;
+    background: var(--pink);
 }
 
 #t-s-div button:hover {
-    background: var(--blue);
+    background: var(--orange);
     color: var(--white);
-    border-color: var(--blue);
+    border-color: var(--bordergrey);
 }
 
 #page-3 a {
@@ -1864,13 +1855,6 @@ footer {
         display: none;
     }
 
-    #page-1 {
-        justify-content: flex-start;
-        min-height: 100vh;
-        padding-bottom: 40px;
-        padding-top: 0;
-    }
-
     #hero-head h1,
     #main-head h1 {
         font-size: min(14vw, calc((100vw - 40px) / 8));
@@ -1914,30 +1898,6 @@ footer {
 
     .arrow i {
         font-size: 1.5rem;
-    }
-
-    #my-ding {
-        min-height: 60vh;
-        padding: 10vh 0 5vh 0;
-    }
-
-    #my-top,
-    #my-bottom {
-        padding: 0 1rem;
-    }
-
-    #my-top h1,
-    #my-bottom h1 {
-        font-size: clamp(6vw, 12vw, 16vw);
-        line-height: 0.8;
-        white-space: normal;
-        overflow-wrap: break-word;
-        word-break: break-word;
-        hyphens: auto;
-    }
-
-    #my-top {
-        margin-bottom: -1rem;
     }
 
     #page-2 {

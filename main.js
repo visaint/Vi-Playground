@@ -252,57 +252,6 @@ function initFooterAnimations() {
   }
 }
 
-function initContactPageAnimations() {
-  if (isMobile()) {
-    // Ensure visibility on mobile
-    const elements = document.querySelectorAll('.contact-intro, .contact-form, .contact-footer-text');
-    elements.forEach(el => el.style.opacity = '1');
-    return;
-  }
-
-  const contactIntro = document.querySelector('.contact-intro');
-  const formGroups = document.querySelectorAll('.form-group, .form-row');
-  const submitBtn = document.querySelector('.form-submit');
-  const footerText = document.querySelector('.contact-footer-text');
-
-  if (!contactIntro && !formGroups.length) return;
-
-  const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 0.3 });
-
-  // Animate contact intro section
-  if (contactIntro) {
-    const flower = contactIntro.querySelector('.contact-flower');
-    const h5 = contactIntro.querySelector('h5');
-    const p = contactIntro.querySelector('p');
-
-    flower && tl.from(flower, { scale: 0, rotation: -180, opacity: 0, duration: 0.6 });
-    h5 && tl.from(h5, { y: 30, opacity: 0, duration: 0.5 }, "-=0.3");
-    p && tl.from(p, { y: 20, opacity: 0, duration: 0.5 }, "-=0.2");
-  }
-
-  // Animate form groups
-  if (formGroups.length) {
-    tl.from(formGroups, {
-      y: 40,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.08
-    }, "-=0.2");
-  }
-
-  // Animate submit button
-  if (submitBtn) {
-    tl.from(submitBtn, { y: 30, opacity: 0, scale: 0.95, duration: 0.5 }, "-=0.3");
-  }
-
-  // Animate footer text
-  if (footerText) {
-    tl.from(footerText, { y: 20, opacity: 0, duration: 0.4 }, "-=0.2");
-  }
-}
-
-window.initContactPageAnimations = initContactPageAnimations;
-
 function initLoadAnimations() {
   const els = {
     heroHead: document.querySelector("#hero-head h1"),
@@ -336,11 +285,6 @@ function initLoadAnimations() {
   }
 
   els.firstBottom && tl.from(els.firstBottom, { opacity: 0, y: 20, duration: 0.3 }, "-=0.2");
-
-  // Check if we're on the contact page and animate its specific elements
-  if (document.body.classList.contains('contact')) {
-    setTimeout(() => initContactPageAnimations(), 100);
-  }
 }
 
 window.initHeaderAnimations = initHeaderAnimations;
