@@ -21,8 +21,7 @@
    ========================================================================== */
 @font-face {
     font-family: "DinaRemasterII";
-    src: url("https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2")
-        format("woff2");
+    src: url("https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -412,17 +411,17 @@ nav.nav-scrolled {
     overflow-y: auto;
 }
 
-#menu-toggle:checked ~ .menu-overlay {
+#menu-toggle:checked~.menu-overlay {
     opacity: 1;
     visibility: visible;
 }
 
-#menu-toggle:checked ~ body,
+#menu-toggle:checked~body,
 body:has(#menu-toggle:checked) {
     overflow: hidden;
 }
 
-#menu-toggle:checked ~ .slide-menu {
+#menu-toggle:checked~.slide-menu {
     transform: translateX(0);
 }
 
@@ -433,7 +432,7 @@ body:has(#menu-toggle:checked) {
     align-items: center;
 }
 
-.menu-content > ul {
+.menu-content>ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -690,7 +689,7 @@ body:has(#menu-toggle:checked) {
     transform: translateX(5vw);
 }
 
-#page-2 > img {
+#page-2>img {
     pointer-events: none;
     width: 70px;
     height: 70px;
@@ -747,7 +746,7 @@ body:has(#menu-toggle:checked) {
     align-items: flex-start;
 }
 
-.page2-ele > img {
+.page2-ele>img {
     position: fixed;
     width: clamp(250px, 24vw, 350px);
     height: clamp(240px, 23vw, 330px);
@@ -829,11 +828,11 @@ body:has(#menu-toggle:checked) {
     display: inline-block;
 }
 
-.service-toggle:checked + .service-item {
+.service-toggle:checked+.service-item {
     color: var(--blue);
 }
 
-.service-toggle:checked + .service-item .expand-indicator {
+.service-toggle:checked+.service-item .expand-indicator {
     transform: rotate(180deg);
 }
 
@@ -849,7 +848,7 @@ body:has(#menu-toggle:checked) {
     padding: 0;
 }
 
-.service-toggle:checked + .service-item + .service-content {
+.service-toggle:checked+.service-item+.service-content {
     max-height: 600px;
     opacity: 1;
     margin-bottom: 1rem;
@@ -892,7 +891,6 @@ body:has(#menu-toggle:checked) {
     font-family: "DinaRemasterII", monospace;
     font-size: clamp(1.4rem, 1.6vw, 1.7rem);
     color: var(--orange);
-    text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
     position: relative;
@@ -949,8 +947,7 @@ body:has(#menu-toggle:checked) {
 
 body.js-enabled .chrome-scroll-section .text {
     opacity: var(--opacity);
-    transform: translateX(var(--x)) translateY(var(--y)) scale(var(--scale))
-        rotate(var(--rotation));
+    transform: translateX(var(--x)) translateY(var(--y)) scale(var(--scale)) rotate(var(--rotation));
     animation:
         zipper 1ms linear forwards,
         fadeInOut 1s ease-in-out;
@@ -1040,28 +1037,24 @@ body.js-enabled .chrome-scroll-section .text {
 .chrome-scroll-section .chrome-container {
     width: 100%;
     overflow-x: clip;
-    -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.1) 3%,
-        rgba(255, 255, 255, 0.4) 8%,
-        #fff 15%,
-        #fff 85%,
-        rgba(255, 255, 255, 0.4) 92%,
-        rgba(255, 255, 255, 0.1) 97%,
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.1) 3%,
-        rgba(255, 255, 255, 0.4) 8%,
-        #fff 15%,
-        #fff 85%,
-        rgba(255, 255, 255, 0.4) 92%,
-        rgba(255, 255, 255, 0.1) 97%,
-        transparent 100%
-    );
+    -webkit-mask-image: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 3%,
+            rgba(255, 255, 255, 0.4) 8%,
+            #fff 15%,
+            #fff 85%,
+            rgba(255, 255, 255, 0.4) 92%,
+            rgba(255, 255, 255, 0.1) 97%,
+            transparent 100%);
+    mask-image: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 3%,
+            rgba(255, 255, 255, 0.4) 8%,
+            #fff 15%,
+            #fff 85%,
+            rgba(255, 255, 255, 0.4) 92%,
+            rgba(255, 255, 255, 0.1) 97%,
+            transparent 100%);
 }
 
 .chrome-scroll-section .text-container {
@@ -1085,10 +1078,7 @@ body.js-enabled .chrome-scroll-section .text {
     --progress-ease-clamped: var(--chrome-eased-expo, 0);
     --opacity: var(--chrome-eased-quart, 0);
     --scale: calc(1 + (0.6 * var(--chrome-eased-quart-inv, 0)));
-    --rotation: calc(
-        var(--rotation-start) * var(--direction) *
-            var(--chrome-eased-in-cubic, 0)
-    );
+    --rotation: calc(var(--rotation-start) * var(--direction) * var(--chrome-eased-in-cubic, 0));
     --start-x: calc(var(--radius-x) * var(--direction));
     --x: calc(var(--start-x) - (var(--start-x) * var(--progress-ease-clamped)));
     --y: calc(30vh * var(--progress-y-inverted));
@@ -1096,8 +1086,7 @@ body.js-enabled .chrome-scroll-section .text {
     font-size: clamp(0.4rem, 2.5vw, 1.5rem);
     text-align: center;
     opacity: var(--opacity);
-    transform: translateX(var(--x)) translateY(var(--y)) scale(var(--scale))
-        rotate(var(--rotation));
+    transform: translateX(var(--x)) translateY(var(--y)) scale(var(--scale)) rotate(var(--rotation));
 }
 
 /* ==========================================================================
@@ -1107,20 +1096,16 @@ body.js-enabled .chrome-scroll-section .text {
     display: flex;
     overflow: hidden;
     gap: 1rem;
-    mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #fff 20%,
-        #fff 80%,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #fff 20%,
-        #fff 80%,
-        transparent
-    );
+    mask-image: linear-gradient(90deg,
+            transparent,
+            #fff 20%,
+            #fff 80%,
+            transparent);
+    -webkit-mask-image: linear-gradient(90deg,
+            transparent,
+            #fff 20%,
+            #fff 80%,
+            transparent);
     margin: 0.5rem 0;
     opacity: 0.8;
 }
@@ -1293,12 +1278,12 @@ body.js-enabled .chrome-scroll-section .text {
     flex-shrink: 0;
 }
 
-.story-toggle:checked + .story-item {
+.story-toggle:checked+.story-item {
     color: var(--pink);
     border-bottom-color: var(--pink);
 }
 
-.story-toggle:checked + .story-item .expand-indicator {
+.story-toggle:checked+.story-item .expand-indicator {
     transform: rotate(180deg);
 }
 
@@ -1313,7 +1298,7 @@ body.js-enabled .chrome-scroll-section .text {
     padding: 0;
 }
 
-.story-toggle:checked + .story-item + .story-content {
+.story-toggle:checked+.story-item+.story-content {
     max-height: 1000px;
     opacity: 1;
     padding: 1.5rem 0 2rem 3.5rem;
@@ -1427,8 +1412,7 @@ footer {
 
 .contact a:hover .letter {
     transform: scale(1.1) rotate(5deg);
-    filter: brightness(0) saturate(100%) invert(71%) sepia(13%) saturate(1089%)
-        hue-rotate(300deg) brightness(98%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(71%) sepia(13%) saturate(1089%) hue-rotate(300deg) brightness(98%) contrast(92%);
 }
 
 /* ==========================================================================
@@ -1713,15 +1697,15 @@ footer {
     transition: transform 0.25s ease;
 }
 
-.switch input:checked + .slider {
+.switch input:checked+.slider {
     background-color: var(--orange);
 }
 
-.switch input:checked + .slider::before {
+.switch input:checked+.slider::before {
     transform: translateX(26px);
 }
 
-.switch input:focus-visible + .slider {
+.switch input:focus-visible+.slider {
     outline: 2px solid var(--orange);
     outline-offset: 2px;
 }
@@ -1875,6 +1859,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
     html,
     body {
         overflow-y: auto !important;
@@ -1983,11 +1968,11 @@ footer {
         font-size: clamp(0.8rem, 2.5vw, 1rem);
     }
 
-    .page2-ele > img {
+    .page2-ele>img {
         display: none !important;
     }
 
-    #page-2 > img {
+    #page-2>img {
         width: 40px !important;
         height: 40px !important;
         margin-bottom: 1rem;
@@ -2007,7 +1992,7 @@ footer {
         gap: 0.3rem;
     }
 
-    .service-toggle:checked + .service-item + .service-content {
+    .service-toggle:checked+.service-item+.service-content {
         max-height: 400px;
         margin-bottom: 1.5rem;
     }
@@ -2075,7 +2060,7 @@ footer {
         font-size: clamp(1.3rem, 5vw, 2rem);
     }
 
-    .story-toggle:checked + .story-item + .story-content {
+    .story-toggle:checked+.story-item+.story-content {
         max-height: 1500px;
         padding: 1rem 0 1.5rem 2rem;
     }
