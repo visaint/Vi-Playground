@@ -501,7 +501,6 @@ body:has(#menu-toggle:checked) {
     transition: transform 0.3s ease;
 }
 
-
 .menu-close span:first-child {
     transform: rotate(45deg) translateY(5px);
 }
