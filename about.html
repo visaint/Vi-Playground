@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <title>
+            About - Vi Saint | Designer, Developer & Creative Technologist
+        </title>
+        <meta
+            name="description"
+            content="Meet Vi Saint — a remote-first Creative Technologist with an unconventional background. Learn about his process, his story, and what drives his work."
+        />
+        <meta
+            name="keywords"
+            content="about Vi Saint, designer biography, creative technologist story, design process, web developer journey, product designer"
+        />
+        <meta name="author" content="Vi Saint" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://visaint.space/about.html" />
+        <meta property="og:title" content="About - Vi Saint" />
+        <meta
+            property="og:description"
+            content="Meet Vi Saint — a remote-first Creative Technologist with an unconventional background spanning multiple industries and creative disciplines."
+        />
+        <meta
+            property="og:image"
+            content="https://visaint.space/images/og-image.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Vi Saint" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://visaint.space/about.html" />
+        <meta name="twitter:title" content="About - Vi Saint" />
+        <meta
+            name="twitter:description"
+            content="Meet Vi Saint — a remote-first Creative Technologist with an unconventional creative background."
+        />
+        <meta
+            name="twitter:image"
+            content="https://visaint.space/images/twitter-card.jpg"
+        />
+
+        <link rel="canonical" href="https://visaint.space/about.html" />
+
+        <link rel="icon" type="image/x-icon" href="./fav/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./fav/favicon-16x16.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./fav/favicon-32x32.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="./fav/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="./fav/site.webmanifest" />
+        <meta
+            name="theme-color"
+            content="#ee8fa1"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#F48F6E"
+            media="(prefers-color-scheme: dark)"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="Vi Saint" />
+
+        <link
+            rel="preload"
+            href="./fonts/tiempos-text.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/tiempos-text-italic.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <link rel="stylesheet" href="./styles.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+            media="print"
+            onload="this.media = 'all'"
+        />
+
+        <script src="./components.js"></script>
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Vi Saint",
+                "alternateName": "Viktor Sekovski",
+                "url": "https://visaint.space",
+                "image": "https://visaint.space/images/me-front.webp",
+                "sameAs": [
+                    "https://notes.visaint.space",
+                    "https://visiant.bearblog.dev",
+                    "https://github.com/ViktorSekovski"
+                ],
+                "jobTitle": "Creative Technologist",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
+                "knowsAbout": [
+                    "Product Design",
+                    "UX Design",
+                    "UI Design",
+                    "Web Development",
+                    "Frontend Development",
+                    "Brand Identity",
+                    "Visual Design",
+                    "Creative Technology",
+                    "React",
+                    "Next.js",
+                    "JavaScript",
+                    "HTML",
+                    "CSS"
+                ],
+                "hasOccupation": {
+                    "@type": "Occupation",
+                    "name": "Creative Technologist",
+                    "occupationLocation": {
+                        "@type": "Country",
+                        "name": "Europe"
+                    },
+                    "description": "Creating end-to-end digital product experiences from research to launch, bridging high-end art direction with technical execution."
+                }
+            }
+        </script>
+
+        <style>
+            /* ── CV Modal ── */
+            .cv-trigger-wrap {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            /* Modal overlay */
+            .cv-modal {
+                display: none;
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                align-items: center;
+                justify-content: center;
+                padding: 1.5rem;
+            }
+
+            .cv-modal.is-open {
+                display: flex;
+            }
+
+            .cv-modal-inner {
+                position: relative;
+                width: 100%;
+                max-width: 900px;
+                height: 90vh;
+                background: var(--bg, #0a0a0a);
+                border: 1px solid var(--pink, #ee8fa1);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cv-modal-bar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.75rem 1.25rem;
+                border-bottom: 1px solid var(--pink, #ee8fa1);
+                flex-shrink: 0;
+            }
+
+            .cv-modal-bar span {
+                font-family: "DinaRemasterII", monospace;
+                font-weight: 700;
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #f4f5ef;
+            }
+
+            .cv-modal-close {
+                background: none;
+                border: none;
+                color: var(--pink, #ee8fa1);
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0.25rem;
+                line-height: 1;
+                transition: color 0.2s ease;
+            }
+            .cv-modal-close:hover {
+                color: var(--orange, #f48f6e);
+            }
+
+            .cv-modal-embed {
+                flex: 1;
+                width: 100%;
+                border: none;
+                display: block;
+            }
+
+            /* Section dividers */
+            .about-section-divider {
+                width: 100%;
+                height: 1px;
+                background: var(--pink, #ee8fa1);
+                opacity: 0.25;
+                margin: 4rem 0 0;
+            }
+
+            .about-section-label {
+                font-size: 0.7rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                opacity: 0.45;
+                margin: 2rem 0 0;
+                padding: 0 var(--pad, 2rem);
+            }
+        </style>
+    </head>
+
+    <body class="story">
+        <!-- ── Background blobs ── -->
+        <div class="organic-bg" aria-hidden="true">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="blob blob-4"></div>
+            <div class="blob blob-5"></div>
+        </div>
+
+        <div id="main">
+            <div id="hero">
+                <site-header></site-header>
+
+                <!-- ═══════════════════════════════════
+                     ABOUT — big heading + content
+                ═══════════════════════════════════ -->
+                <div class="section-heading" style="padding-top: 10vh; padding-bottom: 5vh;">
+                    <div class="section-top"><h1>A Bit</h1></div>
+                    <div class="section-bottom"><h1>About Me</h1></div>
+                </div>
+
+                <div id="about">
+                    <div id="t-f-div">
+                        <img
+                            src="./images/me-front.webp"
+                            alt="Portrait of Vi Saint, creative technologist"
+                            loading="lazy"
+                            class="fade-in-element"
+                        />
+                        <div id="t-s-div">
+                            <p class="fade-in-element about-paragraph">
+                                Vi Saint (Viktor Sekovski) is a Creative Technologist
+                                whose work sits between <em>design</em>, <em>engineering</em> and <em>storytelling</em>.
+                                Rather than treating these disciplines as separate practices,
+                                he combines them into a single process where <em>strategy</em>,
+                                <em>visual identity</em> and <em>implementation</em> evolve together.
+                            </p>
+                            <p class="fade-in-element about-paragraph">
+                                His background spans <em>branding</em>, <em>UI/UX design</em>, <em>front-end development</em>,
+                                <em>motion</em> and <em>interactive experiences</em>. That breadth allows him to move
+                                comfortably from early concepts and research to polished,
+                                production-ready products, ensuring ideas survive the journey
+                                from sketch to screen without losing their intent.
+                            </p>
+                            <!-- CV button + Let's Talk (same line on desktop) -->
+                            <div class="about-actions fade-in-element">
+                                <div class="cv-trigger-wrap">
+                                    <button
+                                        class="btn-pb"
+                                        id="cv-open-btn"
+                                        aria-label="View CV"
+                                    >
+                                        View CV
+                                    </button>
+                                </div>
+
+                                <a
+                                    href="mailto:hello@visaint.space"
+                                    class="btn-bo"
+                                >
+                                    Let's Talk<i class="ri-arrow-right-up-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#about -->
+                <h2 class="blurb fade-in-element">
+                    Drawn to ambitious ideas and complex problems,</h2>
+                <p class="blurb fade-in-element">Viktor enjoys
+                    transforming technical systems into experiences that feel simple,
+                    expressive and memorable. He believes the best digital products are
+                    not only functional but emotionally resonant—tools that people understand
+                    instinctively and remember long after they’ve left.
+                </p>
+                <p class="fade-in-element discipline-list">
+                    Today he works across the full stack — from <em>front-end architecture</em>
+                    and <em>back-end systems</em> to <em>brand identity</em>, <em>advertising</em>,
+                    <em>graphic design</em>, <em>print production</em>, <em>typography</em>,
+                    <em>motion design</em>, <em>video</em>, and beyond.
+                    Every discipline informs the others, and that cross-pollination
+                    is what makes the work feel cohesive, considered, and alive.
+                </p>
+
+                <div style="height: 2vh;"></div>
+
+                <!-- ═══════════════════════════════════
+                     TOOLS
+                ═══════════════════════════════════ -->
+
+                <div class="section-heading fade-in-element">
+                    <div class="section-top">
+                        <h1>My</h1>
+                    </div>
+                    <div class="section-bottom">
+                        <h1>Tools</h1>
+                    </div>
+                </div>
+
+                <div class="tools-section">
+                    <p class="blurb fade-in-element">
+                        I prefer tools that are either open source or built from single people or small companies. The larger the company the more exploitative their payment model has to be, the shittier they have to make their base product to upsell you. Good software lets you do the obvious, steers you towards complex possibilities and gets out of your way otherwise.
+                    </p>
+
+                    <div class="tools-systems-wrap fade-in-element">
+                        <h2 class="systems-heading">Systems</h2>
+                        <div class="systems-grid">
+                            <div class="system-item">
+                                <span class="system-name">MacOS</span>
+                                <span class="system-note">(The Apps Keep Me Bound)</span>
+                            </div>
+                            <span class="system-sep">X</span>
+                            <div class="system-item">
+                                <span class="system-name">Linux</span>
+                                <span class="system-note">for the freedom (KDE — Tuxedo OS currently)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tools-grid">
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Code</h3>
+                            <p class="tool-items">Zed, Sublime, Nova, Kate, Ghostly</p>
+                            <p class="tool-tagline">My main expressive tool;</p>
+                        </div>
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Design</h3>
+                            <p class="tool-items">Affinity, Figma, Photoshop, Illustrator, InDesign, GIMP, Inkscape, Rive</p>
+                            <p class="tool-tagline">Never satisfied, Constantly Needed</p>
+                        </div>
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Writing</h3>
+                            <p class="tool-items">IA Writer, Typora, UpNote, Hemingway Editor</p>
+                            <p class="tool-tagline">To Reflect is to Live</p>
+                        </div>
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Video</h3>
+                            <p class="tool-items">Final Cut Pro, Motion, Cavalry</p>
+                            <p class="tool-tagline">How do I see the world</p>
+                        </div>
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Audio</h3>
+                            <p class="tool-items">Audacity, Ableton Live, MilkyTracker</p>
+                            <p class="tool-tagline">The path to the heart</p>
+                        </div>
+                        <div class="tool-category fade-in-element">
+                            <h3 class="tool-cat-title">Browsers</h3>
+                            <p class="tool-items">Vivaldi, Firefox, Arc, Safari, Phoenix</p>
+                            <p class="tool-tagline">Critical Infrastructure</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════
+                     MY PROCESS
+                ═══════════════════════════════════ -->
+
+                <div class="section-heading fade-in-element">
+                    <div class="section-top">
+                        <h1>My</h1>
+                    </div>
+                    <div class="section-bottom">
+                        <h1>Process</h1>
+                    </div>
+                </div>
+
+                <section
+                    class="chrome-scroll-section last extended-bottom"
+                    aria-label="My Process"
+                >
+                    <div class="container chrome-container">
+                        <div class="focal-marker" aria-hidden="true"></div>
+                        <div class="text-container">
+                            <div class="text">
+                                <h4>In an overstuffed world</h4>
+                            </div>
+                            <div class="text">
+                                <h4>where attention is fleeting</h4>
+                            </div>
+                            <div class="text">
+                                <h4>but competition fierce</h4>
+                            </div>
+                            <div class="text">
+                                <h4>most messages <em>vanish</em>,</h4>
+                            </div>
+                            <div class="text"><h4>before being seen.</h4></div>
+                            <div class="text">
+                                <h4><br />Even worse, they <em>fail</em></h4>
+                            </div>
+                            <div class="text">
+                                <h4>to grab your attention</h4>
+                            </div>
+                            <div class="text"><h4>despite making it</h4></div>
+                            <div class="text">
+                                <h4>in front of your face</h4>
+                            </div>
+                            <div class="text">
+                                <h3><br />But I can break through</h3>
+                            </div>
+                            <div class="text">
+                                <h4><br />with relentless creativity,</h4>
+                            </div>
+                            <div class="text">
+                                <h4>wide technical expertise</h4>
+                            </div>
+                            <div class="text">
+                                <h4>&amp; unmatched skill diversity</h4>
+                            </div>
+                            <div class="text">
+                                <h5>I create meaningful interactions</h5>
+                            </div>
+                            <div class="text">
+                                <h5>that remain in customers' heads</h5>
+                            </div>
+                            <div class="text">
+                                <h5>using every tool available.</h5>
+                            </div>
+                            <div class="text">
+                                <h2><br />Contact Me</h2>
+                            </div>
+                            <div class="text"><h2>Today</h2></div>
+                            <div class="text">
+                                <h5>For an Amazing Experience</h5>
+                            </div>
+                            <div style="height: 2vh"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="contact">
+                    <a href="mailto:hello@visaint.space">
+                        <img
+                            class="letter"
+                            src="./images/letter.svg"
+                            alt="Letter"
+                            loading="lazy"
+                        />
+                    </a>
+                </div>
+
+                <!-- ═══════════════════════════════════
+                     MY JOURNEY
+                ═══════════════════════════════════ -->
+
+                <div class="section-heading fade-in-element">
+                    <div class="section-top">
+                        <h1>My</h1>
+                    </div>
+                    <div class="section-bottom">
+                        <h1>Journey</h1>
+                    </div>
+                </div>
+
+                <!-- Journey timeline — uses same expandable pattern as work/services -->
+                <div style="margin: 2vh auto 8vh; padding: 0 2rem;">
+                    <div class="service-category">
+                        <input type="checkbox" id="story-games" class="service-toggle" />
+                        <label for="story-games" class="service-item journey-item page2-ele" style="border-top: 4px dotted var(--pink); border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Video Games</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>I grew up obsessed with video games. Not just playing them, but exploring them like secret worlds. I jumped between modern 3D universes and the charming simplicity of 8-bit pixels, trying to understand why each one felt magical in its own way. As a kid, I would dive deep into the history of how games were made, how stories were told through level design, and how tiny artistic decisions shaped entire experiences. I loved discovering narrative tricks, strange mechanics, and all the odd, clever experiments that never made it into the mainstream. Video games weren't just entertainment for me — they were a limitless playground of ideas. They taught me that technology, art, and emotion can combine in completely unexpected ways, and I've been chasing that feeling ever since.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-books" class="service-toggle" />
+                        <label for="story-books" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Stories</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>My love for books started with a strange pairing: Alice in Wonderland and The Picture of Dorian Gray. One was surreal, whimsical, and chaotic; the other was dark, elegant, and unnervingly psychological. Together they cracked something open in me. I became obsessed with how stories could twist reality, reveal character, or expose hidden truths. From there I started devouring everything I could get my hands on — reading nearly two books a week — chasing that feeling of slipping into other worlds. Over time my habits expanded into a kind of personal ritual: one fiction book to ignite imagination, one non-fiction to feed curiosity. As my interests grew, the topics exploded outward — philosophy, design, technology, art, psychology, mythology — each one forming a new branch of the inner library I still carry with me.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-tech" class="service-toggle" />
+                        <label for="story-tech" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Tech School</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>Technology school was challenging in all the right ways. It pushed me into the deep end of hardware, circuitry, system internals — all the things I quickly realized I didn't actually care about. I respected the complexity, but it didn't spark anything in me. What did spark something was software. The moment I started writing code, the whole world shifted. Software felt alive — expressive, flexible, endlessly creative. I wasn't just plugging components together; I was shaping behavior, building logic, designing experiences. That's where I first understood that my real passion wasn't inside the machine — it was in creating what the machine could do.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-university" class="service-toggle" />
+                        <label for="story-university" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>University</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>University was the place that demanded everything from me. Moving all the way to Slovenia felt like stepping into a bigger version of myself — new people, new ideas, and a level of independence I had been craving. I pushed harder than I ever had before, grinding through my first year, proud of every class I passed and every connection I made. It felt like momentum, like the start of something huge. And then the pandemic hit. Overnight, the world shrank. Campus, friends, lectures — all of it collapsed into a single glowing rectangle. I ended up back home, trying to hold onto that drive while everything around me slowed, blurred, and broke in ways none of us were prepared for.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-pandemic" class="service-toggle" />
+                        <label for="story-pandemic" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Pandemic</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>The pandemic was dark, horrible, and psychologically destructive. Everything I had been building toward suddenly unraveled, and I felt stuck in a loop of uncertainty that lasted far longer than I ever expected. But in the middle of all that chaos, I managed to carve out a path forward. I landed a job at Business House — a company in a booming industry of medical supplies and health food — and it became this strange, unexpected lifeline. There I learned how to sell, how to negotiate, how to talk to clients, how to pitch ideas with confidence. I even started traveling for work, discovering a version of myself I didn't know existed. It didn't erase the darkness of that time, but it gave me a direction, a set of skills, and a sense of resilience I still carry with me.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-freelance" class="service-toggle" />
+                        <label for="story-freelance" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Freelance</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>University taught me a lot of interesting things, but the class that changed everything was modern web development. It was the first skill that felt both natural and instantly useful — something I was genuinely good at. So I leaned into it. I opened a Fiverr account and started freelancing, building small video games using web technologies. What began as simple experiments quickly grew into full playable ads, interactive experiences, and eventually websites. Every project pushed me to learn more, try more, invent more. And honestly, it was amazing — the feeling of turning ideas into something real, something people could actually play with, was like rediscovering the magic of games from my childhood, but this time from the creator's side.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-design" class="service-toggle" />
+                        <label for="story-design" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Design</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>By now I've read so many books, but a few of them rewired me completely. Popism: The Warhol Sixties by Andy Warhol and Pat Hackett, Insanely Great: The Life and Times of Macintosh, the Computer that Changed Everything by Steven Levy, and Steve Jobs by Walter Isaacson all hit me at exactly the right moment. From Warhol, I learned how industrialized, repetitive labor can still produce powerful art. From the Macintosh story, I understood how much the details matter — how entire revolutions happen because someone cared enough to polish one more pixel. And from Jobs, I internalized the idea that craftsmanship is emotional, personal, and deeply human. Those books taught me to value how something is made far more than how much I make. They shaped my philosophy, and gave me the motto I still live and work by: 'Design is how it works!'</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-visual" class="service-toggle" />
+                        <label for="story-visual" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Visual</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>Once design clicked for me, I wanted to learn every form of it. I dove into graphic design, teaching myself Photoshop, Illustrator, InDesign, and eventually Figma — each one opening a different doorway into how ideas can become visual experiences. I learned to work with video, experimented with visual website builders, and kept doubling the set of tools I felt comfortable creating with. Every new skill expanded the way I thought, the way I communicated, the way I solved problems. It felt like assembling a creative toolkit piece by piece, until suddenly I could express almost anything I imagined.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input type="checkbox" id="story-code" class="service-toggle" />
+                        <label for="story-code" class="service-item journey-item page2-ele" style="border-bottom: 4px dotted var(--pink); width: 100%;">
+                            <span class="expand-indicator">▼</span>
+                            <h2>Code</h2>
+                        </label>
+                        <div class="service-content">
+                            <p>Finally, I shifted my focus back to code. This time, however, I was armed with a deep and practical knowledge of wonderful design principles. I now thrive on the opportunity to blend both crafts—design and development—to build and launch truly amazing products.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#main -->
+
+        <site-footer></site-footer>
+
+        <!-- ═══════════════════════════════════
+             CV MODAL
+        ═══════════════════════════════════ -->
+        <div
+            class="cv-modal"
+            id="cv-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Vi Saint — CV"
+        >
+            <div class="cv-modal-inner">
+                <div class="cv-modal-bar">
+                    <span>Vi Saint — CV</span>
+                    <button
+                        class="cv-modal-close"
+                        id="cv-close-btn"
+                        aria-label="Close CV"
+                    >
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <iframe
+                    class="cv-modal-embed"
+                    id="cv-iframe"
+                    src=""
+                    title="Vi Saint CV"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="./main.js"></script>
+
+        <script>
+            (function () {
+                var openBtn = document.getElementById("cv-open-btn");
+                var closeBtn = document.getElementById("cv-close-btn");
+                var modal = document.getElementById("cv-modal");
+                var iframe = document.getElementById("cv-iframe");
+                var cvSrc = "./Viktor-Sekovski-Cv.pdf";
+
+                function openModal() {
+                    // Load PDF only when the user requests it — no auto-download
+                    if (!iframe.src || iframe.src === window.location.href) {
+                        iframe.src = cvSrc;
+                    }
+                    modal.classList.add("is-open");
+                    document.body.style.overflow = "hidden";
+                }
+
+                function closeModal() {
+                    modal.classList.remove("is-open");
+                    document.body.style.overflow = "";
+                }
+
+                openBtn.addEventListener("click", openModal);
+                closeBtn.addEventListener("click", closeModal);
+
+                // Close on backdrop click
+                modal.addEventListener("click", function (e) {
+                    if (e.target === modal) closeModal();
+                });
+
+                // Close on Escape
+                document.addEventListener("keydown", function (e) {
+                    if (
+                        e.key === "Escape" &&
+                        modal.classList.contains("is-open")
+                    ) {
+                        closeModal();
+                    }
+                });
+            })();
+        </script>
+    </body>
+</html>

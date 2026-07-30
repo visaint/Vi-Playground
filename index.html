@@ -1,555 +1,1420 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <!-- META TAGS FOR index.html (Homepage) -->
+        <title>
+            Vi Saint - Creative Technologist | Product Design & Web Development
+        </title>
+        <meta
+            name="description"
+            content="Vi Saint is a remote-first Creative Technologist specializing in product design, brand identity, and web development. Creating accessible, high-performance digital experiences."
+        />
+        <meta
+            name="keywords"
+            content="creative technologist, web developer, UI UX designer, brand identity, visual design, frontend developer, portfolio"
+        />
+        <meta name="author" content="Vi Saint" />
 
-    <!-- Basic Meta Tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://visaint.space/" />
+        <meta property="og:title" content="Vi Saint - Creative Technologist" />
+        <meta
+            property="og:description"
+            content="Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development."
+        />
+        <meta
+            property="og:image"
+            content="https://visaint.space/images/og-image.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Vi Saint" />
 
-    <title>Vi Saint - Designer & Developer | Product Design & Web Development</title>
-    <meta name="description"
-        content="Vi Saint is a remote-first designer and developer specializing in product design, brand identity, and web development. Creating accessible, eye-catching digital experiences." />
-    <meta name="keywords"
-        content="product designer, web developer, UI UX designer, brand identity, visual design, frontend developer, portfolio" />
-    <meta name="author" content="Vi Saint" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://visaint.space/" />
+        <meta name="twitter:title" content="Vi Saint - Creative Technologist" />
+        <meta
+            name="twitter:description"
+            content="Remote-first Creative Technologist creating accessible, premium digital experiences."
+        />
+        <meta
+            name="twitter:image"
+            content="https://visaint.space/images/twitter-card.jpg"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://visaint.space/" />
-    <meta property="og:title" content="Vi Saint - Designer & Developer" />
-    <meta property="og:description"
-        content="Remote-first designer and developer creating accessible, eye-catching digital experiences. Specializing in product design, brand identity, and web development." />
-    <meta property="og:image" content="https://visaint.space/images/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Vi Saint" />
+        <link rel="canonical" href="https://visaint.space/" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://visaint.space/" />
-    <meta name="twitter:title" content="Vi Saint - Designer & Developer" />
-    <meta name="twitter:description"
-        content="Remote-first designer and developer creating accessible, eye-catching digital experiences." />
-    <meta name="twitter:image" content="https://visaint.space/images/twitter-card.jpg" />
+        <link rel="icon" type="image/x-icon" href="./fav/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./fav/favicon-16x16.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./fav/favicon-32x32.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="./fav/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="./fav/site.webmanifest" />
+        <meta
+            name="theme-color"
+            content="#ee8fa1"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#F48F6E"
+            media="(prefers-color-scheme: dark)"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="Vi Saint" />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://visaint.space/" />
+        <link
+            rel="preload"
+            href="./fonts/tiempos-text.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/tiempos-text-italic.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
 
-    <!-- Favicon links -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="stylesheet" href="./styles.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+            rel="stylesheet"
+            media="print"
+            onload="this.media = 'all'"
+        />
 
-    <!-- Web manifest -->
-    <link rel="manifest" href="/site.webmanifest">
+        <script src="./components.js"></script>
 
-    <!-- Theme color for mobile browsers (light and dark mode) -->
-    <meta name="theme-color" content="#044da6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#606060" media="(prefers-color-scheme: dark)">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Vi Saint">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet">
-    <link rel="preload"
-        href="https://raw.githubusercontent.com/ViktorSekovski/DinaRemasterIi-Woff/main/DinaRemasterII.woff2" as="font"
-        type="font/woff2" crossorigin>
-    <link rel="icon" type="image/x-icon" href="./fav/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="./fav/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./fav/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./fav/apple-touch-icon.png">
-    <link rel="manifest" href="./fav/site.webmanifest">
-    <meta name="theme-color" content="#ee8fa1" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#F48F6E" media="(prefers-color-scheme: dark)">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Vi Saint">
-    <link rel="stylesheet" href="./styles.css" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" media="print"
-        onload="this.media='all';" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <!-- STRUCTURED DATA (Schema.org JSON-LD) -->
-    <!-- Add this just before closing </head> tag on ALL pages -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Vi Saint",
+                "alternateName": "Viktor Sekovski",
+                "url": "https://visaint.space",
+                "image": "https://visaint.space/images/me-front.webp",
+                "sameAs": [
+                    "https://notes.visaint.space",
+                    "https://visiant.bearblog.dev",
+                    "https://github.com/ViktorSekovski"
+                ],
+                "jobTitle": "Creative Technologist",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
+                "knowsAbout": [
+                    "Product Design",
+                    "UX Design",
+                    "UI Design",
+                    "Web Development",
+                    "Frontend Development",
+                    "Brand Identity",
+                    "Visual Design",
+                    "Creative Technology",
+                    "React",
+                    "Next.js",
+                    "JavaScript",
+                    "HTML",
+                    "CSS"
+                ],
+                "hasOccupation": {
+                    "@type": "Occupation",
+                    "name": "Creative Technologist",
+                    "occupationLocation": {
+                        "@type": "Country",
+                        "name": "Europe"
+                    },
+                    "description": "Creating end-to-end digital product experiences from research to launch, bridging high-end art direction with technical execution."
+                }
+            }
+        </script>
+    </head>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Vi Saint",
-      "alternateName": "Viktor Sekovski",
-      "url": "https://visaint.space",
-      "image": "https://visaint.space/images/me-front.webp",
-      "sameAs": [
-        "https://notes.visaint.space",
-        "https://visiant.bearblog.dev",
-        "https://github.com/ViktorSekovski"
-      ],
-      "jobTitle": "Designer & Developer",
-      "description": "Remote-first product and motion designer creating accessible, eye-catching designs. Specializing in product design, brand identity, web development, and game design.",
-      "knowsAbout": [
-        "Product Design",
-        "UX Design",
-        "UI Design",
-        "Web Development",
-        "Frontend Development",
-        "Brand Identity",
-        "Visual Design",
-        "Game Design",
-        "Motion Design",
-        "React",
-        "JavaScript",
-        "HTML",
-        "CSS"
-      ],
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Product Designer & Web Developer",
-        "occupationLocation": {
-          "@type": "Country",
-          "name": "Europe"
-        },
-        "description": "Creating end-to-end digital product experiences from research to launch, specializing in UX strategy, interface design, and web development."
-      }
-    }
-    </script>
-</head>
+    <body class="story">
+        <!-- ── Background blobs ── -->
+        <div class="organic-bg" aria-hidden="true">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="blob blob-4"></div>
+            <div class="blob blob-5"></div>
+        </div>
 
-<body class="story">
-    <div hx-get="./blob.html" hx-trigger="load" hx-swap="outerHTML"></div>
-    <div id="main">
-        <div id="page-1">
-            <!-- Header loaded via HTMX -->
-            <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
-            <div id="hero-handle">
-                <div id="name">
-                    <h1>Vi Saint</h1>
-                </div>
-                <div id="hero-head">
-                    <div id="prefix">
-                        <h6>the only</h6>
+        <div id="main">
+            <div id="hero">
+                <site-header></site-header>
+                <div id="hero-handle">
+                    <div id="name">
+                        <div class="name-marquee-wrap">
+                            <h1 id="name-text">Vi Saint</h1>
+                        </div>
                     </div>
-                    <h1>Designer &</h1>
-                </div>
-                <div id="main-head">
-                    <h1>Developer</h1>
-                    <div id="mini">
-                        <h6>based in europe</h6>
+                    <div id="hero-head">
+                        <div id="prefix">
+                            <h6>the only</h6>
+                        </div>
+                        <h1>Designer &</h1>
                     </div>
+                    <div id="main-head">
+                        <h1>Developer</h1>
+                        <div id="mini">
+                            <h6>based in europe</h6>
+                        </div>
+                    </div>
+                </div>
+                <div id="first-bottom">
+                    <div id="hero-stats">
+                        <div class="hero-stat">
+                            <span class="stat-icon">✦</span>
+                            <h5>Design + Strategy</h5>
+                        </div>
+                        <div class="stat-sep" aria-hidden="true">—</div>
+                        <div class="hero-stat">
+                            <span class="stat-icon">◈</span>
+                            <h5>6+ Years</h5>
+                        </div>
+                        <div class="stat-sep" aria-hidden="true">—</div>
+                        <div class="hero-stat">
+                            <span class="stat-icon">⌨</span>
+                            <h5>Code + Build</h5>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div id="first-bottom">
-                <h5>
-                    Multimedia Creative
-                    <!--<i
-                            class="ri-arrow-right-up-line"
-                        ></i>
-                    </h5> -->
-                    <h5>Unicorn Designer</h5>
-                    <h5>Powerhouse Dev</h5>
-                    <div id="ex">
-                        <div id="arrow-div">
-                            <div class="arrow">
-                                <i class="ri-arrow-down-fill"></i>
-                            </div>
-                            <div class="arrow">
-                                <i class="ri-arrow-down-fill"></i>
+
+            <div class="blurb">
+                <h2>I blend design,</h2>
+                <h2>development &</h2>
+                <h2>storytelling to craft</h2>
+                <h2>unforgettable experiences</h2>
+                <h2>& sticky products</h2>
+            </div>
+
+            <!-- ═══════════════════════════════════
+                 SELECT WORK
+            ═══════════════════════════════════ -->
+            <div id="work">
+                <div class="head"><h1>Select</h1></div>
+                <div class="tail"><h1>Work</h1></div>
+                <img
+                    src="./images/flower.svg"
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                />
+
+                <div id="expandable-container">
+                    <!-- NEBESNA -->
+                    <div class="page2-ele" data-work="nebesna">
+                        <input
+                            type="checkbox"
+                            id="work-nebesna"
+                            class="work-toggle"
+                        />
+                        <label for="work-nebesna" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>nebesna</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-shopping-bag-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text">E-Commerce</span>
+                            </h6>
+                            <img
+                                src="./images/neb.webp"
+                                alt="Nebesna project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>Brand Identity</span
+                                        ><span>Web Dev</span
+                                        ><span>E-Commerce</span
+                                        ><span>Astro + Tailwind</span
+                                        ><span>Cyrillic Typography</span
+                                        ><span>SEO 95+</span>
+                                    </p>
+                                    <p>
+                                        Built Nebesna end-to-end — brand, code,
+                                        content, and commerce. A spiritual
+                                        cosmetics label with Cyrillic-first
+                                        typography I hand-selected for both
+                                        scripts. Light, sacred color language.
+                                        Physical packaging, motion graphics,
+                                        full Instagram content system.
+                                    </p>
+                                    <p>
+                                        Custom Astro + Tailwind + Preact
+                                        architecture from scratch: ultra-fast,
+                                        zero-bloat, easy to update without a
+                                        developer. Mobile-first touch
+                                        interactions, editorial collection drops
+                                        instead of flat product grids.
+                                        Lighthouse 95+ across all four
+                                        categories. The full package.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/neb.webp"
+                                            alt="Nebesna product photography"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/nebesna.webp"
+                                            alt="Nebesna packaging"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/nebesprod.webp"
+                                            alt="Nebesna product lineup"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="./case-studies/nebesna.html"
+                                        class="btn-pb"
+                                        >Read Case Study
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- ANKSIOZNOST -->
+                    <div class="page2-ele" data-work="anksioznost">
+                        <input
+                            type="checkbox"
+                            id="work-anksioznost"
+                            class="work-toggle"
+                        />
+                        <label for="work-anksioznost" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>anksioznost</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-mental-health-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text"
+                                    >Mental Health Branding</span
+                                >
+                            </h6>
+                            <img
+                                src="./images/anksi.webp"
+                                alt="Anksioznost project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>Editorial Design</span
+                                        ><span>Brand Identity</span
+                                        ><span>Illustration Direction</span
+                                        ><span>Print</span
+                                        ><span>Social Media</span>
+                                    </p>
+                                    <p>
+                                        Led the complete visual identity and
+                                        print design for a mental wellness book.
+                                        Built a color system of soft,
+                                        desaturated tones — calming rather than
+                                        clinical. Directed every illustration to
+                                        make complex psychological concepts feel
+                                        approachable. Readability-first
+                                        typography with generous white space at
+                                        every level.
+                                    </p>
+                                    <p>
+                                        Beyond the book: logo, brand guidelines,
+                                        digital assets, social templates, and
+                                        launch campaign materials. The cohesive
+                                        system drove a 30% increase in social
+                                        engagement and helped exceed initial
+                                        sales projections.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/anksi.webp"
+                                            alt="Anksioznost book cover"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/anx.webp"
+                                            alt="Anksioznost interior"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/page1.webp"
+                                            alt="Anksioznost spread"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="./case-studies/anksioznost.html"
+                                        class="btn-pb"
+                                        >Read Case Study
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VEOMA -->
+                    <div class="page2-ele" data-work="veoma">
+                        <input
+                            type="checkbox"
+                            id="work-veoma"
+                            class="work-toggle"
+                        />
+                        <label for="work-veoma" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>veoma studio</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-pen-nib-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text"
+                                    >Boutique Design Studio</span
+                                >
+                            </h6>
+                            <img
+                                src="./images/veo.webp"
+                                alt="Veoma Studio project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>Brand Identity</span
+                                        ><span>Web Dev</span><span>UX/UI</span
+                                        ><span>Client Acquisition</span
+                                        ><span>Agency Operations</span>
+                                    </p>
+                                    <p>
+                                        Co-founded a premium boutique agency
+                                        from the ground up. Brand identity
+                                        rooted in classical typography and
+                                        refined minimalism — the calling card
+                                        that attracted luxury clients. Led
+                                        design, development, business
+                                        development, and client management
+                                        simultaneously.
+                                    </p>
+                                    <p>
+                                        Custom development for every client:
+                                        Webflow, Framer, custom code — whatever
+                                        the project required. Comprehensive
+                                        style guides and usability testing built
+                                        into every engagement. Multiple
+                                        long-term client relationships converted
+                                        from cold outreach.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/veo.webp"
+                                            alt="Veoma studio brand"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/veoma.webp"
+                                            alt="Veoma website"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/coex.webp"
+                                            alt="Veoma client work"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="./case-studies/veoma.html"
+                                        class="btn-pb"
+                                        >Read Case Study
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIEW FROM NOWHERE -->
+                    <div class="page2-ele" data-work="vfns">
+                        <input
+                            type="checkbox"
+                            id="work-vfns"
+                            class="work-toggle"
+                        />
+                        <label for="work-vfns" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>view from nowhere</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-gamepad-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text">Indie Game Studio</span>
+                            </h6>
+                            <img
+                                src="./images/vfns.webp"
+                                alt="View from Nowhere project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>UI/UX Design</span
+                                        ><span>Game Design</span
+                                        ><span>Pixel Art</span
+                                        ><span>Playtesting</span
+                                        ><span>Studio Brand & Web</span>
+                                    </p>
+                                    <p>
+                                        Joined a narrative indie game studio as
+                                        UI/UX Designer — expanded fast into game
+                                        design, playtesting, asset creation, and
+                                        studio brand. Every interface was
+                                        designed as part of the player journey:
+                                        menus and HUDs that feel like they
+                                        belong in the world.
+                                    </p>
+                                    <p>
+                                        Contributed to narrative pacing,
+                                        progression systems, and unlock
+                                        mechanics. Led structured playtesting
+                                        sessions for every build — feedback
+                                        synthesis translated into real design
+                                        improvements. Pixel art assets, texture
+                                        sourcing, and the full studio website
+                                        and brand identity.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/vfns.webp"
+                                            alt="View from Nowhere logo"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/vfweb.webp"
+                                            alt="VFN website"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/soleil.webp"
+                                            alt="VFN character art"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="./case-studies/vfns.html"
+                                        class="btn-pb"
+                                        >Read Case Study
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DOCTORS -->
+                    <div class="page2-ele" data-work="doctors">
+                        <input
+                            type="checkbox"
+                            id="work-doctors"
+                            class="work-toggle"
+                        />
+                        <label for="work-doctors" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>doctors</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-sparkling-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text">Cosmetics Branding</span>
+                            </h6>
+                            <img
+                                src="./images/doctors.webp"
+                                alt="Doctors project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>Brand Identity</span
+                                        ><span>Packaging Design</span
+                                        ><span>Photography</span
+                                        ><span>Motion Design</span
+                                        ><span>E-Commerce</span>
+                                    </p>
+                                    <p>
+                                        A cosmetics company with good products
+                                        and a visual identity stuck in 2003.
+                                        Rebuilt everything — logo, seasonal
+                                        color system, packaging, photography,
+                                        video, and e-commerce. 35% more social
+                                        engagement and 25% higher conversion
+                                        within the first quarter.
+                                    </p>
+                                    <p>
+                                        Color-coded category architecture across
+                                        a 50+ product catalog. Full in-house
+                                        photography and video production.
+                                        E-commerce redesign with
+                                        purchase-behavior-optimized layouts.
+                                        Print-ready files for every label,
+                                        delivered with manufacturer specs.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/doctors.webp"
+                                            alt="Doctors cosmetics brand"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/collagen.webp"
+                                            alt="Doctors packaging"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                    <figure>
+                                        <img
+                                            src="./images/doc.webp"
+                                            alt="Doctors product photography"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="./case-studies/doctors.html"
+                                        class="btn-pb"
+                                        >Read Case Study
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#expandable-container -->
+
+                <div id="work-cta">
+                    <a href="./work.html" class="btn-op">
+                        View All Work<i class="ri-arrow-right-up-line"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- /#work -->
+
+            <!-- Chrome scroll section -->
+            <section
+                class="chrome-scroll-section last extended-bottom"
+                aria-label="Chrome CSS Scroll Demo"
+            >
+                <div class="container chrome-container">
+                    <div class="focal-marker" aria-hidden="true"></div>
+                    <div class="text-container">
+                        <div class="text"><h4>You Just Found A</h4></div>
+                            <div class="text"><h4>High-End <em>Designer</em></h4></div>
+                        <div class="text"><h4>Performant <em>Developer</em> &</h4></div>
+                        <div class="text">
+                            <h4>Strategic <em>Branding</em> Expert</h4>
+                        </div>
+                        <div class="text">
+                            <h4>Deliver Premium<em>End-To-End</em></h4>
+                        </div>
+                        <div class="text">
+                            <h4>Digital Experiences</h4>
+                        </div>
+                        <div class="text">
+                            <h4>for a <em>fraction</em> of agency costs.</h4>
+                        </div>
+                        <div class="text">
+                            <h2><br />Contact Me</h2>
+                        </div>
+                        <div class="text">
+                            <h5>For a quick & efficient solution!</h5>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="contact">
+                <a href="mailto:hello@visaint.space">
+                    <img
+                        class="letter"
+                        src="./images/letter.svg"
+                        alt="Letter"
+                        loading="lazy"
+                    />
+                </a>
+            </div>
+
+            <div class="title fade-in-element">
+                <h1>Services</h1>
+            </div>
+
+            <div class="services-arrow" id="grids">
+                <div
+                    id="expandable-container"
+                    style="display: flex; flex-direction: column; gap: 0"
+                >
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-product"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-product"
+                            class="service-item page2-ele"
+                            style="
+                                border-top: 4px dotted var(--pink);
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Web D & D</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Strategy</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                End-to-end digital product experiences from
+                                research to launch. I handle UX strategy,
+                                interface design, and web design—creating
+                                cohesive products that users love and businesses
+                                need.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>UX Research & Strategy</li>
+                                <li>User Interface Design</li>
+                                <li>Web Design</li>
+                                <li>Prototyping & Testing</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Build your product →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-brand"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-brand"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Brand Identity</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Visuals</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Comprehensive brand universes that feel cohesive
+                                and alive. From positioning to visual systems, I
+                                craft identities that resonate across every
+                                touchpoint.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Brand Strategy & Positioning</li>
+                                <li>Visual Identity Systems</li>
+                                <li>Graphic Design</li>
+                                <li>Brand Worldbuilding</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Build your brand →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-web-dev"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-web-dev"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Web Development</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Frontend</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Clean, performant code that brings designs to
+                                life. Specializing in modern frameworks, smooth
+                                animations, and accessible implementation that
+                                works beautifully.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Frontend Development</li>
+                                <li>React & Modern Frameworks</li>
+                                <li>Animation & Interactions</li>
+                                <li>Performance Optimization</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Start building →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-game"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-game"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Interactive</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Gaming</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Engaging game mechanics and interactive worlds
+                                from concept to completion. I design systems,
+                                build prototypes, and create the assets that
+                                bring experiences to life.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Game Design & Mechanics</li>
+                                <li>Game Development</li>
+                                <li>Assets & Worldbuilding</li>
+                                <li>Interactive Prototypes</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Create your game →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-strategy"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-strategy"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Creative Strategy</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Narrative</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Strategic thinking that drives results. From
+                                advertising campaigns to narrative design, I
+                                create compelling stories that cut through noise
+                                and connect with audiences.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Advertising & Campaigns</li>
+                                <li>Narrative Design</li>
+                                <li>Content Strategy</li>
+                                <li>Art Direction</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Launch your campaign →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-systems"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-systems"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Design Systems</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Scale</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Scalable design systems that bring consistency
+                                and speed to growing teams. I build component
+                                libraries, documentation, and frameworks that
+                                empower everyone.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Component Libraries</li>
+                                <li>Design Tokens & Guidelines</li>
+                                <li>Documentation</li>
+                                <li>Design Ops</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Scale your design →</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.services-arrow#grids -->
+            <div>
+                <div class="skill" style="--t: 20s">
+                    <div>
+                        <span>HTML</span><span>CSS</span><span>Javascript</span
+                        ><span>React</span> <span>Node JS</span><span>SQL</span
+                        ><span>Git</span>
+                    </div>
+                    <div>
+                        <span>HTML</span><span>CSS</span><span>Javascript</span
+                        ><span>React JS</span> <span>Node JS</span
+                        ><span>SQL</span><span>Git</span>
+                    </div>
+                </div>
+                <div class="skill" style="--t: 15s">
+                    <div>
+                        <span>Typescript</span><span>Next JS</span
+                        ><span>Lenis</span><span>WebGL</span>
+                        <span>Tree JS</span><span>Bootstrap</span
+                        ><span>Material UI</span><span>Tailwind</span
+                        ><span>SCSS</span>
+                    </div>
+                    <div>
+                        <span>Typescript</span><span>Next JS</span
+                        ><span>Lenis</span><span>WebGL</span>
+                        <span>Tree JS</span><span>Bootstrap</span
+                        ><span>Material UI</span><span>Tailwind</span
+                        ><span>SCSS</span>
+                    </div>
+                </div>
+                <div class="skill" style="--t: 15s">
+                    <div>
+                        <span>Photoshop</span><span>Illustrator</span
+                        ><span>Premiere Pro</span><span>InDesign</span>
+                        <span>Figma</span><span>Affinity</span
+                        ><span>Aseprite</span><span>Canva</span> <span>SEO</span
+                        ><span>UX</span><span>UI</span><span>Typography</span
+                        ><span>Animation</span><span>Video</span
+                        ><span>Audio</span>
+                    </div>
+                    <div>
+                        <span>Photoshop</span><span>Illustrator</span
+                        ><span>Premiere Pro</span><span>InDesign</span>
+                        <span>Figma</span><span>Affinity</span
+                        ><span>Aseprite</span><span>Canva</span> <span>SEO</span
+                        ><span>UX</span><span>UI</span><span>Typography</span
+                        ><span>Animation</span><span>Video</span
+                        ><span>Audio</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="about">
+                <div id="t-f-div">
+                    <img
+                        src="./images/me-front.webp"
+                        alt="Portrait of Vi Saint, creative technologist"
+                        loading="lazy"
+                        class="fade-in-element"
+                    />
+                    <div id="t-s-div">
+                        <h1 class="fade-in-title">About</h1>
+                        <p class="fade-in-element about-paragraph">
+                            Vi Saint <i>(Viktor Sekovski)</i> is a Creative Technologist
+                            working across design, code and visual storytelling.
+                            His practice explores how thoughtful interfaces,
+                            memorable identities and carefully crafted interactions
+                            can make technology feel more human, intuitive and emotionally
+                            engaging.
+                        </p>
+                        <p class="fade-in-element about-paragraph">
+                            Working remotely with clients across industries, he designs and
+                            builds digital experiences that balance clarity with character.
+                            Whether creating e-commerce platforms, editorial websites or
+                            experimental interfaces, his focus remains the same: translating
+                            complexity into products that people genuinely enjoy using.
+                        </p>
+                        <div class="about-actions fade-in-element">
+                            <a href="./about.html" class="btn-pb">
+                                Learn More<i class="ri-arrow-right-line"></i>
+                            </a>
+                            <a href="mailto:hello@visaint.space" class="btn-op">
+                                Let's Talk<i class="ri-arrow-right-up-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="blurb">
-            <h2>I blend design, development & storytelling to craft unforgettable experiences & sticky products</h2>
-        </div>
-
-        <div id="page-2">
-            <div class="head">
-                <h1>Select</h1>
-            </div>
-            <div class="tail">
-                <h1>Work</h1>
-            </div>
-            <img src="./images/flower.svg" alt="Flower" loading="lazy" />
-
-            <div id="expandable-container">
-                <div id="first-ele" class="page2-ele" hx-get="./partials/veoma.html" hx-swap="innerHTML"
-                    hx-target="#veoma-content" hx-trigger="click" hx-indicator="#veoma-content">
-                    <span class="expand-indicator">▼</span>
-                    <h2>veoma studio</h2>
-                    <h6>2022</h6>
-                    <img src="./images/veo.webp" alt="Veoma Studio" loading="lazy" />
-                    <div id="veoma-content" class="page2-content"></div>
+        <!-- ═══════════════════════════════════
+             WRITING / NOTES
+        ═══════════════════════════════════ -->
+        <div id="writing-section">
+            <div class="writing-header fade-in-element">
+                <div class="writing-title-row">
+                    <h1 class="fade-in-title">Notes</h1>
                 </div>
-
-                <div class="page2-ele" hx-get="./partials/vfns.html" hx-swap="innerHTML" hx-target="#vfn-content"
-                    hx-trigger="click" hx-indicator="#vfn-content">
-                    <span class="expand-indicator">▼</span>
-                    <h2>view from nowhere</h2>
-                    <h6>2023</h6>
-                    <img src="./images/vfns.webp" alt="View from Nowhere" loading="lazy" />
-
-                    <div id="vfn-content" class="page2-content"></div>
-                </div>
-
-                <div class="page2-ele" hx-get="./partials/doctors.html" hx-swap="innerHTML" hx-target="#doctors-content"
-                    hx-trigger="click" hx-indicator="#doctors-content">
-                    <span class="expand-indicator">▼</span>
-                    <h2>doctors</h2>
-                    <h6>2024</h6>
-                    <img src="./images/doctors.webp" alt="Doctors" loading="lazy" />
-
-                    <div id="doctors-content" class="page2-content"></div>
-                </div>
-
-                <div class="page2-ele" hx-get="./partials/nebesna.html" hx-swap="innerHTML" hx-target="#nebesna-content"
-                    hx-trigger="click" hx-indicator="#nebesna-content">
-                    <span class="expand-indicator">▼</span>
-                    <h2>nebesna</h2>
-                    <h6>2025</h6>
-                    <img src="./images/neb.webp" alt="Nebesna" loading="lazy" />
-
-                    <div id="nebesna-content" class="page2-content"></div>
-                </div>
-
-                <div class="page2-ele" hx-get="./partials/anksioznost.html" hx-swap="innerHTML"
-                    hx-target="#anksioznost-content" hx-trigger="click" hx-indicator="#anksioznost-content">
-                    <span class="expand-indicator">▼</span>
-                    <h2>anksioznost</h2>
-                    <h6>2025</h6>
-                    <img src="./images/anksi.webp" alt="Anksioznost" loading="lazy" />
-
-                    <div id="anksioznost-content" class="page2-content"></div>
-                </div>
-            </div>
-            <!-- <div id="btn-div">
-                    <button><a href="#page-2">View more work</a></button>
-                </div> -->
-        </div>
-
-        <section class="chrome-scroll-section last extended-bottom" aria-label="Chrome CSS Scroll Demo">
-            <div class="container chrome-container">
-                <div class="focal-marker" aria-hidden="true"></div>
-                <div class="text-container">
-                    <div class="text">
-                        <h4>You Found Your</h4>
-                    </div>
-                    <div class="text" id="unicorn">
-                        <h2>Unicorn!</h2>
-                    </div>
-                    <div class="text">
-                        <h4>I want to craft</h4>
-                    </div>
-                    <div class="text">
-                        <h4>every aspect of <em>your brand</em></h4>
-                    </div>
-                    <div class="text">
-                        <h4>to <em>improve</em> engagement,</h4>
-                    </div>
-                    <div class="text">
-                        <h4>retention & satisfaction</h4>
-                    </div>
-                    <div class="text">
-                        <h4>for a <em>fraction</em> of agency costs.</h4>
-                    </div>
-                    <div class="text">
-                        <h4><br>Don't entrust your brand</h4>
-                    </div>
-                    <div class="text">
-                        <h4>to an intern</h4>
-                    </div>
-                    <div class="text">
-                        <h4><em>hire me</em> to obsess</h4>
-                    </div>
-                    <div class="text">
-                        <h4>over every aspect!</h4>
-                    </div>
-                    <div class="text">
-                        <h5>6+ years</h5>
-                    </div>
-                    <div class="text">
-                        <h5>6+ years of professional experience!</h5>
-                    </div>
-                    <div class="text">
-                        <h2><br>Contact Me</h2>
-                    </div>
-                    <div class="text">
-                        <h2>Today</h2>
-                    </div>
-                    <div class="text">
-                        <h5>For a quick & efficient solution!</h5>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="contact">
-            <a href="mailto:hello@visaint.space">
-                <img class="letter" src="./images/letter.svg" alt="Letter" loading="lazy" /></a>
-        </div>
-
-        <div>
-            <div class="skill" style="--t:20s">
-                <div>
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>Javascript</span>
-                    <span>React</span>
-                    <span>Node JS</span>
-                    <span>SQL</span>
-                    <span>Git</span>
-                </div>
-                <div>
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>Javascript</span>
-                    <span>React JS</span>
-                    <span>Node JS</span>
-                    <span>SQL</span>
-                    <span>Git</span>
-                </div>
+                <p class="writing-intro fade-in-element">
+                    A place where design thinking meets honest reflection. I
+                    write about software, interfaces, the craft of building
+                    things on the web — and occasionally the stranger terrain of
+                    being human while doing it. No hot takes, no listicles. Just
+                    things worth thinking about.
+                </p>
             </div>
 
-            <div class="skill" style="--t:15s">
-                <div>
-                    <span>Typescript</span>
-                    <span>Next JS</span>
-                    <span>Lenis</span>
-                    <span>WebGL</span>
-                    <span>Tree JS</span>
-                    <span>Bootstrap</span>
-                    <span>Material UI</span>
-                    <span>Tailwind</span>
-                    <span>SCSS</span>
-                </div>
-                <div>
-                    <span>Typescript</span>
-                    <span>Next JS</span>
-                    <span>Lenis</span>
-                    <span>WebGL</span>
-                    <span>Tree JS</span>
-                    <span>Bootstrap</span>
-                    <span>Material UI</span>
-                    <span>Tailwind</span>
-                    <span>SCSS</span>
+            <div class="writing-cards fade-in-element">
+                <!-- Article 1 -->
+                <a
+                    href="https://vsnotes.visaint.space/the-tyranny-of-the-empty-state"
+                    target="_blank"
+                    rel="noopener"
+                    class="writing-card"
+                    aria-label="Read: The Tyranny of the Empty State"
+                >
+                    <div class="wcard-paper">
+                        <div class="wcard-body">
+                            <span class="wcard-tag">Design</span>
+                            <h3 class="wcard-title">
+                                The Tyranny of the Empty State
+                            </h3>
+                            <p class="wcard-excerpt">
+                                On first-run experiences, blank canvases, and
+                                why most apps fail the moment before they
+                                matter.
+                            </p>
+                        </div>
+                        <div class="wcard-footer">
+                            <span class="wcard-read"
+                                >Read<i class="ri-arrow-right-up-line"></i
+                            ></span>
+                        </div>
+                    </div>
+                </a>
 
-                </div>
+                <!-- Article 2 -->
+                <a
+                    href="https://vsnotes.visaint.space/type-is-never-just-type"
+                    target="_blank"
+                    rel="noopener"
+                    class="writing-card"
+                    aria-label="Read: Type Is Never Just Type"
+                >
+                    <div class="wcard-paper">
+                        <div class="wcard-body">
+                            <span class="wcard-tag">Typography</span>
+                            <h3 class="wcard-title">Type Is Never Just Type</h3>
+                            <p class="wcard-excerpt">
+                                Every typeface choice is a cultural argument. A
+                                meditation on letterforms, feeling, and the
+                                weight of small decisions.
+                            </p>
+                        </div>
+                        <div class="wcard-footer">
+                            <span class="wcard-read"
+                                >Read<i class="ri-arrow-right-up-line"></i
+                            ></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Article 3 -->
+                <a
+                    href="https://vsnotes.visaint.space/building-in-the-open"
+                    target="_blank"
+                    rel="noopener"
+                    class="writing-card"
+                    aria-label="Read: Building in the Open"
+                >
+                    <div class="wcard-paper">
+                        <div class="wcard-body">
+                            <span class="wcard-tag">Personal</span>
+                            <h3 class="wcard-title">Building in the Open</h3>
+                            <p class="wcard-excerpt">
+                                What it actually feels like to ship something
+                                real — the doubt, the momentum, and the strange
+                                pride of a thing that exists.
+                            </p>
+                        </div>
+                        <div class="wcard-footer">
+                            <span class="wcard-read"
+                                >Read<i class="ri-arrow-right-up-line"></i
+                            ></span>
+                        </div>
+                    </div>
+                </a>
             </div>
 
-            <div class="skill" style="--t:15s">
-                <div>
-                    <span>Photoshop</span>
-                    <span>Illustrator</span>
-                    <span>Premiere Pro</span>
-                    <span>InDesign</span>
-                    <span>Figma</span>
-                    <span>Affinity</span>
-                    <span>Aseprite</span>
-                    <span>Canva</span>
-                    <span>SEO</span>
-                    <span>UX</span>
-                    <span>UI</span>
-                    <span>Typography</span>
-                    <span>Animation</span>
-                    <span>Video</span>
-                    <span>Audio</span>
-                </div>
-                <div>
-                    <span>Photoshop</span>
-                    <span>Illustrator</span>
-                    <span>Premiere Pro</span>
-                    <span>InDesign</span>
-                    <span>Figma</span>
-                    <span>Affinity</span>
-                    <span>Aseprite</span>
-                    <span>Canva</span>
-                    <span>SEO</span>
-                    <span>UX</span>
-                    <span>UI</span>
-                    <span>Typography</span>
-                    <span>Animation</span>
-                    <span>Video</span>
-                    <span>Audio</span>
-                </div>
+            <div class="writing-cta fade-in-element">
+                <a
+                    href="https://notes.visaint.space"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-bo"
+                >
+                    Read All Notes<i class="ri-arrow-right-up-line"></i>
+                </a>
             </div>
         </div>
-        <div id="page-3">
-            <div id="t-f-div">
-                <img src="./images/me-front.webp" alt="Portrait of Vi Saint, product and motion designer" loading="lazy"
-                    class="fade-in-element" />
-                <div id="t-s-div">
-                    <h1 class="fade-in-title">About</h1>
-                    <p class="fade-in-element about-paragraph">
-                        Vi Saint is a remote-first designer & developer with an unconventional background spanning
-                        multiple industries & creative disciplines. He specializes in turning complexity into intuitive
-                        & emotionally resonant experiences that feel just right.</p>
-                    <p class="fade-in-element about-paragraph">
-                        With 5+ years crafting everything from video game interfaces to high-converting e-commerce
-                        platforms, Viktor brings a rare mix: technical chops, cultural intelligence & obsessive
-                        attention to the human computer interaction.</p>
-                    <p class="fade-in-element about-paragraph">
-                        He doesn't build generic solutions—he creates brand worlds that feel alive, resonant across
-                        channels & highly memorable.</p>
-                    <button class="fade-in-element">
-                        <a href="mailto:hello@visaint.space">Let's Talk</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- /#writing-section -->
 
-    <div class="title fade-in-element">
-        <h1>Services</h1>
-    </div>
-    <div class="services-arrow" id="grids">
-        <div class="services-grid">
-            <!-- LEFT COLUMN -->
-            <div class="service-column">
-                <!-- Product Design -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-product" class="service-toggle">
-                    <label for="service-product" class="service-item" style="--delay: 0s;">
-                        <span class="expand-indicator">▼</span> Product Design
-                    </label>
-                    <div class="service-content">
-                        <p>End-to-end digital product experiences from research to launch. I handle UX strategy,
-                            interface design, and web design—creating cohesive products that users love and businesses
-                            need.</p>
-                        <ul class="service-sublist">
-                            <li>UX Research & Strategy</li>
-                            <li>User Interface Design</li>
-                            <li>Web Design</li>
-                            <li>Prototyping & Testing</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Build your product<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
+        <site-footer></site-footer>
 
-                <!-- Brand & Visual Identity -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-brand" class="service-toggle">
-                    <label for="service-brand" class="service-item" style="--delay: 0.1s;">
-                        <span class="expand-indicator">▼</span> Brand & Visual Identity
-                    </label>
-                    <div class="service-content">
-                        <p>Comprehensive brand universes that feel cohesive and alive. From positioning to visual
-                            systems, I craft identities that resonate across every touchpoint.</p>
-                        <ul class="service-sublist">
-                            <li>Brand Strategy & Positioning</li>
-                            <li>Visual Identity Systems</li>
-                            <li>Graphic Design</li>
-                            <li>Brand Worldbuilding</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Build your brand<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script>
+            (function () {
+                function initNameMarquee() {
+                    var wrap = document.querySelector(".name-marquee-wrap");
+                    var h1 = document.getElementById("name-text");
+                    if (!wrap || !h1) return;
+                    function checkOverflow() {
+                        if (h1.scrollWidth > wrap.offsetWidth + 2) {
+                            if (!wrap.classList.contains("is-overflowing")) {
+                                var clone = h1.cloneNode(true);
+                                clone.setAttribute("aria-hidden", "true");
+                                wrap.appendChild(clone);
+                                wrap.classList.add("is-overflowing");
+                            }
+                        } else {
+                            wrap.classList.remove("is-overflowing");
+                            wrap.querySelectorAll("[aria-hidden]").forEach(
+                                function (c) {
+                                    c.remove();
+                                },
+                            );
+                        }
+                    }
+                    checkOverflow();
+                    window.addEventListener("resize", checkOverflow);
+                }
+                if (document.readyState === "loading") {
+                    document.addEventListener(
+                        "DOMContentLoaded",
+                        initNameMarquee,
+                    );
+                } else {
+                    initNameMarquee();
+                }
+            })();
+        </script>
+        <script src="./main.js"></script>
+        <script>
+            /* Inject hamburger icon into #menu-btn once component renders */
+            (function injectHamburger() {
+                function inject() {
+                    var btn = document.getElementById('menu-btn');
+                    if (!btn) return;
+                    /* Replace any existing <i> icon */
+                    var existing = btn.querySelector('i');
+                    if (existing) existing.remove();
+                    if (!btn.querySelector('.hamburger')) {
+                        var h = document.createElement('span');
+                        h.className = 'hamburger';
+                        h.setAttribute('aria-hidden', 'true');
+                        h.innerHTML = '<span></span><span></span><span></span>';
+                        btn.appendChild(h);
+                    }
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', function() { setTimeout(inject, 50); });
+                } else {
+                    setTimeout(inject, 50);
+                }
+            })();
+        </script>
+        <script>
+            (function () {
+                var TILT_MAX = 6;
+                var SPRING = "cubic-bezier(0.34,1.56,0.64,1)";
+                var EASE_OUT = "cubic-bezier(0.23,1,0.32,1)";
 
-                <!-- Web Development -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-web-dev" class="service-toggle">
-                    <label for="service-web-dev" class="service-item" style="--delay: 0.2s;">
-                        <span class="expand-indicator">▼</span> Web Development
-                    </label>
-                    <div class="service-content">
-                        <p>Clean, performant code that brings designs to life. Specializing in modern frameworks, smooth
-                            animations, and accessible implementation that works beautifully.</p>
-                        <ul class="service-sublist">
-                            <li>Frontend Development</li>
-                            <li>React & Modern Frameworks</li>
-                            <li>Animation & Interactions</li>
-                            <li>Performance Optimization</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Start building<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
-            </div>
+                document
+                    .querySelectorAll(".skill-card-wrap")
+                    .forEach(function (wrap) {
+                        var card = wrap.querySelector(".skill-card");
+                        var isFlipped = false;
+                        var animating = false;
+                        var tiltEnabled = true;
+                        var lastX = 0,
+                            lastY = 0;
+                        var tiltRaf = null;
 
-            <!-- RIGHT COLUMN -->
-            <div class="service-column">
-                <!-- Game & Interactive Experiences -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-game" class="service-toggle">
-                    <label for="service-game" class="service-item" style="--delay: 0.3s;">
-                        <span class="expand-indicator">▼</span> Game & Interactive Experiences
-                    </label>
-                    <div class="service-content">
-                        <p>Engaging game mechanics and interactive worlds from concept to completion. I design systems,
-                            build prototypes, and create the assets that bring experiences to life.</p>
-                        <ul class="service-sublist">
-                            <li>Game Design & Mechanics</li>
-                            <li>Game Development</li>
-                            <li>Assets & Worldbuilding</li>
-                            <li>Interactive Prototypes</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Create your game<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
+                        /* ── Tilt on mousemove (RAF-throttled, no transition) ── */
+                        wrap.addEventListener("mousemove", function (e) {
+                            var rect = wrap.getBoundingClientRect();
+                            var cx = rect.left + rect.width / 2;
+                            var cy = rect.top + rect.height / 2;
+                            lastX = (e.clientX - cx) / (rect.width / 2);
+                            lastY = (e.clientY - cy) / (rect.height / 2);
 
-                <!-- Creative Strategy -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-strategy" class="service-toggle">
-                    <label for="service-strategy" class="service-item" style="--delay: 0.4s;">
-                        <span class="expand-indicator">▼</span> Creative Strategy
-                    </label>
-                    <div class="service-content">
-                        <p>Strategic thinking that drives results. From advertising campaigns to narrative design, I
-                            create compelling stories that cut through noise and connect with audiences.</p>
-                        <ul class="service-sublist">
-                            <li>Advertising & Campaigns</li>
-                            <li>Narrative Design</li>
-                            <li>Content Strategy</li>
-                            <li>Art Direction</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Launch your campaign<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
+                            if (animating || !tiltEnabled) return;
+                            if (tiltRaf) return;
 
-                <!-- Design Systems -->
-                <div class="service-category">
-                    <input type="checkbox" id="service-systems" class="service-toggle">
-                    <label for="service-systems" class="service-item" style="--delay: 0.5s;">
-                        <span class="expand-indicator">▼</span> Design Systems
-                    </label>
-                    <div class="service-content">
-                        <p>Scalable design systems that bring consistency and speed to growing teams. I build component
-                            libraries, documentation, and frameworks that empower everyone.</p>
-                        <ul class="service-sublist">
-                            <li>Component Libraries</li>
-                            <li>Design Tokens & Guidelines</li>
-                            <li>Documentation</li>
-                            <li>Design Ops</li>
-                        </ul>
-                        <a href="mailto:hello@visaint.space" class="service-contact">Scale your design<i
-                                class="ri-arrow-right-up-line"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- Footer loaded via HTMX -->
-    <div hx-get="./footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
+                            tiltRaf = requestAnimationFrame(function () {
+                                tiltRaf = null;
+                                var rotX = -lastY * TILT_MAX;
+                                var rotY = lastX * TILT_MAX;
 
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./main.js"></script>
-</body>
+                                card.style.transition = "none";
+                                if (!isFlipped) {
+                                    card.style.transform =
+                                        "rotateX(" +
+                                        rotX +
+                                        "deg) rotateY(" +
+                                        rotY +
+                                        "deg)";
+                                } else {
+                                    card.style.transform =
+                                        "rotateY(180deg) rotateX(" +
+                                        -rotX +
+                                        "deg) rotateY(" +
+                                        -rotY +
+                                        "deg)";
+                                }
+                            });
+                        });
 
+                        /* ── Spring back on mouse leave ── */
+                        wrap.addEventListener("mouseleave", function () {
+                            if (animating) return;
+                            if (tiltRaf) {
+                                cancelAnimationFrame(tiltRaf);
+                                tiltRaf = null;
+                            }
+                            tiltEnabled = true;
+                            card.style.transition = "transform 0.7s " + SPRING;
+                            card.style.transform = isFlipped
+                                ? "rotateY(180deg)"
+                                : "rotateY(0deg)";
+                        });
+
+                        /* ── Flip on click (left/right only) ── */
+                        wrap.addEventListener("click", function (e) {
+                            if (animating) return;
+                            animating = true;
+
+                            /* Cancel any pending tilt */
+                            if (tiltRaf) {
+                                cancelAnimationFrame(tiltRaf);
+                                tiltRaf = null;
+                            }
+
+                            /* Instant snap to neutral, no transition */
+                            card.style.transition = "none";
+                            card.style.transform = isFlipped
+                                ? "rotateY(180deg)"
+                                : "rotateY(0deg)";
+
+                            /* Flip on Y-axis, direction from cursor side */
+                            var flipDir = lastX >= 0 ? 1 : -1;
+                            var midRot = !isFlipped
+                                ? "rotateY(" + flipDir * 90 + "deg)"
+                                : "rotateY(" + (180 - flipDir * 90) + "deg)";
+
+                            card.style.transition =
+                                "transform 0.3s " + EASE_OUT;
+                            card.style.transform = midRot;
+
+                            setTimeout(function () {
+                                isFlipped = !isFlipped;
+                                card.classList.toggle("is-flipped", isFlipped);
+
+                                card.style.transition =
+                                    "transform 0.35s " + SPRING;
+                                card.style.transform = isFlipped
+                                    ? "rotateY(180deg)"
+                                    : "rotateY(0deg)";
+
+                                setTimeout(function () {
+                                    animating = false;
+                                    tiltEnabled = false;
+                                }, 360);
+                            }, 300);
+                        });
+
+                        /* ── Keyboard support ── */
+                        card.addEventListener("keydown", function (e) {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                lastX = 0.5;
+                                lastY = 0;
+                                wrap.click();
+                            }
+                        });
+                    });
+            })();
+        </script>
+    </body>
 </html>

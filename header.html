@@ -1,5 +1,6 @@
 <header>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <!-- checkbox MUST be direct child of header — sibling selectors depend on it -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
     <nav>
         <div id="logo-div">
             <a href="/" id="logo-link">
@@ -7,36 +8,205 @@
             </a>
         </div>
         <div class="nav-right">
-            <a href="./contact.html" class="header-link">contact<i class="ri-arrow-right-up-line"></i></a>
-            <a href="https://notes.visaint.space" class="header-link orange-arrow">blog<i
-                    class="ri-arrow-right-up-line"></i></a>
-            <label id="menu-btn" for="menu-toggle">
-                <span>menu<i class="ri-add-line"></i></span>
+            <!-- contact: pink×blue (btn-pb) -->
+            <a href="/contact.html" class="btn-pb"
+                ><span class="nav-label">contact</span>
+            </a>
+            <!-- work: orange×pink (btn-op) -->
+            <a href="/work.html" class="btn-op"
+                ><span class="nav-label">work</span>
+            </a>
+            <!-- blog: blue×orange (btn-bo) -->
+            <a
+                href="https://notes.visaint.space"
+                class="btn-bo hide-small"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span class="nav-label">blog</span
+                ><i class="ri-arrow-right-up-line"></i
+            ></a>
+            <!-- about: pink×blue (btn-pb), desktop only -->
+            <a href="/about.html" class="btn-pb desktop-only"
+                ><span class="nav-label">about</span>
+            </a>
+            <!-- menu: grey circle -->
+            <label id="menu-btn" for="menu-toggle" aria-label="Open menu">
+                <span class="hamburger-icon" aria-hidden="true">
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                </span>
             </label>
         </div>
     </nav>
-    <label for="menu-toggle" class="menu-overlay"></label>
-    <div class="slide-menu">
+
+    <label for="menu-toggle" class="menu-overlay" aria-hidden="true"></label>
+
+    <div
+        class="slide-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+    >
         <label for="menu-toggle" class="menu-close" aria-label="Close menu">
-            <span></span>
-            <span></span>
+            <span class="close-x">
+                <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <line
+                        x1="1.5"
+                        y1="1.5"
+                        x2="12.5"
+                        y2="12.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                    <line
+                        x1="12.5"
+                        y1="1.5"
+                        x2="1.5"
+                        y2="12.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </span>
         </label>
+
         <div class="menu-content">
             <ul class="main-menu">
-                <li>
-                    <a href="index.html" class="menu-link home-trigger">Home</a>
-                    <ul class="menu-submenu">
-                        <li><a href="index.html#page-2" class="menu-link menu-bullet">Work</a></li>
-                        <li><a href="index.html#page-3" class="menu-link menu-bullet">About</a></li>
-                        <li><a href="index.html#grids" class="menu-link menu-bullet">Services</a></li>
-                    </ul>
+                <li class="menu-item" style="--i: 0">
+                    <!-- On homepage: btn-op (orange) = Home. On other pages: becomes "Home" link -->
+                    <a
+                        href="/index.html"
+                        class="menu-btn-link btn-op menu-link-home"
+                        >Home</a
+                    >
                 </li>
-                <li><a href="contact.html" class="menu-link">Contact</a></li>
-                <li><a href="process.html" class="menu-link">My Process</a></li>
-                <li><a href="story.html" class="menu-link">My Story</a></li>
-                <li><a href="https://notes.visaint.space" class="menu-link header-link">Blog <i
-                            class="ri-arrow-right-up-line"></i></a></li>
+                <li class="menu-item" style="--i: 1">
+                    <!-- On homepage: btn-pb (pink) = Contact. On contact page: becomes btn-op (orange) = Home -->
+                    <a
+                        href="/contact.html"
+                        class="menu-btn-link btn-pb menu-link-contact"
+                        >Contact</a
+                    >
+                </li>
+                <li class="menu-item" style="--i: 2">
+                    <a href="/work.html" class="menu-btn-link btn-bo"
+                        >Work</a
+                    >
+                </li>
+                <li class="menu-item" style="--i: 3">
+                    <a href="/services.html" class="menu-btn-link btn-pb"
+                        >Services</a
+                    >
+                </li>
+                <li class="menu-item" style="--i: 4">
+                    <a href="/about.html" class="menu-btn-link btn-pb">About</a>
+                </li>
+                <li class="menu-item" style="--i: 5">
+                    <a
+                        href="https://notes.visaint.space"
+                        class="menu-btn-link btn-bo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Blog<i class="ri-arrow-right-up-line"></i
+                    ></a>
+                </li>
             </ul>
+
+            <!-- Social links — mirrors the footer's pixel-grid, smaller -->
+            <div class="menu-social" style="--i: 6">
+                <nav
+                    class="pixel-grid pixel-grid--sm"
+                    aria-label="Social links"
+                >
+                    <a
+                        href="https://www.linkedin.com/in/viktorsekovski/"
+                        class="px-link"
+                        style="--px-color: #0a66c2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-linkedin" /></svg
+                        ></span>
+                        <span class="px-label">LinkedIn</span>
+                    </a>
+                    <a
+                        href="https://github.com/visaint"
+                        class="px-link"
+                        style="--px-color: #f48f6e"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-github" /></svg
+                        ></span>
+                        <span class="px-label">GitHub</span>
+                    </a>
+                    <a
+                        href="https://notes.visaint.space"
+                        class="px-link"
+                        style="--px-color: #ee8198"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Blog"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-blog" /></svg
+                        ></span>
+                        <span class="px-label">Blog</span>
+                    </a>
+                    <a
+                        href="https://codepen.io/visaint"
+                        class="px-link"
+                        style="--px-color: #5a9fd4"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="My Experiments"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-codepen" /></svg
+                        ></span>
+                        <span class="px-label">My Experiments</span>
+                    </a>
+                    <a
+                        href="https://contra.com/viktorsekovski_8r714jwo/about?r=viktorsekovski_8r714jwo"
+                        class="px-link"
+                        style="--px-color: #f48f6e"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Contra"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-contra" /></svg
+                        ></span>
+                        <span class="px-label">Contra</span>
+                    </a>
+                    <a
+                        href="https://www.instagram.com/visaintstudio/"
+                        class="px-link"
+                        style="--px-color: #e1306c"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <span class="px-icon"
+                            ><svg><use href="#ic-instagram" /></svg
+                        ></span>
+                        <span class="px-label">Instagram</span>
+                    </a>
+                </nav>
+            </div>
         </div>
     </div>
 </header>
