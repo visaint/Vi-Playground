@@ -1,0 +1,197 @@
+/* Hero heading carousel — swipe (or drag / arrow keys) the
+   headline to cycle titles; auto-advances every 3s. */
+(function () {
+    "use strict";
+
+    var TITLES = [
+        ["Designer &", "Developer"],
+        ["Creative", "Technologist"],
+        ["Creative", "Coder"],
+        ["Product", "Designer"],
+        ["Frontend", "Developer"],
+        ["User Interface", "Designer"],
+        ["User Experience", "Designer"],
+        ["Graphic", "Designer"],
+        ["Creative", "Director"],
+        ["Growth", "Hacker"],
+    ];
+
+    var heroHead = document.querySelector("#hero-head h1");
+    var mainHead = document.querySelector("#main-head h1");
+    if (!heroHead || !mainHead) return;
+
+    var THRESHOLD = 48; // px — minimum horizontal drag to change title
+    var AXIS_LOCK = 6; // px — drag must be this far before we claim it
+    var MAX_FOLLOW = 140; // px — clamp the live drag offset
+    var EXIT_MS = 180; // slide-out duration (matches CSS transition)
+    var ENTER_MS = 200; // settle time before the carousel unlocks
+    var AUTO_MS = 3000; // autoplay: auto-advance every 3s
+
+    var heads = [heroHead, mainHead];
+    var index = 0;
+    var activePointer = null;
+    var dragging = false;
+    var animating = false;
+    var startX = 0;
+    var startY = 0;
+    var dx = 0;
+    var autoTimer = null;
+
+    function setTitle(i) {
+        index = (i + TITLES.length) % TITLES.length;
+        heroHead.textContent = TITLES[index][0];
+        mainHead.textContent = TITLES[index][1];
+        fitTitles();
+    }
+
+    /* Desktop/tablet headlines are nowrap + clipped; if a title is wider
+       than its container, shrink it just enough to fit. The h1s carry their
+       own padding, so fit the content box, then re-check to converge.
+       Mobile keeps the CSS clamp sizing (titles wrap there instead). */
+    function fitTitles() {
+        if (window.innerWidth < 768) return;
+        for (var i = 0; i < heads.length; i++) {
+            var el = heads[i];
+            el.style.fontSize = "";
+            for (var pass = 0; pass < 3; pass++) {
+                if (el.scrollWidth <= el.clientWidth + 1) break;
+                var cs = getComputedStyle(el);
+                var pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+                var usable = el.clientWidth - pad;
+                var contentW = el.scrollWidth - pad;
+                if (contentW <= usable) break;
+                var base = parseFloat(cs.fontSize);
+                el.style.fontSize =
+                    Math.floor((base * usable) / contentW * 100) / 100 + "px";
+            }
+        }
+    }
+
+    function setTransform(x) {
+        for (var i = 0; i < heads.length; i++) {
+            heads[i].style.transform = x;
+        }
+    }
+
+    function setTransition(on) {
+        for (var i = 0; i < heads.length; i++) {
+            heads[i].classList.toggle("hero-carousel-anim", on);
+        }
+    }
+
+    /* dir: +1 = next (swipe left / ArrowRight), -1 = previous */
+    function go(dir) {
+        if (animating) return;
+        animating = true;
+        restartAuto(); // give a full 3s after every change, manual or automatic
+        var outX = dir === 1 ? "translateX(-100%)" : "translateX(100%)";
+        var inX = dir === 1 ? "translateX(100%)" : "translateX(-100%)";
+
+        setTransition(true);
+        setTransform(outX); // slide the current title out
+        setTimeout(function () {
+            setTitle(index + dir);
+            // park the incoming title at the far side (no transition),
+            // then slide it in
+            setTransition(false);
+            setTransform(inX);
+            void heroHead.offsetWidth; // flush so the enter transition runs
+            setTransition(true);
+            setTransform("translateX(0)");
+            setTimeout(function () {
+                setTransition(false);
+                setTransform("");
+                animating = false;
+            }, ENTER_MS);
+        }, EXIT_MS);
+    }
+
+    /* Autoplay: advance every AUTO_MS, paused while a pointer is down
+       so a long drag never fights the timer. */
+    function restartAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(function () {
+            if (activePointer === null) go(1);
+        }, AUTO_MS);
+    }
+
+    function reset() {
+        setTransition(true);
+        setTransform("translateX(0)");
+        setTimeout(function () {
+            setTransition(false);
+            setTransform("");
+        }, 200);
+    }
+
+    function cleanup() {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+        window.removeEventListener("pointercancel", onCancel);
+        document.documentElement.classList.remove("hero-carousel-dragging");
+        activePointer = null;
+        dragging = false;
+        dx = 0;
+    }
+
+    function onDown(e) {
+        if (animating || activePointer !== null) return;
+        if (e.pointerType === "mouse" && e.button !== 0) return;
+        activePointer = e.pointerId;
+        startX = e.clientX;
+        startY = e.clientY;
+        window.addEventListener("pointermove", onMove);
+        window.addEventListener("pointerup", onUp);
+        window.addEventListener("pointercancel", onCancel);
+    }
+
+    function onMove(e) {
+        if (e.pointerId !== activePointer) return;
+        var moveX = e.clientX - startX;
+        var moveY = e.clientY - startY;
+        if (!dragging) {
+            if (Math.abs(moveX) < AXIS_LOCK) return;
+            if (Math.abs(moveX) < Math.abs(moveY)) return; // vertical intent — let the page scroll
+            dragging = true;
+            document.documentElement.classList.add("hero-carousel-dragging");
+        }
+        dx = Math.max(-MAX_FOLLOW, Math.min(MAX_FOLLOW, moveX));
+        setTransform("translateX(" + dx + "px)");
+    }
+
+    function onUp(e) {
+        if (e.pointerId !== activePointer) return;
+        var shouldGo = dragging && Math.abs(dx) >= THRESHOLD;
+        var dir = dx < 0 ? 1 : -1;
+        var hadOffset = dx !== 0;
+        cleanup();
+        if (shouldGo) go(dir);
+        else if (hadOffset) reset();
+    }
+
+    function onCancel(e) {
+        if (e.pointerId !== activePointer) return;
+        var hadOffset = dx !== 0;
+        cleanup();
+        if (hadOffset) reset();
+    }
+
+    heroHead.addEventListener("pointerdown", onDown);
+    mainHead.addEventListener("pointerdown", onDown);
+
+    for (var i = 0; i < heads.length; i++) {
+        heads[i].addEventListener("keydown", function (e) {
+            if (e.key === "ArrowRight") {
+                e.preventDefault();
+                go(1);
+            } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                go(-1);
+            }
+        });
+    }
+
+    setTitle(0);
+    restartAuto();
+    window.addEventListener("resize", fitTitles);
+})();

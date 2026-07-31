@@ -120,6 +120,61 @@
         />
 
         <link rel="stylesheet" href="./styles.css" />
+        <style>
+            @font-face {
+                font-family: "Jacquard 12";
+                src: url("./fonts/jacquard-12.woff2") format("woff2");
+                font-weight: 400;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Libre Baskerville";
+                src: url("./fonts/libre-baskerville.woff2") format("woff2");
+                font-weight: 400 700;
+                font-style: normal;
+                font-display: swap;
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+            @font-face {
+                font-family: "Libre Baskerville";
+                src: url("./fonts/libre-baskerville-ext.woff2") format("woff2");
+                font-weight: 400 700;
+                font-style: normal;
+                font-display: swap;
+                unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+            @font-face {
+                font-family: "Libre Baskerville";
+                src: url("./fonts/libre-baskerville-italic.woff2") format("woff2");
+                font-weight: 400 700;
+                font-style: italic;
+                font-display: swap;
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+            @font-face {
+                font-family: "Libre Baskerville";
+                src: url("./fonts/libre-baskerville-ext-italic.woff2") format("woff2");
+                font-weight: 400 700;
+                font-style: italic;
+                font-display: swap;
+                unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+            @font-face {
+                font-family: "DinaRemasterII";
+                src: url("./fonts/DinaRemasterII.woff2") format("woff2");
+                font-weight: 400;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "DinaRemasterII-Bold";
+                src: url("./fonts/DinaRemasterII-Bold.woff2") format("woff2");
+                font-weight: 700;
+                font-style: normal;
+                font-display: swap;
+            }
+        </style>
         <link
             href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
             rel="stylesheet"
@@ -193,35 +248,32 @@
                     </div>
                     <div id="hero-head">
                         <div id="prefix">
-                            <h6>the only</h6>
+                            <h6>Europe's most unnecessarily ambitious</h6>
                         </div>
-                        <h1>Designer &</h1>
+                        <h1 tabindex="0">Designer &amp;</h1>
                     </div>
                     <div id="main-head">
-                        <h1>Developer</h1>
+                        <h1 tabindex="0" aria-live="polite">Developer</h1>
                         <div id="mini">
-                            <h6>based in europe</h6>
+                            <h6>Available for freelance &amp; full-time work</h6>
                         </div>
                     </div>
                 </div>
                 <div id="first-bottom">
-                    <div id="hero-stats">
-                        <div class="hero-stat">
-                            <span class="stat-icon">✦</span>
-                            <h5>Design + Strategy</h5>
+                    <div id="hero-tags">
+                        <div class="hero-tag">
+                            <h5>Designer</h5>
+                            <span class="tag-desc">UX &amp; Interfaces</span>
                         </div>
-                        <div class="stat-sep" aria-hidden="true">—</div>
-                        <div class="hero-stat">
-                            <span class="stat-icon">◈</span>
-                            <h5>6+ Years</h5>
+                        <div class="hero-tag">
+                            <h5>Developer</h5>
+                            <span class="tag-desc">Web &amp; Apps</span>
                         </div>
-                        <div class="stat-sep" aria-hidden="true">—</div>
-                        <div class="hero-stat">
-                            <span class="stat-icon">⌨</span>
-                            <h5>Code + Build</h5>
+                        <div class="hero-tag">
+                            <h5>Problem Solver</h5>
+                            <span class="tag-desc">AI &amp; Automation</span>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -247,6 +299,71 @@
                 />
 
                 <div id="expandable-container">
+                    <!-- CLIMATE MIGRATION MAP -->
+                    <div class="page2-ele" data-work="climate">
+                        <input
+                            type="checkbox"
+                            id="work-climate"
+                            class="work-toggle"
+                        />
+                        <label for="work-climate" class="work-row">
+                            <span class="expand-indicator" aria-hidden="true"
+                                >▼</span
+                            >
+                            <h2>climate migration map</h2>
+                            <h6 class="work-label">
+                                <i
+                                    class="ri-global-line wl-icon"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="wl-text">Data Visualization</span>
+                            </h6>
+                            <img
+                                src="./images/climate.png"
+                                alt="Climate Migration Map project preview"
+                                loading="lazy"
+                                class="work-hover-img"
+                            />
+                        </label>
+                        <div class="work-teaser">
+                            <div class="project-tldr">
+                                <div class="tldr-text">
+                                    <p class="tag-pills">
+                                        <span>Interactive Map</span
+                                        ><span>Data Viz</span><span>Climate</span
+                                        ><span>D3.js</span><span>React</span>
+                                    </p>
+                                    <p>
+                                        An interactive data visualization
+                                        exploring global climate migration
+                                        patterns. Built with React and D3.js to
+                                        communicate complex environmental data
+                                        through an intuitive, engaging interface.
+                                    </p>
+                                </div>
+                                <div class="tldr-gallery">
+                                    <figure>
+                                        <img
+                                            src="./images/climate.png"
+                                            alt="Climate Migration Map"
+                                            loading="lazy"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="tldr-actions">
+                                    <a
+                                        href="https://climate-migration-map.vercel.app"
+                                        class="btn-bo"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        >Live Site
+                                        <i class="ri-arrow-right-up-line"></i
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- NEBESNA -->
                     <div class="page2-ele" data-work="nebesna">
                         <input
@@ -1270,6 +1387,7 @@
             })();
         </script>
         <script src="./main.js"></script>
+        <script src="./hero-carousel.js"></script>
         <script>
             /* Inject hamburger icon into #menu-btn once component renders */
             (function injectHamburger() {

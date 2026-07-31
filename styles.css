@@ -380,13 +380,9 @@ nav.nav-scrolled {
 }
 
 .nav-right .nav-label {
-    display: inline;
+    display: inline-block;
 }
 .nav-right .icon-mobile {
-    display: none;
-}
-.nav-right .btn-pb i.ri-arrow-right-up-line,
-.nav-right .btn-bo i.ri-arrow-right-up-line {
     display: none;
 }
 /* legacy: hide old + icon in menu-btn if component renders it */
@@ -408,6 +404,7 @@ nav.nav-scrolled {
     font-family: "DinaRemasterII", monospace;
     font-size: clamp(11px, 1.05vw, 14px);
     letter-spacing: 0.06em;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Nav labels: accent-colored in light mode */
@@ -421,17 +418,15 @@ nav.nav-scrolled {
     .nav-right .btn-bo .nav-label {
         color: #2060a0;
     }
+/* Day mode: don't flip labels to white (unreadable on the light
+   hover tint) — keep the accent color, expand the text instead */
     .nav-right a.btn-op:hover .nav-label,
-    .nav-right a.btn-op:active .nav-label {
-        color: #f4f5ef;
-    }
+    .nav-right a.btn-op:active .nav-label,
     .nav-right a.btn-pb:hover .nav-label,
-    .nav-right a.btn-pb:active .nav-label {
-        color: #f4f5ef;
-    }
+    .nav-right a.btn-pb:active .nav-label,
     .nav-right a.btn-bo:hover .nav-label,
     .nav-right a.btn-bo:active .nav-label {
-        color: #f4f5ef;
+        transform: scale(1.1);
     }
 }
 
@@ -1090,6 +1085,7 @@ body:has(#menu-toggle:checked) {
 #hero {
     width: 100%;
     min-height: 100vh;
+    min-height: 100svh;
     padding-top: 0;
     position: relative;
     display: flex;
@@ -1157,7 +1153,7 @@ body:has(#menu-toggle:checked) {
     text-transform: none;
 }
 
-/* prefix "the only" — left-aligned */
+/* prefix line — left-aligned */
 #prefix {
     z-index: 1;
     width: 100%;
@@ -1169,6 +1165,7 @@ body:has(#menu-toggle:checked) {
     position: relative;
     left: -1vw;
     font-size: clamp(0.85rem, 1.2vw, 1.4rem);
+    text-transform: none;
 }
 
 /* hero-head: left, main-head: right — spread horizontally */
@@ -1178,21 +1175,22 @@ body:has(#menu-toggle:checked) {
 }
 
 #hero-head {
-    padding: 0 clamp(45px, 10vw, 160px);
+    padding: 0 clamp(30px, 6vw, 110px);
     text-align: left;
 }
 
 #main-head {
-    padding: 0 clamp(45px, 10vw, 160px);
+    padding: 0 clamp(30px, 6vw, 110px);
     text-align: right;
 }
 
-/* "based in europe" — right */
+/* "available for freelance & full-time." — right */
 #mini {
     text-align: right;
 }
 #mini h6 {
     font-size: clamp(0.85rem, 1.2vw, 1.4rem);
+    text-transform: none;
 }
 
 #hero-head h1,
@@ -1212,33 +1210,50 @@ body:has(#menu-toggle:checked) {
     bottom: 0;
 }
 
-#hero-stats {
+#hero-tags {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex: 1;
+    align-items: flex-end;
+    gap: clamp(1rem, 3vw, 3rem);
 }
-.hero-stat {
+.hero-tag {
     display: flex;
-    align-items: center;
-    gap: 0.5em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45em;
 }
-.hero-stat h5 {
-    font-size: clamp(1rem, 1.4vw, 1.6rem);
+.hero-tag h5 {
+    font-family: "DinaRemasterII", monospace;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.5vw, 1.7rem);
     white-space: nowrap;
+    letter-spacing: 0.02em;
 }
-.stat-icon {
-    font-size: 0.65em;
-    color: var(--pink);
-    opacity: 0.7;
-    display: inline-block;
+.tag-desc {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(0.72rem, 0.95vw, 1rem);
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    opacity: 0.9;
 }
-.stat-sep {
-    color: var(--bordergrey);
-    font-size: 1rem;
-    opacity: 0.5;
+
+/* ── Hero heading carousel (swipe/drag to alternate titles) ── */
+#hero-head h1,
+#main-head h1 {
+    touch-action: pan-y;
+    cursor: grab;
     user-select: none;
+    -webkit-user-select: none;
+}
+.hero-carousel-anim {
+    transition: transform 0.18s cubic-bezier(0.25, 0.6, 0.25, 1);
+}
+html.hero-carousel-dragging,
+html.hero-carousel-dragging * {
+    cursor: grabbing !important;
 }
 #hero-bullets {
     display: none;
@@ -2316,20 +2331,24 @@ footer {
     min-width: 0;
 }
 .foot-name {
-    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    font-size: clamp(3.2rem, 6vw, 6rem);
     line-height: 1;
     margin: 0 0 0.25rem;
     letter-spacing: -0.02em;
-    /* Override the global h1 rule's large padding-right (meant for the
-       hero heading) — it was widening .foot-identity and stealing the
-       space .foot-links needs to sit flush against the right edge */
+    /* Override the global h1 rule's large paddings (meant for the
+       hero heading) — padding-left was pushing the name right of the
+       content below it, padding-right was stealing the space
+       .foot-links needs to sit flush against the right edge */
     padding-right: 0;
+    padding-left: 0;
+    text-align: left;
 }
 .foot-title {
+    font-family: "DinaRemasterII", monospace;
     font-size: clamp(0.85rem, 1.2vw, 1.05rem);
     font-weight: 500;
     margin: 0;
-    opacity: 0.7;
+    color: var(--orange);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -2345,15 +2364,23 @@ footer {
     opacity: 0.55;
     text-decoration: none;
     letter-spacing: 0.04em;
-    transition: opacity 0.2s ease;
+    transform-origin: left center;
+    transition:
+        opacity 0.2s ease,
+        color 0.25s ease,
+        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        letter-spacing 0.25s ease;
 }
 .foot-email:hover {
     opacity: 1;
+    color: var(--pink);
+    transform: scale(1.08);
+    letter-spacing: 0.09em;
 }
 
 .pixel-grid {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
     gap: 2px;
     width: fit-content;
     margin-left: auto;
@@ -2377,7 +2404,32 @@ footer {
 
 .foot-links {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+}
+
+.foot-links .pixel-grid {
+    margin-left: 0;
+    grid-template-columns: repeat(4, auto);
+}
+
+/* X strip — spans a full row, as long as 4 buttons */
+.foot-links .px-link.px-link--wide {
+    grid-column: 1 / -1;
+    width: auto;
+    flex-direction: row;
+    padding: 0 1.5rem;
+    order: 99;
+    border-radius: 16px;
+}
+
+.foot-links .px-link--wide .px-body {
+    flex-direction: row;
+    gap: 10px;
+}
+
+.foot-links .px-link--wide .px-icon {
+    width: 26px;
+    height: 26px;
 }
 
 .foot-bottom {
@@ -2428,7 +2480,7 @@ footer {
         margin-left: 0;
     }
     .foot-name {
-        font-size: clamp(2.2rem, 8vw, 3rem);
+        font-size: clamp(3rem, 11vw, 4.5rem);
     }
 }
 
@@ -3267,117 +3319,136 @@ footer {
     #hero {
         display: flex;
         flex-direction: column;
-        min-height: 90vh;
-        padding-top: calc(60px + 0.1rem);
-        padding-bottom: 0.5rem;
+        min-height: 100vh;
+        min-height: 100svh;
+        --hero-big: clamp(2.75rem, min(18vw, 15svh), 5.5rem);
+        --hero-small: clamp(1rem, 4.5vw, 1.4rem);
+        padding-top: calc(clamp(3.6rem, 11vw, 5rem) + 34px);
+        padding-bottom: 0.9rem;
     }
     #name {
         text-align: left;
         margin-top: 0;
         margin-bottom: 0;
+        justify-content: flex-start;
     }
-    #name h1,
-    #hero-head h1,
-    #main-head h1 {
-        font-size: clamp(15vw, 18vw, 22vw);
+    .name-marquee-wrap {
+        justify-content: flex-start;
     }
-
+    #name h1 {
+        font-size: var(--hero-small);
+        line-height: 0.85;
+        padding: 0;
+        color: var(--pink) !important;
+        text-transform: none;
+    }
 
     #hero-handle {
         flex: 1;
+        min-height: 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: stretch;
-        gap: 0.15rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.4rem;
         padding: 0.5rem 0;
     }
     #hero-head,
     #main-head {
         padding: 0;
         overflow: visible;
+        text-align: left;
+        width: 100%;
+    }
+    /* pull Technologist up so the two big headline lines sit tight */
+    #hero-head {
+        margin-bottom: -0.4rem;
     }
     #hero-head h1,
     #main-head h1 {
-        line-height: 1;
+        line-height: 0.78;
         padding: 0;
         padding-right: 0;
         max-width: none;
-        white-space: nowrap;
+        white-space: normal;
+        text-align: left;
+        font-size: var(--hero-big);
     }
 
     #prefix {
-        margin-top: 0.2rem;
+        margin-top: 0;
         margin-bottom: 0;
+        text-align: left;
     }
     #prefix h6 {
         left: 0;
-        font-size: clamp(1.6rem, 4.8vw, 2.4rem);
-        line-height: 1.3;
-        padding: 0.3rem 0;
+        font-size: var(--hero-small);
+        line-height: 1.02;
+        color: var(--pink);
+        text-transform: none;
+        font-weight: 400;
+        padding: 0;
+        text-align: left;
     }
 
     #mini {
-        margin: 0.2rem 0 0;
-        text-align: right;
+        margin: 0;
+        text-align: left;
         padding-right: 0;
     }
     #mini h6 {
         position: static;
-        font-size: clamp(1.2rem, 3.6vw, 1.6rem);
+        font-size: var(--hero-small);
+        line-height: 1.02;
+        color: var(--pink);
+        text-transform: none;
+        font-weight: 400;
+        text-align: left;
     }
 
     #first-bottom {
+        position: static;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0.9rem;
+        padding: 0.9rem 1rem 0;
+        border-top: 1px solid
+            color-mix(in srgb, var(--bordergrey) 35%, transparent);
+    }
+    #hero-tags {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.9rem;
+    }
+    .hero-tag {
+        gap: 0.3em;
+    }
+    .hero-tag:nth-child(1) {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .hero-tag:nth-child(2) {
         align-items: center;
-        gap: 0;
-        padding: 0.75rem 1rem;
-        border-top: none;
+        text-align: center;
     }
-    #hero-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 0.2rem 0.6rem;
-        width: 100%;
+    .hero-tag:nth-child(3) {
+        align-items: flex-end;
+        text-align: right;
     }
-    .hero-stat {
-        gap: 0.4em;
+    .hero-tag h5 {
+        font-family: "DinaRemasterII", monospace;
+        font-weight: 400;
+        font-size: var(--hero-small);
+        text-transform: none;
     }
-    .hero-stat h5 {
-        font-size: clamp(0.85rem, 3.2vw, 1rem);
-        white-space: nowrap;
-        display: inline;
-    }
-    .stat-icon {
-        font-size: 0.65em;
-        opacity: 0.7;
-    }
-    .stat-sep {
-        display: none;
-    }
-
-    /* Small phones: 2+1 stats layout */
-    @media (max-width: 480px) {
-        .hero-stat:nth-child(5) {
-            flex: 0 0 100%;
-            justify-content: center;
-        }
-    }
-
-    /* Bigger phones: all 3 stats in one line */
-    @media (min-width: 481px) {
-        #hero-stats {
-            flex-wrap: nowrap;
-            gap: 0.4rem 1rem;
-        }
-        .hero-stat:nth-child(5) {
-            flex: none;
-            justify-content: flex-start;
-        }
+    .tag-desc {
+        font-size: clamp(0.72rem, 2.6vw, 0.95rem);
+        color: var(--orange);
+        opacity: 0.85;
+        text-transform: none;
+        white-space: normal;
     }
 
     #ex {
@@ -3577,17 +3648,28 @@ footer {
     .hide-small {
         display: none !important;
     }
+}
 
-    #hero-head h1,
-    #main-head h1 {
-        font-size: clamp(15vw, 17vw, 19vw);
-        line-height: 1;
+/* ── Very small / short phones: tighten hero padding so the name,
+   headline and the orange tags all fit on the first screen ── */
+@media (max-width: 380px) and (max-height: 600px) {
+    #hero {
+        padding-top: calc(clamp(3.6rem, 11vw, 5rem) + 32px);
+        padding-bottom: 0.5rem;
     }
-    #name h1 {
-        font-size: clamp(14vw, 18vw, 22vw);
+    #hero-handle {
+        padding: 0.25rem 0;
+        gap: 0.25rem;
     }
-    .hero-stat h5 {
-        font-size: clamp(0.9rem, 3.8vw, 1.2rem);
+    #hero-head {
+        margin-bottom: -0.25rem;
+    }
+    #first-bottom {
+        gap: 0.7rem;
+        padding: 0.6rem 1rem 0;
+    }
+    #hero-tags {
+        gap: 0.7rem;
     }
 }
 
