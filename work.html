@@ -79,12 +79,38 @@
             content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="Vi Saint" />
-        <link rel="stylesheet" href="./styles.css" />
         <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
+            rel="preload"
+            href="./fonts/libre-baskerville.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
         />
-        <script src="./components.js"></script>
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link rel="stylesheet" href="./styles.css" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
+        <script src="./components.js" defer></script>
         <!-- STRUCTURED DATA (Schema.org JSON-LD) -->
 
         <script type="application/ld+json">
@@ -164,7 +190,7 @@
                     <div class="trail-media">
                         <div class="trail-image">
                             <img
-                                src="./images/climate.png"
+                                src="./images/climate.webp"
                                 alt="Interactive Climate Migration Map"
                                 loading="lazy"
                             />
@@ -187,9 +213,9 @@
                                 class="btn-bo"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Open the live Climate Migration Map site"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                         </div>
                     </div>
                 </div>
@@ -254,17 +280,15 @@
                             <a
                                 href="./case-studies/nebesna.html"
                                 class="btn-pb"
+                                aria-label="Read the Nebesna case study"
                                 >Read Case Study
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="btn-bo"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
+                            <span
+                                class="btn-bo is-disabled"
+                                aria-disabled="true"
+                                title="Live site coming soon"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                 </div>
@@ -305,17 +329,15 @@
                             <a
                                 href="./case-studies/anksioznost.html"
                                 class="btn-op"
+                                aria-label="Read the Anksioznost case study"
                                 >Read Case Study
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="btn-bo"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
+                            <span
+                                class="btn-bo is-disabled"
+                                aria-disabled="true"
+                                title="Live site coming soon"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                     <div class="trail-media">
@@ -404,17 +426,15 @@
                             <a
                                 href="./case-studies/veoma.html"
                                 class="btn-pb"
+                                aria-label="Read the Veoma Studio case study"
                                 >Read Case Study
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="btn-bo"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
+                            <span
+                                class="btn-bo is-disabled"
+                                aria-disabled="true"
+                                title="Live site coming soon"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                 </div>
@@ -455,17 +475,15 @@
                             <a
                                 href="./case-studies/vfns.html"
                                 class="btn-op"
+                                aria-label="Read the View From Nowhere case study"
                                 >Read Case Study
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="btn-bo"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
+                            <span
+                                class="btn-bo is-disabled"
+                                aria-disabled="true"
+                                title="Live site coming soon"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                     <div class="trail-media">
@@ -555,17 +573,15 @@
                             <a
                                 href="./case-studies/doctors.html"
                                 class="btn-pb"
+                                aria-label="Read the Doctors case study"
                                 >Read Case Study
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="btn-bo"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
+                            <span
+                                class="btn-bo is-disabled"
+                                aria-disabled="true"
+                                title="Live site coming soon"
                                 >Live Site
-                                <i class="ri-arrow-right-up-line"></i
-                            ></a>
+                                <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                 </div>
@@ -591,9 +607,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the Film Weather live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -614,9 +630,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the Robber Baron live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -637,9 +653,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the Waves of Life live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -660,9 +676,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the Grandfather live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -683,9 +699,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the Interactive Odyssey live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -706,9 +722,9 @@
                                     class="btn-bo"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="Open the MOod live demo"
                                     >Live Demo
-                                    <i class="ri-arrow-right-up-line"></i
-                                ></a>
+                                    <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -717,16 +733,7 @@
 
             <site-footer></site-footer>
 
-            <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-                crossorigin="anonymous"
-            ></script>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-                crossorigin="anonymous"
-            ></script>
-            <script src="./main.js"></script>
+            <script src="./anim-loader.js" data-main="./main.js"></script>
         </div>
     </body>
 </html>

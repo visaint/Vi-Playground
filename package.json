@@ -4,5 +4,11 @@
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve ."
+  },
+  "dependencies": {
+    "geckodriver": "^6.1.1",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^25.4.0",
+    "selenium-webdriver": "^4.46.0"
   }
 }

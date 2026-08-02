@@ -85,14 +85,14 @@
 
         <link
             rel="preload"
-            href="./fonts/tiempos-text.woff2"
+            href="./fonts/libre-baskerville.woff2"
             as="font"
             type="font/woff2"
             crossorigin
         />
         <link
             rel="preload"
-            href="./fonts/tiempos-text-italic.woff2"
+            href="./fonts/libre-baskerville-italic.woff2"
             as="font"
             type="font/woff2"
             crossorigin
@@ -120,14 +120,11 @@
         />
 
         <link rel="stylesheet" href="./styles.css" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-            media="print"
-            onload="this.media = 'all'"
-        />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
 
-        <script src="./components.js"></script>
+        <script src="./components.js" defer></script>
+        <script src="./skill-cards.js" defer></script>
 
         <script type="application/ld+json">
             {
@@ -191,17 +188,17 @@
                             <h1 id="name-text">Vi Saint</h1>
                         </div>
                     </div>
+                    <div id="prefix">
+                        <h6>Europe's most <span class="h6-break">unnecessarily ambitious</span></h6>
+                    </div>
                     <div id="hero-head">
-                        <div id="prefix">
-                            <h6>Europe's most unnecessarily ambitious</h6>
-                        </div>
                         <h1 tabindex="0">Designer &amp;</h1>
                     </div>
                     <div id="main-head">
                         <h1 tabindex="0" aria-live="polite">Developer</h1>
-                        <div id="mini">
-                            <h6>Available for freelance &amp; full-time work</h6>
-                        </div>
+                    </div>
+                    <div id="mini">
+                        <h6><span class="avail-dot" aria-hidden="true"></span>Available for <span class="h6-break">freelance &amp; full-time work</span></h6>
                     </div>
                 </div>
                 <div id="first-bottom">
@@ -257,14 +254,12 @@
                             >
                             <h2>climate migration map</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-global-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-global-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-globe"/></svg>
                                 <span class="wl-text">Data Visualization</span>
                             </h6>
                             <img
-                                src="./images/climate.png"
+                                src="./images/climate.webp"
                                 alt="Climate Migration Map project preview"
                                 loading="lazy"
                                 class="work-hover-img"
@@ -289,7 +284,7 @@
                                 <div class="tldr-gallery">
                                     <figure>
                                         <img
-                                            src="./images/climate.png"
+                                            src="./images/climate.webp"
                                             alt="Climate Migration Map"
                                             loading="lazy"
                                         />
@@ -301,9 +296,9 @@
                                         class="btn-bo"
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        aria-label="Open the live Climate Migration Map site"
                                         >Live Site
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        <svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></a>
                                 </div>
                             </div>
                         </div>
@@ -322,10 +317,8 @@
                             >
                             <h2>nebesna</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-shopping-bag-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-shopping-bag-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-shopping-bag"/></svg>
                                 <span class="wl-text">E-Commerce</span>
                             </h6>
                             <img
@@ -393,9 +386,8 @@
                                     <a
                                         href="./case-studies/nebesna.html"
                                         class="btn-pb"
-                                        >Read Case Study
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        aria-label="Read the Nebesna case study"
+                                        >Read Case Study</a>
                                 </div>
                             </div>
                         </div>
@@ -414,10 +406,8 @@
                             >
                             <h2>anksioznost</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-mental-health-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-mental-health-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-mental-health"/></svg>
                                 <span class="wl-text"
                                     >Mental Health Branding</span
                                 >
@@ -486,9 +476,8 @@
                                     <a
                                         href="./case-studies/anksioznost.html"
                                         class="btn-pb"
-                                        >Read Case Study
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        aria-label="Read the Anksioznost case study"
+                                        >Read Case Study</a>
                                 </div>
                             </div>
                         </div>
@@ -507,10 +496,8 @@
                             >
                             <h2>veoma studio</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-pen-nib-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-pen-nib-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-pen-nib"/></svg>
                                 <span class="wl-text"
                                     >Boutique Design Studio</span
                                 >
@@ -578,9 +565,8 @@
                                     <a
                                         href="./case-studies/veoma.html"
                                         class="btn-pb"
-                                        >Read Case Study
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        aria-label="Read the Veoma Studio case study"
+                                        >Read Case Study</a>
                                 </div>
                             </div>
                         </div>
@@ -599,10 +585,8 @@
                             >
                             <h2>view from nowhere</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-gamepad-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-gamepad-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-gamepad"/></svg>
                                 <span class="wl-text">Indie Game Studio</span>
                             </h6>
                             <img
@@ -669,9 +653,8 @@
                                     <a
                                         href="./case-studies/vfns.html"
                                         class="btn-pb"
-                                        >Read Case Study
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        aria-label="Read the View From Nowhere case study"
+                                        >Read Case Study</a>
                                 </div>
                             </div>
                         </div>
@@ -690,10 +673,8 @@
                             >
                             <h2>doctors</h2>
                             <h6 class="work-label">
-                                <i
-                                    class="ri-sparkling-line wl-icon"
-                                    aria-hidden="true"
-                                ></i>
+                                <svg class="ri-sparkling-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-sparkling"/></svg>
                                 <span class="wl-text">Cosmetics Branding</span>
                             </h6>
                             <img
@@ -759,9 +740,8 @@
                                     <a
                                         href="./case-studies/doctors.html"
                                         class="btn-pb"
-                                        >Read Case Study
-                                        <i class="ri-arrow-right-up-line"></i
-                                    ></a>
+                                        aria-label="Read the Doctors case study"
+                                        >Read Case Study</a>
                                 </div>
                             </div>
                         </div>
@@ -771,8 +751,7 @@
 
                 <div id="work-cta">
                     <a href="./work.html" class="btn-op">
-                        View All Work<i class="ri-arrow-right-up-line"></i>
-                    </a>
+                        View All Work</a>
                 </div>
             </div>
             <!-- /#work -->
@@ -811,11 +790,16 @@
             </section>
 
             <div class="contact">
-                <a href="mailto:hello@visaint.space">
+                <a
+                    href="mailto:hello@visaint.space"
+                    aria-label="Email Vi Saint at hello@visaint.space"
+                >
                     <img
                         class="letter"
                         src="./images/letter.svg"
-                        alt="Letter"
+                        alt=""
+                        width="99"
+                        height="99"
                         loading="lazy"
                     />
                 </a>
@@ -826,307 +810,151 @@
             </div>
 
             <div class="services-arrow" id="grids">
-                <div
-                    id="expandable-container"
-                    style="display: flex; flex-direction: column; gap: 0"
-                >
-                    <div class="service-category">
+                <div class="svc-grid" id="svc-grid">
+                    <!-- ── DESIGN ── -->
+                    <div class="svc-cell">
                         <input
                             type="checkbox"
-                            id="service-product"
-                            class="service-toggle"
+                            id="svc-design"
+                            class="svc-toggle"
                         />
-                        <label
-                            for="service-product"
-                            class="service-item page2-ele"
-                            style="
-                                border-top: 4px dotted var(--pink);
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Web D & D</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Strategy</span>
+                        <label for="svc-design" class="svc-front">
+                            <h2 class="svc-name">Design</h2>
+                            <h6 class="svc-items">
+                                <span>Products</span>
+                                <span>Interfaces</span>
+                                <span>Brands</span>
                             </h6>
                         </label>
-                        <div class="service-content">
-                            <p>
-                                End-to-end digital product experiences from
-                                research to launch. I handle UX strategy,
-                                interface design, and web design—creating
-                                cohesive products that users love and businesses
-                                need.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>UX Research & Strategy</li>
-                                <li>User Interface Design</li>
-                                <li>Web Design</li>
-                                <li>Prototyping & Testing</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Build your product →</a
-                            >
+                        <div class="svc-slide svc-slide--orange">
+                            <h3 class="svc-slide-title">Design</h3>
+                            <p class="svc-slide-text">Design products, interfaces and brands that people instantly understand, trust and enjoy.</p>
                         </div>
                     </div>
 
-                    <div class="service-category">
+                    <!-- ── BUILD ── -->
+                    <div class="svc-cell">
                         <input
                             type="checkbox"
-                            id="service-brand"
-                            class="service-toggle"
+                            id="svc-build"
+                            class="svc-toggle"
                         />
-                        <label
-                            for="service-brand"
-                            class="service-item page2-ele"
-                            style="
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Brand Identity</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Visuals</span>
+                        <label for="svc-build" class="svc-front">
+                            <h2 class="svc-name">Build</h2>
+                            <h6 class="svc-items">
+                                <span>Websites</span>
+                                <span>Apps</span>
+                                <span>Games</span>
                             </h6>
                         </label>
-                        <div class="service-content">
-                            <p>
-                                Comprehensive brand universes that feel cohesive
-                                and alive. From positioning to visual systems, I
-                                craft identities that resonate across every
-                                touchpoint.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>Brand Strategy & Positioning</li>
-                                <li>Visual Identity Systems</li>
-                                <li>Graphic Design</li>
-                                <li>Brand Worldbuilding</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Build your brand →</a
-                            >
+                        <div class="svc-slide svc-slide--blue">
+                            <h3 class="svc-slide-title">Build</h3>
+                            <p class="svc-slide-text">Transform concepts into fast, polished websites, apps & interactive experiences built to last.</p>
                         </div>
                     </div>
 
-                    <div class="service-category">
+                    <!-- ── IMPROVE ── -->
+                    <div class="svc-cell">
                         <input
                             type="checkbox"
-                            id="service-web-dev"
-                            class="service-toggle"
+                            id="svc-improve"
+                            class="svc-toggle"
                         />
-                        <label
-                            for="service-web-dev"
-                            class="service-item page2-ele"
-                            style="
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Web Development</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Frontend</span>
+                        <label for="svc-improve" class="svc-front">
+                            <h2 class="svc-name">Improve</h2>
+                            <h6 class="svc-items">
+                                <span>Automation</span>
+                                <span>Optimization</span>
+                                <span>Growth</span>
                             </h6>
                         </label>
-                        <div class="service-content">
-                            <p>
-                                Clean, performant code that brings designs to
-                                life. Specializing in modern frameworks, smooth
-                                animations, and accessible implementation that
-                                works beautifully.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>Frontend Development</li>
-                                <li>React & Modern Frameworks</li>
-                                <li>Animation & Interactions</li>
-                                <li>Performance Optimization</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Start building →</a
-                            >
-                        </div>
-                    </div>
-
-                    <div class="service-category">
-                        <input
-                            type="checkbox"
-                            id="service-game"
-                            class="service-toggle"
-                        />
-                        <label
-                            for="service-game"
-                            class="service-item page2-ele"
-                            style="
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Interactive</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Gaming</span>
-                            </h6>
-                        </label>
-                        <div class="service-content">
-                            <p>
-                                Engaging game mechanics and interactive worlds
-                                from concept to completion. I design systems,
-                                build prototypes, and create the assets that
-                                bring experiences to life.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>Game Design & Mechanics</li>
-                                <li>Game Development</li>
-                                <li>Assets & Worldbuilding</li>
-                                <li>Interactive Prototypes</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Create your game →</a
-                            >
-                        </div>
-                    </div>
-
-                    <div class="service-category">
-                        <input
-                            type="checkbox"
-                            id="service-strategy"
-                            class="service-toggle"
-                        />
-                        <label
-                            for="service-strategy"
-                            class="service-item page2-ele"
-                            style="
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Creative Strategy</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Narrative</span>
-                            </h6>
-                        </label>
-                        <div class="service-content">
-                            <p>
-                                Strategic thinking that drives results. From
-                                advertising campaigns to narrative design, I
-                                create compelling stories that cut through noise
-                                and connect with audiences.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>Advertising & Campaigns</li>
-                                <li>Narrative Design</li>
-                                <li>Content Strategy</li>
-                                <li>Art Direction</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Launch your campaign →</a
-                            >
-                        </div>
-                    </div>
-
-                    <div class="service-category">
-                        <input
-                            type="checkbox"
-                            id="service-systems"
-                            class="service-toggle"
-                        />
-                        <label
-                            for="service-systems"
-                            class="service-item page2-ele"
-                            style="
-                                border-bottom: 4px dotted var(--pink);
-                                width: 100%;
-                            "
-                        >
-                            <span class="expand-indicator">▼</span>
-                            <h2>Design Systems</h2>
-                            <h6 class="work-label">
-                                <span class="wl-text">Scale</span>
-                            </h6>
-                        </label>
-                        <div class="service-content">
-                            <p>
-                                Scalable design systems that bring consistency
-                                and speed to growing teams. I build component
-                                libraries, documentation, and frameworks that
-                                empower everyone.
-                            </p>
-                            <ul class="service-sublist">
-                                <li>Component Libraries</li>
-                                <li>Design Tokens & Guidelines</li>
-                                <li>Documentation</li>
-                                <li>Design Ops</li>
-                            </ul>
-                            <a
-                                href="mailto:sekovskiviktor@gmail.com"
-                                class="service-contact"
-                                >Scale your design →</a
-                            >
+                        <div class="svc-slide svc-slide--pink">
+                            <h3 class="svc-slide-title">Improve</h3>
+                            <p class="svc-slide-text">Refine what's already there with AI, automation, optimization & continuous iteration.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /.services-arrow#grids -->
+
+            <div class="services-cta fade-in-element">
+                <a href="./services.html" class="btn-pb">
+                    Learn More
+                </a>
+            </div>
+
             <div>
                 <div class="skill" style="--t: 20s">
                     <div>
-                        <span>HTML</span><span>CSS</span><span>Javascript</span
-                        ><span>React</span> <span>Node JS</span><span>SQL</span
-                        ><span>Git</span>
-                    </div>
-                    <div>
-                        <span>HTML</span><span>CSS</span><span>Javascript</span
-                        ><span>React JS</span> <span>Node JS</span
-                        ><span>SQL</span><span>Git</span>
-                    </div>
-                </div>
-                <div class="skill" style="--t: 15s">
-                    <div>
-                        <span>Typescript</span><span>Next JS</span
-                        ><span>Lenis</span><span>WebGL</span>
-                        <span>Tree JS</span><span>Bootstrap</span
-                        ><span>Material UI</span><span>Tailwind</span
-                        ><span>SCSS</span>
-                    </div>
-                    <div>
-                        <span>Typescript</span><span>Next JS</span
-                        ><span>Lenis</span><span>WebGL</span>
-                        <span>Tree JS</span><span>Bootstrap</span
-                        ><span>Material UI</span><span>Tailwind</span
-                        ><span>SCSS</span>
+                        <span class="pill-blue">HTML</span
+                        ><span class="pill-orange">Figma</span
+                        ><span class="pill-pink">Tailwind</span
+                        ><span class="pill-orange">Photoshop</span
+                        ><span class="pill-blue">CSS</span
+                        ><span class="pill-orange">Illustrator</span
+                        ><span class="pill-pink">SCSS</span
+                        ><span class="pill-orange">Framer</span
+                        ><span class="pill-grey">MacOS</span
+                        ><span class="pill-orange">Adobe CC</span
+                        ><span class="pill-pink">Bootstrap</span
+                        ><span class="pill-orange">Premiere Pro</span
+                        ><span class="pill-blue">JavaScript</span
+                        ><span class="pill-orange">InDesign</span
+                        ><span class="pill-pink">Material UI</span
+                        ><span class="pill-orange">Affinity</span
+                        ><span class="pill-pink">Astro</span
+                        ><span class="pill-blue">TypeScript</span
+                        ><span class="pill-pink">Preact</span
+                        ><span class="pill-grey">Linux</span
+                        ><span class="pill-pink">Lenis</span
+                        ><span class="pill-orange">Aseprite</span>
                     </div>
                 </div>
-                <div class="skill" style="--t: 15s">
+                <div class="skill" style="--t: 20s">
                     <div>
-                        <span>Photoshop</span><span>Illustrator</span
-                        ><span>Premiere Pro</span><span>InDesign</span>
-                        <span>Figma</span><span>Affinity</span
-                        ><span>Aseprite</span><span>Canva</span> <span>SEO</span
-                        ><span>UX</span><span>UI</span><span>Typography</span
-                        ><span>Animation</span><span>Video</span
-                        ><span>Audio</span>
+                        <span class="pill-orange">Canva</span
+                        ><span class="pill-pink">WebGL</span
+                        ><span class="pill-orange">GIMP</span
+                        ><span class="pill-blue">React</span
+                        ><span class="pill-orange">Inkscape</span
+                        ><span class="pill-pink">Three JS</span
+                        ><span class="pill-orange">Rive</span
+                        ><span class="pill-grey">Audio</span
+                        ><span class="pill-orange">Vercel</span
+                        ><span class="pill-pink">GSAP</span
+                        ><span class="pill-orange">Final Cut Pro</span
+                        ><span class="pill-blue">Next JS</span
+                        ><span class="pill-orange">Motion</span
+                        ><span class="pill-pink">Headless CMS</span
+                        ><span class="pill-orange">Cavalry</span
+                        ><span class="pill-pink">SEO</span
+                        ><span class="pill-orange">Audacity</span
+                        ><span class="pill-pink">UX</span
+                        ><span class="pill-blue">Node JS</span
+                        ><span class="pill-pink">UI</span
+                        ><span class="pill-blue">Git</span>
                     </div>
+                </div>
+                <div class="skill" style="--t: 20s">
                     <div>
-                        <span>Photoshop</span><span>Illustrator</span
-                        ><span>Premiere Pro</span><span>InDesign</span>
-                        <span>Figma</span><span>Affinity</span
-                        ><span>Aseprite</span><span>Canva</span> <span>SEO</span
-                        ><span>UX</span><span>UI</span><span>Typography</span
-                        ><span>Animation</span><span>Video</span
-                        ><span>Audio</span>
+                        <span class="pill-orange">Ableton Live</span
+                        ><span class="pill-pink">WordPress</span
+                        ><span class="pill-orange">MilkyTracker</span
+                        ><span class="pill-blue">SQL</span
+                        ><span class="pill-orange">Zed</span
+                        ><span class="pill-pink">Shopify</span
+                        ><span class="pill-orange">Sublime</span
+                        ><span class="pill-grey">Video</span
+                        ><span class="pill-orange">Nova</span
+                        ><span class="pill-blue">Core Web Vitals</span
+                        ><span class="pill-orange">Kate</span
+                        ><span class="pill-pink">WooCommerce</span
+                        ><span class="pill-orange">Ghostly</span
+                        ><span class="pill-pink">Animation</span
+                        ><span class="pill-orange">Sanity CMS</span
+                        ><span class="pill-pink">Typography</span
+                        ><span class="pill-blue">Responsive &amp; Mobile-First</span
+                        ><span class="pill-pink">AI-Assisted Dev Workflows</span>
                     </div>
                 </div>
             </div>
@@ -1136,33 +964,27 @@
                     <img
                         src="./images/me-front.webp"
                         alt="Portrait of Vi Saint, creative technologist"
+                        width="1505"
+                        height="3882"
                         loading="lazy"
                         class="fade-in-element"
                     />
                     <div id="t-s-div">
                         <h1 class="fade-in-title">About</h1>
                         <p class="fade-in-element about-paragraph">
-                            Vi Saint <i>(Viktor Sekovski)</i> is a Creative Technologist
+                            Vi Saint is a Creative Technologist
                             working across design, code and visual storytelling.
                             His practice explores how thoughtful interfaces,
                             memorable identities and carefully crafted interactions
                             can make technology feel more human, intuitive and emotionally
                             engaging.
                         </p>
-                        <p class="fade-in-element about-paragraph">
-                            Working remotely with clients across industries, he designs and
-                            builds digital experiences that balance clarity with character.
-                            Whether creating e-commerce platforms, editorial websites or
-                            experimental interfaces, his focus remains the same: translating
-                            complexity into products that people genuinely enjoy using.
-                        </p>
                         <div class="about-actions fade-in-element">
                             <a href="./about.html" class="btn-pb">
-                                Learn More<i class="ri-arrow-right-line"></i>
+                                Learn More<svg class="ri-arrow-right-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-right"/></svg>
                             </a>
                             <a href="mailto:hello@visaint.space" class="btn-op">
-                                Let's Talk<i class="ri-arrow-right-up-line"></i>
-                            </a>
+                                Let's Talk</a>
                         </div>
                     </div>
                 </div>
@@ -1180,88 +1002,83 @@
                     A place where design thinking meets honest reflection. I
                     write about software, interfaces, the craft of building
                     things on the web — and occasionally the stranger terrain of
-                    being human while doing it. No hot takes, no listicles. Just
-                    things worth thinking about.
+                    being human while doing it.
                 </p>
             </div>
 
             <div class="writing-cards fade-in-element">
                 <!-- Article 1 -->
                 <a
-                    href="https://vsnotes.visaint.space/the-tyranny-of-the-empty-state"
+                    href="https://notes.visaint.space/never-ending-improvements/"
                     target="_blank"
                     rel="noopener"
                     class="writing-card"
-                    aria-label="Read: The Tyranny of the Empty State"
+                    aria-label="Read: Never Ending Improvements"
                 >
                     <div class="wcard-paper">
                         <div class="wcard-body">
-                            <span class="wcard-tag">Design</span>
-                            <h3 class="wcard-title">
-                                The Tyranny of the Empty State
-                            </h3>
+                            <span class="wcard-tag">Blog</span>
+                            <h3 class="wcard-title">Never Ending Improvements</h3>
                             <p class="wcard-excerpt">
-                                On first-run experiences, blank canvases, and
-                                why most apps fail the moment before they
-                                matter.
+                                On the never-ending quest for a just-right site —
+                                a new discussion page, a reworked posts index,
+                                and the small tweaks that make ramblings easier
+                                to scan.
                             </p>
                         </div>
                         <div class="wcard-footer">
                             <span class="wcard-read"
-                                >Read<i class="ri-arrow-right-up-line"></i
-                            ></span>
+                                >Read</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Article 2 -->
                 <a
-                    href="https://vsnotes.visaint.space/type-is-never-just-type"
+                    href="https://notes.visaint.space/keep-it-simple/"
                     target="_blank"
                     rel="noopener"
                     class="writing-card"
-                    aria-label="Read: Type Is Never Just Type"
+                    aria-label="Read: Keep It Simple"
                 >
                     <div class="wcard-paper">
                         <div class="wcard-body">
-                            <span class="wcard-tag">Typography</span>
-                            <h3 class="wcard-title">Type Is Never Just Type</h3>
+                            <span class="wcard-tag">Engineering</span>
+                            <h3 class="wcard-title">Keep It Simple</h3>
                             <p class="wcard-excerpt">
-                                Every typeface choice is a cultural argument. A
-                                meditation on letterforms, feeling, and the
-                                weight of small decisions.
+                                Web development loves to overcomplicate the
+                                basics. A case for the simplest tool for the job
+                                — and against the framework du jour.
                             </p>
                         </div>
                         <div class="wcard-footer">
                             <span class="wcard-read"
-                                >Read<i class="ri-arrow-right-up-line"></i
-                            ></span>
+                                >Read<svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Article 3 -->
                 <a
-                    href="https://vsnotes.visaint.space/building-in-the-open"
+                    href="https://notes.visaint.space/the-ipod-new/"
                     target="_blank"
                     rel="noopener"
                     class="writing-card"
-                    aria-label="Read: Building in the Open"
+                    aria-label="Read: The Ipod"
                 >
                     <div class="wcard-paper">
                         <div class="wcard-body">
-                            <span class="wcard-tag">Personal</span>
-                            <h3 class="wcard-title">Building in the Open</h3>
+                            <span class="wcard-tag">Design</span>
+                            <h3 class="wcard-title">The Ipod</h3>
                             <p class="wcard-excerpt">
-                                What it actually feels like to ship something
-                                real — the doubt, the momentum, and the strange
-                                pride of a thing that exists.
+                                Two stories — growing up reading about Steve
+                                Jobs and the creation of the iPod — about
+                                faith, craft, and doing the best job you can.
                             </p>
                         </div>
                         <div class="wcard-footer">
                             <span class="wcard-read"
-                                >Read<i class="ri-arrow-right-up-line"></i
-                            ></span>
+                                >Read<svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg></span>
                         </div>
                     </div>
                 </a>
@@ -1274,7 +1091,7 @@
                     rel="noopener"
                     class="btn-bo"
                 >
-                    Read All Notes<i class="ri-arrow-right-up-line"></i>
+                    Read All Notes<svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg>
                 </a>
             </div>
         </div>
@@ -1282,19 +1099,7 @@
 
         <site-footer></site-footer>
 
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
+        <script src="./anim-loader.js" data-main="./main.js" data-extra="./hero-carousel.js"></script>
         <script>
             (function () {
                 function initNameMarquee() {
@@ -1331,8 +1136,6 @@
                 }
             })();
         </script>
-        <script src="./main.js"></script>
-        <script src="./hero-carousel.js"></script>
         <script>
             /* Inject hamburger icon into #menu-btn once component renders */
             (function injectHamburger() {
@@ -1355,128 +1158,6 @@
                 } else {
                     setTimeout(inject, 50);
                 }
-            })();
-        </script>
-        <script>
-            (function () {
-                var TILT_MAX = 6;
-                var SPRING = "cubic-bezier(0.34,1.56,0.64,1)";
-                var EASE_OUT = "cubic-bezier(0.23,1,0.32,1)";
-
-                document
-                    .querySelectorAll(".skill-card-wrap")
-                    .forEach(function (wrap) {
-                        var card = wrap.querySelector(".skill-card");
-                        var isFlipped = false;
-                        var animating = false;
-                        var tiltEnabled = true;
-                        var lastX = 0,
-                            lastY = 0;
-                        var tiltRaf = null;
-
-                        /* ── Tilt on mousemove (RAF-throttled, no transition) ── */
-                        wrap.addEventListener("mousemove", function (e) {
-                            var rect = wrap.getBoundingClientRect();
-                            var cx = rect.left + rect.width / 2;
-                            var cy = rect.top + rect.height / 2;
-                            lastX = (e.clientX - cx) / (rect.width / 2);
-                            lastY = (e.clientY - cy) / (rect.height / 2);
-
-                            if (animating || !tiltEnabled) return;
-                            if (tiltRaf) return;
-
-                            tiltRaf = requestAnimationFrame(function () {
-                                tiltRaf = null;
-                                var rotX = -lastY * TILT_MAX;
-                                var rotY = lastX * TILT_MAX;
-
-                                card.style.transition = "none";
-                                if (!isFlipped) {
-                                    card.style.transform =
-                                        "rotateX(" +
-                                        rotX +
-                                        "deg) rotateY(" +
-                                        rotY +
-                                        "deg)";
-                                } else {
-                                    card.style.transform =
-                                        "rotateY(180deg) rotateX(" +
-                                        -rotX +
-                                        "deg) rotateY(" +
-                                        -rotY +
-                                        "deg)";
-                                }
-                            });
-                        });
-
-                        /* ── Spring back on mouse leave ── */
-                        wrap.addEventListener("mouseleave", function () {
-                            if (animating) return;
-                            if (tiltRaf) {
-                                cancelAnimationFrame(tiltRaf);
-                                tiltRaf = null;
-                            }
-                            tiltEnabled = true;
-                            card.style.transition = "transform 0.7s " + SPRING;
-                            card.style.transform = isFlipped
-                                ? "rotateY(180deg)"
-                                : "rotateY(0deg)";
-                        });
-
-                        /* ── Flip on click (left/right only) ── */
-                        wrap.addEventListener("click", function (e) {
-                            if (animating) return;
-                            animating = true;
-
-                            /* Cancel any pending tilt */
-                            if (tiltRaf) {
-                                cancelAnimationFrame(tiltRaf);
-                                tiltRaf = null;
-                            }
-
-                            /* Instant snap to neutral, no transition */
-                            card.style.transition = "none";
-                            card.style.transform = isFlipped
-                                ? "rotateY(180deg)"
-                                : "rotateY(0deg)";
-
-                            /* Flip on Y-axis, direction from cursor side */
-                            var flipDir = lastX >= 0 ? 1 : -1;
-                            var midRot = !isFlipped
-                                ? "rotateY(" + flipDir * 90 + "deg)"
-                                : "rotateY(" + (180 - flipDir * 90) + "deg)";
-
-                            card.style.transition =
-                                "transform 0.3s " + EASE_OUT;
-                            card.style.transform = midRot;
-
-                            setTimeout(function () {
-                                isFlipped = !isFlipped;
-                                card.classList.toggle("is-flipped", isFlipped);
-
-                                card.style.transition =
-                                    "transform 0.35s " + SPRING;
-                                card.style.transform = isFlipped
-                                    ? "rotateY(180deg)"
-                                    : "rotateY(0deg)";
-
-                                setTimeout(function () {
-                                    animating = false;
-                                    tiltEnabled = false;
-                                }, 360);
-                            }, 300);
-                        });
-
-                        /* ── Keyboard support ── */
-                        card.addEventListener("keydown", function (e) {
-                            if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                lastX = 0.5;
-                                lastY = 0;
-                                wrap.click();
-                            }
-                        });
-                    });
             })();
         </script>
     </body>

@@ -24,9 +24,39 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Vi Saint" />
+        <link
+            rel="preload"
+            href="./fonts/libre-baskerville.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         <link rel="stylesheet" href="./styles.css" />
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-        <script src="./components.js"></script>
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
+        <script src="./components.js" defer></script>
+        <script src="./skill-cards.js" defer></script>
     </head>
     <body class="services-page">
         <div class="organic-bg" aria-hidden="true">
@@ -62,7 +92,10 @@
                             </div>
                             <div class="skill-card-face skill-card-back">
                                 <div class="scard-back-inner">
-                                    <span class="scard-back-title">Design</span>
+                                    <div class="scard-back-top">
+                                        <span class="scard-back-title">Design</span>
+                                        <div class="scard-award"><span>🏆</span> HCI Competition Winner — UP FAMNIT × Bar-Ilan University 2021</div>
+                                    </div>
                                     <ul class="scard-skills">
                                         <li>UX Research &amp; Strategy</li>
                                         <li>User Interface Design</li>
@@ -81,7 +114,6 @@
                                         <li>Final Cut Pro</li>
                                         <li>Motion</li>
                                     </ul>
-                                    <div class="scard-award"><span>🏆</span> HCI Competition Winner — UP FAMNIT × Bar-Ilan University 2021</div>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +135,10 @@
                             </div>
                             <div class="skill-card-face skill-card-back">
                                 <div class="scard-back-inner">
-                                    <span class="scard-back-title">Development</span>
+                                    <div class="scard-back-top">
+                                        <span class="scard-back-title">Development</span>
+                                        <div class="scard-award"><span>🏆</span> Frontend Design Competition — Outlander AI 2× Finalist 2025</div>
+                                    </div>
                                     <ul class="scard-skills">
                                         <li>JavaScript &amp; TypeScript</li>
                                         <li>React · Next.js · Astro · Preact</li>
@@ -122,7 +157,6 @@
                                         <li>WordPress</li>
                                         <li>SQL</li>
                                     </ul>
-                                    <div class="scard-award"><span>🏆</span> Frontend Design Competition — Outlander AI 2× Finalist 2025</div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +178,10 @@
                             </div>
                             <div class="skill-card-face skill-card-back">
                                 <div class="scard-back-inner">
-                                    <span class="scard-back-title">Branding</span>
+                                    <div class="scard-back-top">
+                                        <span class="scard-back-title">Branding</span>
+                                        <div class="scard-award"><span>✦</span> 35% engagement growth · 25% conversion uplift — Doctors Q1</div>
+                                    </div>
                                     <ul class="scard-skills">
                                         <li>Brand Strategy &amp; Positioning</li>
                                         <li>Visual Identity Systems</li>
@@ -163,7 +200,6 @@
                                         <li>Motion</li>
                                         <li>Aseprite</li>
                                     </ul>
-                                    <div class="scard-award"><span>✦</span> 35% engagement growth · 25% conversion uplift — Doctors Q1</div>
                                 </div>
                             </div>
                         </div>
@@ -171,11 +207,279 @@
                 </div>
             </div>
 
+            <h2 class="systems-heading" style="margin-top: 8vh;">What I Do</h2>
+
+            <div class="services-arrow" id="grids">
+                <div
+                    id="expandable-container"
+                    style="display: flex; flex-direction: column; gap: 0"
+                >
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-product"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-product"
+                            class="service-item page2-ele"
+                            style="
+                                border-top: 4px dotted var(--pink);
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Digital Products</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Product</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Designing and building products from idea to
+                                launch.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Product Strategy</li>
+                                <li>UX Research</li>
+                                <li>Information Architecture</li>
+                                <li>UI Design</li>
+                                <li>Design Systems</li>
+                                <li>Front-end Development</li>
+                                <li>Web Apps</li>
+                                <li>SaaS Products</li>
+                                <li>Mobile Interfaces</li>
+                                <li>Prototyping</li>
+                                <li>Testing &amp; Iteration</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Build your product →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-web"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-web"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Websites &amp; Commerce</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Web</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Everything needed to create or improve a
+                                company's online presence.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>Marketing Websites</li>
+                                <li>Landing Pages</li>
+                                <li>E-commerce</li>
+                                <li>CMS Integration</li>
+                                <li>Headless Websites</li>
+                                <li>Performance Optimization</li>
+                                <li>SEO Foundations</li>
+                                <li>Accessibility</li>
+                                <li>Analytics</li>
+                                <li>Website Redesigns</li>
+                                <li>Website Maintenance</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Start your website →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-brand"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-brand"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Brand &amp; Content</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Brand</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Visual communication that supports products.</p>
+                            <ul class="service-sublist">
+                                <li>Brand Identity</li>
+                                <li>Art Direction</li>
+                                <li>Graphic Design</li>
+                                <li>Marketing Assets</li>
+                                <li>Social Campaigns</li>
+                                <li>Motion Graphics</li>
+                                <li>Product Photography Direction</li>
+                                <li>Creative Copywriting</li>
+                                <li>Technical Writing</li>
+                                <li>Content Strategy</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Build your brand →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-interactive"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-interactive"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Interactive Experiences</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Interactive</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Probably your biggest differentiator.</p>
+                            <ul class="service-sublist">
+                                <li>Interactive Installations</li>
+                                <li>Microsites</li>
+                                <li>WebGL Experiences</li>
+                                <li>Playable Ads</li>
+                                <li>Browser Games</li>
+                                <li>Experimental Interfaces</li>
+                                <li>Interactive Storytelling</li>
+                                <li>Data Visualizations</li>
+                                <li>Creative Coding</li>
+                            </ul>
+                            <p>Very few designers can offer this.</p>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Create an experience →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-ai"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-ai"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>AI &amp; Automation</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">AI</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>
+                                Growing rapidly and complements everything else.
+                            </p>
+                            <ul class="service-sublist">
+                                <li>AI Workflows</li>
+                                <li>AI Integration</li>
+                                <li>Internal Tools</li>
+                                <li>Business Automation</li>
+                                <li>Custom GPTs</li>
+                                <li>Documentation Systems</li>
+                                <li>Knowledge Bases</li>
+                                <li>Process Design</li>
+                                <li>CRM Automation</li>
+                                <li>No-code &amp; Low-code Solutions</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Automate your workflow →</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="service-category">
+                        <input
+                            type="checkbox"
+                            id="service-consulting"
+                            class="service-toggle"
+                        />
+                        <label
+                            for="service-consulting"
+                            class="service-item page2-ele"
+                            style="
+                                border-bottom: 4px dotted var(--pink);
+                                width: 100%;
+                            "
+                        >
+                            <span class="expand-indicator">▼</span>
+                            <h2>Consulting &amp; Optimization</h2>
+                            <h6 class="work-label">
+                                <span class="wl-text">Consult</span>
+                            </h6>
+                        </label>
+                        <div class="service-content">
+                            <p>Instead of always building new things.</p>
+                            <ul class="service-sublist">
+                                <li>UX Audits</li>
+                                <li>Design Reviews</li>
+                                <li>Performance Audits</li>
+                                <li>Conversion Optimization</li>
+                                <li>Accessibility Reviews</li>
+                                <li>Product Strategy</li>
+                                <li>Design Mentoring</li>
+                                <li>Team Workshops</li>
+                                <li>Fractional Creative Direction</li>
+                            </ul>
+                            <a
+                                href="mailto:sekovskiviktor@gmail.com"
+                                class="service-contact"
+                                >Optimize what you have →</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <site-footer></site-footer>
-            <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
-            <script src="./main.js"></script>
+            <script src="./anim-loader.js" data-main="./main.js"></script>
         </div>
     </body>
 </html>

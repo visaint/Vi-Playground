@@ -79,12 +79,39 @@
             content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="Vi Saint" />
-        <link rel="stylesheet" href="./styles.css" />
         <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
+            rel="preload"
+            href="./fonts/libre-baskerville.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
         />
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="./fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link rel="stylesheet" href="./styles.css" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
+        <script src="./components.js" defer></script>
+        <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
         <!-- STRUCTURED DATA (Schema.org JSON-LD) -->
         <!-- Add this just before closing </head> tag on ALL pages -->
 
@@ -134,8 +161,8 @@
     <body class="contact">
         <div hx-get="./blob.html" hx-trigger="load" hx-swap="outerHTML"></div>
 
-        <!-- Header loaded via HTMX -->
-        <div hx-get="./header.html" hx-trigger="load" hx-swap="outerHTML"></div>
+        <!-- Header — same web component as every other page -->
+        <site-header></site-header>
 
         <div id="main">
             <!-- Heading -->
@@ -163,6 +190,25 @@
                         brand identity, or just want to chat about
                         possibilities—I'm here. Fill out the form below and I'll
                         get back to you within 24 hours.
+                    </p>
+                    <div class="contact contact-intro-letter">
+                        <a
+                            href="mailto:hello@visaint.space"
+                            aria-label="Email Vi Saint at hello@visaint.space"
+                        >
+                            <img
+                                class="letter"
+                                src="./images/letter.svg"
+                                alt=""
+                                loading="lazy"
+                            />
+                        </a>
+                    </div>
+                    <p class="contact-email">
+                         <span>hello@visaint.space</span>
+                    </p>
+                    <p class="contact-form-link">
+                        Or fill out my contact form
                     </p>
                 </div>
 
@@ -344,30 +390,17 @@
 
                 <!-- Alternative Contact -->
                 <p class="contact-footer-text">
-                    Or email me directly at
+                    You can always email me at:
                     <a href="mailto:hello@visaint.space" class="service-contact"
                         >hello@visaint.space</a
                     >
                 </p>
             </section>
 
-            <!-- Footer loaded via HTMX -->
-            <div
-                hx-get="./footer.html"
-                hx-trigger="load"
-                hx-swap="outerHTML"
-            ></div>
+            <!-- Footer — same web component as every other page -->
+            <site-footer></site-footer>
 
-            <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-                crossorigin="anonymous"
-            ></script>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-                crossorigin="anonymous"
-            ></script>
-            <script src="./main.js"></script>
+            <script src="./anim-loader.js" data-main="./main.js"></script>
         </div>
     </body>
 </html>

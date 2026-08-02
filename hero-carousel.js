@@ -29,6 +29,13 @@
 
     var heads = [heroHead, mainHead];
     var index = 0;
+
+    /* Hidden nowrap measuring node for the mobile fit below */
+    var fitSpan = document.createElement("span");
+    fitSpan.style.cssText =
+        "position:fixed;left:-9999px;top:0;visibility:hidden;white-space:nowrap;pointer-events:none;";
+    fitSpan.style.fontFamily = getComputedStyle(heroHead).fontFamily;
+    document.body.appendChild(fitSpan);
     var activePointer = null;
     var dragging = false;
     var animating = false;
@@ -47,13 +54,35 @@
     /* Desktop/tablet headlines are nowrap + clipped; if a title is wider
        than its container, shrink it just enough to fit. The h1s carry their
        own padding, so fit the content box, then re-check to converge.
-       Mobile keeps the CSS clamp sizing (titles wrap there instead). */
+
+       Mobile: every title must stay on ONE line, so both headline lines
+       share a single font-size sized to the widest of the two current
+       titles — nothing ever wraps into a second line. */
     function fitTitles() {
-        if (window.innerWidth < 768) return;
+        if (window.innerWidth < 768) {
+            for (var i = 0; i < heads.length; i++) heads[i].style.fontSize = "";
+            var base = parseFloat(getComputedStyle(heroHead).fontSize);
+            if (!(base > 0)) return;
+            var maxW = 0;
+            for (var i = 0; i < heads.length; i++) {
+                fitSpan.textContent = heads[i].textContent;
+                fitSpan.style.fontSize = base + "px";
+                var w = fitSpan.offsetWidth;
+                if (w > maxW) maxW = w;
+            }
+            var avail = heroHead.clientWidth;
+            if (maxW > avail) {
+                var px = Math.floor((avail * base) / maxW * 100) / 100;
+                for (var i = 0; i < heads.length; i++) {
+                    heads[i].style.fontSize = px + "px";
+                }
+            }
+            return;
+        }
         for (var i = 0; i < heads.length; i++) {
             var el = heads[i];
             el.style.fontSize = "";
-            for (var pass = 0; pass < 3; pass++) {
+            for (var pass = 0; pass < 4; pass++) {
                 if (el.scrollWidth <= el.clientWidth + 1) break;
                 var cs = getComputedStyle(el);
                 var pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
@@ -194,4 +223,8 @@
     setTitle(0);
     restartAuto();
     window.addEventListener("resize", fitTitles);
+    /* Re-fit once the webfont is definitely loaded (swapped in) */
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitTitles);
+    }
 })();

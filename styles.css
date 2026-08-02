@@ -122,6 +122,11 @@ html {
     font-size: clamp(16px, 1.6vw, 2.3vw);
     scroll-behavior: smooth;
     overflow-y: auto;
+    /* Clip horizontal overflow here, NOT on body: once body has any
+       non-visible overflow, overflow-y computes to auto and body becomes
+       its own scroll container — rendering a second, separate scrollbar
+       beside the browser's and clipping the footer's bottom margin. */
+    overflow-x: hidden;
     overscroll-behavior-y: none;
     scroll-padding-top: clamp(60px, 8vh, 90px);
 }
@@ -146,7 +151,12 @@ body {
     font-family: "Libre Baskerville", serif;
     color: var(--grey);
     background-color: var(--white);
-    overflow-x: hidden;
+    /* Clip horizontal overflow at the body box itself. Unlike
+       overflow-x: hidden, `clip` never coerces overflow-y to auto, so
+       body stays a plain (non-scrolling) element on desktop — no second
+       scrollbar — while descendants that poke past the viewport (e.g.
+       footer tooltips) get clipped instead of widening the page. */
+    overflow-x: clip;
     position: relative;
     -webkit-font-smoothing: antialiased;
 }
@@ -239,10 +249,20 @@ button {
     animation: drift-1 20s infinite reverse linear;
 }
 .blob-5 {
+    /* Second pink blob — own keyframes so it never moves in sync with .blob-2 */
     background: var(--pink);
     top: 70%;
     left: 20%;
-    animation: drift-2 18s infinite alternate linear;
+    animation: drift-4 17s infinite alternate linear;
+}
+
+/* ── Dark mode: make blobs more visible without performance cost ── */
+@media (prefers-color-scheme: dark) {
+    .blob-1 { opacity: 0.35; }
+    .blob-2 { opacity: 0.35; }
+    .blob-3 { opacity: 0.55; }
+    .blob-4 { opacity: 0.45; }
+    .blob-5 { opacity: 0.35; }
 }
 
 @keyframes drift-1 {
@@ -273,6 +293,19 @@ button {
     }
     100% {
         transform: translate(30vw, -10vh);
+    }
+}
+
+/* Distinct path for the second pink blob — opposite drift to drift-2 */
+@keyframes drift-4 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(18vw, -12vh) scale(1.15);
+    }
+    100% {
+        transform: translate(-10vw, 8vh) scale(0.95);
     }
 }
 
@@ -354,9 +387,10 @@ site-header {
 
 nav {
     width: 100%;
-    display: flex;
+    display: grid;
+    /* logo | centered buttons | menu button — middle column sits dead-centre */
+    grid-template-columns: 1fr minmax(0, auto) 1fr;
     align-items: center;
-    flex-wrap: nowrap;
     padding: clamp(16px, 2.2vh, 28px) clamp(24px, 3.5vw, 60px);
     position: fixed;
     top: 0;
@@ -402,6 +436,7 @@ nav.nav-scrolled {
 
 #logo-div {
     flex: 0 0 auto;
+    justify-self: start;
     padding-left: clamp(4px, 0.5vw, 10px);
     margin-top: 0.35em;
 }
@@ -428,6 +463,7 @@ nav.nav-scrolled {
 
 .nav-right {
     flex: 1;
+    justify-self: center;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -441,10 +477,6 @@ nav.nav-scrolled {
     display: inline-block;
 }
 .nav-right .icon-mobile {
-    display: none;
-}
-/* legacy: hide old + icon in menu-btn if component renders it */
-#menu-btn > i.ri-add-line {
     display: none;
 }
 
@@ -543,6 +575,7 @@ nav.nav-scrolled {
 #menu-btn {
     position: relative;
     z-index: 2;
+    justify-self: end;
     flex-shrink: 0;
     width: 38px;
     height: 38px;
@@ -634,6 +667,7 @@ nav.nav-scrolled {
     position: relative;
     z-index: 1;
 }
+
 
 .ham-line {
     display: block;
@@ -1035,7 +1069,8 @@ body:has(#menu-toggle:checked) {
 }
 
 /* Arrow indicator on the right */
-.menu-btn-link i {
+.menu-btn-link i,
+.menu-btn-link svg {
     font-size: 0.5em !important;
     opacity: 0.5;
     transition:
@@ -1043,7 +1078,12 @@ body:has(#menu-toggle:checked) {
         opacity 0.2s ease !important;
     flex-shrink: 0;
 }
-.menu-btn-link:hover i {
+.menu-btn-link svg {
+    width: 0.5em;
+    height: 0.5em;
+}
+.menu-btn-link:hover i,
+.menu-btn-link:hover svg {
     transform: translate(4px, -4px) !important;
     opacity: 1;
 }
@@ -1054,57 +1094,7 @@ body:has(#menu-toggle:checked) {
     display: none !important;
 }
 
-.menu-submenu {
-    list-style: none;
-    padding: 0.3rem 0 0.6rem 0.5rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.18rem;
-    border-left: 1.5px solid color-mix(in srgb, #ee8198 22%, transparent);
-}
-
-.menu-bullet-link {
-    font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.72rem, 0.82vw, 0.9rem);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--lightgrey);
-    display: flex;
-    align-items: center;
-    gap: 0.42em;
-    padding: 0.26em 0.5em;
-    border-radius: 6px;
-    text-decoration: none;
-    transition:
-        color 0.2s ease,
-        background 0.2s ease;
-}
-.menu-bullet-link:hover {
-    color: var(--pink);
-    background: color-mix(in srgb, #ee8198 8%, transparent);
-}
-
-.bullet-arrow {
-    font-size: 0.6em;
-    color: color-mix(in srgb, #ee8198 42%, transparent);
-    flex-shrink: 0;
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-.menu-bullet-link:hover .bullet-arrow {
-    color: var(--pink);
-    transform: translateX(2px);
-}
-
 @media (prefers-color-scheme: light) {
-    .menu-bullet-link {
-        color: var(--grey);
-    }
-    .menu-submenu {
-        border-left-color: color-mix(in srgb, #c4607a 30%, transparent);
-    }
     .menu-btn-link.btn-op {
         color: var(--orange) !important;
     }
@@ -1216,7 +1206,11 @@ body:has(#menu-toggle:checked) {
     z-index: 1;
     width: 100%;
     margin-top: -0.5rem;
+    padding-left: clamp(30px, 6vw, 110px);
     text-align: left;
+    /* small breathing room above the blue heading (desktop only —
+       the mobile layout overrides these margins) */
+    margin-bottom: 0.5rem;
 }
 #prefix h6 {
     display: inline-block;
@@ -1224,6 +1218,8 @@ body:has(#menu-toggle:checked) {
     left: -1vw;
     font-size: clamp(0.85rem, 1.2vw, 1.4rem);
     text-transform: none;
+    color: var(--pink);
+    white-space: nowrap;
 }
 
 /* hero-head: left, main-head: right — spread horizontally */
@@ -1244,11 +1240,67 @@ body:has(#menu-toggle:checked) {
 
 /* "available for freelance & full-time." — right */
 #mini {
+    padding: 0 clamp(30px, 6vw, 110px);
     text-align: right;
+    /* extra breathing room below the blue heading (desktop only) —
+       slightly larger than #prefix's margin so the gap reads equal */
+    margin-top: 0.8rem;
 }
 #mini h6 {
     font-size: clamp(0.85rem, 1.2vw, 1.4rem);
     text-transform: none;
+    color: var(--pink);
+    white-space: nowrap;
+}
+
+/* Availability dot — static by default; initAvailDot re-triggers the
+   heartbeat class at irregular, randomised intervals and swaps the
+   colour per beat (orange / blue / pink, random order) */
+.avail-dot {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    vertical-align: 0.06em;
+    background-color: var(--orange);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--orange) 55%, transparent);
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+/* One organic pulse: shrinks down to a period, swaps colour while
+   tiny (see initAvailDot in main.js — swap lands in the 18–32%
+   hold), then expands again in the new colour. */
+.avail-dot.beating {
+    animation: availHeartbeat 1.6s ease-in-out;
+}
+@keyframes availHeartbeat {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    18% {
+        transform: scale(0.3);
+        opacity: 0.6;
+    }
+    32% {
+        transform: scale(0.3);
+        opacity: 0.6;
+    }
+    62% {
+        transform: scale(1.25);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .avail-dot {
+        animation: none;
+    }
 }
 
 #hero-head h1,
@@ -1313,9 +1365,6 @@ html.hero-carousel-dragging,
 html.hero-carousel-dragging * {
     cursor: grabbing !important;
 }
-#hero-bullets {
-    display: none;
-}
 
 .blurb {
     margin: 3vh clamp(1rem, 5vw, 10vh);
@@ -1332,34 +1381,6 @@ html.hero-carousel-dragging * {
 }
 
 /* arrows removed */
-
-#my-top,
-#my-bottom {
-    padding: 0 clamp(40px, 8vw, 120px);
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-#my-top {
-    text-align: center;
-    margin-bottom: -2vw;
-}
-#my-bottom {
-    text-align: center;
-}
-#my-top h1,
-#my-bottom h1 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
-    font-size: clamp(8vw, 16vw, 20vw);
-    line-height: 0.8;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    padding-left: 2vw;
-}
 
 /* Compact section headings (used on about page for Process / Journey) */
 .section-heading {
@@ -1385,14 +1406,7 @@ html.hero-carousel-dragging * {
         font-size: clamp(10vw, 12vw, 16vw);
         padding-left: 2vw;
     }
-    #my-top h1,
-    #my-bottom h1 {
-        font-size: clamp(10vw, 12vw, 16vw);
-    }
-    #my-top {
-        margin-bottom: -1vw;
-    }
-        
+
     /* Interior page heading spacing */
         
     /* About page: hero holds all content, first heading at ~30% */
@@ -1621,6 +1635,12 @@ html.hero-carousel-dragging * {
     display: inline;
 }
 
+/* Services page: the "What I Do" accordion rows have no right-side
+   category pills (kept on the homepage work rows). */
+.services-page .service-item .work-label {
+    display: none;
+}
+
 /* ── Work label alternating colors ── */
 /* Work rows (page2-ele direct children of #expandable-container) */
 #expandable-container > .page2-ele:nth-child(3n + 1) .work-label {
@@ -1790,6 +1810,12 @@ html.hero-carousel-dragging * {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+}
+
+.services-cta {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 8vh;
 }
 
 /* ==========================================================================
@@ -2004,7 +2030,6 @@ body.js-enabled .chrome-scroll-section .text {
     z-index: 1;
 }
 
-#chrome-scroll .text:nth-child(even),
 .chrome-scroll-section .text:nth-child(even) {
     --direction: -1;
 }
@@ -2051,21 +2076,17 @@ body.js-enabled .chrome-scroll-section .text {
     opacity: 0.65;
 }
 
-#chrome-scroll h4,
-#chrome-scroll h5,
 .chrome-scroll-section h4,
 .chrome-scroll-section h5 {
     color: var(--grey);
     font-size: clamp(1.6rem, 3vw, 3rem);
-}
-#unicorn h2 {
-    color: var(--pink);
 }
 
 .chrome-scroll-section {
     padding: 10vh 0;
     position: relative;
     overflow: hidden;
+    z-index: 2;
 }
 .chrome-scroll-section.extended-bottom .chrome-container {
     padding-bottom: 25vh !important;
@@ -2097,6 +2118,33 @@ body.js-enabled .chrome-scroll-section .text {
         rgba(255, 255, 255, 0.1) 97%,
         transparent 100%
     );
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+.chrome-scroll-section .chrome-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(
+        180deg,
+        #fff 0%,
+        #fff 60%,
+        rgba(255, 255, 255, 0.6) 75%,
+        rgba(255, 255, 255, 0.2) 85%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        180deg,
+        #fff 0%,
+        #fff 60%,
+        rgba(255, 255, 255, 0.6) 75%,
+        rgba(255, 255, 255, 0.2) 85%,
+        transparent 100%
+    );
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
 }
 
 .chrome-scroll-section .text-container {
@@ -2161,8 +2209,22 @@ body.js-enabled .chrome-scroll-section .text {
 }
 .skill div {
     display: flex;
-    animation: slide 20s linear infinite;
+    animation: slide var(--t, 20s) linear infinite alternate;
     gap: 0.5rem;
+}
+
+/* Pill colour modifiers — Blue: critical skills · Pink: skills · Orange: software · Grey: misc/foundations */
+.skill span.pill-blue {
+    --pill-color: var(--blue);
+}
+.skill span.pill-pink {
+    --pill-color: var(--pink);
+}
+.skill span.pill-orange {
+    --pill-color: var(--orange);
+}
+.skill span.pill-grey {
+    --pill-color: var(--lightgrey);
 }
 
 .skill span {
@@ -2177,36 +2239,36 @@ body.js-enabled .chrome-scroll-section .text {
     letter-spacing: 0.08em;
     white-space: nowrap;
     line-height: 1;
-    color: var(--orange);
+    color: var(--pill-color, var(--orange));
     background: linear-gradient(
         135deg,
         color-mix(
                 in srgb,
                 #0f100a 72%,
-                color-mix(in srgb, var(--orange) 40%, transparent)
+                color-mix(in srgb, var(--pill-color, var(--orange)) 40%, transparent)
             )
             0%,
         color-mix(
                 in srgb,
                 #0f100a 78%,
-                color-mix(in srgb, var(--pink) 28%, transparent)
+                color-mix(in srgb, var(--pill-color, var(--orange)) 28%, transparent)
             )
             50%,
         color-mix(
                 in srgb,
                 #0f100a 72%,
-                color-mix(in srgb, var(--orange) 35%, transparent)
+                color-mix(in srgb, var(--pill-color, var(--orange)) 35%, transparent)
             )
             100%
     );
-    border: 1px solid color-mix(in srgb, var(--orange) 38%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color, var(--orange)) 38%, transparent);
     backdrop-filter: blur(14px) saturate(1.4);
     -webkit-backdrop-filter: blur(14px) saturate(1.4);
     position: relative;
     isolation: isolate;
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 0.5px color-mix(in srgb, var(--orange) 20%, transparent) inset;
+        0 0 0 0.5px color-mix(in srgb, var(--pill-color, var(--orange)) 20%, transparent) inset;
     transition:
         color 0.3s ease,
         border-color 0.3s ease;
@@ -2236,8 +2298,8 @@ body.js-enabled .chrome-scroll-section .text {
     border-radius: 50%;
     background: radial-gradient(
         ellipse at 50% 85%,
-        color-mix(in srgb, var(--orange) 70%, transparent) 0%,
-        color-mix(in srgb, var(--pink) 45%, transparent) 45%,
+        color-mix(in srgb, var(--pill-color, var(--orange)) 70%, transparent) 0%,
+        color-mix(in srgb, var(--pill-color, var(--orange)) 45%, transparent) 45%,
         transparent 75%
     );
     filter: blur(16px);
@@ -2245,33 +2307,56 @@ body.js-enabled .chrome-scroll-section .text {
     z-index: -1;
     animation: blobBreathe 4s ease-in-out infinite;
 }
+
+/* Mobile: horizontal pill marquees — rows 1 & 3 drift right, the middle
+   row drifts left. All three start centred and stay on screen at all
+   times (the travel range keeps the strip overlapping the viewport). */
+@media (max-width: 600px) {
+    .skill {
+        margin: 0.35rem 0;
+    }
+    .skill div {
+        display: flex;
+        width: max-content;
+        gap: 0.5rem;
+        animation: pills-right var(--t, 20s) linear infinite alternate;
+    }
+    .skill:nth-child(2) div {
+        animation-name: pills-left;
+    }
+    .skill span {
+        font-size: 0.75rem;
+        padding: 0.55em 1.1em;
+    }
+}
+
 @media (prefers-color-scheme: light) {
     .skill span {
-        color: #b8521e;
+        color: color-mix(in srgb, var(--pill-color, var(--orange)) 80%, #1a1a1a);
         background: linear-gradient(
             135deg,
             color-mix(
                     in srgb,
                     #f4f5ef 82%,
-                    color-mix(in srgb, #f48f6e 55%, transparent)
+                    color-mix(in srgb, var(--pill-color, var(--orange)) 55%, transparent)
                 )
                 0%,
             color-mix(
                     in srgb,
                     #f4f5ef 86%,
-                    color-mix(in srgb, #ee8198 38%, transparent)
+                    color-mix(in srgb, var(--pill-color, var(--orange)) 38%, transparent)
                 )
                 50%,
             color-mix(
                     in srgb,
                     #f4f5ef 82%,
-                    color-mix(in srgb, #f48f6e 48%, transparent)
+                    color-mix(in srgb, var(--pill-color, var(--orange)) 48%, transparent)
                 )
                 100%
         );
-        border-color: color-mix(in srgb, #f48f6e 45%, transparent);
+        border-color: color-mix(in srgb, var(--pill-color, var(--orange)) 45%, transparent);
         box-shadow:
-            0 2px 8px rgba(244, 143, 110, 0.1),
+            0 2px 8px color-mix(in srgb, var(--pill-color, var(--orange)) 10%, transparent),
             inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 }
@@ -2282,6 +2367,26 @@ body.js-enabled .chrome-scroll-section .text {
     }
     100% {
         transform: translateX(-100%);
+    }
+}
+
+/* Mobile pill marquees: start centred (50vw − half the strip), then drift
+   right (outer rows) or left (middle row) — never off-screen. */
+@keyframes pills-right {
+    from {
+        transform: translateX(calc(-50% + 50vw));
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pills-left {
+    from {
+        transform: translateX(calc(-50% + 50vw));
+    }
+    to {
+        transform: translateX(calc(-100% + 100vw));
     }
 }
 
@@ -2802,11 +2907,11 @@ footer {
     letter-spacing: 0.05em;
 }
 
-/* ── Menu social strip — directly below the menu list ── */
+/* ── Menu social strip — clearly separated from the menu list ── */
 .menu-social {
     display: flex;
     justify-content: center;
-    padding-top: 0.75rem;
+    padding-top: 2.25rem;
     position: relative;
     z-index: 10;
     opacity: 0;
@@ -2831,6 +2936,8 @@ footer {
     justify-content: center;
     margin-top: -2rem;
     margin-bottom: 8vh;
+    position: relative;
+    z-index: 1;
 }
 
 .letter {
@@ -3041,6 +3148,25 @@ footer {
 .contact-intro p {
     max-width: 600px;
     margin: 0 auto;
+}
+.contact-intro .contact {
+    margin: 2.5rem 0 0;
+}
+.contact-intro .contact-email {
+    margin: 1.25rem auto 0;
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(0.9rem, 1vw, 1.1rem);
+    letter-spacing: 0.06em;
+    color: var(--grey);
+}
+.contact-intro .contact-email span {
+    color: var(--orange);
+}
+.contact-intro .contact-form-link {
+    margin: 2rem auto 0;
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+    color: var(--pink);
 }
 .contact-form {
     display: flex;
@@ -3279,6 +3405,10 @@ footer {
     nav {
         padding: 14px 20px;
         align-items: center;
+        /* logo | full-width button row | menu — the middle column spans
+           everything between the two so space-evenly can spread the
+           buttons equidistantly */
+        grid-template-columns: auto minmax(0, 1fr) auto;
     }
     .slide-menu {
         right: 0;
@@ -3326,18 +3456,22 @@ footer {
         margin-bottom: 0.75rem;
     }
     .menu-social {
-        padding-top: 0.25rem;
+        padding-top: 1.25rem;
     }
     #logo {
-        font-size: clamp(3.6rem, 11vw, 5rem);
+        font-size: clamp(3rem, 10vw, 5rem);
     }
     #logo-div {
         padding-left: 4px;
     }
 
     .nav-right {
-        gap: clamp(6px, 2.2vw, 14px);
-        padding-right: 4px;
+        justify-self: stretch;
+        width: 100%;
+        justify-content: space-evenly;
+        /* zero the base gap so space-evenly alone sets identical gaps
+           between the logo, each button and the menu button */
+        gap: 0;
     }
 
     .desktop-only {
@@ -3349,9 +3483,24 @@ footer {
         display: inline-flex;
         flex-shrink: 0;
     }
+    /* Mobile nav buttons: a touch bigger with room to breathe. The
+       fit-check drops services on very narrow screens instead of letting
+       the group crowd the logo and menu button */
+    .nav-right .btn-pb,
+    .nav-right .btn-bo,
+    .nav-right .btn-op {
+        font-size: clamp(11px, 2.8vw, 13px);
+        padding: 0.7em 1.3em;
+        letter-spacing: 0.06em;
+    }
     .nav-right .btn-pb .nav-label,
     .nav-right .btn-bo .nav-label {
         display: inline;
+    }
+    /* Cramped phones: the fit-check drops services so the group
+       never crowds the logo and menu button */
+    nav.nav-cramped .nav-services {
+        display: none;
     }
     .nav-right .btn-pb .icon-mobile,
     .nav-right .btn-bo .icon-mobile {
@@ -3379,43 +3528,48 @@ footer {
         flex-direction: column;
         min-height: 100vh;
         min-height: 100svh;
-        --hero-big: clamp(2.75rem, min(18vw, 15svh), 5.5rem);
+        --hero-big: clamp(3.25rem, min(21vw, 19svh), 6.5rem);
         --hero-small: clamp(1rem, 4.5vw, 1.4rem);
-        padding-top: calc(clamp(3.6rem, 11vw, 5rem) + 34px);
+        padding-top: calc(clamp(3rem, 10vw, 5rem) + 34px);
         padding-bottom: 0.9rem;
     }
     #name {
-        text-align: left;
-        margin-top: 0;
-        margin-bottom: 0;
-        justify-content: flex-start;
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: 0.4rem;
+        justify-content: center;
     }
     .name-marquee-wrap {
-        justify-content: flex-start;
+        justify-content: center;
     }
     #name h1 {
-        font-size: var(--hero-small);
+        font-size: calc(var(--hero-small) * 1.21);
         line-height: 0.85;
         padding: 0;
         color: var(--pink) !important;
         text-transform: none;
     }
 
+    /* Name + prefix float equidistant between the nav and the blue
+       heading pair, and the availability line floats equidistant
+       between the heading and the orange tags. Four auto-margin
+       gutters share the free space evenly: above the name, below the
+       prefix, and above/below the availability line. */
     #hero-handle {
         flex: 1;
         min-height: 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
-        gap: 0.4rem;
+        align-items: center;
+        gap: 0.5rem;
         padding: 0.5rem 0;
     }
     #hero-head,
     #main-head {
         padding: 0;
         overflow: visible;
-        text-align: left;
+        text-align: center;
         width: 100%;
     }
     /* pull Technologist up so the two big headline lines sit tight */
@@ -3428,40 +3582,48 @@ footer {
         padding: 0;
         padding-right: 0;
         max-width: none;
-        white-space: normal;
-        text-align: left;
+        white-space: nowrap;
+        text-align: center;
         font-size: var(--hero-big);
     }
 
     #prefix {
         margin-top: 0;
-        margin-bottom: 0;
-        text-align: left;
+        margin-bottom: auto;
+        padding-left: 0;
+        text-align: center;
     }
     #prefix h6 {
         left: 0;
         font-size: var(--hero-small);
-        line-height: 1.02;
+        line-height: 1.18;
         color: var(--pink);
         text-transform: none;
         font-weight: 400;
         padding: 0;
-        text-align: left;
+        text-align: center;
     }
 
     #mini {
-        margin: 0;
-        text-align: left;
-        padding-right: 0;
+        margin: auto 0;
+        text-align: center;
+        padding: 0;
+        width: 100%;
     }
     #mini h6 {
         position: static;
         font-size: var(--hero-small);
-        line-height: 1.02;
+        line-height: 1.18;
         color: var(--pink);
         text-transform: none;
         font-weight: 400;
-        text-align: left;
+        text-align: center;
+    }
+    /* Keep the two-line split of the prefix / availability lines on
+       mobile (desktop renders them as a single line) */
+    #prefix h6 .h6-break,
+    #mini h6 .h6-break {
+        display: block;
     }
 
     #first-bottom {
@@ -3471,29 +3633,26 @@ footer {
         justify-content: flex-start;
         align-items: stretch;
         gap: 0.9rem;
-        padding: 0.9rem 1rem 0;
+        padding: 0.4rem 1rem 0;
         border-top: 1px solid
             color-mix(in srgb, var(--bordergrey) 35%, transparent);
     }
     #hero-tags {
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.9rem;
+        align-items: center;
+        justify-items: center;
+    }
+    /* Designer + Developer share the first row; Problem Solver
+       spans both columns and sits centered below them */
+    .hero-tag:last-child {
+        grid-column: 1 / -1;
     }
     .hero-tag {
         gap: 0.3em;
-    }
-    .hero-tag:nth-child(1) {
-        align-items: flex-start;
-        text-align: left;
-    }
-    .hero-tag:nth-child(2) {
         align-items: center;
         text-align: center;
-    }
-    .hero-tag:nth-child(3) {
-        align-items: flex-end;
-        text-align: right;
     }
     .hero-tag h5 {
         font-family: "DinaRemasterII", monospace;
@@ -3503,10 +3662,14 @@ footer {
     }
     .tag-desc {
         font-size: clamp(0.72rem, 2.6vw, 0.95rem);
-        color: var(--orange);
+        color: var(--grey);
         opacity: 0.85;
         text-transform: none;
         white-space: normal;
+        /* Tab-like spacing so the description spreads out evenly under
+           the main word instead of bunching into a narrow strip. */
+        letter-spacing: 0.12em;
+        word-spacing: 0.65em;
     }
 
     #ex {
@@ -3603,18 +3766,34 @@ footer {
         gap: 0.3rem;
     }
     .service-toggle:checked + .service-item + .service-content {
-        max-height: 400px;
+        max-height: 800px;
         margin-bottom: 1.5rem;
     }
     .service-item .work-label {
         display: none;
     }
+    /* Long category titles wrap on narrow screens (e.g. "Consulting & Optimization") */
+    .service-item h2 {
+        white-space: normal;
+        line-height: 1.1;
+    }
 
-    #chrome-scroll h4,
-    #chrome-scroll h5,
     .chrome-scroll-section h4,
     .chrome-scroll-section h5 {
         font-size: clamp(0.96rem, 2vw, 1.6rem);
+    }
+
+    /* Mobile: the 25vh bottom padding + full-viewport centering leave too
+       much empty space under the much smaller mobile chrome-scroll text,
+       pushing the email icon down. Tighten here only; desktop is untouched. */
+    .chrome-scroll-section .text-container {
+        min-height: auto;
+    }
+    .chrome-scroll-section.extended-bottom .chrome-container {
+        padding-bottom: 8vh !important;
+    }
+    .chrome-scroll-section.last + .contact {
+        margin-top: -4rem;
     }
 
     #about {
@@ -3708,11 +3887,19 @@ footer {
     }
 }
 
+/* Insurance: even if the fit-check JS never runs, don't let the
+   button group crowd the logo/menu on tiny screens */
+@media (max-width: 360px) {
+    .nav-services {
+        display: none !important;
+    }
+}
+
 /* ── Very small / short phones: tighten hero padding so the name,
    headline and the orange tags all fit on the first screen ── */
 @media (max-width: 380px) and (max-height: 600px) {
     #hero {
-        padding-top: calc(clamp(3.6rem, 11vw, 5rem) + 32px);
+        padding-top: calc(clamp(3rem, 10vw, 5rem) + 32px);
         padding-bottom: 0.5rem;
     }
     #hero-handle {
@@ -3825,14 +4012,27 @@ footer {
 
 .btn-op i,
 .btn-pb i,
-.btn-bo i {
+.btn-bo i,
+.btn-op svg,
+.btn-pb svg,
+.btn-bo svg {
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     opacity: 0.75;
     font-size: 1em;
 }
+.btn-op svg,
+.btn-pb svg,
+.btn-bo svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
 .btn-op:hover i,
 .btn-pb:hover i,
-.btn-bo:hover i {
+.btn-bo:hover i,
+.btn-op:hover svg,
+.btn-pb:hover svg,
+.btn-bo:hover svg {
     transform: translate(3px, -3px);
     opacity: 1;
 }
@@ -3941,6 +4141,19 @@ footer {
         0 0 24px rgba(90, 159, 212, 0.3),
         0 0 48px rgba(90, 159, 212, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ── Disabled state for placeholder buttons (e.g. "Live Site" links whose
+   URLs aren't published yet) — kept in the DOM but visually muted & inert ── */
+.btn-bo.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.btn-bo.is-disabled::before {
+    opacity: 0;
+}
+.btn-bo.is-disabled:hover {
+    transform: none;
 }
 
 /* ── Light mode overrides ── */
@@ -4068,12 +4281,6 @@ footer {
     margin-bottom: 1.4rem;
 }
 
-.writing-label {
-    /* reuse the same orange pill style as work-label */
-    margin-bottom: 0;
-    flex-shrink: 0;
-}
-
 #writing-section h1 {
     line-height: 1;
     margin: 0;
@@ -4149,41 +4356,6 @@ footer {
         0 2px 0 0 color-mix(in srgb, var(--pink) 50%, transparent),
         0 16px 36px rgba(0, 0, 0, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.22);
-}
-
-/* ruled lines */
-.wcard-lines {
-    padding: 1.1rem 1.4rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    flex-shrink: 0;
-}
-
-.wcard-lines span {
-    display: block;
-    height: 1px;
-    background: color-mix(in srgb, var(--blue) 18%, transparent);
-    border-radius: 1px;
-}
-
-.wcard-lines span:nth-child(1) {
-    opacity: 0.5;
-}
-.wcard-lines span:nth-child(2) {
-    opacity: 0.35;
-}
-.wcard-lines span:nth-child(3) {
-    opacity: 0.5;
-}
-.wcard-lines span:nth-child(4) {
-    opacity: 0.35;
-}
-.wcard-lines span:nth-child(5) {
-    opacity: 0.25;
-}
-.wcard-lines span:nth-child(6) {
-    opacity: 0.18;
 }
 
 /* card body */
@@ -4335,13 +4507,6 @@ footer {
     margin: 0;
     padding-right: 0;
     line-height: 0.8;
-}
-
-.skill-cards-mini {
-    display: inline-block;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.04em;
-    font-size: clamp(1rem, 1.4vw, 1.6rem);
 }
 
 /* ── Grid ── */
@@ -4507,7 +4672,7 @@ footer {
 }
 
 .scard-back-inner {
-    padding: 1.4rem 1.5rem 1.2rem;
+    padding: 1.4rem 2.25rem 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -4515,15 +4680,23 @@ footer {
     overflow: hidden;
 }
 
+.scard-back-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--pink) 28%, transparent);
+    padding-bottom: 0.55rem;
+    flex-shrink: 0;
+}
+
 .scard-back-title {
     font-family: "DinaRemasterII-Bold", "DinaRemasterII", monospace;
     font-weight: 700;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--orange);
-    border-bottom: 1px solid color-mix(in srgb, var(--pink) 28%, transparent);
-    padding-bottom: 0.55rem;
     flex-shrink: 0;
 }
 
@@ -4540,7 +4713,7 @@ footer {
 
 .scard-skills li {
     font-family: "Libre Baskerville", serif;
-    font-size: clamp(0.76rem, 0.96vw, 0.88rem);
+    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
     color: var(--grey);
     line-height: 1.4;
     padding-left: 0.95em;
@@ -4568,7 +4741,7 @@ footer {
 
 .scard-tools li {
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.56rem, 0.68vw, 0.65rem);
+    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--blue);
@@ -4581,13 +4754,13 @@ footer {
 
 .scard-award {
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.54rem, 0.65vw, 0.62rem);
+    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
     color: var(--grey);
-    opacity: 0.58;
+    opacity: 0.72;
     line-height: 1.55;
-    border-top: 1px solid color-mix(in srgb, var(--bordergrey) 28%, transparent);
-    padding-top: 0.5rem;
-    flex-shrink: 0;
+    text-align: right;
+    flex: 1;
+    min-width: 0;
 }
 
 /* ── Dark mode ── */
@@ -5021,13 +5194,12 @@ footer {
 }
 
 .system-sep {
-  font-family: "DinaRemasterII", monospace;
-  font-size: clamp(1.4rem, 2vw, 2rem);
-  color: var(--pink);
-  opacity: 0.4;
-  text-align: center;
+  width: 2px;
+  border-left: 2px dashed var(--pink);
+  opacity: 0.35;
+  align-self: stretch;
+  justify-self: center;
   font-style: normal;
-  align-self: center;
 }
 
 .system-item {
@@ -5088,7 +5260,6 @@ footer {
 }
 
 /* ── Tools Grid ── */
-
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5139,7 +5310,7 @@ footer {
 
 .tool-cat-title {
   font-family: "DinaRemasterII", monospace !important;
-  font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+  font-size: clamp(1.21rem, 1.65vw, 1.65rem) !important;
   color: var(--pink) !important;
   font-style: normal !important;
   text-transform: uppercase;
@@ -5150,7 +5321,7 @@ footer {
 
 .tool-items {
   font-family: "DinaRemasterII", monospace;
-  font-size: clamp(0.72rem, 0.85vw, 0.9rem);
+  font-size: clamp(0.79rem, 0.94vw, 0.99rem);
   line-height: 1.6;
   color: var(--grey);
   text-transform: uppercase;
@@ -5160,7 +5331,7 @@ footer {
 
 .tool-tagline {
   font-family: "DinaRemasterII", monospace;
-  font-size: clamp(0.6rem, 0.7vw, 0.75rem);
+  font-size: clamp(0.66rem, 0.77vw, 0.83rem);
   color: var(--pink);
   opacity: 0.5;
   text-transform: uppercase;
@@ -5228,7 +5399,212 @@ footer {
     padding: 1.2rem 1rem;
   }
 
+  .tool-cat-title {
+    font-size: clamp(1.43rem, 1.95vw, 1.95rem) !important;
+  }
+
+  .tool-items {
+    font-size: clamp(0.94rem, 1.11vw, 1.17rem);
+  }
+
+  .tool-tagline {
+    font-size: clamp(0.78rem, 0.91vw, 0.98rem);
+  }
+
   .tools-section {
     padding: 0 clamp(16px, 4vw, 40px);
   }
 }
+
+/* ═══════════════════════════════════
+   SERVICES (HOME) — 3-column grid + CSS-only slide-down cards
+   Mirrors the "My Tools / Systems" styling from about.html
+   (dashed pink rules, dark-blue names, pink notes).
+   Cards use the site palette (btn-op / btn-pb / btn-bo treatment).
+═══════════════════════════════════ */
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(14px, 2vw, 32px);
+  border-top: 2px dashed var(--pink);
+  border-bottom: 2px dashed var(--pink);
+}
+
+.svc-cell {
+  position: relative;
+  overflow: hidden;
+  border-right: 2px dashed var(--pink);
+  display: grid;
+  align-content: start;
+  height: 100%;
+}
+
+.svc-cell:last-child {
+  border-right: none;
+}
+
+.svc-toggle {
+  display: none;
+}
+
+.svc-front {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 0.6rem;
+  min-height: clamp(280px, 42vh, 420px);
+  padding: clamp(1.8rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  text-align: left;
+  cursor:
+    url("./images/hand.svg") 7 0,
+    pointer;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+.svc-name {
+  grid-row: 1;
+  align-self: start;
+}
+
+.svc-front:hover {
+  background: color-mix(in srgb, var(--pink) 7%, transparent);
+}
+
+.svc-name {
+  font-family: "DinaRemasterII", monospace;
+  font-size: clamp(1.7rem, 3.4vw, 3.4rem);
+  line-height: 1;
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+.svc-items {
+  font-family: "DinaRemasterII", monospace;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Home services grid — the three explainer items under each group name
+   each get their own accent: 1st=orange, 2nd=blue, 3rd=pink */
+.svc-items span:nth-child(1) {
+  color: var(--orange);
+}
+
+.svc-items span:nth-child(2) {
+  color: var(--blue);
+}
+
+.svc-items span:nth-child(3) {
+  color: var(--pink);
+}
+
+.svc-items span::before {
+  content: "*";
+  margin-right: 0.6em;
+  opacity: 0.5;
+}
+
+/* ── CSS-only slide-down card (from the top, atop the cell) ── */
+
+.svc-slide {
+  --svc-accent: var(--pink);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--svc-accent) 45%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.08),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+  transform: translateY(-100%);
+  transition: transform 0.5s var(--ease);
+  pointer-events: none;
+}
+
+.svc-toggle:checked + .svc-front + .svc-slide {
+  transform: translateY(0);
+}
+
+.svc-slide--orange {
+  --svc-accent: var(--orange);
+  background: color-mix(in srgb, var(--orange) 16%, #0f100a);
+  color: var(--orange);
+}
+
+.svc-slide--blue {
+  --svc-accent: var(--blue);
+  background: color-mix(in srgb, var(--blue) 20%, #0f100a);
+  color: var(--blue);
+}
+
+.svc-slide--pink {
+  --svc-accent: var(--pink);
+  background: color-mix(in srgb, var(--pink) 24%, #0f100a);
+  color: var(--pink);
+}
+
+.svc-slide-title {
+  font-family: "DinaRemasterII", monospace;
+  font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.svc-slide-text {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 34ch;
+  color: color-mix(in srgb, #f4f5ef 88%, transparent);
+}
+
+/* Light mode — mirror the btn-op / btn-pb / btn-bo light treatment */
+@media (prefers-color-scheme: light) {
+  .svc-slide--orange {
+    background: color-mix(in srgb, var(--orange) 20%, #f4f5ef);
+    color: #c45520;
+  }
+
+  .svc-slide--blue {
+    background: color-mix(in srgb, var(--blue) 22%, #f4f5ef);
+    color: #2060a0;
+  }
+
+  .svc-slide--pink {
+    background: color-mix(in srgb, var(--pink) 20%, #f4f5ef);
+    color: #c42040;
+  }
+
+  .svc-slide-text {
+    color: color-mix(in srgb, #0f100a 82%, transparent);
+  }
+}
+
+/* ── Mobile: one cell per line ── */
+

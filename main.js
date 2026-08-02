@@ -288,6 +288,9 @@ function initHeaderAnimations() {
 
   if (!logo && !navBtns.length) return;
 
+  // No GSAP on mobile (skipped by anim-loader.js) — elements show by default
+  if (typeof gsap === "undefined") return;
+
   const els = [logo, ...Array.from(navBtns)].filter(Boolean);
 
   // Kill stale tweens
@@ -410,10 +413,263 @@ window.initFooterAnimations = initFooterAnimations;
 // ===================================
 // HEADER INIT
 // ===================================
+function initNavHideOnScroll() {
+  const nav = document.querySelector("nav");
+  const btns =
+    nav &&
+    Array.from(
+      nav.querySelectorAll(
+        ".nav-right > a.btn-pb, .nav-right > a.btn-bo, .nav-right > a.btn-op",
+      ),
+    );
+  if (!btns || !btns.length) return;
+
+  // Desktop uses GSAP (loaded by anim-loader); mobile has no GSAP,
+  // so fall back to the native Web Animations API for the same feel.
+  const gsapOk = typeof gsap !== "undefined";
+  const waapiOk =
+    typeof Element !== "undefined" && !!Element.prototype.animate;
+
+  let lastY = window.scrollY;
+  let hidden = false;
+  let ticking = false;
+
+  // In-flight WAAPI animations per button — cancel on direction flips
+  const live = new Map();
+
+  const hideBtns = () => {
+    if (hidden) return;
+    hidden = true;
+    if (gsapOk) {
+      gsap.killTweensOf(btns);
+      gsap.to(btns, {
+        autoAlpha: 0,
+        y: -14,
+        duration: 0.3,
+        ease: "power2.in",
+        stagger: 0.02,
+      });
+      return;
+    }
+    if (waapiOk) {
+      btns.forEach((b, i) => {
+        const prev = live.get(b);
+        if (prev) prev.cancel();
+        b.style.pointerEvents = "none";
+        live.set(
+          b,
+          b.animate(
+            [
+              { opacity: 1, transform: "translateY(0)" },
+              { opacity: 0, transform: "translateY(-14px)" },
+            ],
+            { duration: 300, delay: i * 20, easing: "ease-in", fill: "forwards" },
+          ),
+        );
+      });
+      // Drop them out of the tab order once the fade completes
+      const last = live.get(btns[btns.length - 1]);
+      if (last) {
+        last.onfinish = () => {
+          if (hidden) btns.forEach((b) => (b.style.visibility = "hidden"));
+        };
+      }
+      return;
+    }
+    btns.forEach((b) => {
+      b.style.opacity = "0";
+      b.style.visibility = "hidden";
+      b.style.pointerEvents = "none";
+    });
+  };
+
+  const showBtns = () => {
+    if (!hidden) return;
+    hidden = false;
+    if (gsapOk) {
+      gsap.killTweensOf(btns);
+      // Fall in from above, staggered like the blurb — clearProps keeps
+      // the CSS :hover transform working afterwards
+      gsap.fromTo(
+        btns,
+        { autoAlpha: 0, y: -24 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.07,
+          clearProps: "all",
+        },
+      );
+      return;
+    }
+    if (waapiOk) {
+      btns.forEach((b, i) => {
+        const prev = live.get(b);
+        if (prev) prev.cancel();
+        b.style.pointerEvents = "";
+        b.style.visibility = "";
+        live.set(
+          b,
+          b.animate(
+            [
+              { opacity: 0, transform: "translateY(-24px)" },
+              { opacity: 1, transform: "translateY(0)" },
+            ],
+            {
+              duration: 700,
+              delay: i * 70,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              // "both" (not "forwards") holds the from-keyframe during the
+              // stagger delay, matching GSAP's immediate-render fromTo on
+              // desktop. With "forwards" each button flashes visible while
+              // waiting out its delay, then fades in again (the "double take").
+              fill: "both",
+            },
+          ),
+        );
+      });
+      return;
+    }
+    btns.forEach((b) => {
+      b.style.opacity = "";
+      b.style.visibility = "";
+      b.style.pointerEvents = "";
+    });
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      lastY = y;
+      if (Math.abs(delta) < 4) return; // ignore micro-scrolls
+      if (delta > 0 && y > 100) hideBtns();
+      else if (delta < 0) showBtns();
+    });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
 function initHeaderComponent() {
   initHeaderAnimations();
+  initNavHideOnScroll();
+  initNavFit();
   initMenuLinkHandlers();
   initContextMenu();
+}
+
+// ===================================
+// NAV FIT — drop services when the group crowds the logo/menu (mobile)
+// ===================================
+function initNavFit() {
+  const nav = document.querySelector("nav");
+  const group = nav && nav.querySelector(".nav-right");
+  const logo = nav && nav.querySelector("#logo-div");
+  const menu = nav && nav.querySelector("#menu-btn");
+  const services = nav && nav.querySelector(".nav-services");
+  if (!nav || !group || !logo || !menu) return;
+
+  // Breathing room between the button group and the logo/menu before we
+  // fall back to 2 buttons. Hysteresis stops flip-flopping at the edge.
+  const MIN_GAP = 20;
+  const HYST = 6;
+
+  const check = () => {
+    if (window.innerWidth > 768) {
+      nav.classList.remove("nav-cramped");
+      return;
+    }
+    // On mobile .nav-right fills the whole column between logo and menu
+    // button, so measure the actual first/last visible button edges
+    // instead of the container (which always sits flush against both).
+    const buttons = Array.from(group.querySelectorAll("a")).filter(
+      (a) => getComputedStyle(a).display !== "none",
+    );
+    if (!buttons.length) return;
+    const gap = Math.min(
+      buttons[0].getBoundingClientRect().left - logo.getBoundingClientRect().right,
+      menu.getBoundingClientRect().left -
+        buttons[buttons.length - 1].getBoundingClientRect().right,
+    );
+    const already = nav.classList.contains("nav-cramped");
+    nav.classList.toggle("nav-cramped", gap < (already ? MIN_GAP - HYST : MIN_GAP));
+    if (!nav.classList.contains("nav-cramped") && services) {
+      // It may have been animated into a hidden state while display:none —
+      // restore it cleanly before it becomes visible again
+      services.style.visibility = "";
+      services.style.opacity = "";
+      services.style.pointerEvents = "";
+    }
+  };
+
+  check();
+  window.addEventListener("resize", check, { passive: true });
+  // Re-measure once webfonts finish loading (logo width changes)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(check);
+  }
+}
+
+// ===================================
+// AVAILABILITY DOT — heartbeat blink, random brand colour per beat
+// ===================================
+function initAvailDot() {
+  const dot = document.querySelector(".avail-dot");
+  if (!dot) return;
+  if (prefersReducedMotion()) return; // keep the static dot, no beats
+
+  const rootStyle = getComputedStyle(document.documentElement);
+  const colors = [
+    (rootStyle.getPropertyValue("--orange").trim() || "#f48f6e"),
+    (rootStyle.getPropertyValue("--blue").trim() || "#5a9fd4"),
+    (rootStyle.getPropertyValue("--pink").trim() || "#ee8198"),
+  ];
+
+  let timer = null;
+  let lastColorIndex = -1;
+
+  // Keep in sync with the availHeartbeat animation duration in
+  // styles.css (1.6s). The dot is at its smallest ~25% through the
+  // animation — swap the colour there so each expansion glows in a
+  // fresh colour (the swap is invisible at period size).
+  const ANIM_MS = 1600;
+  const COLOR_SWAP_MS = ANIM_MS * 0.25;
+
+  const swapColor = () => {
+    // pick a colour different from the current one
+    let index;
+    do {
+      index = Math.floor(Math.random() * colors.length);
+    } while (index === lastColorIndex);
+    lastColorIndex = index;
+
+    const color = colors[index];
+    dot.style.backgroundColor = color;
+    dot.style.boxShadow = `0 0 12px ${color}66`;
+  };
+
+  const beat = () => {
+    // restart the heartbeat animation cleanly
+    dot.classList.remove("beating");
+    void dot.offsetWidth; // force reflow so the animation re-runs
+    dot.classList.add("beating");
+
+    // swap the colour while the dot is shrunk, not at the start of
+    // the beat — the next expansion then appears in the new colour
+    setTimeout(swapColor, COLOR_SWAP_MS);
+
+    // irregular rhythm: base rest + random jitter
+    const rest = 1400 + Math.random() * 800;
+    timer = setTimeout(beat, rest);
+  };
+
+  timer = setTimeout(beat, 500 + Math.random() * 500);
 }
 
 // ===================================
@@ -423,6 +679,9 @@ function initIntersectionObserver() {
   // Added .service-item to this observer list
   const targets = document.querySelectorAll(".fade-in-element, .service-item");
   if (!targets.length) return;
+
+  // No GSAP on mobile (skipped by anim-loader.js) — elements are visible by default
+  if (typeof gsap === "undefined") return;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -606,6 +865,9 @@ function initScrollAnimations() {
 // PAGE 2 EXPANDABLE CONTENT
 // ===================================
 function initPage2Expandable() {
+  // Expand/collapse is CSS-driven (:checked + max-height); GSAP only animates it
+  if (typeof gsap === "undefined") return;
+
   const page2Elements = document.querySelectorAll(".page2-ele");
   if (!page2Elements.length) return;
 
@@ -715,9 +977,23 @@ function initContextMenu() {
 
 function randomizeBackground() {
   const blobs = document.querySelectorAll(".blob");
+  const placed = [];
+  const minGap = 26; // % — keep blobs from spawning on top of each other
   blobs.forEach((blob) => {
-    blob.style.left = `${Math.floor(Math.random() * 80)}%`;
-    blob.style.top = `${Math.floor(Math.random() * 80)}%`;
+    let left, top;
+    // Re-roll until the blob lands clear of every already-placed blob
+    for (let tries = 0; tries < 50; tries++) {
+      left = Math.floor(Math.random() * 76);
+      top = Math.floor(Math.random() * 76);
+      const tooClose = placed.some(
+        (p) =>
+          Math.abs(p.left - left) < minGap && Math.abs(p.top - top) < minGap
+      );
+      if (!tooClose) break;
+    }
+    placed.push({ left, top });
+    blob.style.left = `${left}%`;
+    blob.style.top = `${top}%`;
   });
 }
 
@@ -832,9 +1108,46 @@ function initWorkToggle() {
   });
 }
 
+function randomizeSvcItemColors() {
+  // Home services grid: give each explainer list a shuffled permutation of
+  // orange / blue / pink so every section differs on each page load.
+  const lists = document.querySelectorAll(".svc-items");
+  if (!lists.length) return;
+
+  const rootStyle = getComputedStyle(document.documentElement);
+  const palette = [
+    rootStyle.getPropertyValue("--orange").trim() || "#f48f6e",
+    rootStyle.getPropertyValue("--blue").trim() || "#5a9fd4",
+    rootStyle.getPropertyValue("--pink").trim() || "#ee8198",
+  ];
+
+  lists.forEach((list) => {
+    const spans = list.querySelectorAll("span");
+    if (spans.length < 3) return;
+
+    // The Improve card keeps a fixed orange → blue → pink order (CSS default)
+    const cell = list.closest(".svc-cell");
+    const isImprove =
+      cell && cell.querySelector(".svc-toggle")?.id === "svc-improve";
+    if (isImprove) return;
+
+    // Fisher–Yates shuffle so each list gets its own random order
+    for (let i = palette.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [palette[i], palette[j]] = [palette[j], palette[i]];
+    }
+
+    spans.forEach((span, i) => {
+      span.style.color = palette[i % palette.length];
+    });
+  });
+}
+
 function initPage() {
   randomizeBackground();
+  randomizeSvcItemColors();
   initHeaderComponent();
+  initAvailDot();
   initLenis();
   initMenuToggleScrollLock();
   initWorkToggle();

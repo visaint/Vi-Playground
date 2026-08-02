@@ -50,20 +50,105 @@ const SVG_SPRITE = `
     <line x1="7" y1="13" x2="17" y2="13" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
     <line x1="7" y1="16" x2="13" y2="16" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
   </symbol>
+  <!-- Bluesky -->
+  <symbol id="ic-bluesky" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/>
+  </symbol>
+  <!-- Mastodon -->
+  <symbol id="ic-mastodon" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/>
+  </symbol>
+  <!-- X (Twitter) -->
+  <symbol id="ic-x" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+  </symbol>
+  <!-- Arrow up-right -->
+  <symbol id="ic-arrow-up-right" viewBox="0 0 24 24">
+    <path d="M7 17 17 7M17 7H8m9 0v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Arrow right -->
+  <symbol id="ic-arrow-right" viewBox="0 0 24 24">
+    <path d="M4 12h16m-7-7 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Close -->
+  <symbol id="ic-close" viewBox="0 0 24 24">
+    <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- Mail -->
+  <symbol id="ic-mail" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="m3.5 7.5 8.5 5.75 8.5-5.75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- File text -->
+  <symbol id="ic-file-text" viewBox="0 0 24 24">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Globe -->
+  <symbol id="ic-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M3 12h18M12 3a15.5 15.5 0 0 1 0 18 15.5 15.5 0 0 1 0-18Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Shopping bag -->
+  <symbol id="ic-shopping-bag" viewBox="0 0 24 24">
+    <path d="M5 8h14l-.8 12H5.8L5 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 10V6a3 3 0 0 1 6 0v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- Sun -->
+  <symbol id="ic-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 17.66l1.41-1.41M17.66 4.93l1.41-1.41" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- Moon -->
+  <symbol id="ic-moon" viewBox="0 0 24 24">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Mental health (heart + pulse) -->
+  <symbol id="ic-mental-health" viewBox="0 0 24 24">
+    <path d="M12 20s-7-4.35-9.2-8.45C1.3 9.05 2.7 6 5.7 5.6c2-.4 4.1.6 6.3 2.9 2.2-2.3 4.3-3.3 6.3-2.9 3 .4 4.4 3.45 2.9 5.95C19 15.65 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M8 11.5h2l1.5 2.5 2-4 1.5 2.5h1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- Pen nib -->
+  <symbol id="ic-pen-nib" viewBox="0 0 24 24">
+    <path d="m4 20 4-1.2L18.5 8.3a2.1 2.1 0 0 0-3-3L5 15.7 4 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m14.5 7.5 2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="18.5" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  <!-- Gamepad -->
+  <symbol id="ic-gamepad" viewBox="0 0 24 24">
+    <path d="M6.5 7h11a4.5 4.5 0 0 1 4.5 4.5V15a3 3 0 0 1-5.3 1.9L15.6 15.5h-7.2l-1.1 1.4A3 3 0 0 1 2 15v-3.5A4.5 4.5 0 0 1 6.5 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M7 9.5v3M5.5 11h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="16.75" cy="10.5" r="0.75" fill="currentColor"/>
+    <circle cx="18.75" cy="12.5" r="0.75" fill="currentColor"/>
+  </symbol>
+  <!-- Sparkling -->
+  <symbol id="ic-sparkling" viewBox="0 0 24 24">
+    <path d="M12 3.2c.55 3.6 2 5.05 5.6 5.6-3.6.55-5.05 2-5.6 5.6-.55-3.6-2-5.05-5.6-5.6 3.6-.55 5.05-2 5.6-5.6Z" fill="currentColor"/>
+    <path d="M19.5 13.5c.3 1.9 1.2 2.8 3.1 3.1-1.9.3-2.8 1.2-3.1 3.1-.3-1.9-1.2-2.8-3.1-3.1 1.9-.3 2.8-1.2 3.1-3.1Z" fill="currentColor"/>
+    <path d="M5.2 14.2c.22 1.4.9 2.08 2.3 2.3-1.4.22-2.08.9-2.3 2.3-.22-1.4-.9-2.08-2.3-2.3 1.4-.22 2.08-.9 2.3-2.3Z" fill="currentColor"/>
+  </symbol>
 </svg>`;
 
 /* ── Reusable pixel-grid HTML (links + icons) ── */
-function pixelGridHTML(small = false) {
+function pixelGridHTML(small = false, blog = false) {
   const cls = small ? "pixel-grid pixel-grid--sm" : "pixel-grid";
   return `
 	<nav class="${cls}" aria-label="Social links">
-	  <a href="https://www.linkedin.com/in/viktorsekovski/" class="px-link" style="--px-color:#0A66C2"
+	  <a href="https://www.linkedin.com/in/vi-saint-130a33426/" class="px-link" style="--px-color:#0A66C2"
 	    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
 	    <span class="px-body">
 	      <span class="px-icon"><svg><use href="#ic-linkedin"/></svg></span>
 	      <span class="px-label">LinkedIn</span>
 	    </span>
 	    <span class="px-tip">Let's connect</span>
+	  </a>
+	  <a href="https://bsky.app/profile/visaint.bsky.social" class="px-link" style="--px-color:#0285FF"
+	    target="_blank" rel="noopener noreferrer" aria-label="Bluesky">
+	    <span class="px-body">
+	      <span class="px-icon"><svg><use href="#ic-bluesky"/></svg></span>
+	      <span class="px-label">Bluesky</span>
+	    </span>
+	    <span class="px-tip">Find me on Bluesky</span>
 	  </a>
 	  <a href="https://github.com/visaint" class="px-link" style="--px-color:#f48f6e"
 	    target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -73,21 +158,13 @@ function pixelGridHTML(small = false) {
 	    </span>
 	    <span class="px-tip">See my code</span>
 	  </a>
-	  <a href="https://notes.visaint.space" class="px-link" style="--px-color:#ee8198"
-	    target="_blank" rel="noopener noreferrer" aria-label="Blog">
-	    <span class="px-body">
-	      <span class="px-icon"><svg><use href="#ic-blog"/></svg></span>
-	      <span class="px-label">Blog</span>
-	    </span>
-	    <span class="px-tip">Read my words</span>
-	  </a>
 	  <a href="https://codepen.io/visaint" class="px-link" style="--px-color:#5a9fd4"
 	    target="_blank" rel="noopener noreferrer" aria-label="CodePen">
 	    <span class="px-body">
 	      <span class="px-icon"><svg><use href="#ic-codepen"/></svg></span>
 	      <span class="px-label">CodePen</span>
 	    </span>
-	    <span class="px-tip">Leads to CodePen</span>
+	<span class="px-tip">My experiments</span>
 	  </a>
 	  <a href="https://contra.com/viktorsekovski_8r714jwo/about?r=viktorsekovski_8r714jwo"
 	    class="px-link" style="--px-color:#f48f6e"
@@ -106,7 +183,35 @@ function pixelGridHTML(small = false) {
 	    </span>
 	    <span class="px-tip">Follow my art</span>
 	  </a>
-</nav>`;
+	  <a href="https://mastodon.social/@vis7" class="px-link" style="--px-color:#6364FF"
+	    target="_blank" rel="noopener noreferrer" aria-label="Mastodon">
+	    <span class="px-body">
+	      <span class="px-icon"><svg><use href="#ic-mastodon"/></svg></span>
+	      <span class="px-label">Mastodon</span>
+	    </span>
+	    <span class="px-tip">Find me on Mastodon</span>
+	  </a>
+	  <a href="https://x.com/visaintstudio" class="px-link" style="--px-color:#8b949e"
+	    target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+	    <span class="px-body">
+	      <span class="px-icon"><svg><use href="#ic-x"/></svg></span>
+	      <span class="px-label">X</span>
+	    </span>
+	    <span class="px-tip">Follow me on X</span>
+	  </a>
+	  ${
+	    blog
+	      ? `<a href="https://notes.visaint.space" class="px-link px-link--wide" style="--px-color:#ee8198"
+	    target="_blank" rel="noopener noreferrer" aria-label="Blog">
+	    <span class="px-body">
+	      <span class="px-icon"><svg><use href="#ic-blog"/></svg></span>
+	      <span class="px-label">Blog</span>
+	    </span>
+	    <span class="px-tip">Read my notes</span>
+	  </a>`
+	      : ""
+	  }
+	</nav>`;
 }
 
 // ===================================
@@ -119,35 +224,38 @@ ${SVG_SPRITE}
 <input type="checkbox" id="menu-toggle" class="menu-toggle" />
 <nav>
   <div id="logo-div">
-    <a href="/" id="logo-link">
+    <a href="/" id="logo-link" aria-label="Vi Saint &#8212; home">
       <h4 id="logo">VS</h4>
     </a>
   </div>
   <div class="nav-right">
-    <a href="./contact.html" class="btn-pb">
+    <a href="./contact.html" class="btn-pb desktop-only">
       <span class="nav-label">contact</span>
-      <i class="ri-mail-line icon-mobile"></i>
+      <svg class="icon-mobile" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-mail"/></svg>
     </a>
-    <a href="./work.html" class="btn-op">
+    <a href="./work.html" class="btn-bo">
       <span class="nav-label">work</span>
     </a>
-    <a href="https://notes.visaint.space" class="btn-bo hide-small"
-       target="_blank" rel="noopener noreferrer">
-      <span class="nav-label">blog</span>
-      <i class="ri-arrow-right-up-line"></i>
-      <i class="ri-file-text-line icon-mobile"></i>
+    <a href="./services.html" class="btn-pb nav-services">
+      <span class="nav-label">services</span>
     </a>
-    <a href="./about.html" class="btn-pb desktop-only">
+    <a href="./about.html" class="btn-op">
       <span class="nav-label">about</span>
     </a>
-    <label id="menu-btn" for="menu-toggle" aria-label="Open menu">
-      <span class="hamburger-icon" aria-hidden="true">
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
-      </span>
-    </label>
+    <a href="https://notes.visaint.space" class="btn-bo desktop-only"
+       target="_blank" rel="noopener noreferrer">
+      <span class="nav-label">blog</span>
+      <svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg>
+      <svg class="icon-mobile" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-file-text"/></svg>
+    </a>
   </div>
+  <label id="menu-btn" for="menu-toggle" aria-label="Open menu">
+    <span class="hamburger-icon" aria-hidden="true">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </span>
+  </label>
 </nav>
 
 <label for="menu-toggle" class="menu-overlay" aria-hidden="true"></label>
@@ -186,7 +294,7 @@ ${SVG_SPRITE}
       <li class="menu-item" style="--i:5">
         <a href="https://notes.visaint.space" class="menu-btn-link btn-bo"
            target="_blank" rel="noopener noreferrer">
-          Blog<i class="ri-arrow-right-up-line"></i>
+          Blog<svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg>
         </a>
       </li>
     </ul>
@@ -222,12 +330,12 @@ class SiteFooter extends HTMLElement {
   <div class="foot-card">
     <div class="foot-identity">
       <h1 class="foot-name">Vi Saint</h1>
-      <h4 class="foot-title">Designer &amp; Developer</h4>
+      <h4 class="foot-title">Creative Technologist</h4>
       <p class="foot-tagline">Interfaces, interaction, motion &amp; performance</p>
       <a href="mailto:hello@visaint.space" class="foot-email">hello@visaint.space</a>
     </div>
     <div class="foot-links">
-      ${pixelGridHTML(false)}
+      ${pixelGridHTML(false, true)}
     </div>
   </div>
   <div class="foot-bottom">
@@ -241,3 +349,39 @@ class SiteFooter extends HTMLElement {
 // Register both
 customElements.define("site-header", SiteHeader);
 customElements.define("site-footer", SiteFooter);
+
+// ── Hover tooltips: keep inside the viewport ──
+// .px-tip cards are centered on their tile (translateX(-50%)) and can be
+// wider than the space to the viewport edge, so tiles near the right (or
+// left) edge clip. Clamp the tooltip horizontally, and vertically when
+// it would poke above the top of the screen.
+document.addEventListener("mouseover", (e) => {
+  const link = e.target.closest?.(".px-link");
+  if (!link) return;
+  const tip = link.querySelector(".px-tip");
+  if (!tip) return;
+  requestAnimationFrame(() => {
+    const r = tip.getBoundingClientRect();
+    const margin = 12;
+    let dx = 0;
+    if (r.right > window.innerWidth - margin) {
+      dx = window.innerWidth - margin - r.right;
+    }
+    if (r.left < margin) dx = margin - r.left;
+    let dy = 0;
+    if (r.top < margin) dy = margin - r.top;
+    if (dx || dy) {
+      tip.style.transform = `translateX(calc(-50% + ${dx}px)) translateY(${dy}px)`;
+    }
+  });
+});
+
+document.addEventListener("mouseout", (e) => {
+  const link = e.target.closest?.(".px-link");
+  if (!link) return;
+  const tip = link.querySelector(".px-tip");
+  if (!tip) return;
+  // Still inside the same link (e.g. moving between icon and label)?
+  if (e.relatedTarget && e.relatedTarget.closest?.(".px-link") === link) return;
+  tip.style.removeProperty("transform");
+});

@@ -10,7 +10,7 @@
         </title>
         <meta
             name="description"
-            content="Meet Vi Saint — a remote-first Creative Technologist with an unconventional background. Learn about his process, his story, and what drives his work."
+            content="Meet Vi Saint — a remote-first Creative Technologist with an unconventional background. Learn about his process, his story & what drives his work."
         />
         <meta
             name="keywords"
@@ -85,14 +85,14 @@
 
         <link
             rel="preload"
-            href="./fonts/tiempos-text.woff2"
+            href="./fonts/libre-baskerville.woff2"
             as="font"
             type="font/woff2"
             crossorigin
         />
         <link
             rel="preload"
-            href="./fonts/tiempos-text-italic.woff2"
+            href="./fonts/libre-baskerville-italic.woff2"
             as="font"
             type="font/woff2"
             crossorigin
@@ -120,14 +120,10 @@
         />
 
         <link rel="stylesheet" href="./styles.css" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-            media="print"
-            onload="this.media = 'all'"
-        />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
 
-        <script src="./components.js"></script>
+        <script src="./components.js" defer></script>
 
         <script type="application/ld+json">
             {
@@ -143,7 +139,7 @@
                     "https://github.com/ViktorSekovski"
                 ],
                 "jobTitle": "Creative Technologist",
-                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity & web development.",
                 "knowsAbout": [
                     "Product Design",
                     "UX Design",
@@ -293,13 +289,15 @@
                         <img
                             src="./images/me-front.webp"
                             alt="Portrait of Vi Saint, creative technologist"
+                            width="1505"
+                            height="3882"
                             loading="lazy"
                             class="fade-in-element"
                         />
                         <div id="t-s-div">
                             <p class="fade-in-element about-paragraph">
-                                Vi Saint (Viktor Sekovski) is a Creative Technologist
-                                whose work sits between <em>design</em>, <em>engineering</em> and <em>storytelling</em>.
+                                Vi Saint is a Creative Technologist
+                                whose work sits between <em>design</em>, <em>engineering</em> & <em>storytelling</em>.
                                 Rather than treating these disciplines as separate practices,
                                 he combines them into a single process where <em>strategy</em>,
                                 <em>visual identity</em> and <em>implementation</em> evolve together.
@@ -313,7 +311,7 @@
                             </p>
                             <!-- CV button + Let's Talk (same line on desktop) -->
                             <div class="about-actions fade-in-element">
-                                <div class="cv-trigger-wrap">
+                                <div class="cv-trigger-wrap" style="display: none">
                                     <button
                                         class="btn-pb"
                                         id="cv-open-btn"
@@ -327,7 +325,7 @@
                                     href="mailto:hello@visaint.space"
                                     class="btn-bo"
                                 >
-                                    Let's Talk<i class="ri-arrow-right-up-line"></i>
+                                    Let's Talk<svg class="ri-arrow-right-up-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-arrow-up-right"/></svg>
                                 </a>
                             </div>
                         </div>
@@ -346,9 +344,9 @@
                     Today he works across the full stack — from <em>front-end architecture</em>
                     and <em>back-end systems</em> to <em>brand identity</em>, <em>advertising</em>,
                     <em>graphic design</em>, <em>print production</em>, <em>typography</em>,
-                    <em>motion design</em>, <em>video</em>, and beyond.
-                    Every discipline informs the others, and that cross-pollination
-                    is what makes the work feel cohesive, considered, and alive.
+                    <em>motion design</em>, <em>video</em> & beyond.
+                    Every discipline informs the others & that cross-pollination
+                    is what makes the work feel cohesive, considered & alive.
                 </p>
 
                 <div style="height: 2vh;"></div>
@@ -378,10 +376,10 @@
                                 <span class="system-name">MacOS</span>
                                 <span class="system-note">(The Apps Keep Me Bound)</span>
                             </div>
-                            <span class="system-sep">X</span>
+                            <span class="system-sep" aria-hidden="true"></span>
                             <div class="system-item">
                                 <span class="system-name">Linux</span>
-                                <span class="system-note">for the freedom (KDE — Tuxedo OS currently)</span>
+                                <span class="system-note">for the freedom (KDE — Tuxedo OS)</span>
                             </div>
                         </div>
                     </div>
@@ -497,11 +495,14 @@
                 </section>
 
                 <div class="contact">
-                    <a href="mailto:hello@visaint.space">
+                    <a
+                        href="mailto:hello@visaint.space"
+                        aria-label="Email Vi Saint at hello@visaint.space"
+                    >
                         <img
                             class="letter"
                             src="./images/letter.svg"
-                            alt="Letter"
+                            alt=""
                             loading="lazy"
                         />
                     </a>
@@ -529,7 +530,7 @@
                             <h2>Video Games</h2>
                         </label>
                         <div class="service-content">
-                            <p>I grew up obsessed with video games. Not just playing them, but exploring them like secret worlds. I jumped between modern 3D universes and the charming simplicity of 8-bit pixels, trying to understand why each one felt magical in its own way. As a kid, I would dive deep into the history of how games were made, how stories were told through level design, and how tiny artistic decisions shaped entire experiences. I loved discovering narrative tricks, strange mechanics, and all the odd, clever experiments that never made it into the mainstream. Video games weren't just entertainment for me — they were a limitless playground of ideas. They taught me that technology, art, and emotion can combine in completely unexpected ways, and I've been chasing that feeling ever since.</p>
+                            <p>I grew up obsessed with video games. Not just playing them, but exploring them like secret worlds. I jumped between modern 3D universes and the charming simplicity of 8-bit pixels, trying to understand why each one felt magical in its own way. As a kid, I would dive deep into the history of how games were made, how stories were told through level design & how tiny artistic decisions shaped entire experiences. I loved discovering narrative tricks, strange mechanics & all the odd, clever experiments that never made it into the mainstream. Video games weren't just entertainment for me — they were a limitless playground of ideas. They taught me that technology, art & emotion can combine in completely unexpected ways & I've been chasing that feeling ever since.</p>
                         </div>
                     </div>
 
@@ -540,7 +541,7 @@
                             <h2>Stories</h2>
                         </label>
                         <div class="service-content">
-                            <p>My love for books started with a strange pairing: Alice in Wonderland and The Picture of Dorian Gray. One was surreal, whimsical, and chaotic; the other was dark, elegant, and unnervingly psychological. Together they cracked something open in me. I became obsessed with how stories could twist reality, reveal character, or expose hidden truths. From there I started devouring everything I could get my hands on — reading nearly two books a week — chasing that feeling of slipping into other worlds. Over time my habits expanded into a kind of personal ritual: one fiction book to ignite imagination, one non-fiction to feed curiosity. As my interests grew, the topics exploded outward — philosophy, design, technology, art, psychology, mythology — each one forming a new branch of the inner library I still carry with me.</p>
+                            <p>My love for books started with a strange pairing: Alice in Wonderland and The Picture of Dorian Gray. One was surreal, whimsical & chaotic; the other was dark, elegant & unnervingly psychological. Together they cracked something open in me. I became obsessed with how stories could twist reality, reveal character, or expose hidden truths. From there I started devouring everything I could get my hands on — reading nearly two books a week — chasing that feeling of slipping into other worlds. Over time my habits expanded into a kind of personal ritual: one fiction book to ignite imagination, one non-fiction to feed curiosity. As my interests grew, the topics exploded outward — philosophy, design, technology, art, psychology, mythology — each one forming a new branch of the inner library I still carry with me.</p>
                         </div>
                     </div>
 
@@ -562,7 +563,7 @@
                             <h2>University</h2>
                         </label>
                         <div class="service-content">
-                            <p>University was the place that demanded everything from me. Moving all the way to Slovenia felt like stepping into a bigger version of myself — new people, new ideas, and a level of independence I had been craving. I pushed harder than I ever had before, grinding through my first year, proud of every class I passed and every connection I made. It felt like momentum, like the start of something huge. And then the pandemic hit. Overnight, the world shrank. Campus, friends, lectures — all of it collapsed into a single glowing rectangle. I ended up back home, trying to hold onto that drive while everything around me slowed, blurred, and broke in ways none of us were prepared for.</p>
+                            <p>University was the place that demanded everything from me. Moving all the way to Slovenia felt like stepping into a bigger version of myself — new people, new ideas & a level of independence I had been craving. I pushed harder than I ever had before, grinding through my first year, proud of every class I passed and every connection I made. It felt like momentum, like the start of something huge. And then the pandemic hit. Overnight, the world shrank. Campus, friends, lectures — all of it collapsed into a single glowing rectangle. I ended up back home, trying to hold onto that drive while everything around me slowed, blurred & broke in ways none of us were prepared for.</p>
                         </div>
                     </div>
 
@@ -573,7 +574,7 @@
                             <h2>Pandemic</h2>
                         </label>
                         <div class="service-content">
-                            <p>The pandemic was dark, horrible, and psychologically destructive. Everything I had been building toward suddenly unraveled, and I felt stuck in a loop of uncertainty that lasted far longer than I ever expected. But in the middle of all that chaos, I managed to carve out a path forward. I landed a job at Business House — a company in a booming industry of medical supplies and health food — and it became this strange, unexpected lifeline. There I learned how to sell, how to negotiate, how to talk to clients, how to pitch ideas with confidence. I even started traveling for work, discovering a version of myself I didn't know existed. It didn't erase the darkness of that time, but it gave me a direction, a set of skills, and a sense of resilience I still carry with me.</p>
+                            <p>The pandemic was dark, horrible & psychologically destructive. Everything I had been building toward suddenly unraveled & I felt stuck in a loop of uncertainty that lasted far longer than I ever expected. But in the middle of all that chaos, I managed to carve out a path forward. I landed a job at Business House — a company in a booming industry of medical supplies and health food — and it became this strange, unexpected lifeline. There I learned how to sell, how to negotiate, how to talk to clients, how to pitch ideas with confidence. I even started traveling for work, discovering a version of myself I didn't know existed. It didn't erase the darkness of that time, but it gave me a direction, a set of skills & a sense of resilience I still carry with me.</p>
                         </div>
                     </div>
 
@@ -584,7 +585,7 @@
                             <h2>Freelance</h2>
                         </label>
                         <div class="service-content">
-                            <p>University taught me a lot of interesting things, but the class that changed everything was modern web development. It was the first skill that felt both natural and instantly useful — something I was genuinely good at. So I leaned into it. I opened a Fiverr account and started freelancing, building small video games using web technologies. What began as simple experiments quickly grew into full playable ads, interactive experiences, and eventually websites. Every project pushed me to learn more, try more, invent more. And honestly, it was amazing — the feeling of turning ideas into something real, something people could actually play with, was like rediscovering the magic of games from my childhood, but this time from the creator's side.</p>
+                            <p>University taught me a lot of interesting things, but the class that changed everything was modern web development. It was the first skill that felt both natural and instantly useful — something I was genuinely good at. So I leaned into it. I opened a Fiverr account and started freelancing, building small video games using web technologies. What began as simple experiments quickly grew into full playable ads, interactive experiences & eventually websites. Every project pushed me to learn more, try more, invent more. And honestly, it was amazing — the feeling of turning ideas into something real, something people could actually play with, was like rediscovering the magic of games from my childhood, but this time from the creator's side.</p>
                         </div>
                     </div>
 
@@ -595,7 +596,7 @@
                             <h2>Design</h2>
                         </label>
                         <div class="service-content">
-                            <p>By now I've read so many books, but a few of them rewired me completely. Popism: The Warhol Sixties by Andy Warhol and Pat Hackett, Insanely Great: The Life and Times of Macintosh, the Computer that Changed Everything by Steven Levy, and Steve Jobs by Walter Isaacson all hit me at exactly the right moment. From Warhol, I learned how industrialized, repetitive labor can still produce powerful art. From the Macintosh story, I understood how much the details matter — how entire revolutions happen because someone cared enough to polish one more pixel. And from Jobs, I internalized the idea that craftsmanship is emotional, personal, and deeply human. Those books taught me to value how something is made far more than how much I make. They shaped my philosophy, and gave me the motto I still live and work by: 'Design is how it works!'</p>
+                            <p>By now I've read so many books, but a few of them rewired me completely. Popism: The Warhol Sixties by Andy Warhol and Pat Hackett, Insanely Great: The Life and Times of Macintosh, the Computer that Changed Everything by Steven Levy & Steve Jobs by Walter Isaacson all hit me at exactly the right moment. From Warhol, I learned how industrialized, repetitive labor can still produce powerful art. From the Macintosh story, I understood how much the details matter — how entire revolutions happen because someone cared enough to polish one more pixel. And from Jobs, I internalized the idea that craftsmanship is emotional, personal & deeply human. Those books taught me to value how something is made far more than how much I make. They shaped my philosophy & gave me the motto I still live and work by: 'Design is how it works!'</p>
                         </div>
                     </div>
 
@@ -606,7 +607,7 @@
                             <h2>Visual</h2>
                         </label>
                         <div class="service-content">
-                            <p>Once design clicked for me, I wanted to learn every form of it. I dove into graphic design, teaching myself Photoshop, Illustrator, InDesign, and eventually Figma — each one opening a different doorway into how ideas can become visual experiences. I learned to work with video, experimented with visual website builders, and kept doubling the set of tools I felt comfortable creating with. Every new skill expanded the way I thought, the way I communicated, the way I solved problems. It felt like assembling a creative toolkit piece by piece, until suddenly I could express almost anything I imagined.</p>
+                            <p>Once design clicked for me, I wanted to learn every form of it. I dove into graphic design, teaching myself Photoshop, Illustrator, InDesign & eventually Figma — each one opening a different doorway into how ideas can become visual experiences. I learned to work with video, experimented with visual website builders & kept doubling the set of tools I felt comfortable creating with. Every new skill expanded the way I thought, the way I communicated, the way I solved problems. It felt like assembling a creative toolkit piece by piece, until suddenly I could express almost anything I imagined.</p>
                         </div>
                     </div>
 
@@ -645,7 +646,7 @@
                         id="cv-close-btn"
                         aria-label="Close CV"
                     >
-                        <i class="ri-close-line"></i>
+                        <svg class="ri-close-line" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-close"/></svg>
                     </button>
                 </div>
                 <iframe
@@ -658,20 +659,7 @@
             </div>
         </div>
 
-        <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-            integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script src="./main.js"></script>
+        <script src="./anim-loader.js" data-main="./main.js"></script>
 
         <script>
             (function () {
