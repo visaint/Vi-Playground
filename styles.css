@@ -179,10 +179,6 @@ iframe {
 }
 
 img[src$=".svg"],
-#logo img,
-.skill span img,
-.flower,
-.contact-flower,
 .work-hover-img {
     border-radius: 0;
     outline: none;
@@ -416,21 +412,6 @@ nav {
         top: 10px;
         right: 10px;
         z-index: 1000;
-    }
-}
-
-nav.nav-scrolled {
-    background-color: rgba(244, 245, 239, 0.88);
-    backdrop-filter: blur(16px) saturate(1.5);
-    -webkit-backdrop-filter: blur(16px) saturate(1.5);
-    box-shadow: 0 2px 10px var(--shadow-ui);
-}
-
-@media (prefers-color-scheme: dark) {
-    nav.nav-scrolled {
-        background-color: rgba(15, 16, 10, 0.88);
-        backdrop-filter: blur(16px) saturate(1.5);
-        -webkit-backdrop-filter: blur(16px) saturate(1.5);
     }
 }
 
@@ -1559,7 +1540,6 @@ html.hero-carousel-dragging * {
         0 12px 40px rgba(0, 0, 0, 0.25),
         0 0 0 1px color-mix(in srgb, var(--pink) 25%, transparent);
 }
-.page2-ele.is-hovered .work-hover-img,
 .work-row:hover .work-hover-img {
     opacity: 1;
 }
@@ -2868,27 +2848,6 @@ footer {
     }
 }
 
-/* ── Small variant: inside slide-menu — 3×2 grid, matches footer sizing ── */
-.pixel-grid--sm {
-    grid-template-columns: repeat(3, auto);
-}
-.pixel-grid--sm .px-link {
-    width: 62px;
-    height: 62px;
-    border-radius: 16px;
-}
-.pixel-grid--sm .px-body {
-    gap: 4px;
-}
-.pixel-grid--sm .px-icon {
-    width: 24px;
-    height: 24px;
-}
-.pixel-grid--sm .px-label {
-    font-size: 10px;
-    letter-spacing: 0.05em;
-}
-
 /* ── Large variant: footer ── */
 .foot-links .px-link {
     width: 62px;
@@ -3672,10 +3631,6 @@ footer {
         word-spacing: 0.65em;
     }
 
-    #ex {
-        display: none;
-    }
-
     .blurb {
         margin: 1.5vh 0 2vh 0;
         padding: 0 1rem;
@@ -3804,11 +3759,11 @@ footer {
         width: 20% !important;
         max-width: 80px !important;
         min-width: 60px;
-        margin: 0 auto;
+        margin: 0 auto 0.5rem;
     }
     #about .fade-in-title {
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         font-size: clamp(3rem, 12vw, 5rem);
     }
 
@@ -3830,13 +3785,6 @@ footer {
         flex-direction: row;
         align-items: center;
         gap: 0.75rem;
-    }
-
-    #third-bottom {
-        width: 100%;
-        text-align: left;
-        align-self: flex-start;
-        margin-top: 2rem;
     }
 
     #contact-form-section {
@@ -3878,12 +3826,6 @@ footer {
         margin-top: 2rem;
         padding-top: 1.5rem;
         font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hide-small {
-        display: none !important;
     }
 }
 
@@ -4495,18 +4437,6 @@ footer {
     max-width: 1400px;
     margin: 0 auto;
     padding: clamp(3rem, 6vw, 6rem) 4vw clamp(2rem, 4vw, 4rem);
-}
-
-/* ── Section heading ── */
-.skill-cards-heading {
-    margin-bottom: clamp(1.8rem, 3vw, 3rem);
-    text-align: center;
-}
-
-.skill-cards-heading h1 {
-    margin: 0;
-    padding-right: 0;
-    line-height: 0.8;
 }
 
 /* ── Grid ── */
@@ -5607,4 +5537,98 @@ footer {
 }
 
 /* ── Mobile: one cell per line ── */
+
+@media (max-width: 600px) {
+  .svc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-cell {
+    border-right: none;
+    border-bottom: 2px dashed var(--pink);
+  }
+
+  .svc-cell:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ==========================================================================
+   16. LOAD-FRAME PRE-POSITIONING (no-flash entrance)
+   ==========================================================================
+
+   While <html> carries .anim-loading (added by a tiny inline <head> script
+   before first paint on desktop, non-touch, non-reduced-motion setups),
+   these elements sit at the exact opening frame of their GSAP entrance
+   animations. The first paint therefore already matches the animation's
+   start state — GSAP's fromTo/set tweens take over seamlessly and the page
+   never flashes the final layout before hiding it again.
+
+   The class is removed by main.js as soon as GSAP has captured the start
+   frames into inline styles, with a timeout fallback in the <head> script
+   so content can never stay hidden (e.g. if the CDN fails).
+
+   Values below mirror the from-values in main.js: initLoadAnimations,
+   initHeaderAnimations and initIntersectionObserver. */
+html.anim-loading #hero-head h1 {
+    opacity: 0;
+    transform: translateX(-80px);
+}
+html.anim-loading #main-head h1 {
+    opacity: 0;
+    transform: translateX(80px);
+}
+html.anim-loading #name h1 {
+    opacity: 0;
+    transform: translateY(18px);
+}
+html.anim-loading #prefix h6 {
+    opacity: 0;
+    transform: translateY(-18px);
+}
+html.anim-loading #mini h6 {
+    opacity: 0;
+    transform: translateY(18px);
+}
+html.anim-loading #first-bottom {
+    opacity: 0;
+    transform: translateY(12px);
+}
+html.anim-loading #logo {
+    opacity: 0;
+    transform: translateX(-24px);
+}
+html.anim-loading .nav-right .btn-pb,
+html.anim-loading .nav-right .btn-bo,
+html.anim-loading .nav-right .btn-op,
+html.anim-loading #menu-btn {
+    opacity: 0;
+    visibility: hidden;
+}
+html.anim-loading .fade-in-element,
+html.anim-loading .service-item {
+    opacity: 0;
+    transform: translateY(24px);
+    /* Stop the CSS slideInService entrance from playing while the class is
+       set — it would fade items in, then GSAP's observer would snap them
+       back to opacity 0 at boot (a visible double-flash). GSAP owns the
+       reveal on desktop; the CSS animation stays as the no-JS fallback. */
+    animation: none;
+}
+
+/* Scroll-reveal targets (initScrollAnimations): hold the opening frames
+   from first paint so the window-load capture can't flash the final layout. */
+html.anim-loading .blurb h2,
+html.anim-loading #work,
+html.anim-loading #grids,
+html.anim-loading .skill-card-wrap,
+html.anim-loading #about #t-s-div {
+    opacity: 0;
+}
+
+/* Work-page trail reveal (initWorkTrailAnimations): same treatment. */
+html.anim-loading .trail-image,
+html.anim-loading .trail-text {
+    opacity: 0;
+}
 

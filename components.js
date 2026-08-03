@@ -94,15 +94,6 @@ const SVG_SPRITE = `
     <path d="M5 8h14l-.8 12H5.8L5 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     <path d="M9 10V6a3 3 0 0 1 6 0v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   </symbol>
-  <!-- Sun -->
-  <symbol id="ic-sun" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 17.66l1.41-1.41M17.66 4.93l1.41-1.41" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </symbol>
-  <!-- Moon -->
-  <symbol id="ic-moon" viewBox="0 0 24 24">
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  </symbol>
   <!-- Mental health (heart + pulse) -->
   <symbol id="ic-mental-health" viewBox="0 0 24 24">
     <path d="M12 20s-7-4.35-9.2-8.45C1.3 9.05 2.7 6 5.7 5.6c2-.4 4.1.6 6.3 2.9 2.2-2.3 4.3-3.3 6.3-2.9 3 .4 4.4 3.45 2.9 5.95C19 15.65 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -130,8 +121,8 @@ const SVG_SPRITE = `
 </svg>`;
 
 /* ── Reusable pixel-grid HTML (links + icons) ── */
-function pixelGridHTML(small = false, blog = false) {
-  const cls = small ? "pixel-grid pixel-grid--sm" : "pixel-grid";
+function pixelGridHTML(blog = false) {
+  const cls = "pixel-grid";
   return `
 	<nav class="${cls}" aria-label="Social links">
 	  <a href="https://www.linkedin.com/in/vi-saint-130a33426/" class="px-link" style="--px-color:#0A66C2"

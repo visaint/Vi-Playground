@@ -53,6 +53,28 @@
             crossorigin
         />
         <link rel="stylesheet" href="./styles.css" />
+        <script>
+            /* Pre-paint hook: flag desktop sessions so CSS can hold the
+               entrance animations' opening frame — the site renders in its
+               intended first frame and GSAP takes over without any flash.
+               main.js removes the class once GSAP captures the frames;
+               the timeout is a safety net so content never stays hidden. */
+            (function () {
+                var root = document.documentElement;
+                var reduced =
+                    window.matchMedia &&
+                    window.matchMedia("(prefers-reduced-motion: reduce)")
+                        .matches;
+                var touch = "ontouchstart" in window;
+                var small = window.innerWidth < 768;
+                if (!reduced && !touch && !small) {
+                    root.classList.add("anim-loading");
+                    setTimeout(function () {
+                        root.classList.remove("anim-loading");
+                    }, 5000);
+                }
+            })();
+        </script>
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
         <link rel="preconnect" href="https://unpkg.com" />
         <script src="./components.js" defer></script>

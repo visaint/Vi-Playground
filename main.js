@@ -14,6 +14,21 @@ const prefersReducedMotion = () =>
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 const lerp = (start, end, factor) => start + (end - start) * factor;
 
+// Register ScrollTrigger once, up-front. initFooterAnimations and the
+// work-trail timelines create scrollTriggers before initScrollAnimations
+// runs (which is where the plugin used to be registered), so without this
+// the scrollTrigger property is silently dropped and those tweens play
+// immediately on load instead of waiting for the user to scroll to them.
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+// If GSAP never arrived (CDN failure), release the pre-paint CSS class
+// (html.anim-loading) immediately so no entrance frame stays hidden.
+if (typeof gsap === "undefined") {
+  document.documentElement.classList.remove("anim-loading");
+}
+
 // ===================================
 // LENIS SMOOTH SCROLL
 // ===================================
@@ -273,7 +288,6 @@ function initImageHoverEffects() {
     };
 
     element.addEventListener("mouseleave", reset);
-    element.addEventListener("htmx:afterSwap", reset);
   });
 }
 
@@ -335,25 +349,37 @@ function initHeaderAnimations() {
 }
 
 function initFooterAnimations() {
-  if (isMobile()) {
-    const footer = document.querySelector("footer");
+  const footer = document.querySelector("footer");
+
+  if (isMobile() || prefersReducedMotion()) {
     if (footer) footer.style.opacity = "1";
     return;
   }
 
-  const footer = document.querySelector("footer");
   if (
     footer &&
     typeof gsap !== "undefined" &&
     typeof ScrollTrigger !== "undefined"
   ) {
-    gsap.from(footer, {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: { trigger: footer, start: "top 92%", once: true },
-    });
+    // immediateRender: false — do NOT apply the y:40/opacity:0 opening
+    // frame (or play the tween) at page load. That shifted the whole page
+    // bottom (+40px scrollbar geometry) and hid the footer until scroll.
+    // The reveal now only happens when the footer actually scrolls into view.
+    // fromTo (not from) so the destination is explicit: a from() tween
+    // created while html.anim-loading hides elements would capture
+    // opacity: 0 as its destination and the footer would never show.
+    gsap.fromTo(
+      footer,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: footer, start: "top 92%", once: true },
+      },
+    );
   }
 }
 
@@ -365,50 +391,77 @@ function initLoadAnimations() {
     miniH6: document.querySelector("#mini h6"),
     name: document.querySelector("#name h1"),
     firstBottom: document.querySelector("#first-bottom"),
-    midElements: document.querySelectorAll(".mid h5"),
   };
 
-  if (isMobile()) {
+  const forceVisible = () => {
     Object.values(els).forEach((el) => {
       if (el instanceof NodeList) el.forEach((e) => (e.style.opacity = "1"));
       else if (el) el.style.opacity = "1";
     });
+  };
+
+  // Mobile / reduced-motion / no GSAP: show everything immediately.
+  if (isMobile() || prefersReducedMotion() || typeof gsap === "undefined") {
+    forceVisible();
     return;
   }
 
   const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.1 });
 
+  // fromTo (not from) so the end values are explicit: while html.anim-loading
+  // is set, CSS already holds these opening frames, so GSAP takes over with
+  // zero visible jump — no flash of the final layout before the animation.
   // "Designer &" slides from left, "Developer" slides from right
   els.heroHead &&
-    tl.from(els.heroHead, { x: -80, opacity: 0, duration: 0.5 }, 0);
+    tl.fromTo(
+      els.heroHead,
+      { x: -80, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5 },
+      0,
+    );
   els.mainHead &&
-    tl.from(els.mainHead, { x: 80, opacity: 0, duration: 0.5 }, 0);
+    tl.fromTo(
+      els.mainHead,
+      { x: 80, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5 },
+      0,
+    );
 
   // "Vi Saint" drifts from bottom — appears first
-  els.name && tl.from(els.name, { y: 18, opacity: 0, duration: 0.3 }, 0);
+  els.name &&
+    tl.fromTo(
+      els.name,
+      { y: 18, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.3 },
+      0,
+    );
 
   // "the only" drifts from top, "based in europe" from bottom
   els.prefixH6 &&
-    tl.from(els.prefixH6, { y: -18, opacity: 0, duration: 0.28 }, "-=0.15");
+    tl.fromTo(
+      els.prefixH6,
+      { y: -18, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.28 },
+      "-=0.15",
+    );
   els.miniH6 &&
-    tl.from(els.miniH6, { y: 18, opacity: 0, duration: 0.28 }, "-=0.2");
+    tl.fromTo(
+      els.miniH6,
+      { y: 18, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.28 },
+      "-=0.2",
+    );
 
   // Stats
   els.firstBottom &&
-    tl.from(els.firstBottom, { opacity: 0, y: 12, duration: 0.3 }, "-=0.1");
-
-  // Mid elements
-  if (els.midElements.length) {
-    tl.from(
-      els.midElements,
-      { y: -18, opacity: 0, duration: 0.35, stagger: 0.05 },
+    tl.fromTo(
+      els.firstBottom,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.3 },
       "-=0.1",
     );
-  }
-}
 
-window.initHeaderAnimations = initHeaderAnimations;
-window.initFooterAnimations = initFooterAnimations;
+}
 
 // ===================================
 // HEADER INIT
@@ -560,8 +613,6 @@ function initHeaderComponent() {
   initHeaderAnimations();
   initNavHideOnScroll();
   initNavFit();
-  initMenuLinkHandlers();
-  initContextMenu();
 }
 
 // ===================================
@@ -680,22 +731,27 @@ function initIntersectionObserver() {
   const targets = document.querySelectorAll(".fade-in-element, .service-item");
   if (!targets.length) return;
 
-  // No GSAP on mobile (skipped by anim-loader.js) — elements are visible by default
-  if (typeof gsap === "undefined") return;
+  // No GSAP on mobile (skipped by anim-loader.js) — elements are visible by default.
+  // Reduced motion: leave everything visible — no hide-then-reveal.
+  if (typeof gsap === "undefined" || prefersReducedMotion()) return;
+
+  const reveal = (el) => {
+    if (el._revealed) return;
+    el._revealed = true;
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power3.out",
+      overwrite: true,
+    });
+    observer.unobserve(el);
+  };
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          gsap.to(entry.target, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            overwrite: true,
-          });
-          observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) reveal(entry.target);
       });
     },
     {
@@ -710,6 +766,27 @@ function initIntersectionObserver() {
     gsap.set(el, { opacity: 0, y: 24 });
     observer.observe(el);
   });
+
+  // Safety net: IntersectionObserver only reports state CHANGES, so an
+  // element can be skipped entirely when the page is jumped past it in one
+  // instant (scrollbar drag, Cmd+End, instant jump). Sweep on scroll too and
+  // reveal anything that has reached (or passed) the viewport, so content
+  // can never stay hidden once the user has scrolled to it.
+  let ticking = false;
+  const sweep = () => {
+    ticking = false;
+    const vh = window.innerHeight;
+    for (const el of targets) {
+      if (el._revealed) continue;
+      if (el.getBoundingClientRect().top < vh) reveal(el);
+    }
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(sweep);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
 }
 
 // ===================================
@@ -719,20 +796,15 @@ function initScrollAnimations() {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
     return;
 
-  if (isMobile()) {
-    // Ensure visibility on mobile if animations are skipped
+  if (isMobile() || prefersReducedMotion()) {
+    // Ensure visibility on mobile / reduced-motion if animations are skipped
     [
       ".blurb h2",
       "#work",
       "#about #t-f-div img",
       "#about #t-s-div",
       "#grids",
-      "#my-top h1",
-      "#my-bottom h1",
-      "#story-top h1",
-      "#story-bottom h1",
       ".skill-card-wrap",
-      ".skill-cards-heading",
     ].forEach((sel) => {
       const el = document.querySelector(sel);
       if (el) {
@@ -759,24 +831,34 @@ function initScrollAnimations() {
   // Blurb
   const blurbH2 = document.querySelectorAll(".blurb h2");
   if (blurbH2.length) {
-    gsap.from(blurbH2, {
-      x: 100,
-      opacity: 0,
-      stagger: 0.08,
-      ...defaults,
-      scrollTrigger: createTrigger(blurbH2[0]),
-    });
+    gsap.fromTo(
+      blurbH2,
+      { x: 100, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        stagger: 0.08,
+        immediateRender: true,
+        ...defaults,
+        scrollTrigger: createTrigger(blurbH2[0]),
+      },
+    );
   }
 
   // Page 2
   const page2 = document.querySelector("#work");
   page2 &&
-    gsap.from(page2, {
-      y: 100,
-      opacity: 0,
-      ...defaults,
-      scrollTrigger: createTrigger(page2, "top 80%"),
-    });
+    gsap.fromTo(
+      page2,
+      { y: 100, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        immediateRender: true,
+        ...defaults,
+        scrollTrigger: createTrigger(page2, "top 80%"),
+      },
+    );
 
   // Page 3
   const p3Pic = document.querySelector("#about #t-f-div img");
@@ -808,120 +890,34 @@ function initScrollAnimations() {
   // Grids
   const grids = document.querySelector("#grids");
   grids &&
-    gsap.from(grids, {
-      opacity: 0,
-      y: 50,
-      ...defaults,
-      scrollTrigger: createTrigger(grids, "top 80%"),
-    });
-
-  // Skill cards heading
-  const skillHeading = document.querySelector(".skill-cards-heading");
-  skillHeading &&
-    gsap.from(skillHeading, {
-      y: 40,
-      opacity: 0,
-      ...defaults,
-      scrollTrigger: createTrigger(skillHeading, "top 90%"),
-    });
+    gsap.fromTo(
+      grids,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        immediateRender: true,
+        ...defaults,
+        scrollTrigger: createTrigger(grids, "top 80%"),
+      },
+    );
 
   // Skill cards
   const skillCards = document.querySelectorAll(".skill-card-wrap");
   if (skillCards.length) {
-    gsap.from(skillCards, {
-      y: 60,
-      opacity: 0,
-      stagger: 0.12,
-      ...defaults,
-      scrollTrigger: createTrigger(skillCards[0], "top 85%"),
-    });
+    gsap.fromTo(
+      skillCards,
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.12,
+        immediateRender: true,
+        ...defaults,
+        scrollTrigger: createTrigger(skillCards[0], "top 85%"),
+      },
+    );
   }
-
-  // Process & Story Headers
-  ["#my-top h1", "#story-top h1"].forEach((sel) => {
-    const el = document.querySelector(sel);
-    el &&
-      gsap.from(el, {
-        x: -100,
-        opacity: 0,
-        ...defaults,
-        scrollTrigger: createTrigger(el),
-      });
-  });
-
-  ["#my-bottom h1", "#story-bottom h1"].forEach((sel) => {
-    const el = document.querySelector(sel);
-    el &&
-      gsap.from(el, {
-        x: 100,
-        opacity: 0,
-        ...defaults,
-        scrollTrigger: createTrigger(el),
-      });
-  });
-}
-
-// ===================================
-// PAGE 2 EXPANDABLE CONTENT
-// ===================================
-function initPage2Expandable() {
-  // Expand/collapse is CSS-driven (:checked + max-height); GSAP only animates it
-  if (typeof gsap === "undefined") return;
-
-  const page2Elements = document.querySelectorAll(".page2-ele");
-  if (!page2Elements.length) return;
-
-  page2Elements.forEach((element) => {
-    const content = element.querySelector(".page2-content");
-    if (!content) return;
-
-    let isAnimating = false;
-
-    content.addEventListener("click", (e) => e.stopPropagation());
-
-    element.addEventListener("htmx:afterSwap", () => {
-      if (isAnimating) return;
-      element.classList.add("active");
-
-      const fullHeight = content.offsetHeight;
-      gsap.fromTo(
-        content,
-        { height: 0, opacity: 0 },
-        {
-          height: "auto",
-          opacity: 1,
-          duration: 0.45,
-          ease: "power2.out",
-          onComplete: () =>
-            typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh(),
-        },
-      );
-    });
-
-    element.addEventListener("click", (e) => {
-      if (e.target.closest(".page2-content")) return;
-
-      const isActive = element.classList.contains("active");
-      if (isActive && content.innerHTML.trim().length > 0) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        gsap.to(content, {
-          height: 0,
-          opacity: 0,
-          duration: 0.45,
-          ease: "power2.inOut",
-          onComplete: () => {
-            element.classList.remove("active");
-            content.innerHTML = "";
-            gsap.set(content, { height: "auto", opacity: 1 });
-            isAnimating = false;
-            typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh();
-          },
-        });
-      }
-    });
-  });
 }
 
 // ===================================
@@ -936,43 +932,6 @@ function initMenuToggleScrollLock() {
       window.lenis?.start();
     }
   });
-}
-
-function initMenuLinkHandlers() {
-  const menuLinks = document.querySelectorAll('.menu-link[href^="#"]');
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const toggle = document.getElementById("menu-toggle");
-      if (toggle) toggle.checked = false;
-
-      const target = document.getElementById(
-        link.getAttribute("href").slice(1),
-      );
-      if (!target) return;
-
-      e.preventDefault();
-      if (window.lenis) window.lenis.stop();
-      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.disable();
-
-      const offset = (document.querySelector("header")?.offsetHeight || 0) + 20;
-      window.scrollTo({ top: target.offsetTop - offset, behavior: "smooth" });
-
-      setTimeout(() => {
-        if (window.lenis) window.lenis.start();
-        if (typeof ScrollTrigger !== "undefined") {
-          ScrollTrigger.enable();
-          ScrollTrigger.refresh();
-        }
-      }, 800);
-    });
-  });
-}
-
-// ===================================
-// CONTEXT-AWARE MENU (page-sensitive)
-// ===================================
-function initContextMenu() {
-  // Links are always consistent — no page-dependent swapping
 }
 
 function randomizeBackground() {
@@ -1155,36 +1114,28 @@ function initPage() {
   initImageHoverEffects();
   initLoadAnimations();
   initChromeScroll();
-  initPage2Expandable();
-  initMenuLinkHandlers();
   initIntersectionObserver();
   initFooterAnimations();
   initWorkTrailAnimations();
+  // Scroll-reveal tweens (blurb, #work, grids, skill cards, about portrait,
+  // trail sections...) must be created while html.anim-loading is still set:
+  // their immediateRender opening frames are captured into inline styles
+  // here, so removing the class below can't flash the final layout first.
+  // ScrollTrigger.refresh() on window load re-measures trigger positions
+  // once lazy images / fonts have settled.
+  initScrollAnimations();
+
+  // All entrance animations above have captured their opening frames into
+  // inline styles, so release the pre-paint CSS class (html.anim-loading).
+  // The <head> script's timeout is the fallback if GSAP never arrived.
+  document.documentElement.classList.remove("anim-loading");
 
   window.addEventListener("load", () => {
-    initScrollAnimations();
     typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh();
   });
 }
 
-// HTMX & Resize Handlers
-document.addEventListener("htmx:afterSwap", (event) => {
-  const t = event.target;
-  const isHeader = t.innerHTML.includes("<header") || t.tagName === "HEADER";
-  const isFooter = t.innerHTML.includes("<footer") || t.tagName === "FOOTER";
-
-  if (isHeader)
-    setTimeout(() => {
-      initHeaderAnimations();
-      initMenuLinkHandlers();
-    }, 50);
-  if (isFooter)
-    setTimeout(() => {
-      initFooterAnimations();
-      typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh();
-    }, 50);
-});
-
+// Resize handler
 let resizeTimer;
 window.addEventListener(
   "resize",
