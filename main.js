@@ -468,14 +468,18 @@ function initLoadAnimations() {
 // ===================================
 function initNavHideOnScroll() {
   const nav = document.querySelector("nav");
-  const btns =
-    nav &&
-    Array.from(
-      nav.querySelectorAll(
-        ".nav-right > a.btn-pb, .nav-right > a.btn-bo, .nav-right > a.btn-op",
-      ),
+  if (!nav) return;
+
+  // The tiered button count (styles.css) leaves some buttons at
+  // display:none for a given viewport, so the animated set is recomputed
+  // on every scroll. Invisible buttons never get animated, and a tier
+  // change is picked up on the next scroll without extra wiring.
+  const btnSel =
+    ".nav-right > a.btn-pb, .nav-right > a.btn-bo, .nav-right > a.btn-op";
+  const visibleBtns = () =>
+    Array.from(nav.querySelectorAll(btnSel)).filter(
+      (b) => getComputedStyle(b).display !== "none",
     );
-  if (!btns || !btns.length) return;
 
   // Desktop uses GSAP (loaded by anim-loader); mobile has no GSAP,
   // so fall back to the native Web Animations API for the same feel.
@@ -493,6 +497,9 @@ function initNavHideOnScroll() {
   const hideBtns = () => {
     if (hidden) return;
     hidden = true;
+    nav.dataset.navHidden = "true";
+    const btns = visibleBtns();
+    if (!btns.length) return;
     if (gsapOk) {
       gsap.killTweensOf(btns);
       gsap.to(btns, {
@@ -539,6 +546,9 @@ function initNavHideOnScroll() {
   const showBtns = () => {
     if (!hidden) return;
     hidden = false;
+    delete nav.dataset.navHidden;
+    const btns = visibleBtns();
+    if (!btns.length) return;
     if (gsapOk) {
       gsap.killTweensOf(btns);
       // Fall in from above, staggered like the blurb — clearProps keeps
@@ -612,59 +622,60 @@ function initNavHideOnScroll() {
 function initHeaderComponent() {
   initHeaderAnimations();
   initNavHideOnScroll();
-  initNavFit();
+  initNavTiers();
 }
 
 // ===================================
-// NAV FIT — drop services when the group crowds the logo/menu (mobile)
+// NAV TIERS — fixed breakpoint cleanup (phones 2–3, tablets 4–5)
 // ===================================
-function initNavFit() {
+// The button count is decided by fixed CSS breakpoints in styles.css
+// (≤ 400px → 2, 401–600 → 3, 601–700 → 4, 701–768 → 5). This listener
+// only cleans up after the scroll-hide animation when a button flips
+// between display:none and visible at a breakpoint, so a button can
+// never reappear stuck invisible. Keep the breakpoints in sync with
+// styles.css.
+function initNavTiers() {
   const nav = document.querySelector("nav");
-  const group = nav && nav.querySelector(".nav-right");
-  const logo = nav && nav.querySelector("#logo-div");
-  const menu = nav && nav.querySelector("#menu-btn");
-  const services = nav && nav.querySelector(".nav-services");
-  if (!nav || !group || !logo || !menu) return;
+  if (!nav) return;
 
-  // Breathing room between the button group and the logo/menu before we
-  // fall back to 2 buttons. Hysteresis stops flip-flopping at the edge.
-  const MIN_GAP = 20;
-  const HYST = 6;
+  const btnSel =
+    ".nav-right > a.btn-pb, .nav-right > a.btn-bo, .nav-right > a.btn-op";
 
-  const check = () => {
-    if (window.innerWidth > 768) {
-      nav.classList.remove("nav-cramped");
-      return;
-    }
-    // On mobile .nav-right fills the whole column between logo and menu
-    // button, so measure the actual first/last visible button edges
-    // instead of the container (which always sits flush against both).
-    const buttons = Array.from(group.querySelectorAll("a")).filter(
-      (a) => getComputedStyle(a).display !== "none",
-    );
-    if (!buttons.length) return;
-    const gap = Math.min(
-      buttons[0].getBoundingClientRect().left - logo.getBoundingClientRect().right,
-      menu.getBoundingClientRect().left -
-        buttons[buttons.length - 1].getBoundingClientRect().right,
-    );
-    const already = nav.classList.contains("nav-cramped");
-    nav.classList.toggle("nav-cramped", gap < (already ? MIN_GAP - HYST : MIN_GAP));
-    if (!nav.classList.contains("nav-cramped") && services) {
-      // It may have been animated into a hidden state while display:none —
-      // restore it cleanly before it becomes visible again
-      services.style.visibility = "";
-      services.style.opacity = "";
-      services.style.pointerEvents = "";
-    }
+  const sync = () => {
+    const btns = Array.from(nav.querySelectorAll(btnSel));
+    // Cancel any leftover WAAPI fill:forwards state (the old code cleared
+    // inline styles, which doesn't undo animation fills).
+    btns.forEach((b) => {
+      if (typeof b.getAnimations === "function") {
+        b.getAnimations().forEach((anim) => anim.cancel());
+      }
+    });
+    // If the scroll-hide is active (or was mid-flight), keep every tier
+    // button in the same hidden state as its visible siblings instead of
+    // flashing it in at full opacity.
+    const visible = btns.filter((b) => getComputedStyle(b).display !== "none");
+    const hidden =
+      nav.dataset.navHidden === "true" ||
+      visible.some((b) => getComputedStyle(b).visibility === "hidden");
+    visible.forEach((b) => {
+      b.style.visibility = hidden ? "hidden" : "";
+      b.style.opacity = hidden ? "0" : "";
+      b.style.pointerEvents = hidden ? "none" : "";
+    });
   };
 
-  check();
-  window.addEventListener("resize", check, { passive: true });
-  // Re-measure once webfonts finish loading (logo width changes)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(check);
-  }
+  // Every boundary the CSS tiers depend on. onChange runs in BOTH
+  // directions (match and unmatch) so a button reappearing is synced
+  // too, not just one that is being hidden away.
+  [400, 600, 700, 768].forEach((px) => {
+    const mq = window.matchMedia(`(max-width: ${px}px)`);
+    const onChange = () => sync();
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", onChange);
+    } else if (typeof mq.addListener === "function") {
+      mq.addListener(onChange); // legacy Safari
+    }
+  });
 }
 
 // ===================================

@@ -3442,9 +3442,9 @@ footer {
         display: inline-flex;
         flex-shrink: 0;
     }
-    /* Mobile nav buttons: a touch bigger with room to breathe. The
-       fit-check drops services on very narrow screens instead of letting
-       the group crowd the logo and menu button */
+    /* Mobile nav buttons: a touch bigger with room to breathe. The tier
+       breakpoints below drop buttons on narrower screens instead of
+       letting the group crowd the logo and menu button */
     .nav-right .btn-pb,
     .nav-right .btn-bo,
     .nav-right .btn-op {
@@ -3456,10 +3456,28 @@ footer {
     .nav-right .btn-bo .nav-label {
         display: inline;
     }
-    /* Cramped phones: the fit-check drops services so the group
-       never crowds the logo and menu button */
-    nav.nav-cramped .nav-services {
-        display: none;
+    /* Nav button tiers — FIXED breakpoints, no JS measuring (no flicker,
+       no layout math). Buttons that don't fit move to the slide menu:
+       ≤ 400px        → 2 buttons (work + about)
+       401–600px      → 3 buttons (+ services)
+       601–700px      → 4 buttons (+ contact)   [small tablets/foldables]
+       701–768px      → 5 buttons (+ blog)      [large tablets]
+       > 768px        → 5 buttons (desktop, unchanged)
+       Adjust the breakpoint values to move the tier boundaries. */
+    @media (max-width: 400px) {
+        nav .nav-services {
+            display: none;
+        }
+    }
+    @media (min-width: 601px) and (max-width: 768px) {
+        nav .nav-right a.btn-pb.desktop-only {
+            display: inline-flex !important;
+        }
+    }
+    @media (min-width: 701px) and (max-width: 768px) {
+        nav .nav-right a.btn-bo.desktop-only {
+            display: inline-flex !important;
+        }
     }
     .nav-right .btn-pb .icon-mobile,
     .nav-right .btn-bo .icon-mobile {
@@ -3826,14 +3844,6 @@ footer {
         margin-top: 2rem;
         padding-top: 1.5rem;
         font-size: 0.85rem;
-    }
-}
-
-/* Insurance: even if the fit-check JS never runs, don't let the
-   button group crowd the logo/menu on tiny screens */
-@media (max-width: 360px) {
-    .nav-services {
-        display: none !important;
     }
 }
 
