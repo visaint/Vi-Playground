@@ -667,7 +667,7 @@ function initNavTiers() {
   // Every boundary the CSS tiers depend on. onChange runs in BOTH
   // directions (match and unmatch) so a button reappearing is synced
   // too, not just one that is being hidden away.
-  [400, 600, 700, 768].forEach((px) => {
+  [320, 400, 600, 700, 768].forEach((px) => {
     const mq = window.matchMedia(`(max-width: ${px}px)`);
     const onChange = () => sync();
     if (typeof mq.addEventListener === "function") {

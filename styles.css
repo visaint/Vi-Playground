@@ -3458,14 +3458,22 @@ footer {
     }
     /* Nav button tiers — FIXED breakpoints, no JS measuring (no flicker,
        no layout math). Buttons that don't fit move to the slide menu:
+       ≤ 320px        → 1 button (work)          [absurdly small]
        ≤ 400px        → 2 buttons (work + about)
        401–600px      → 3 buttons (+ services)
        601–700px      → 4 buttons (+ contact)   [small tablets/foldables]
        701–768px      → 5 buttons (+ blog)      [large tablets]
        > 768px        → 5 buttons (desktop, unchanged)
-       Adjust the breakpoint values to move the tier boundaries. */
+       Adjust the breakpoint values to move the tier boundaries. The
+       selectors must out-specificity the mobile `.nav-right .btn-pb` /
+       `.nav-right .btn-bo { display: inline-flex }` rule above. */
+    @media (max-width: 320px) {
+        nav .nav-right a.btn-op {
+            display: none;
+        }
+    }
     @media (max-width: 400px) {
-        nav .nav-services {
+        nav .nav-right a.btn-pb.nav-services {
             display: none;
         }
     }
