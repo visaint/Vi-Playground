@@ -552,14 +552,14 @@ nav {
     }
 }
 
-/* ── Menu button: perfect circle matching .menu-close, btn-op hover ── */
+/* ── Menu button: orange glass circle matching .menu-close ── */
 #menu-btn {
     position: relative;
     z-index: 2;
     justify-self: end;
     flex-shrink: 0;
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     cursor:
         url("./images/hand.svg") 7 0,
@@ -567,14 +567,14 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Resting: grey/neutral glass — matches the circle style */
-    background: color-mix(in srgb, var(--grey) 10%, transparent);
+    /* Resting: orange glass — same look as the slide-menu .menu-close */
+    background: color-mix(in srgb, var(--orange) 28%, transparent);
     backdrop-filter: blur(14px) saturate(1.5);
     -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    border: 2.5px solid color-mix(in srgb, var(--grey) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--orange) 40%, transparent);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        0 2px 10px rgba(0, 0, 0, 0.07);
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 4px 24px color-mix(in srgb, var(--orange) 25%, transparent);
     transition:
         background 0.28s ease,
         border-color 0.28s ease,
@@ -582,39 +582,24 @@ nav {
         transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Hover: btn-op orange glow (same as nav link hover) */
+/* Hover: same treatment as .menu-close — stronger orange edge + glow */
 #menu-btn:hover {
-    background: color-mix(in srgb, var(--orange) 28%, #0f100a);
-    border-color: color-mix(in srgb, var(--orange) 70%, transparent);
+    border-color: color-mix(in srgb, var(--orange) 60%, transparent);
     box-shadow:
-        0 0 24px rgba(244, 143, 110, 0.4),
-        0 0 56px rgba(244, 143, 110, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 6px 32px color-mix(in srgb, var(--orange) 40%, transparent);
     transform: scale(1.08) !important;
-}
-#menu-btn:hover .ham-line {
-    background: #f4f5ef;
 }
 #menu-btn:active {
     transform: scale(0.94);
     transition-duration: 0.1s;
 }
 
-/* Light mode: dark grey resting state */
+/* Light mode: same orange glass — lines get a dark grey for contrast
+   against the light page background */
 @media (prefers-color-scheme: light) {
-    #menu-btn {
-        border-color: color-mix(in srgb, #555 35%, transparent);
-        background: color-mix(in srgb, #555 8%, transparent);
-    }
     #menu-btn .ham-line {
-        background: #444;
-    }
-    #menu-btn:hover {
-        background: color-mix(in srgb, var(--orange) 28%, #0f100a);
-        border-color: color-mix(in srgb, var(--orange) 70%, transparent);
-    }
-    #menu-btn:hover .ham-line {
-        background: #f4f5ef;
+        border-color: #444;
     }
 }
 
@@ -653,16 +638,9 @@ nav {
 .ham-line {
     display: block;
     width: 16px;
-    height: 2px;
-    background: #606060;
-    border-radius: 0;
-    transition: background 0.28s ease;
-}
-
-@media (prefers-color-scheme: dark) {
-    .ham-line {
-        background: #f4f5ef;
-    }
+    height: 0;
+    border-top: 2px dotted var(--orange);
+    transition: border-color 0.28s ease;
 }
 
 /* All three lines exactly equal width */
@@ -949,9 +927,6 @@ body:has(#menu-toggle:checked) {
 @media (prefers-color-scheme: light) {
     .close-x {
         color: #c96540;
-    }
-    #menu-btn i {
-        color: #666;
     }
 }
 .menu-close:hover .close-x {
@@ -1372,7 +1347,7 @@ html.hero-carousel-dragging * {
     flex-direction: column;
     justify-content: center;
 }
-    
+
 @media (max-width: 768px) {
     .section-heading {
         padding-top: 0.4rem;
@@ -1389,12 +1364,12 @@ html.hero-carousel-dragging * {
     }
 
     /* Interior page heading spacing */
-        
+
     /* About page: hero holds all content, first heading at ~30% */
     #hero:has(.section-heading) {
         min-height: auto;
     }
-        
+
     /* Compact section-spacing on interior pages */
     .tools-section {
         margin-bottom: 3vh;
@@ -1794,8 +1769,34 @@ html.hero-carousel-dragging * {
 
 .services-cta {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
     justify-content: center;
     margin: 0 0 8vh;
+}
+
+/* Secondary "or fill out my contact form" line under a CTA button */
+.services-cta-note {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    letter-spacing: 0.04em;
+    color: var(--grey);
+    margin: 0;
+}
+.services-cta-note a {
+    color: var(--pink);
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
+    transition: text-decoration-color 0.25s ease;
+}
+.services-cta-note a:hover {
+    text-decoration-color: var(--pink);
+}
+.services-cta-note a:focus-visible {
+    outline: 2px dashed var(--pink);
+    outline-offset: 4px;
 }
 
 /* ==========================================================================
@@ -1943,27 +1944,21 @@ html.hero-carousel-dragging * {
     font-size: clamp(1.4rem, 1.6vw, 1.7rem);
     color: var(--orange);
     text-transform: uppercase;
-    text-decoration: none;
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
     display: inline-block;
-    position: relative;
-    padding-bottom: 2px;
-    transition: color 0.2s ease;
-}
-.service-contact::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--blue);
-    transition: width 0.2s ease;
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
 }
 .service-contact:hover {
-    color: var(--blue);
+    color: var(--pink);
+    text-decoration-color: var(--pink);
 }
-.service-contact:hover::after {
-    width: 100%;
+.service-contact:focus-visible {
+    outline: 2px dashed var(--pink);
+    outline-offset: 4px;
 }
 
 @keyframes slideInService {
@@ -2505,18 +2500,22 @@ footer {
     display: inline-block;
     font-size: clamp(0.78rem, 1vw, 0.88rem);
     opacity: 0.55;
-    text-decoration: none;
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
     letter-spacing: 0.04em;
     transform-origin: left center;
     transition:
         opacity 0.2s ease,
         color 0.25s ease,
         transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-        letter-spacing 0.25s ease;
+        letter-spacing 0.25s ease,
+        text-decoration-color 0.25s ease;
 }
 .foot-email:hover {
     opacity: 1;
     color: var(--pink);
+    text-decoration-color: var(--pink);
     transform: scale(1.08);
     letter-spacing: 0.09em;
 }
@@ -3086,18 +3085,18 @@ footer {
    13. CONTACT PAGE
    ========================================================================== */
 #contact-form-section {
-    max-width: 900px;
-    margin: 5vh auto 15vh;
+    max-width: max(900px, 80vw);
+    margin: 4vh auto 10vh;
     padding: 0 2rem;
 }
 .contact-intro {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
 }
 .contact-flower {
     width: 70px;
     height: 70px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1.5rem;
     display: block;
     pointer-events: none;
 }
@@ -3109,33 +3108,97 @@ footer {
     margin: 0 auto;
 }
 .contact-intro .contact {
-    margin: 2.5rem 0 0;
+    margin: 1.75rem 0 0;
 }
+
+/* Big blue headline between the letter button and the email address */
+.contact-intro .contact-world {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--blue-dark);
+    margin: 1.5rem auto 0;
+    max-width: 26ch;
+}
+
+/* JOIN ME links straight to the email — underline appears on hover */
+.contact-intro .contact-world .contact-join {
+    color: inherit;
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 2px;
+    transition:
+        text-decoration-color 0.25s ease,
+        color 0.25s ease;
+}
+.contact-intro .contact-world .contact-join:hover {
+    color: var(--orange);
+    text-decoration-color: var(--pink);
+}
+.contact-intro .contact-world .contact-join:focus-visible {
+    outline: 2px dashed var(--pink);
+    outline-offset: 4px;
+}
+
+/* The email address is a copy-to-clipboard button */
 .contact-intro .contact-email {
-    margin: 1.25rem auto 0;
+    margin: 1rem auto 0;
     font-family: "DinaRemasterII", monospace;
     font-size: clamp(0.9rem, 1vw, 1.1rem);
     letter-spacing: 0.06em;
     color: var(--grey);
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0.25em 0;
+    cursor:
+        url("./images/hand.svg") 7 0,
+        pointer;
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.35em;
+    text-decoration-thickness: 2px;
+    transition:
+        text-decoration-color 0.25s ease,
+        color 0.25s ease;
 }
 .contact-intro .contact-email span {
     color: var(--orange);
 }
+.contact-intro .contact-email:hover {
+    text-decoration-color: var(--pink);
+}
+.contact-intro .contact-email:hover span {
+    color: var(--pink);
+}
+.contact-intro .contact-email:focus-visible {
+    outline: 2px dashed var(--pink);
+    outline-offset: 4px;
+}
+.contact-intro .contact-email.copied span {
+    color: var(--blue);
+}
 .contact-intro .contact-form-link {
-    margin: 2rem auto 0;
+    margin: 1.25rem auto 0;
     font-family: "DinaRemasterII", monospace;
     font-size: clamp(1.05rem, 1.3vw, 1.4rem);
     color: var(--pink);
 }
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-.form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+}
+.form-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+}
+.form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 .form-group {
     display: flex;
@@ -3149,6 +3212,10 @@ footer {
     font-size: clamp(0.9rem, 1vw, 1rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+.contact-form .req {
+    color: var(--orange);
+    font-size: 1.15em;
 }
 .contact-form input[type="text"],
 .contact-form input[type="email"],
@@ -3175,7 +3242,8 @@ footer {
 }
 .contact-form textarea {
     resize: vertical;
-    min-height: 180px;
+    flex: 1;
+    min-height: 160px;
     line-height: 1.7;
 }
 .contact-form select {
@@ -3202,11 +3270,6 @@ footer {
     color: var(--grey);
     user-select: none;
     transition: color 0.2s ease;
-}
-.optional {
-    color: var(--lightgrey);
-    font-size: 0.75em;
-    letter-spacing: 0;
 }
 
 .switch {
@@ -3825,11 +3888,12 @@ footer {
         height: 50px;
         margin-bottom: 1.5rem;
     }
-    .form-row {
-        display: block !important;
-    }
     .contact-form {
+        display: block;
         gap: 1.5rem;
+    }
+    .form-stack {
+        display: block;
     }
     .form-group {
         gap: 0.5rem;
@@ -4372,14 +4436,19 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--pink);
+    text-decoration: underline dashed transparent;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
     transition:
         letter-spacing 0.25s ease,
-        color 0.2s ease;
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
 }
 
 .writing-card:hover .wcard-read {
     letter-spacing: 0.18em;
     color: var(--blue);
+    text-decoration-color: var(--pink);
 }
 
 /* ── CTA ── */
@@ -5207,126 +5276,21 @@ footer {
   font-style: normal;
 }
 
-/* ── Tools Grid ── */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-}
+/* ── Tools Grid ──
+   The about page's software cards reuse the home services grid
+   (.svc-grid / .svc-cell / .svc-slide) — see SERVICES (HOME) below. */
 
-.tool-category {
-  position: relative;
-  padding: 1.5rem 1.2rem;
-  border-right: 1px dashed color-mix(in srgb, var(--pink) 35%, transparent);
-  border-bottom: 1px dashed color-mix(in srgb, var(--pink) 35%, transparent);
-  transition: background 0.25s ease;
-  cursor: default;
-  min-height: 100%;
-}
-
-/* Remove right border on every 3rd item (end of each row) */
-.tool-category:nth-child(3n) {
-  border-right: none;
-}
-
-/* Remove bottom border on items in the last row */
-.tool-category:nth-last-child(-n+3) {
-  border-bottom: none;
-}
-
-.tool-category::before {
-  content: "X";
-  position: absolute;
-  right: 0.6rem;
-  bottom: 0.3rem;
-  font-family: "DinaRemasterII", monospace;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
-  color: var(--pink);
-  opacity: 0.1;
-  line-height: 1;
-  pointer-events: none;
-  font-style: normal;
-}
-
-.tool-category:nth-child(even)::before {
-  content: "O";
-}
-
-.tool-category:hover {
-  background: color-mix(in srgb, var(--pink) 6%, transparent);
-}
-
-.tool-cat-title {
-  font-family: "DinaRemasterII", monospace !important;
-  font-size: clamp(1.21rem, 1.65vw, 1.65rem) !important;
-  color: var(--pink) !important;
-  font-style: normal !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.5rem;
-  line-height: 1.1;
-}
-
-.tool-items {
-  font-family: "DinaRemasterII", monospace;
-  font-size: clamp(0.79rem, 0.94vw, 0.99rem);
-  line-height: 1.6;
-  color: var(--grey);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-style: normal;
-}
-
-.tool-tagline {
-  font-family: "DinaRemasterII", monospace;
-  font-size: clamp(0.66rem, 0.77vw, 0.83rem);
-  color: var(--pink);
-  opacity: 0.5;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 0.5rem;
-  line-height: 1.3;
-  font-style: normal;
-}
-
-/* ── Tools: tablet / small desktop ── */
+/* ── Systems: tablet / small desktop ── */
 
 @media (max-width: 900px) {
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Remove right border on even items (end of each row in 2-col) */
-  .tool-category:nth-child(even) {
-    border-right: none;
-  }
-
-  /* Remove bottom border on items in the last row of 2-col */
-  .tool-category:nth-last-child(-n+2) {
-    border-bottom: none;
-  }
-
   .systems-grid {
     grid-template-columns: 1fr auto 1fr;
   }
 }
 
-/* ── Tools: mobile ── */
+/* ── Systems: mobile ── */
 
 @media (max-width: 600px) {
-  .tools-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .tool-category {
-    border-right: none;
-    border-bottom: 1px dashed color-mix(in srgb, var(--pink) 35%, transparent);
-  }
-
-  .tool-category:last-child {
-    border-bottom: none;
-  }
-
   .systems-grid {
     grid-template-columns: 1fr;
     gap: 0.8rem;
@@ -5341,22 +5305,6 @@ footer {
   .system-item:last-child {
     text-align: center;
     align-items: center;
-  }
-
-  .tool-category {
-    padding: 1.2rem 1rem;
-  }
-
-  .tool-cat-title {
-    font-size: clamp(1.43rem, 1.95vw, 1.95rem) !important;
-  }
-
-  .tool-items {
-    font-size: clamp(0.94rem, 1.11vw, 1.17rem);
-  }
-
-  .tool-tagline {
-    font-size: clamp(0.78rem, 0.91vw, 0.98rem);
   }
 
   .tools-section {
@@ -5467,6 +5415,31 @@ footer {
   opacity: 0.5;
 }
 
+/* Clickable affordance — same alternating X/O corner marks as the tools
+   grid on the about page, brightened to read as an interactive cue */
+.svc-cell::before {
+  content: "X";
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.3rem;
+  z-index: 1;
+  font-family: "DinaRemasterII", monospace;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  color: var(--pink);
+  opacity: 0.35;
+  line-height: 1;
+  pointer-events: none;
+  font-style: normal;
+}
+
+.svc-cell:nth-child(even)::before {
+  content: "O";
+}
+
+.svc-cell:hover::before {
+  opacity: 0.7;
+}
+
 /* ── CSS-only slide-down card (from the top, atop the cell) ── */
 
 .svc-slide {
@@ -5569,6 +5542,34 @@ footer {
   .svc-cell:last-child {
     border-bottom: none;
   }
+
+  /* Tighten the tall desktop cells & center their content vertically */
+  .svc-front {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 1.4rem clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  /* Center the item list to match the centered card layout */
+  .svc-items {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Slim the section's own vertical rhythm on small screens */
+  #main .services-arrow {
+    margin-top: 0;
+    margin-bottom: 4vh;
+  }
+
+  .services-cta {
+    margin-bottom: 5vh;
+  }
 }
 
 /* ==========================================================================
@@ -5649,4 +5650,3 @@ html.anim-loading .trail-image,
 html.anim-loading .trail-text {
     opacity: 0;
 }
-

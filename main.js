@@ -968,6 +968,52 @@ function randomizeBackground() {
 }
 
 // ===================================
+// CONTACT PAGE — COPY EMAIL TO CLIPBOARD
+// ===================================
+function initCopyEmail() {
+  const btn = document.getElementById("copy-email");
+  if (!btn) return;
+
+  const email = btn.dataset.email || btn.textContent.trim();
+  const label = btn.querySelector("span");
+
+  const flashCopied = () => {
+    if (!label) return;
+    label.textContent = "Copied!";
+    btn.classList.add("copied");
+    clearTimeout(btn._copyTimer);
+    btn._copyTimer = setTimeout(() => {
+      label.textContent = email;
+      btn.classList.remove("copied");
+    }, 1600);
+  };
+
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      // Fallback for older browsers / non-secure contexts
+      const ta = document.createElement("textarea");
+      ta.value = email;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch {
+        ok = false;
+      }
+      ta.remove();
+      if (!ok) return;
+    }
+    flashCopied();
+  });
+}
+
+// ===================================
 // WORK PAGE — TRAIL ANIMATIONS
 // ===================================
 function initWorkTrailAnimations() {
@@ -1118,6 +1164,7 @@ function initPage() {
   randomizeSvcItemColors();
   initHeaderComponent();
   initAvailDot();
+  initCopyEmail();
   initLenis();
   initMenuToggleScrollLock();
   initWorkToggle();

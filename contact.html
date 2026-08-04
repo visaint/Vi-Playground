@@ -234,9 +234,22 @@
                             />
                         </a>
                     </div>
-                    <p class="contact-email">
-                         <span>hello@visaint.space</span>
-                    </p>
+                    <h2 class="contact-world">
+                        I Live in<br />My Own World<br /><a
+                            class="contact-join"
+                            href="mailto:hello@visaint.space"
+                            >JOIN ME</a
+                        >
+                    </h2>
+                    <button
+                        type="button"
+                        class="contact-email"
+                        id="copy-email"
+                        data-email="hello@visaint.space"
+                        aria-label="Copy email address hello@visaint.space"
+                    >
+                        <span>hello@visaint.space</span>
+                    </button>
                     <p class="contact-form-link">
                         Or fill out my contact form
                     </p>
@@ -265,35 +278,43 @@
                         value="visaint.space Contact Form"
                     />
 
-                    <!-- Name & Email Row -->
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                required
-                                placeholder="Your name"
-                            />
-                        </div>
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="name"
+                            >Name
+                            <span class="req" aria-hidden="true">*</span></label
+                        >
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            required
+                            placeholder="Your name"
+                        />
+                    </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                                placeholder="your@email.com"
-                            />
-                        </div>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email"
+                            >Email
+                            <span class="req" aria-hidden="true">*</span></label
+                        >
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="your@email.com"
+                        />
                     </div>
 
                     <!-- Project Type -->
                     <div class="form-group">
-                        <label for="project">Project Type</label>
-                        <select id="project" name="project_type">
+                        <label for="project"
+                            >Project Type
+                            <span class="req" aria-hidden="true">*</span></label
+                        >
+                        <select id="project" name="project_type" required>
                             <option value="">Select a service...</option>
                             <option value="Product Design">
                                 Product Design
@@ -317,65 +338,12 @@
                         </select>
                     </div>
 
-                    <!-- Message -->
-                    <div class="form-group">
-                        <label for="message">Tell me about your project</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="6"
-                            required
-                            placeholder="What are you looking to create?"
-                        ></textarea>
-                    </div>
-
-                    <!-- Engagement Type -->
-                    <div class="form-group">
-                        <label>Engagement Type</label>
-
-                        <div class="engagement-toggle">
-                            <span class="label left">Long-term</span>
-
-                            <label class="switch">
-                                <input
-                                    type="checkbox"
-                                    name="engagement_type"
-                                    value="Contract"
-                                    aria-label="Engagement type"
-                                />
-                                <span class="slider"></span>
-                            </label>
-
-                            <span class="label right">Contract</span>
-                        </div>
-
-                        <!-- Hidden default value for unchecked state -->
-                        <input
-                            type="hidden"
-                            name="engagement_type"
-                            value="Long-term"
-                        />
-                    </div>
-
-                    <!-- Timeline -->
-                    <div class="form-group">
-                        <label for="timeline">Desired Timeline</label>
-                        <select id="timeline" name="timeline">
-                            <option value="">Select timeline...</option>
-                            <option value="ASAP (0–1 month)">
-                                ASAP (0–1 month)
-                            </option>
-                            <option value="1–3 months">1–3 months</option>
-                            <option value="3–6 months">3–6 months</option>
-                            <option value="Flexible / exploratory">
-                                Flexible / exploratory
-                            </option>
-                        </select>
-                    </div>
-
                     <!-- Project Stage -->
                     <div class="form-group">
-                        <label for="stage">Project Stage</label>
+                        <label for="stage"
+                            >Project Stage
+                            <span class="req" aria-hidden="true">*</span></label
+                        >
                         <select id="stage" name="project_stage">
                             <option value="">Select project stage...</option>
                             <option value="Idea / early concept">
@@ -393,25 +361,86 @@
                         </select>
                     </div>
 
-                    <!-- Budget -->
+                    <!-- Message -->
                     <div class="form-group">
-                        <label for="budget"
-                            >Budget Range
-                            <span class="optional">(optional)</span></label
+                        <label for="message"
+                            >Tell me about your project
+                            <span class="req" aria-hidden="true">*</span></label
                         >
-                        <select id="budget" name="budget">
-                            <option value="">Select budget range...</option>
-                            <option value="< $5k">Under $2,000</option>
-                            <option value="$5k - $10k">$2,000 - $5,000</option>
-                            <option value="$10k - $25k">
-                                $5,000 - $10,000
-                            </option>
-                            <option value="$25k+">$10,000+</option>
-                        </select>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            required
+                            placeholder="What are you looking to create?"
+                        ></textarea>
+                    </div>
+
+                    <!-- Right column: Timeline, Budget, Engagement -->
+                    <div class="form-stack">
+                        <!-- Desired Timeline -->
+                        <div class="form-group">
+                            <label for="timeline">Desired Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline...</option>
+                                <option value="ASAP (0–1 month)">
+                                    ASAP (0–1 month)
+                                </option>
+                                <option value="1–3 months">1–3 months</option>
+                                <option value="3–6 months">3–6 months</option>
+                                <option value="Flexible / exploratory">
+                                    Flexible / exploratory
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Budget -->
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range...</option>
+                                <option value="< €2k">Under €2,000</option>
+                                <option value="€2k - €5k">
+                                    €2,000 - €5,000
+                                </option>
+                                <option value="€5k - €10k">
+                                    €5,000 - €10,000
+                                </option>
+                                <option value="€10k+">€10,000+</option>
+                            </select>
+                        </div>
+
+                        <!-- Engagement Type -->
+                        <div class="form-group">
+                            <label>Engagement Type</label>
+
+                            <div class="engagement-toggle">
+                                <span class="label left">Long-term</span>
+
+                                <label class="switch">
+                                    <input
+                                        type="checkbox"
+                                        name="engagement_type"
+                                        value="Contract"
+                                        aria-label="Engagement type"
+                                    />
+                                    <span class="slider"></span>
+                                </label>
+
+                                <span class="label right">Contract</span>
+                            </div>
+
+                            <!-- Hidden default value for unchecked state -->
+                            <input
+                                type="hidden"
+                                name="engagement_type"
+                                value="Long-term"
+                            />
+                        </div>
                     </div>
 
                     <!-- Submit Button -->
-                    <div style="display: flex; justify-content: center">
+                    <div class="form-submit">
                         <button type="submit" class="btn-op">
                             <span>Send Message</span>
                         </button>
