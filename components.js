@@ -84,20 +84,29 @@ const SVG_SPRITE = `
     <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     <path d="M14 3v5h5M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  <!-- Globe -->
-  <symbol id="ic-globe" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M3 12h18M12 3a15.5 15.5 0 0 1 0 18 15.5 15.5 0 0 1 0-18Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Map (folded, migration route) -->
+  <symbol id="ic-map" viewBox="0 0 24 24">
+    <path d="M3 5.4 9 3.5v15.7l-6 1.8V5.4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 3.5l6 1.9v15.6l-6-1.8V3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M15 5.4l6-1.9v15.7l-6 1.8V5.4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M7 16.4 8.7 13.7l2 .6 2.6-2.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="7" cy="16.4" r="1.15" fill="currentColor"/>
+    <circle cx="13.3" cy="11.4" r="1.15" fill="currentColor"/>
   </symbol>
   <!-- Shopping bag -->
   <symbol id="ic-shopping-bag" viewBox="0 0 24 24">
     <path d="M5 8h14l-.8 12H5.8L5 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
     <path d="M9 10V6a3 3 0 0 1 6 0v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   </symbol>
-  <!-- Mental health (heart + pulse) -->
+  <!-- Mental health (head with gears) -->
   <symbol id="ic-mental-health" viewBox="0 0 24 24">
-    <path d="M12 20s-7-4.35-9.2-8.45C1.3 9.05 2.7 6 5.7 5.6c2-.4 4.1.6 6.3 2.9 2.2-2.3 4.3-3.3 6.3-2.9 3 .4 4.4 3.45 2.9 5.95C19 15.65 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M8 11.5h2l1.5 2.5 2-4 1.5 2.5h1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 3c4.1 0 7.4 3.3 7.4 7.4 0 2.3-1.1 4.4-2.9 5.7-.7.6-1.1 1.4-1.1 2.3v.9a1.8 1.8 0 0 1-1.8 1.8h-3.2a1.8 1.8 0 0 1-1.8-1.8v-.9c0-.9-.4-1.7-1.1-2.3-1.8-1.3-2.9-3.4-2.9-5.7C4.6 6.3 7.9 3 12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="11.2" cy="9.4" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M11.2 7v-.9M11.2 11.8v.9M8.8 9.4H7.9M13.6 9.4h.9M12.9 7.7l.6-.6M12.9 11.1l.6.6M9.5 7.7l-.6-.6M9.5 11.1l-.6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="11.2" cy="9.4" r="0.85" fill="currentColor"/>
+    <circle cx="15" cy="12" r="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M15 10.5v-.8M15 13.5v.8M13.5 12H12.7M16.5 12h.8M16.1 10.9l.5-.5M16.1 13.1l.5.5M13.9 10.9l-.5-.5M13.9 13.1l-.5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="15" cy="12" r="0.6" fill="currentColor"/>
   </symbol>
   <!-- Pen nib -->
   <symbol id="ic-pen-nib" viewBox="0 0 24 24">
@@ -105,18 +114,21 @@ const SVG_SPRITE = `
     <path d="m14.5 7.5 2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     <circle cx="18.5" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
   </symbol>
-  <!-- Gamepad -->
-  <symbol id="ic-gamepad" viewBox="0 0 24 24">
-    <path d="M6.5 7h11a4.5 4.5 0 0 1 4.5 4.5V15a3 3 0 0 1-5.3 1.9L15.6 15.5h-7.2l-1.1 1.4A3 3 0 0 1 2 15v-3.5A4.5 4.5 0 0 1 6.5 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M7 9.5v3M5.5 11h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="16.75" cy="10.5" r="0.75" fill="currentColor"/>
-    <circle cx="18.75" cy="12.5" r="0.75" fill="currentColor"/>
+  <!-- Joystick (Atari 2600) -->
+  <symbol id="ic-joystick" viewBox="0 0 24 24">
+    <rect x="4" y="14.3" width="16" height="6.6" rx="3.2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 14.3V7.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="12" cy="5.8" r="2.3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect x="6.3" y="16.1" width="3.3" height="3" rx="1.5" fill="currentColor"/>
   </symbol>
-  <!-- Sparkling -->
-  <symbol id="ic-sparkling" viewBox="0 0 24 24">
-    <path d="M12 3.2c.55 3.6 2 5.05 5.6 5.6-3.6.55-5.05 2-5.6 5.6-.55-3.6-2-5.05-5.6-5.6 3.6-.55 5.05-2 5.6-5.6Z" fill="currentColor"/>
-    <path d="M19.5 13.5c.3 1.9 1.2 2.8 3.1 3.1-1.9.3-2.8 1.2-3.1 3.1-.3-1.9-1.2-2.8-3.1-3.1 1.9-.3 2.8-1.2 3.1-3.1Z" fill="currentColor"/>
-    <path d="M5.2 14.2c.22 1.4.9 2.08 2.3 2.3-1.4.22-2.08.9-2.3 2.3-.22-1.4-.9-2.08-2.3-2.3 1.4-.22 2.08-.9 2.3-2.3Z" fill="currentColor"/>
+  <!-- Soap bar -->
+  <symbol id="ic-soap" viewBox="0 0 24 24">
+    <rect x="3" y="12.5" width="18" height="8" rx="3.2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="8.6" cy="8.6" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="15.4" cy="7.8" r="1.8" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="19.6" cy="10.6" r="1.2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M7 15.4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="8.1" cy="7.9" r="0.75" fill="currentColor"/>
   </symbol>
 </svg>`;
 

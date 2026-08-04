@@ -15,8 +15,11 @@
             content="contact designer, hire web developer, freelance designer, product design inquiry, web development services"
         />
         <meta name="author" content="Vi Saint" />
+
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:url" content="https://visaint.space/contact.html" />
         <meta property="og:title" content="Contact Vi Saint - Get In Touch" />
         <meta
@@ -29,6 +32,7 @@
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Vi Saint — Creative Technologist. Designer & Developer." />
         <meta property="og:site_name" content="Vi Saint" />
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
@@ -41,6 +45,10 @@
         <meta
             name="twitter:image"
             content="https://visaint.space/images/twitter-card.jpg"
+        />
+        <meta
+            name="twitter:image:alt"
+            content="Vi Saint — Creative Technologist. Designer & Developer."
         />
         <!-- Canonical URL -->
         <link rel="canonical" href="https://visaint.space/contact.html" />
@@ -73,7 +81,7 @@
             content="#F48F6E"
             media="(prefers-color-scheme: dark)"
         />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta
             name="apple-mobile-web-app-status-bar-style"
             content="black-translucent"
@@ -140,17 +148,25 @@
             {
                 "@context": "https://schema.org",
                 "@type": "Person",
+                "@id": "https://visaint.space/#person",
                 "name": "Vi Saint",
                 "alternateName": "Viktor Sekovski",
                 "url": "https://visaint.space",
                 "image": "https://visaint.space/images/me-front.webp",
+                "email": "mailto:hello@visaint.space",
                 "sameAs": [
-                    "https://notes.visaint.space",
-                    "https://visiant.bearblog.dev",
-                    "https://github.com/ViktorSekovski"
+                    "https://www.linkedin.com/in/vi-saint-130a33426/",
+                    "https://bsky.app/profile/visaint.bsky.social",
+                    "https://github.com/visaint",
+                    "https://codepen.io/visaint",
+                    "https://contra.com/viktorsekovski_8r714jwo/about",
+                    "https://www.instagram.com/visaintstudio/",
+                    "https://mastodon.social/@vis7",
+                    "https://x.com/visaintstudio",
+                    "https://notes.visaint.space"
                 ],
-                "jobTitle": "Designer & Developer",
-                "description": "Remote-first product and motion designer creating accessible, eye-catching designs. Specializing in product design, brand identity, web development, and game design.",
+                "jobTitle": "Creative Technologist",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
                 "knowsAbout": [
                     "Product Design",
                     "UX Design",
@@ -159,21 +175,21 @@
                     "Frontend Development",
                     "Brand Identity",
                     "Visual Design",
-                    "Game Design",
-                    "Motion Design",
+                    "Creative Technology",
                     "React",
+                    "Next.js",
                     "JavaScript",
                     "HTML",
                     "CSS"
                 ],
                 "hasOccupation": {
                     "@type": "Occupation",
-                    "name": "Product Designer & Web Developer",
+                    "name": "Creative Technologist",
                     "occupationLocation": {
                         "@type": "Country",
                         "name": "Europe"
                     },
-                    "description": "Creating end-to-end digital product experiences from research to launch, specializing in UX strategy, interface design, and web development."
+                    "description": "Creating end-to-end digital product experiences from research to launch, bridging high-end art direction with technical execution."
                 }
             }
         </script>
@@ -194,7 +210,7 @@
         <!-- Header — same web component as every other page -->
         <site-header></site-header>
 
-        <div id="main">
+        <main id="main">
             <!-- Heading -->
             <div class="section-heading" style="padding-top: 10vh; padding-bottom: 5vh;">
                 <div class="section-top">
@@ -253,6 +269,23 @@
                     <p class="contact-form-link">
                         Or fill out my contact form
                     </p>
+                    <div class="contact-arrows" aria-hidden="true">
+                        <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <!-- Three solid chevrons pointing down, stacked
+                                 close together — road-sign style, reading as
+                                 movement toward the form below. -->
+                            <path d="M4 2.5 L12 7 L20 2.5 M4 9 L12 13.5 L20 9 M4 15.5 L12 20 L20 15.5" />
+                        </svg>
+                    </div>
                 </div>
 
                 <!-- Form -->
@@ -460,6 +493,6 @@
             <site-footer></site-footer>
 
             <script src="./anim-loader.js" data-main="./main.js"></script>
-        </div>
+        </main>
     </body>
 </html>

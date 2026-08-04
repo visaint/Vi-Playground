@@ -129,6 +129,21 @@ html {
     overflow-x: hidden;
     overscroll-behavior-y: none;
     scroll-padding-top: clamp(60px, 8vh, 90px);
+    /* Never render a scrollbar: the entire layout (including this root
+       font-size) is sized in vw/rem, so a scrollbar appearing or
+       disappearing mid-load changes the viewport width and reflows the
+       whole page — the visible "flash and expand" jump. With the scrollbar
+       hidden, the viewport width is stable from first paint. Scrolling
+       still works natively (wheel / trackpad / keyboard). */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge / IE */
+}
+
+/* Chrome / Safari / Edge (Blink & WebKit) */
+html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
 }
 
 html.lenis {
@@ -552,7 +567,7 @@ nav {
     }
 }
 
-/* ── Menu button: orange glass circle matching .menu-close ── */
+/* ── Menu button: pink glass circle ── */
 #menu-btn {
     position: relative;
     z-index: 2;
@@ -567,14 +582,14 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Resting: orange glass — same look as the slide-menu .menu-close */
-    background: color-mix(in srgb, var(--orange) 28%, transparent);
+    /* Resting: pink glass */
+    background: color-mix(in srgb, var(--pink) 28%, transparent);
     backdrop-filter: blur(14px) saturate(1.5);
     -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    border: 1px solid color-mix(in srgb, var(--orange) 40%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pink) 40%, transparent);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        0 4px 24px color-mix(in srgb, var(--orange) 25%, transparent);
+        0 4px 24px color-mix(in srgb, var(--pink) 25%, transparent);
     transition:
         background 0.28s ease,
         border-color 0.28s ease,
@@ -582,12 +597,12 @@ nav {
         transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Hover: same treatment as .menu-close — stronger orange edge + glow */
+/* Hover: stronger pink edge + glow */
 #menu-btn:hover {
-    border-color: color-mix(in srgb, var(--orange) 60%, transparent);
+    border-color: color-mix(in srgb, var(--pink) 60%, transparent);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.35),
-        0 6px 32px color-mix(in srgb, var(--orange) 40%, transparent);
+        0 6px 32px color-mix(in srgb, var(--pink) 40%, transparent);
     transform: scale(1.08) !important;
 }
 #menu-btn:active {
@@ -595,7 +610,7 @@ nav {
     transition-duration: 0.1s;
 }
 
-/* Light mode: same orange glass — lines get a dark grey for contrast
+/* Light mode: same pink glass — lines get a dark grey for contrast
    against the light page background */
 @media (prefers-color-scheme: light) {
     #menu-btn .ham-line {
@@ -639,7 +654,7 @@ nav {
     display: block;
     width: 16px;
     height: 0;
-    border-top: 2px dotted var(--orange);
+    border-top: 2px dotted var(--pink);
     transition: border-color 0.28s ease;
 }
 
@@ -687,6 +702,7 @@ body:has(#menu-toggle:checked) {
     z-index: 1500;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: none; /* keep the menu's own scrollbar hidden too */
     background: linear-gradient(
         160deg,
         color-mix(in srgb, #ee8198 11%, transparent) 0%,
@@ -711,6 +727,12 @@ body:has(#menu-toggle:checked) {
     display: flex;
     flex-direction: column;
     padding: 2rem 2rem 3rem 2rem;
+}
+
+.slide-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
 }
 
 .slide-menu::after {
@@ -924,6 +946,12 @@ body:has(#menu-toggle:checked) {
     color: var(--orange);
     transition: color 0.25s ease;
 }
+.close-x svg {
+    /* Dotted X. 0.5 3.389 → period 3.889; each 15.56-unit leg gets exactly
+       5 dots with the last one landing on the bottom corners, so both lines
+       of the X have the same number of dots and stay symmetric top-to-bottom. */
+    stroke-dasharray: 0.5 3.389;
+}
 @media (prefers-color-scheme: light) {
     .close-x {
         color: #c96540;
@@ -1075,7 +1103,7 @@ body:has(#menu-toggle:checked) {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: clip;
     overflow-y: visible;
     position: relative;
     /* NOTE: do not set `transform`, `filter`, `perspective`, `will-change:
@@ -1185,13 +1213,13 @@ body:has(#menu-toggle:checked) {
 }
 
 #hero-head {
-    padding: 0 clamp(30px, 6vw, 110px);
-    text-align: left;
+    padding: 0;
+    text-align: center;
 }
 
 #main-head {
-    padding: 0 clamp(30px, 6vw, 110px);
-    text-align: right;
+    padding: 0;
+    text-align: center;
 }
 
 /* "available for freelance & full-time." — right */
@@ -1264,6 +1292,14 @@ body:has(#menu-toggle:checked) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
+    /* zero the base h1's asymmetric padding so centered text is truly
+       centered between the two pink accent lines */
+    padding: 0;
+    /* Desktop size matches the base h1 scale (≈20–30% of viewport height
+       on typical screens). hero-carousel.js fitTitles() still shrinks a
+       line down if a wider carousel title would overflow — never wraps,
+       never clips. The ≤768px block overrides this with --hero-big. */
+    font-size: clamp(6vw, 14vw, 18vw);
 }
 
 #first-bottom {
@@ -1368,6 +1404,7 @@ html.hero-carousel-dragging * {
     /* About page: hero holds all content, first heading at ~30% */
     #hero:has(.section-heading) {
         min-height: auto;
+        padding-top: 0;
     }
 
     /* Compact section-spacing on interior pages */
@@ -1376,9 +1413,6 @@ html.hero-carousel-dragging * {
     }
     #skill-cards-section {
         padding-top: 0;
-    }
-    #contact-form-section {
-        margin-top: 2vh;
     }
 }
 
@@ -1405,12 +1439,35 @@ html.hero-carousel-dragging * {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
-    font-size: clamp(8vw, 16vw, 20vw);
+    /* Desktop: slightly smaller than the index hero lines (12vw vs 14vw)
+       so interior page headings stay big and bold but read as secondary.
+       Mobile (≤768px) overrides with its own clamp below. */
+    font-size: clamp(6vw, 12vw, 15vw);
     line-height: 0.8;
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
     padding-left: 5vw;
+}
+
+/* Case-study titles that don't fit at full display size keep their
+   oversized leading syllable and a smaller trailing part on the same
+   line. The span lives INSIDE the h1 so the full project name is real
+   heading text (SEO), while the styling mirrors the old split layout:
+   trailing part at the root font size, Libre Baskerville, pinned to the
+   top of the line, separated by the space the h1's right padding used
+   to create between the two halves. */
+body.case-study-page .section-top h1 {
+    padding-right: 0;
+}
+.section-top h1 .cs-tail {
+    font-family: "Libre Baskerville", serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    vertical-align: top;
+    white-space: nowrap;
+    margin-left: clamp(40px, 10vw, 11vw);
 }
 
 /* ==========================================================================
@@ -2371,7 +2428,9 @@ body.js-enabled .chrome-scroll-section .text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10vh 2rem clamp(50px, 8vw, 120px);
+    /* Bottom padding reduced (was clamp(50px, 8vw, 120px)) so the gap to
+       the notes section matches the spacing used elsewhere on the page. */
+    padding: 10vh 2rem clamp(2rem, 4vh, 3rem);
 }
 
 #t-f-div {
@@ -2899,6 +2958,10 @@ footer {
 }
 
 .letter {
+    /* Square SVG — reserving the height here (the contact page <img> has no
+       width/height attributes) stops the late image load from growing the
+       document and flashing a scrollbar, same as the homepage's 99x99 attrs. */
+    aspect-ratio: 1 / 1;
     width: 15vw;
     min-width: 120px;
     transition:
@@ -3086,7 +3149,7 @@ footer {
    ========================================================================== */
 #contact-form-section {
     max-width: max(900px, 80vw);
-    margin: 4vh auto 10vh;
+    margin: 0 auto 10vh;
     padding: 0 2rem;
 }
 .contact-intro {
@@ -3112,15 +3175,17 @@ footer {
 }
 
 /* Big blue headline between the letter button and the email address */
+/* "I Live in My Own World" headline — big, centered, no wrapping. */
 .contact-intro .contact-world {
-    font-family: "DinaRemasterII", monospace;
-    font-size: clamp(2.2rem, 5.5vw, 4rem);
-    line-height: 1.12;
-    letter-spacing: 0.02em;
-    text-transform: none;
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible;
+    hyphens: none;
+    word-break: keep-all;
+    font-size: clamp(3rem, 6vw, 9vw);
+    line-height: 1.05;
     color: var(--blue-dark);
-    margin: 1.5rem auto 0;
-    max-width: 26ch;
+    margin: 3vh clamp(1rem, 5vw, 10vh);
 }
 
 /* JOIN ME links straight to the email — underline appears on hover */
@@ -3184,6 +3249,20 @@ footer {
     font-family: "DinaRemasterII", monospace;
     font-size: clamp(1.05rem, 1.3vw, 1.4rem);
     color: var(--pink);
+}
+
+/* Dotted double-chevron (two nested V's, first inside the second) guiding
+   the eye from the form link down to the form */
+.contact-intro .contact-arrows {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    color: var(--pink);
+    pointer-events: none;
+}
+.contact-intro .contact-arrows svg {
+    width: 32px;
+    height: 32px;
 }
 .contact-form {
     display: grid;
@@ -3490,10 +3569,12 @@ footer {
     .nav-right {
         justify-self: stretch;
         width: 100%;
-        justify-content: space-evenly;
-        /* zero the base gap so space-evenly alone sets identical gaps
-           between the logo, each button and the menu button */
-        gap: 0;
+        justify-content: center;
+        /* buttons sit close together with a small fixed gap; leftover space
+           splits evenly to the ends, so the group is farther from the logo
+           and menu button than the buttons are from each other */
+        gap: clamp(10px, 3vw, 20px);
+        padding: 0 clamp(8px, 2vw, 16px); /* guaranteed min breathing room at the ends */
     }
 
     .desktop-only {
@@ -3766,7 +3847,7 @@ footer {
     }
     .work-label .wl-icon {
         display: inline-flex;
-        font-size: 1rem;
+        font-size: 1.15rem;
         line-height: 1;
     }
 
@@ -3878,7 +3959,7 @@ footer {
 
     #contact-form-section {
         padding: 0 1.5rem;
-        margin: 3vh auto 10vh;
+        margin: 0 auto 10vh;
     }
     .contact-intro {
         margin-bottom: 3rem;
@@ -4289,7 +4370,9 @@ footer {
 #writing-section {
     max-width: 1400px;
     margin: 0 auto;
-    padding: clamp(4rem, 8vw, 9rem) 4vw clamp(4rem, 6vw, 7rem);
+    /* Top padding reduced (was clamp(4rem, 8vw, 9rem)) to close the large
+       desktop gap after the about section. */
+    padding: clamp(3rem, 5vh, 4rem) 4vw clamp(4rem, 6vw, 7rem);
 }
 
 .writing-header {
@@ -5173,8 +5256,142 @@ footer {
 
 .tools-section {
   padding: 0 clamp(24px, 4vw, 80px);
-  max-width: 1000px;
+  max-width: 90vw;
   margin: 0 auto 6vh;
+}
+
+.tools-section .svc-grid {
+  width: 90vw;
+  max-width: 90vw;
+  margin: 0 auto;
+  grid-auto-rows: 1fr;
+  border-top: none;
+  border-bottom: none;
+}
+
+.tools-section .svc-cell {
+  height: auto;
+  border-right: none;
+}
+
+/* 2 columns × 3 rows at every width (mobile included) with the dividers
+   only BETWEEN the items — 1 vertical (odd cells' right edge, between the
+   columns) + 2 horizontal (the first four cells' bottom edge, between the
+   rows) — never at the outer edges. Scoped under .tools-section so the
+   shared ≤600px block (which stacks .svc-grid to one column) never wins. */
+.tools-section .svc-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tools-section .svc-cell:nth-child(odd) {
+  border-right: 2px dashed var(--pink);
+}
+
+.tools-section .svc-cell:nth-child(-n+4) {
+  border-bottom: 2px dashed var(--pink);
+}
+
+.tools-section .svc-cell:nth-child(n+5) {
+  border-bottom: none;
+}
+
+/* Cards centre their content; the bullet list is centred as a block but
+   its lines stay left-aligned. Every row is 1fr, so all six cards are
+   the same size regardless of how many tools each list holds. */
+.tools-section .svc-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tools-section .svc-name {
+  align-self: center;
+}
+
+.tools-section .svc-items {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Cards with a long list (Design) split it into two side-by-side
+   sections so no card is taller than its neighbours; the pair wraps
+   to a single column only if there genuinely isn't room. */
+.tools-section .svc-items-cols {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem) clamp(1.5rem, 3vw, 3rem);
+}
+
+/* Desktop: tighter vertical rhythm than before */
+@media (min-width: 601px) {
+  .tools-section .svc-front {
+    min-height: clamp(160px, 26vh, 280px);
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.75rem, 3vw, 3rem);
+    gap: 0.75rem;
+  }
+
+  .tools-section .svc-name {
+    font-size: clamp(1.6rem, 3vw, 3rem);
+  }
+
+  .tools-section .svc-items {
+    font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+    line-height: 1.4;
+  }
+}
+
+/* Mobile: two cards per line with roomy vertical padding so every tool
+   name fits on one line; the Design split stays side-by-side when there's
+   room and wraps to stacked lists on the narrowest phones. */
+@media (max-width: 600px) {
+  .tools-section .svc-front {
+    padding: 1.3rem 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .tools-section .svc-name {
+    font-size: clamp(1.05rem, 4.5vw, 1.4rem);
+  }
+
+  .tools-section .svc-items {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .tools-section .svc-items-cols {
+    gap: 0.5rem 0.75rem;
+  }
+
+  /* The detail cards hold longer copy than the home services ones, so on
+     compact cards let them scroll if the text ever outgrows the card. */
+  .tools-section .svc-slide {
+    padding: 1rem;
+    gap: 0.5rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .tools-section .svc-slide-title {
+    font-size: 1rem;
+  }
+
+  .tools-section .svc-slide-text {
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+}
+
+/* X/O marks sit towards the bottom-right corner of the card, a little
+   away from the absolute corner so they read as part of the card. */
+.tools-section .svc-cell::before {
+  right: clamp(0.75rem, 1.5vw, 1.25rem);
+  top: auto;
+  bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+  transform: none;
 }
 
 
@@ -5467,6 +5684,7 @@ footer {
 
 .svc-toggle:checked + .svc-front + .svc-slide {
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .svc-slide--orange {

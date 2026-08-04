@@ -18,7 +18,10 @@
         />
         <meta name="author" content="Vi Saint" />
 
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:url" content="https://visaint.space/" />
         <meta property="og:title" content="Vi Saint - Creative Technologist" />
         <meta
@@ -31,6 +34,7 @@
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Vi Saint — Creative Technologist. Designer & Developer." />
         <meta property="og:site_name" content="Vi Saint" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -43,6 +47,10 @@
         <meta
             name="twitter:image"
             content="https://visaint.space/images/twitter-card.jpg"
+        />
+        <meta
+            name="twitter:image:alt"
+            content="Vi Saint — Creative Technologist. Designer & Developer."
         />
 
         <link rel="canonical" href="https://visaint.space/" />
@@ -76,7 +84,7 @@
             content="#F48F6E"
             media="(prefers-color-scheme: dark)"
         />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta
             name="apple-mobile-web-app-status-bar-style"
             content="black-translucent"
@@ -151,15 +159,37 @@
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://visaint.space/#website",
+                "url": "https://visaint.space/",
+                "name": "Vi Saint — Creative Technologist",
+                "description": "Portfolio of Vi Saint, a remote-first Creative Technologist specializing in product design, brand identity, and web development.",
+                "publisher": {
+                    "@id": "https://visaint.space/#person"
+                },
+                "inLanguage": "en"
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
                 "@type": "Person",
+                "@id": "https://visaint.space/#person",
                 "name": "Vi Saint",
                 "alternateName": "Viktor Sekovski",
                 "url": "https://visaint.space",
                 "image": "https://visaint.space/images/me-front.webp",
+                "email": "mailto:hello@visaint.space",
                 "sameAs": [
-                    "https://notes.visaint.space",
-                    "https://visiant.bearblog.dev",
-                    "https://github.com/ViktorSekovski"
+                    "https://www.linkedin.com/in/vi-saint-130a33426/",
+                    "https://bsky.app/profile/visaint.bsky.social",
+                    "https://github.com/visaint",
+                    "https://codepen.io/visaint",
+                    "https://contra.com/viktorsekovski_8r714jwo/about",
+                    "https://www.instagram.com/visaintstudio/",
+                    "https://mastodon.social/@vis7",
+                    "https://x.com/visaintstudio",
+                    "https://notes.visaint.space"
                 ],
                 "jobTitle": "Creative Technologist",
                 "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
@@ -201,7 +231,7 @@
             <div class="blob blob-5"></div>
         </div>
 
-        <div id="main">
+        <main id="main">
             <div id="hero">
                 <site-header></site-header>
                 <div id="hero-handle">
@@ -240,6 +270,7 @@
                     </div>
                 </div>
             </div>
+            </main>
 
             <div class="blurb">
                 <h2>I blend design,</h2>
@@ -276,8 +307,8 @@
                             >
                             <h2>climate migration map</h2>
                             <h6 class="work-label">
-                                <svg class="ri-global-line wl-icon"
-                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-globe"/></svg>
+                                <svg class="ri-map-2-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-map"/></svg>
                                 <span class="wl-text">Data Visualization</span>
                             </h6>
                             <img
@@ -607,8 +638,8 @@
                             >
                             <h2>view from nowhere</h2>
                             <h6 class="work-label">
-                                <svg class="ri-gamepad-line wl-icon"
-                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-gamepad"/></svg>
+                                <svg class="ri-joystick-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-joystick"/></svg>
                                 <span class="wl-text">Indie Game Studio</span>
                             </h6>
                             <img
@@ -695,8 +726,8 @@
                             >
                             <h2>doctors</h2>
                             <h6 class="work-label">
-                                <svg class="ri-sparkling-line wl-icon"
-                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-sparkling"/></svg>
+                                <svg class="ri-soap-line wl-icon"
+                                 width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-soap"/></svg>
                                 <span class="wl-text">Cosmetics Branding</span>
                             </h6>
                             <img
@@ -892,7 +923,7 @@
                         </label>
                         <div class="svc-slide svc-slide--pink">
                             <h3 class="svc-slide-title">Improve</h3>
-                            <p class="svc-slide-text">Refine what's already there with AI, automation, optimization & continuous iteration.</p>
+                            <p class="svc-slide-text">Refine what's already there with AI, automation, optimization & continuous iteration. Limit & fix website debt.</p>
                         </div>
                     </div>
                 </div>
@@ -1011,9 +1042,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ═══════════════════════════════════
-             WRITING / NOTES
+            <!-- ═══════════════════════════════════
+                 WRITING / NOTES
         ═══════════════════════════════════ -->
         <div id="writing-section">
             <div class="writing-header fade-in-element">
@@ -1086,12 +1116,12 @@
                     target="_blank"
                     rel="noopener"
                     class="writing-card"
-                    aria-label="Read: The Ipod"
+                    aria-label="Read: The iPod"
                 >
                     <div class="wcard-paper">
                         <div class="wcard-body">
                             <span class="wcard-tag">Design</span>
-                            <h3 class="wcard-title">The Ipod</h3>
+                            <h3 class="wcard-title">The iPod</h3>
                             <p class="wcard-excerpt">
                                 Two stories — growing up reading about Steve
                                 Jobs and the creation of the iPod — about

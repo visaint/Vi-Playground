@@ -18,7 +18,10 @@
         />
         <meta name="author" content="Vi Saint" />
 
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:url" content="https://visaint.space/about.html" />
         <meta property="og:title" content="About - Vi Saint" />
         <meta
@@ -31,6 +34,7 @@
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Vi Saint — Creative Technologist. Designer & Developer." />
         <meta property="og:site_name" content="Vi Saint" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -43,6 +47,10 @@
         <meta
             name="twitter:image"
             content="https://visaint.space/images/twitter-card.jpg"
+        />
+        <meta
+            name="twitter:image:alt"
+            content="Vi Saint — Creative Technologist. Designer & Developer."
         />
 
         <link rel="canonical" href="https://visaint.space/about.html" />
@@ -76,7 +84,7 @@
             content="#F48F6E"
             media="(prefers-color-scheme: dark)"
         />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta
             name="apple-mobile-web-app-status-bar-style"
             content="black-translucent"
@@ -151,17 +159,25 @@
             {
                 "@context": "https://schema.org",
                 "@type": "Person",
+                "@id": "https://visaint.space/#person",
                 "name": "Vi Saint",
                 "alternateName": "Viktor Sekovski",
                 "url": "https://visaint.space",
                 "image": "https://visaint.space/images/me-front.webp",
+                "email": "mailto:hello@visaint.space",
                 "sameAs": [
-                    "https://notes.visaint.space",
-                    "https://visiant.bearblog.dev",
-                    "https://github.com/ViktorSekovski"
+                    "https://www.linkedin.com/in/vi-saint-130a33426/",
+                    "https://bsky.app/profile/visaint.bsky.social",
+                    "https://github.com/visaint",
+                    "https://codepen.io/visaint",
+                    "https://contra.com/viktorsekovski_8r714jwo/about",
+                    "https://www.instagram.com/visaintstudio/",
+                    "https://mastodon.social/@vis7",
+                    "https://x.com/visaintstudio",
+                    "https://notes.visaint.space"
                 ],
                 "jobTitle": "Creative Technologist",
-                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity & web development.",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
                 "knowsAbout": [
                     "Product Design",
                     "UX Design",
@@ -294,8 +310,7 @@
             <div class="blob blob-5"></div>
         </div>
 
-        <div id="main">
-            <div id="hero">
+        <main id="main">    <div id="hero">
                 <site-header></site-header>
 
                 <!-- ═══════════════════════════════════
@@ -388,7 +403,7 @@
 
                 <div class="tools-section">
                     <p class="blurb fade-in-element">
-                        I prefer tools that are either open source or built from single people or small companies. The larger the company the more exploitative their payment model has to be, the shittier they have to make their base product to upsell you. Good software lets you do the obvious, steers you towards complex possibilities and gets out of your way otherwise.
+                        I prefer tools that are open source or built by individuals and small companies. The larger the company, the more exploitative its pricing model and the more the base product gets degraded just to upsell you. Good software lets you do the obvious, steers you toward complex possibilities, and gets out of your way otherwise.
                     </p>
 
                     <div class="tools-systems-wrap fade-in-element">
@@ -426,7 +441,7 @@
                             </label>
                             <div class="svc-slide svc-slide--orange">
                                 <h3 class="svc-slide-title">Code</h3>
-                                <p class="svc-slide-text">Where I spend most of my work day, I prioritize platform nativity, speed (startup &amp; run), customizability and features.</p>
+                                <p class="svc-slide-text">This is where I spend most of my working day. I prioritize platform-native tools, speed — at startup and at runtime — customizability, and features.</p>
                             </div>
                         </div>
 
@@ -439,20 +454,24 @@
                             />
                             <label for="tool-design" class="svc-front">
                                 <h2 class="svc-name">Design</h2>
-                                <h6 class="svc-items">
-                                    <span>Affinity</span>
-                                    <span>Figma</span>
-                                    <span>Photoshop</span>
-                                    <span>Illustrator</span>
-                                    <span>InDesign</span>
-                                    <span>GIMP</span>
-                                    <span>Inkscape</span>
-                                    <span>Rive</span>
-                                </h6>
+                                <div class="svc-items-cols">
+                                    <h6 class="svc-items">
+                                        <span>Affinity</span>
+                                        <span>Figma</span>
+                                        <span>Photoshop</span>
+                                        <span>Illustrator</span>
+                                    </h6>
+                                    <h6 class="svc-items">
+                                        <span>InDesign</span>
+                                        <span>GIMP</span>
+                                        <span>Inkscape</span>
+                                        <span>Rive</span>
+                                    </h6>
+                                </div>
                             </label>
                             <div class="svc-slide svc-slide--blue">
                                 <h3 class="svc-slide-title">Design</h3>
-                                <p class="svc-slide-text">I'm never satisfied with any of them, especially despise Adob (and all monopolists) and constantly trying to fully switch away. Actually native, useful and thought out is better than 'does it all'</p>
+                                <p class="svc-slide-text">I deeply despise Adobe and am constantly trying to fully switch away from it. Native, useful, and thoughtfully designed beats 'does it all'.</p>
                             </div>
                         </div>
 
@@ -474,7 +493,7 @@
                             </label>
                             <div class="svc-slide svc-slide--pink">
                                 <h3 class="svc-slide-title">Writing</h3>
-                                <p class="svc-slide-text">I do own a typewriter and several notebooks, but my need to write things in elegant places on all things I own is unbeatable.</p>
+                                <p class="svc-slide-text">I own a typewriter and several notebooks, but my need to write things in elegant places on everything I own is unbeatable.</p>
                             </div>
                         </div>
 
@@ -488,14 +507,14 @@
                             <label for="tool-video" class="svc-front">
                                 <h2 class="svc-name">Video</h2>
                                 <h6 class="svc-items">
-                                    <span>Final Cut Pro</span>
+                                    <span>Final Cut</span>
                                     <span>Motion</span>
                                     <span>Cavalry</span>
                                 </h6>
                             </label>
                             <div class="svc-slide svc-slide--orange">
                                 <h3 class="svc-slide-title">Video</h3>
-                                <p class="svc-slide-text">I need to learn more of motion design, but I'm happy with how fun video editing can be.</p>
+                                <p class="svc-slide-text">I still have a lot to learn about motion design, but I love how fun video editing can be.</p>
                             </div>
                         </div>
 
@@ -516,7 +535,7 @@
                             </label>
                             <div class="svc-slide svc-slide--blue">
                                 <h3 class="svc-slide-title">Audio</h3>
-                                <p class="svc-slide-text">Audacity does it all but is kinda ugly, I need a lot more practice with all the others but gosh do I enjoy them. Plugins are a fun mess to have.</p>
+                                <p class="svc-slide-text">Audacity does it all but is a little ugly. I need a lot more practice with the rest — but I genuinely enjoy them. Plugins are a fun mess to have.</p>
                             </div>
                         </div>
 
@@ -714,7 +733,7 @@
                         <div class="service-content">
                             <p>University taught me a lot of interesting things, but the class that changed everything was modern web development. It was the first skill that felt both natural and instantly useful — something I was genuinely good at. So I leaned into it. I opened a Fiverr account and started freelancing, building small video games using web technologies. What began as simple experiments quickly grew into full playable ads, interactive experiences & eventually websites. Every project pushed me to learn more, try more, invent more. And honestly, it was amazing — the feeling of turning ideas into something real, something people could actually play with, was like rediscovering the magic of games from my childhood, but this time from the creator's side.</p>
                         </div>
-                    </div>x§
+                    </div>
 
                     <div class="service-category">
                         <input type="checkbox" id="story-design" class="service-toggle" />
@@ -750,7 +769,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
         <!-- /#main -->
 
         <site-footer></site-footer>
@@ -827,6 +846,83 @@
                         closeModal();
                     }
                 });
+            })();
+        </script>
+
+        <script>
+            (function () {
+                /* Tools cards: tap the back to flip back to the front; swipe
+                   left/right to move to the next/previous card's back. */
+                var grid = document.querySelector(
+                    ".tools-section .svc-grid"
+                );
+                if (!grid) return;
+                var cells = Array.prototype.slice.call(
+                    grid.querySelectorAll(".svc-cell")
+                );
+
+                function openCell(cell) {
+                    cells.forEach(function (c) {
+                        var t = c.querySelector(".svc-toggle");
+                        if (t) t.checked = c === cell;
+                    });
+                }
+
+                cells.forEach(function (cell) {
+                    var slide = cell.querySelector(".svc-slide");
+                    var toggle = cell.querySelector(".svc-toggle");
+                    if (!slide || !toggle) return;
+                    // The slide is a sibling of the label, so the checkbox
+                    // hack needs a hand to flip back to the front.
+                    slide.addEventListener("click", function (e) {
+                        if (e.target.closest("a")) return;
+                        toggle.checked = !toggle.checked;
+                    });
+                });
+
+                var startX = null;
+                var startY = null;
+                var startCell = null;
+                grid.addEventListener(
+                    "touchstart",
+                    function (e) {
+                        var t = e.touches[0];
+                        startX = t.clientX;
+                        startY = t.clientY;
+                        startCell = document.elementFromPoint(
+                            t.clientX,
+                            t.clientY
+                        );
+                        while (
+                            startCell &&
+                            !startCell.classList.contains("svc-cell")
+                        ) {
+                            startCell = startCell.parentElement;
+                        }
+                    },
+                    { passive: true }
+                );
+
+                grid.addEventListener(
+                    "touchend",
+                    function (e) {
+                        if (startX === null || !startCell) return;
+                        var t = e.changedTouches[0];
+                        var dx = t.clientX - startX;
+                        var dy = t.clientY - startY;
+                        startX = null;
+                        startY = null;
+                        startCell = null;
+                        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) {
+                            return; // tap or vertical scroll, not a swipe
+                        }
+                        var idx = cells.indexOf(startCell);
+                        var next = dx < 0 ? idx + 1 : idx - 1;
+                        if (next < 0 || next >= cells.length) return;
+                        openCell(cells[next]);
+                    },
+                    { passive: true }
+                );
             })();
         </script>
     </body>
