@@ -1390,7 +1390,7 @@ html.hero-carousel-dragging * {
         padding-bottom: 0.2rem;
     }
     .section-heading[style*="padding-top"] {
-        padding-top: clamp(15vh, 18vh, 22vh) !important;
+        padding-top: clamp(25vh, 28vh, 32vh) !important;
         padding-bottom: 3vh !important;
     }
     .section-top h1,
@@ -1833,6 +1833,18 @@ body.case-study-page .section-top h1 {
     margin: 0 0 8vh;
 }
 
+/* Mid-page CTA on the services page (sits between the accordion and the
+   competency cards) — tighter spacing. */
+.services-cta-mid {
+    margin: 2vh 0 6vh;
+}
+
+/* "What I Do" heading sits directly above the competency cards — the
+   cards' own large top padding would push them too far from the heading. */
+.systems-heading + #skill-cards-section {
+    padding-top: 0;
+}
+
 /* Secondary "or fill out my contact form" line under a CTA button */
 .services-cta-note {
     font-family: "DinaRemasterII", monospace;
@@ -1950,6 +1962,25 @@ body.case-study-page .section-top h1 {
     opacity: 1;
     margin-bottom: 1rem;
     padding-top: 0.5rem;
+}
+
+/* Services page: expanded panel content aligns with the service title
+   rather than the pink triangle. The triangle sits in a fixed-width slot
+   (1em at its own size = 0.8 × the title size) so the panel indent and
+   the title offset stay in sync. */
+.services-page .service-category {
+    --svc-title-size: clamp(2.2rem, 3.6vw, 4rem);
+}
+.services-page .service-item {
+    font-size: var(--svc-title-size);
+}
+.services-page .service-item .expand-indicator {
+    width: 1em;
+    text-align: center;
+    flex-shrink: 0;
+}
+.services-page .service-content {
+    padding-left: calc(var(--svc-title-size) / 1.25 + 0.8rem);
 }
 
 .service-content p {
@@ -4726,7 +4757,7 @@ footer {
 .scard-title {
     font-family: "DinaRemasterII-Bold", "DinaRemasterII", monospace;
     font-weight: 700;
-    font-size: clamp(1.5rem, 2.4vw, 2.6rem);
+    font-size: clamp(2rem, 3.4vw, 3.6rem);
     line-height: 1;
     color: var(--orange);
     text-transform: uppercase;
@@ -4739,7 +4770,7 @@ footer {
     font-size: clamp(0.58rem, 0.72vw, 0.68rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--pink);
+    color: var(--blue-dark);
     opacity: 0.8;
     margin-bottom: 0.85rem;
     padding-bottom: 0.75rem;
@@ -4752,8 +4783,14 @@ footer {
     font-size: clamp(0.78rem, 0.96vw, 0.9rem);
     line-height: 1.68;
     color: var(--grey);
-    opacity: 0.78;
+    opacity: 1;
     margin-bottom: 0.75rem;
+}
+
+/* Emphasis inside the card copy — italic orange, rest stays neutral */
+.scard-desc em {
+    font-style: italic;
+    color: var(--orange);
 }
 
 .scard-desc:last-child {
@@ -4763,12 +4800,23 @@ footer {
 /* ── BACK ── */
 .skill-card-back {
     transform: rotateY(180deg);
-    background: color-mix(in srgb, var(--white) 78%, var(--pink) 5%);
-    border: 1px solid color-mix(in srgb, var(--pink) 28%, transparent);
+    background: color-mix(in srgb, var(--white) 78%, var(--scard-back-color, var(--pink)) 5%);
+    border: 1px solid color-mix(in srgb, var(--scard-back-color, var(--pink)) 28%, transparent);
     box-shadow:
-        0 2px 0 0 color-mix(in srgb, var(--pink) 35%, transparent),
+        0 2px 0 0 color-mix(in srgb, var(--scard-back-color, var(--pink)) 35%, transparent),
         0 6px 24px rgba(0, 0, 0, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* per-card back accents: orange · blue · pink */
+.skill-cards-grid .skill-card-wrap:nth-child(1) .skill-card-back {
+    --scard-back-color: var(--orange);
+}
+.skill-cards-grid .skill-card-wrap:nth-child(2) .skill-card-back {
+    --scard-back-color: var(--blue);
+}
+.skill-cards-grid .skill-card-wrap:nth-child(3) .skill-card-back {
+    --scard-back-color: var(--pink);
 }
 
 .scard-back-inner {
@@ -4785,7 +4833,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--pink) 28%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--scard-back-color, var(--pink)) 28%, transparent);
     padding-bottom: 0.55rem;
     flex-shrink: 0;
 }
@@ -4793,10 +4841,10 @@ footer {
 .scard-back-title {
     font-family: "DinaRemasterII-Bold", "DinaRemasterII", monospace;
     font-weight: 700;
-    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
+    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--orange);
+    color: var(--scard-back-color, var(--orange));
     flex-shrink: 0;
 }
 
@@ -4824,7 +4872,7 @@ footer {
     content: "▸";
     position: absolute;
     left: 0;
-    color: var(--orange);
+    color: var(--scard-back-color, var(--orange));
     font-size: 0.62em;
     top: 0.22em;
 }
@@ -4844,23 +4892,12 @@ footer {
     font-size: clamp(0.64rem, 0.8vw, 0.74rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--blue);
-    background: color-mix(in srgb, var(--blue) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--blue) 28%, transparent);
+    color: var(--scard-back-color, var(--blue));
+    background: color-mix(in srgb, var(--scard-back-color, var(--blue)) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--scard-back-color, var(--blue)) 28%, transparent);
     border-radius: 999px;
     padding: 0.15em 0.65em 0.18em;
     line-height: 1.6;
-}
-
-.scard-award {
-    font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.64rem, 0.8vw, 0.74rem);
-    color: var(--grey);
-    opacity: 0.72;
-    line-height: 1.55;
-    text-align: right;
-    flex: 1;
-    min-width: 0;
 }
 
 /* ── Dark mode ── */
@@ -4880,6 +4917,12 @@ footer {
             color-mix(in srgb, var(--bordergrey) 16%, transparent) 50%
         );
     }
+    .scard-sub {
+        color: var(--blue);
+    }
+    .scard-desc {
+        color: var(--lightgrey);
+    }
     .skill-card-wrap:hover .skill-card-front {
         box-shadow:
             0 2px 0 0 color-mix(in srgb, var(--orange) 45%, transparent),
@@ -4887,10 +4930,10 @@ footer {
             inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
     .skill-card-back {
-        background: color-mix(in srgb, #0f100a 85%, var(--pink) 7%);
-        border-color: color-mix(in srgb, var(--pink) 20%, transparent);
+        background: color-mix(in srgb, #0f100a 85%, var(--scard-back-color, var(--pink)) 7%);
+        border-color: color-mix(in srgb, var(--scard-back-color, var(--pink)) 20%, transparent);
         box-shadow:
-            0 2px 0 0 color-mix(in srgb, var(--pink) 22%, transparent),
+            0 2px 0 0 color-mix(in srgb, var(--scard-back-color, var(--pink)) 22%, transparent),
             0 6px 26px rgba(0, 0, 0, 0.32),
             inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
@@ -4931,8 +4974,8 @@ footer {
 
 .work-toggle-wrap {
   padding: 0 var(--side-pad, 4vw);
-  max-width: 1000px;
-  margin: 0 auto 6vh;
+  max-width: 720px;
+  margin: 0 auto 4vh;
 }
 
 .work-toggle-grid {
@@ -4949,15 +4992,15 @@ footer {
   all: unset;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 1rem 1.5rem;
+  flex-direction: row;
+  gap: 0.6em;
+  padding: 0.65rem 1.2rem;
   transition: all 0.3s ease;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-family: "DinaRemasterII", monospace;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   line-height: 1.1;
@@ -4977,23 +5020,53 @@ footer {
   border-right: 1px dashed color-mix(in srgb, var(--pink) 25%, transparent);
 }
 
-.work-toggle-btn.active {
-  color: var(--pink);
-  background: color-mix(in srgb, var(--pink) 12%, transparent);
+/* State markers: X = currently selected, O = the option you can switch to */
+.work-toggle-btn::before {
+  content: "O";
+  font-size: 0.7em;
+  line-height: 1;
+}
+.work-toggle-btn.active::before {
+  content: "X";
 }
 
-.work-toggle-btn:hover {
+/* Selected: the site's dark blue fill with orange text. Unselected keeps
+   the grey text. */
+.work-toggle-btn.active {
+  color: var(--orange);
+  background: var(--blue-dark);
+}
+
+/* Hover feedback only for the unselected button — hovering the selected
+   one must never wash out the blue + pink active state. */
+.work-toggle-btn:not(.active):hover {
   color: var(--orange) !important;
   background: color-mix(in srgb, var(--orange) 15%, transparent);
 }
 
 @media (prefers-color-scheme: light) {
-  .work-toggle-btn:hover {
+  .work-toggle-btn:not(.active):hover {
     color: var(--orange) !important;
     background: color-mix(in srgb, var(--orange) 12%, #f4f5ef);
   }
+}
+
+/* Mobile: stack the Commercial / Experiments toggle vertically so both
+   words always fit — side-by-side columns are too narrow for
+   "EXPERIMENTS" in uppercase monospace on small screens. The selected
+   button uses the site's dark blue fill with orange text; !important pins it
+   against the sticky :hover touch devices leave on the tapped button. */
+@media (max-width: 768px) {
+  .work-toggle-grid {
+    grid-template-columns: 1fr;
+  }
+  .work-toggle-btn:first-child {
+    border-right: none;
+    border-bottom: 1px dashed color-mix(in srgb, var(--pink) 25%, transparent);
+  }
   .work-toggle-btn.active {
-    background: color-mix(in srgb, var(--pink) 10%, #f4f5ef);
+    color: var(--orange) !important;
+    background: var(--blue-dark) !important;
   }
 }
 
