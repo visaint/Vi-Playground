@@ -4279,19 +4279,6 @@ footer {
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* ── Disabled state for placeholder buttons (e.g. "Live Site" links whose
-   URLs aren't published yet) — kept in the DOM but visually muted & inert ── */
-.btn-bo.is-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-.btn-bo.is-disabled::before {
-    opacity: 0;
-}
-.btn-bo.is-disabled:hover {
-    transform: none;
-}
-
 /* ── Light mode overrides ── */
 @media (prefers-color-scheme: light) {
     .btn-op,
