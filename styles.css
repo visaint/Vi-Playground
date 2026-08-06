@@ -1450,26 +1450,6 @@ html.hero-carousel-dragging * {
     padding-left: 5vw;
 }
 
-/* Case-study titles that don't fit at full display size keep their
-   oversized leading syllable and a smaller trailing part on the same
-   line. The span lives INSIDE the h1 so the full project name is real
-   heading text (SEO), while the styling mirrors the old split layout:
-   trailing part at the root font size, Libre Baskerville, pinned to the
-   top of the line, separated by the space the h1's right padding used
-   to create between the two halves. */
-body.case-study-page .section-top h1 {
-    padding-right: 0;
-}
-.section-top h1 .cs-tail {
-    font-family: "Libre Baskerville", serif;
-    font-size: 1rem;
-    line-height: 1.5;
-    font-weight: 400;
-    vertical-align: top;
-    white-space: nowrap;
-    margin-left: clamp(40px, 10vw, 11vw);
-}
-
 /* ==========================================================================
    7. PAGE 2: WORK SECTION + TEASERS
    ========================================================================== */
@@ -1813,6 +1793,23 @@ body.case-study-page .section-top h1 {
     line-height: 1.7;
     color: var(--grey);
     margin: 0;
+}
+
+/* Small live-site link under a teaser's description (e.g. Nebesna) */
+.tldr-visit {
+    font-family: "DinaRemasterII", monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+}
+.tldr-visit a {
+    color: var(--blue);
+    text-decoration: underline dashed currentColor;
+    text-underline-offset: 3px;
+}
+.tldr-visit a:hover {
+    color: var(--orange);
 }
 
 /* CTA button inside teaser — uses base button sizing */
@@ -3052,113 +3049,113 @@ footer {
         hue-rotate(300deg) brightness(98%) contrast(92%);
 }
 /* ==========================================================================
-   12. PROJECT PARTIALS
+   12. CASE STUDIES — ARTICLE LAYOUT
    ========================================================================== */
-.project-modal-container.future-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 5vw, 80px);
-    width: 100%;
-    max-width: 1440px;
+.cs-article {
+    max-width: 56rem;
     margin: 0 auto;
-    padding: clamp(40px, 4vw, 80px);
-    background-color: transparent;
-    align-items: start;
-    position: relative;
-}
-
-.project-text-col {
-    position: sticky;
-    top: 40px;
+    padding: clamp(5rem, 16vh, 8rem) clamp(1.25rem, 5vw, 3rem) 3rem;
     display: flex;
     flex-direction: column;
-    gap: clamp(20px, 2vw, 40px);
-}
-.project-meta {
-    font-family: "DinaRemasterII", monospace;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    gap: 8px;
-    opacity: 0.7;
-    align-items: center;
-}
-.project-meta .separator {
-    width: 4px;
-    height: 4px;
-    background-color: var(--grey);
-    border-radius: 50%;
-    opacity: 0.5;
-}
-.project-headline {
-    font-family: "Libre Baskerville", serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1.3;
-    color: var(--blue);
-    font-weight: 400;
-    margin-bottom: 20px;
-}
-.project-body-grid {
-    display: grid;
-    grid-template-columns: 0.6fr 1.4fr;
-    gap: 30px;
-    margin-top: 20px;
-    align-items: start;
+    gap: clamp(1.75rem, 3.5vw, 3rem);
 }
 
-.project-services-list {
-    list-style: none;
+.cs-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.cs-title {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 7.5vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--blue) !important;
     padding: 0;
     margin: 0;
-    font-family: "DinaRemasterII", monospace;
+    letter-spacing: -0.02em;
 }
-.project-services-list li {
+
+.cs-sub {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blue-dark);
+    margin: 0;
+}
+
+.cs-lede {
+    font-family: "Libre Baskerville", serif;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.55;
+    color: var(--grey);
+    margin: 0;
+    max-width: 48rem;
+}
+
+.cs-body {
     display: flex;
-    align-items: center;
-    padding: 0 0 0 30px;
-    gap: 5px;
-    line-height: 1.4;
-    font-size: clamp(14px, 1.5vw, 2rem);
-    text-decoration: underline dashed var(--orange);
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
+    flex-direction: column;
+    gap: 1.3rem;
+    max-width: 48rem;
+}
+
+.cs-body p {
+    font-family: "Libre Baskerville", serif;
+    font-size: clamp(1rem, 1.15vw, 1.1rem);
+    line-height: 1.8;
+    color: var(--grey);
+    margin: 0;
+}
+
+.cs-h2 {
+    font-family: "DinaRemasterII-Bold", "DinaRemasterII", monospace;
+    font-weight: 700;
+    font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin: 0 0 1.2rem;
+}
+
+.cs-services {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.7rem 2rem;
+}
+
+.cs-services li {
+    font-family: "DinaRemasterII", monospace;
+    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+    line-height: 1.5;
     color: var(--pink);
+    padding-left: 1.5em;
     position: relative;
 }
-.project-services-list li::before {
+
+.cs-services li::before {
     content: "▹";
     position: absolute;
     left: 0;
-    color: var(--pink);
-    font-size: 1.2em;
-}
-.project-services-list li:hover {
-    opacity: 0.85;
-    transform: translateX(2px);
-}
-.project-services-list li:hover::before {
-    color: var(--blue);
+    color: var(--orange);
 }
 
-.project-description {
+.cs-gallery {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
 }
-.project-gallery-col {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(40px, 4vw, 80px);
-    width: 100%;
-    align-items: stretch;
-}
-.gallery-item {
-    width: 100%;
+
+.cs-figure {
+    margin: 0;
+    border-radius: clamp(14px, 3vw, 32px);
     overflow: hidden;
-    background-color: var(--bordergrey);
-    display: block;
-    border-radius: clamp(16px, 4vw, 48px);
+    background: var(--bordergrey);
     outline: 1.5px solid rgba(255, 255, 255, 0.38);
     outline-offset: -1.5px;
     box-shadow:
@@ -3166,13 +3163,42 @@ footer {
         inset 0 -1px 0 rgba(0, 0, 0, 0.08),
         0 2px 12px rgba(0, 0, 0, 0.1);
 }
-.gallery-item img {
+
+.cs-figure img {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
     object-fit: cover;
-    border-radius: inherit;
-    transition: transform 0.35s var(--ease);
+}
+
+.cs-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cs-sub {
+        color: var(--blue);
+    }
+}
+
+@media (max-width: 768px) {
+    .cs-article {
+        padding: 6rem 1.25rem 2rem;
+        gap: 1.75rem;
+    }
+    .cs-title {
+        font-size: clamp(2.6rem, 12vw, 4rem);
+    }
+    .cs-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .cs-cta a {
+        text-align: center;
+    }
 }
 
 /* ==========================================================================
@@ -3436,41 +3462,6 @@ footer {
    14. MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 900px) {
-    .project-modal-container.future-layout {
-        grid-template-columns: 1fr;
-        padding: 20px;
-        gap: 20px;
-    }
-    .project-text-col {
-        position: relative;
-        top: 0;
-        gap: 15px;
-    }
-    .project-body-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    .project-headline {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-    }
-    .project-services-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 15px;
-        border-bottom: 1px solid var(--bordergrey);
-        padding-bottom: 15px;
-    }
-    .project-services-list li {
-        width: fit-content;
-    }
-    .project-description,
-    .project-gallery-col {
-        gap: 15px;
-    }
-    .gallery-item {
-        max-height: 80vh;
-    }
     .slide-menu {
         width: clamp(280px, 42vw, 400px);
     }
@@ -5293,15 +5284,6 @@ footer {
     font-size: 0.65rem;
     padding: 0.2rem 0.5rem;
   }
-}
-
-/* ═══════════════════════════════════
-   CASE STUDY PAGES
-   ═══════════════════════════════════ */
-
-.cs-back {
-  text-align: center;
-  padding: 6vh 0 4vh;
 }
 
 /* ═══════════════════════════════════
