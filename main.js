@@ -691,6 +691,7 @@ function initAvailDot() {
     (rootStyle.getPropertyValue("--orange").trim() || "#f48f6e"),
     (rootStyle.getPropertyValue("--blue").trim() || "#5a9fd4"),
     (rootStyle.getPropertyValue("--pink").trim() || "#ee8198"),
+    (rootStyle.getPropertyValue("--grey").trim() || "#606060"),
   ];
 
   let timer = null;
@@ -1212,3 +1213,60 @@ if (document.readyState === "loading") {
 } else {
   initPage();
 }
+
+// ===================================
+// IMAGE LIGHTBOX (case study pages)
+// ===================================
+(function initImageModal() {
+  const figures = document.querySelectorAll(".cs-figure");
+  if (!figures.length) return;
+
+  // Create modal once
+  const modal = document.createElement("div");
+  modal.className = "img-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-label", "Image preview");
+  modal.innerHTML = `
+    <div class="img-modal-inner">
+      <div class="img-modal-bar">
+        <span class="img-modal-title"></span>
+        <button class="img-modal-close" aria-label="Close image">&times;</button>
+      </div>
+      <img class="img-modal-img" src="" alt="" />
+    </div>`;
+  document.body.appendChild(modal);
+
+  const modalImg = modal.querySelector(".img-modal-img");
+  const modalTitle = modal.querySelector(".img-modal-title");
+  const closeBtn = modal.querySelector(".img-modal-close");
+
+  function openModal(src, alt) {
+    modalImg.src = src;
+    modalImg.alt = alt || "";
+    modalTitle.textContent = alt || "";
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+    modalImg.src = "";
+  }
+
+  figures.forEach((fig) => {
+    fig.addEventListener("click", () => {
+      const img = fig.querySelector("img");
+      if (img) openModal(img.src, img.alt);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+})();

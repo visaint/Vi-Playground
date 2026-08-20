@@ -184,19 +184,12 @@ iframe {
     display: block;
     transform: translateZ(0);
     border-radius: clamp(16px, 4vw, 48px);
-    /* Glassy border: single CSS outline + inset shadow — no layout repaints */
-    outline: 1.5px solid rgba(255, 255, 255, 0.38);
-    outline-offset: -1.5px;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.08),
-        0 2px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 img[src$=".svg"],
 .work-hover-img {
     border-radius: 0;
-    outline: none;
     box-shadow: none;
 }
 
@@ -610,14 +603,6 @@ nav {
     transition-duration: 0.1s;
 }
 
-/* Light mode: same pink glass — lines get a dark grey for contrast
-   against the light page background */
-@media (prefers-color-scheme: light) {
-    #menu-btn .ham-line {
-        border-color: #444;
-    }
-}
-
 /* Specular rim (same as menu-close) */
 #menu-btn::after {
     content: "";
@@ -641,28 +626,23 @@ nav {
 .hamburger-icon {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    align-items: center;
-    justify-content: center;
+    gap: 3px;
     pointer-events: none;
     position: relative;
     z-index: 1;
 }
 
-
-.ham-line {
-    display: block;
-    width: 16px;
-    height: 0;
-    border-top: 2px dotted var(--pink);
-    transition: border-color 0.28s ease;
+.dot-row {
+    display: flex;
+    gap: 3px;
 }
 
-/* All three lines exactly equal width */
-.ham-line:nth-child(1),
-.ham-line:nth-child(2),
-.ham-line:nth-child(3) {
-    width: 16px;
+.dot {
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background: var(--grey, #606060);
+    transition: background-color 0.28s ease;
 }
 
 .menu-toggle {
@@ -1715,6 +1695,7 @@ html.hero-carousel-dragging * {
     overflow: hidden;
     border-radius: clamp(8px, 1.5vw, 16px);
     background: color-mix(in srgb, var(--bordergrey) 30%, transparent);
+    aspect-ratio: 4 / 3;
 }
 .tldr-gallery figure:first-child {
     grid-column: 1 / 3;
@@ -2641,24 +2622,31 @@ footer {
     grid-template-columns: repeat(4, auto);
 }
 
-/* X strip — spans a full row, as long as 4 buttons */
-.foot-links .px-link.px-link--wide {
+/* Wide strip — spans a full row, as long as 4 buttons */
+.px-link.px-link--wide {
     grid-column: 1 / -1;
     width: auto;
+    height: auto;
     flex-direction: row;
-    padding: 0 1.5rem;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.7rem 1.5rem;
     order: 99;
     border-radius: 16px;
 }
 
-.foot-links .px-link--wide .px-body {
+.px-link--wide .px-body {
     flex-direction: row;
     gap: 10px;
 }
 
-.foot-links .px-link--wide .px-icon {
+.px-link--wide .px-icon {
     width: 26px;
     height: 26px;
+}
+
+.px-link--wide .px-label {
+    font-size: 14px;
 }
 
 .foot-bottom {
@@ -2940,6 +2928,10 @@ footer {
     height: 62px;
     border-radius: 16px;
 }
+.foot-links .px-link--wide {
+    width: auto;
+    height: auto;
+}
 .foot-links .px-body {
     gap: 4px;
 }
@@ -2950,6 +2942,9 @@ footer {
 .foot-links .px-label {
     font-size: 10px;
     letter-spacing: 0.05em;
+}
+.foot-links .px-link--wide .px-label {
+    font-size: 14px;
 }
 
 /* ── Menu social strip — clearly separated from the menu list ── */
@@ -3149,19 +3144,16 @@ footer {
     display: flex;
     flex-direction: column;
     gap: clamp(1.25rem, 3vw, 2.25rem);
+    max-width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cs-figure {
     margin: 0;
     border-radius: clamp(14px, 3vw, 32px);
     overflow: hidden;
-    background: var(--bordergrey);
-    outline: 1.5px solid rgba(255, 255, 255, 0.38);
-    outline-offset: -1.5px;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.08),
-        0 2px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .cs-figure img {
@@ -3169,6 +3161,13 @@ footer {
     width: 100%;
     height: auto;
     object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cs-figure:hover img {
+    transform: scale(1.04);
 }
 
 .cs-cta {
@@ -3199,6 +3198,85 @@ footer {
     .cs-cta a {
         text-align: center;
     }
+    .cs-gallery {
+        max-width: 100%;
+    }
+}
+
+/* ── Image Lightbox Modal ── */
+.img-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.img-modal.is-open {
+    display: flex;
+}
+
+.img-modal-inner {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--pink, #ee8fa1);
+    flex-shrink: 0;
+}
+
+.img-modal-bar span {
+    font-family: "DinaRemasterII", monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f4f5ef;
+}
+
+.img-modal-close {
+    background: none;
+    border: none;
+    color: var(--grey, #999);
+    font-family: "DinaRemasterII", monospace;
+    font-size: 2.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.img-modal-close:hover {
+    color: var(--orange, #f48f6e);
+}
+
+@media (min-width: 769px) {
+    .img-modal-close {
+        margin-right: 3rem;
+    }
+}
+}
+
+.img-modal-img {
+    display: block;
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0 0 clamp(10px, 2vw, 20px) clamp(10px, 2vw, 20px);
 }
 
 /* ==========================================================================
@@ -5139,7 +5217,7 @@ footer {
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.trail-item:hover .trail-image img {
+.trail-image:hover img {
   transform: scale(1.04);
 }
 
@@ -5174,7 +5252,7 @@ footer {
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.trail-item:hover .trail-gallery figure img {
+.trail-gallery figure:hover img {
   transform: scale(1.04);
 }
 

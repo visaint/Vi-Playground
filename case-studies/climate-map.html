@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Climate Migration Map — Case Study | Vi Saint</title>
+        <meta name="description" content="An interactive historical climate migration map built with React and D3.js. Award-winning data visualization exploring how climate shaped human history." />
+        <meta name="author" content="Vi Saint" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:url" content="https://visaint.space/case-studies/climate-map.html" />
+        <meta property="og:title" content="Climate Migration Map — Case Study" />
+        <meta property="og:description" content="An interactive historical climate migration map built with React and D3.js." />
+        <meta property="og:image" content="https://visaint.space/images/climate.webp" />
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
+        <meta property="og:image:alt" content="Climate Migration Map — interactive data visualization by Vi Saint." />
+        <meta property="og:site_name" content="Vi Saint" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://visaint.space/case-studies/climate-map.html" />
+        <meta name="twitter:title" content="Climate Migration Map — Case Study" />
+        <meta name="twitter:description" content="An interactive historical climate migration map built with React and D3.js by Vi Saint." />
+        <meta name="twitter:image" content="https://visaint.space/images/climate.webp" />
+        <meta name="twitter:image:alt" content="Climate Migration Map — interactive data visualization by Vi Saint." />
+        <link rel="canonical" href="https://visaint.space/case-studies/climate-map.html" />
+        <link rel="icon" type="image/x-icon" href="../fav/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="../fav/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="../fav/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="../fav/apple-touch-icon.png" />
+        <link rel="manifest" href="../fav/site.webmanifest" />
+        <meta name="theme-color" content="#ee8fa1" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#F48F6E" media="(prefers-color-scheme: dark)" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Vi Saint" />
+        <link
+            rel="preload"
+            href="../fonts/libre-baskerville.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="../fonts/DinaRemasterII.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="../fonts/DinaRemasterII-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="../fonts/jacquard-12.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link rel="stylesheet" href="../styles.css" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+        <link rel="preconnect" href="https://unpkg.com" />
+        <script src="../components.js" defer></script>
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "@id": "https://visaint.space/#person",
+                "name": "Vi Saint",
+                "alternateName": "Viktor Sekovski",
+                "url": "https://visaint.space",
+                "image": "https://visaint.space/images/me-front.webp",
+                "email": "mailto:hello@visaint.space",
+                "sameAs": [
+                    "https://www.linkedin.com/in/vi-saint-130a33426/",
+                    "https://bsky.app/profile/visaint.bsky.social",
+                    "https://github.com/visaint",
+                    "https://codepen.io/visaint",
+                    "https://contra.com/viktorsekovski_8r714jwo/about",
+                    "https://www.instagram.com/visaintstudio/",
+                    "https://mastodon.social/@vis7",
+                    "https://x.com/visaintstudio",
+                    "https://notes.visaint.space"
+                ],
+                "jobTitle": "Creative Technologist",
+                "description": "Remote-first Creative Technologist creating accessible, premium digital experiences. Specializing in luxury product design, brand identity, and web development.",
+                "knowsAbout": [
+                    "Product Design",
+                    "UX Design",
+                    "UI Design",
+                    "Web Development",
+                    "Frontend Development",
+                    "Brand Identity",
+                    "Visual Design",
+                    "Creative Technology",
+                    "React",
+                    "Next.js",
+                    "JavaScript",
+                    "HTML",
+                    "CSS"
+                ],
+                "hasOccupation": {
+                    "@type": "Occupation",
+                    "name": "Creative Technologist",
+                    "occupationLocation": {
+                        "@type": "Country",
+                        "name": "Europe"
+                    },
+                    "description": "Creating end-to-end digital product experiences from research to launch, bridging high-end art direction with technical execution."
+                }
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://visaint.space/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Work",
+                        "item": "https://visaint.space/work.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Climate Migration Map",
+                        "item": "https://visaint.space/case-studies/climate-map.html"
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="case-study-page">
+        <div class="organic-bg" aria-hidden="true">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+                <div class="blob blob-3"></div>
+                <div class="blob blob-4"></div>
+                <div class="blob blob-5"></div>
+            </div>
+        <site-header></site-header>
+
+        <main id="main">
+            <article class="cs-article">
+                <header class="cs-hero">
+                    <h1 class="cs-title">Climate Migration Map</h1>
+                    <p class="cs-sub">Data Visualization · Interactive Map</p>
+                </header>
+
+                <p class="cs-lede">An interactive historical climate migration map showing how climate shaped human civilization — from the Out of Africa migration to the Bronze Age Collapse and beyond.</p>
+
+                <div class="cs-body">
+                    <p>Built for the Contra x Figma Config Makeathon, this project explores how climate has driven human migration throughout history. The map visualizes major climate-driven migrations using Open Historical Map data, with era-specific styling that shifts colors and borders to reflect each period.</p>
+                    <p>Starting from the Out of Africa migration, through the Bronze Age Collapse and the Sea Peoples, the Great Famine, and into modern climate change — each era is styled distinctly so the map itself tells the story. The challenge was loading heavy tile data fast enough to feel responsive, while layering rich historical context on top.</p>
+                    <p>The project pushed me into React and D3.js territory — tools I don't normally reach for — to handle the complexity of interactive mapping, tile loading, and dynamic overlays. Performance tuning the map tiles and reducing load-time black screens was a key battle.</p>
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-h2">Services</h2>
+                    <ul class="cs-services">
+                        <li>Interactive Data Visualization</li>
+                        <li>React &amp; D3.js Development</li>
+                        <li>Historical Map Styling</li>
+                        <li>UI/UX Design</li>
+                        <li>Performance Optimization</li>
+                    </ul>
+                </section>
+
+                <section class="cs-section">
+                    <h2 class="cs-h2">Selected Work</h2>
+                    <div class="cs-gallery">
+                        <figure class="cs-figure"><img src="../images/climate.webp" alt="Climate Migration Map globe view" loading="lazy" /></figure>
+                    </div>
+                </section>
+
+                <div class="cs-cta">
+                    <a href="../work.html" class="btn-pb">← Back to Work</a>
+                    <a href="https://climate-migration-map.vercel.app" class="btn-bo" target="_blank" rel="noopener noreferrer">Visit Live Site</a>
+                </div>
+            </article>
+
+            <site-footer></site-footer>
+            <script src="../anim-loader.js" data-main="../main.js"></script>
+        </main>
+    </body>
+</html>

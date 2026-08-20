@@ -133,7 +133,7 @@ const SVG_SPRITE = `
 </svg>`;
 
 /* ── Reusable pixel-grid HTML (links + icons) ── */
-function pixelGridHTML(blog = false) {
+function pixelGridHTML() {
   const cls = "pixel-grid";
   return `
 	<nav class="${cls}" aria-label="Social links">
@@ -202,18 +202,14 @@ function pixelGridHTML(blog = false) {
 	    </span>
 	    <span class="px-tip">Follow me on X</span>
 	  </a>
-	  ${
-	    blog
-	      ? `<a href="https://notes.visaint.space" class="px-link px-link--wide" style="--px-color:#ee8198"
+	  <a href="https://notes.visaint.space/blog/" class="px-link px-link--wide" style="--px-color:#ee8198"
 	    target="_blank" rel="noopener noreferrer" aria-label="Blog">
 	    <span class="px-body">
 	      <span class="px-icon"><svg><use href="#ic-blog"/></svg></span>
 	      <span class="px-label">Blog</span>
 	    </span>
 	    <span class="px-tip">Read my notes</span>
-	  </a>`
-	      : ""
-	  }
+	  </a>
 	</nav>`;
 }
 
@@ -232,17 +228,17 @@ ${SVG_SPRITE}
     </a>
   </div>
   <div class="nav-right">
-    <a href="./contact.html" class="btn-pb desktop-only">
+    <a href="/contact.html" class="btn-pb desktop-only">
       <span class="nav-label">contact</span>
       <svg class="icon-mobile" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-mail"/></svg>
     </a>
-    <a href="./work.html" class="btn-bo">
+    <a href="/work.html" class="btn-bo">
       <span class="nav-label">work</span>
     </a>
-    <a href="./services.html" class="btn-pb nav-services">
+    <a href="/services.html" class="btn-pb nav-services">
       <span class="nav-label">services</span>
     </a>
-    <a href="./about.html" class="btn-op">
+    <a href="/about.html" class="btn-op">
       <span class="nav-label">about</span>
     </a>
     <a href="https://notes.visaint.space" class="btn-bo desktop-only"
@@ -254,9 +250,15 @@ ${SVG_SPRITE}
   </div>
   <label id="menu-btn" for="menu-toggle" aria-label="Open menu">
     <span class="hamburger-icon" aria-hidden="true">
-      <span class="ham-line"></span>
-      <span class="ham-line"></span>
-      <span class="ham-line"></span>
+      <span class="dot-row">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </span>
+      <span class="dot-row">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </span>
+      <span class="dot-row">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </span>
     </span>
   </label>
 </nav>
@@ -304,7 +306,7 @@ ${SVG_SPRITE}
   </div>
 
   <div class="menu-social">
-    ${pixelGridHTML(false)}
+    ${pixelGridHTML()}
   </div>
 </div>
     `;
@@ -338,7 +340,7 @@ class SiteFooter extends HTMLElement {
       <a href="mailto:hello@visaint.space" class="foot-email">hello@visaint.space</a>
     </div>
     <div class="foot-links">
-      ${pixelGridHTML(false, true)}
+      ${pixelGridHTML()}
     </div>
   </div>
   <div class="foot-bottom">

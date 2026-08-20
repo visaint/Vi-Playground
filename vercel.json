@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/(styles.css|main.js|components.js|hero-carousel.js|anim-loader.js|skill-cards.js)",
+      "source": "/(styles.css|main.js|components.js|hero-carousel.js|404-carousel.js|anim-loader.js|skill-cards.js)",
       "headers": [
         {
           "key": "Cache-Control",
