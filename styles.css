@@ -2225,209 +2225,84 @@ body.js-enabled .chrome-scroll-section .text {
 }
 
 /* ==========================================================================
-   10. SKILLS, ABOUT & STORY
+   10. SKILLS GRID (static, no animation)
    ========================================================================== */
-.skill {
+/* ==========================================================================
+   10. SKILLS GRID (static, no animation)
+   ========================================================================== */
+.skills-grid {
     display: flex;
-    overflow: hidden;
-    gap: 1rem;
-    mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #fff 20%,
-        #fff 80%,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #fff 20%,
-        #fff 80%,
-        transparent
-    );
-    margin: 0.5rem 0;
-    opacity: 1;
-}
-.skill div {
-    display: flex;
-    animation: slide var(--t, 20s) linear infinite alternate;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.5rem clamp(24px, 4vw, 80px) 1rem;
 }
 
-/* Pill colour modifiers — Blue: critical skills · Pink: skills · Orange: software · Grey: misc/foundations */
-.skill span.pill-blue {
-    --pill-color: var(--blue);
-}
-.skill span.pill-pink {
-    --pill-color: var(--pink);
-}
-.skill span.pill-orange {
-    --pill-color: var(--orange);
-}
-.skill span.pill-grey {
-    --pill-color: var(--lightgrey);
-}
-
-.skill span {
+.skill-pill {
     display: inline-flex;
     align-items: center;
-    padding: 0.55em 1.2em;
-    border-radius: 999px;
     font-family: "DinaRemasterII", monospace;
-    font-size: clamp(0.75rem, 1vw, 1.1rem);
+    font-size: clamp(0.7rem, 0.9vw, 1rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     white-space: nowrap;
     line-height: 1;
-    color: var(--pill-color, var(--orange));
-    background: linear-gradient(
-        135deg,
-        color-mix(
-                in srgb,
-                #0f100a 72%,
-                color-mix(in srgb, var(--pill-color, var(--orange)) 40%, transparent)
-            )
-            0%,
-        color-mix(
-                in srgb,
-                #0f100a 78%,
-                color-mix(in srgb, var(--pill-color, var(--orange)) 28%, transparent)
-            )
-            50%,
-        color-mix(
-                in srgb,
-                #0f100a 72%,
-                color-mix(in srgb, var(--pill-color, var(--orange)) 35%, transparent)
-            )
-            100%
-    );
-    border: 1px solid color-mix(in srgb, var(--pill-color, var(--orange)) 38%, transparent);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    position: relative;
-    isolation: isolate;
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 0.5px color-mix(in srgb, var(--pill-color, var(--orange)) 20%, transparent) inset;
-    transition:
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-.skill span::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-        180deg,
-        rgba(244, 245, 239, 0.13) 0%,
-        rgba(244, 245, 239, 0.02) 45%,
-        transparent 65%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-.skill span::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 30px;
-    border-radius: 50%;
-    background: radial-gradient(
-        ellipse at 50% 85%,
-        color-mix(in srgb, var(--pill-color, var(--orange)) 70%, transparent) 0%,
-        color-mix(in srgb, var(--pill-color, var(--orange)) 45%, transparent) 45%,
-        transparent 75%
-    );
-    filter: blur(16px);
-    pointer-events: none;
-    z-index: -1;
-    animation: blobBreathe 4s ease-in-out infinite;
+    padding: 0.45em 1em;
+    border-radius: 999px;
+    color: var(--pill-color, var(--pink));
+    background: color-mix(in srgb, var(--pill-color, var(--pink)) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pill-color, var(--pink)) 28%, transparent);
 }
 
-/* Mobile: horizontal pill marquees — rows 1 & 3 drift right, the middle
-   row drifts left. All three start centred and stay on screen at all
-   times (the travel range keeps the strip overlapping the viewport). */
+/* Pill colour modifiers — Blue: critical skills · Pink: skills · Orange: software · Grey: misc/foundations */
+.skill-pill.pill-blue   { --pill-color: var(--blue); }
+.skill-pill.pill-pink   { --pill-color: var(--pink); }
+.skill-pill.pill-orange { --pill-color: var(--orange); }
+.skill-pill.pill-grey   { --pill-color: var(--lightgrey); }
+
+/* Desktop: long thin strip — wraps naturally */
+@media (min-width: 769px) {
+    .skills-grid {
+        max-width: 80vw;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile: compact, show only essential subset */
 @media (max-width: 600px) {
-    .skill {
-        margin: 0.35rem 0;
+    .skills-grid {
+        gap: 0.4rem;
+        padding: 0.5rem 1rem 1rem;
     }
-    .skill div {
-        display: flex;
-        width: max-content;
-        gap: 0.5rem;
-        animation: pills-right var(--t, 20s) linear infinite alternate;
+    .skill-pill {
+        font-size: 0.65rem;
+        padding: 0.4em 0.8em;
     }
-    .skill:nth-child(2) div {
-        animation-name: pills-left;
-    }
-    .skill span {
-        font-size: 0.75rem;
-        padding: 0.55em 1.1em;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    .skill span {
-        color: color-mix(in srgb, var(--pill-color, var(--orange)) 80%, #1a1a1a);
-        background: linear-gradient(
-            135deg,
-            color-mix(
-                    in srgb,
-                    #f4f5ef 82%,
-                    color-mix(in srgb, var(--pill-color, var(--orange)) 55%, transparent)
-                )
-                0%,
-            color-mix(
-                    in srgb,
-                    #f4f5ef 86%,
-                    color-mix(in srgb, var(--pill-color, var(--orange)) 38%, transparent)
-                )
-                50%,
-            color-mix(
-                    in srgb,
-                    #f4f5ef 82%,
-                    color-mix(in srgb, var(--pill-color, var(--orange)) 48%, transparent)
-                )
-                100%
-        );
-        border-color: color-mix(in srgb, var(--pill-color, var(--orange)) 45%, transparent);
-        box-shadow:
-            0 2px 8px color-mix(in srgb, var(--pill-color, var(--orange)) 10%, transparent),
-            inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    /* Hide secondary skills on mobile — keep ~25 core items (≈3 rows) */
+    .skill-pill:nth-child(5),   /* Premiere Pro */
+    .skill-pill:nth-child(6),   /* Affinity */
+    .skill-pill:nth-child(10),  /* Bootstrap */
+    .skill-pill:nth-child(11),  /* Material UI */
+    .skill-pill:nth-child(12),  /* Astro */
+    .skill-pill:nth-child(24),  /* Three JS */
+    .skill-pill:nth-child(25),  /* WebGL */
+    .skill-pill:nth-child(26),  /* GSAP */
+    .skill-pill:nth-child(27),  /* Vercel */
+    .skill-pill:nth-child(32),  /* Headless CMS */
+    .skill-pill:nth-child(35) { /* WooCommerce */
+        display: none;
     }
 }
 
-@keyframes slide {
-    0% {
-        transform: translateX(0);
+/* Huge screens: readable but not oversized */
+@media (min-width: 1920px) {
+    .skills-grid {
+        max-width: 70vw;
+        gap: 0.65rem;
     }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-/* Mobile pill marquees: start centred (50vw − half the strip), then drift
-   right (outer rows) or left (middle row) — never off-screen. */
-@keyframes pills-right {
-    from {
-        transform: translateX(calc(-50% + 50vw));
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes pills-left {
-    from {
-        transform: translateX(calc(-50% + 50vw));
-    }
-    to {
-        transform: translateX(calc(-100% + 100vw));
+    .skill-pill {
+        font-size: clamp(0.85rem, 0.9vw, 1.15rem);
     }
 }
 
@@ -4135,6 +4010,67 @@ footer {
     }
 }
 
+/* ── Extra-large screens (25″+) — cap font sizes and layout widths ── */
+@media (min-width: 1920px) {
+    h1 {
+        font-size: clamp(4rem, 5vw, 120px);
+    }
+    h2 {
+        font-size: clamp(3rem, 4vw, 96px);
+    }
+    h3 {
+        font-size: clamp(1.8rem, 2.4vw, 3.2rem);
+    }
+    h4 {
+        font-size: clamp(1.6rem, 2.2vw, 2.8rem);
+    }
+    h5 {
+        font-size: clamp(1.2rem, 1.3vw, 1.8rem);
+    }
+    h6 {
+        font-size: clamp(1rem, 1.1vw, 1.5rem);
+    }
+    .cs-title {
+        font-size: clamp(3rem, 4.5vw, 6rem);
+    }
+    .svc-name {
+        font-size: clamp(1.7rem, 2.4vw, 3rem);
+    }
+    .svc-items {
+        font-size: clamp(1rem, 1.3vw, 1.5rem);
+    }
+    .svc-slide-title {
+        font-size: clamp(1.35rem, 1.8vw, 2.1rem);
+    }
+    .svc-slide-text {
+        font-size: clamp(0.95rem, 1.1vw, 1.25rem);
+    }
+    .tools-section .svc-name {
+        font-size: clamp(1.6rem, 2.2vw, 2.8rem);
+    }
+    .tools-section .svc-items {
+        font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+    }
+    .systems-heading {
+        font-size: clamp(2.2rem, 3.2vw, 4rem);
+    }
+    .system-name {
+        font-size: clamp(1.8rem, 2.5vw, 3rem);
+    }
+    .work-toggle-btn {
+        font-size: clamp(1.1rem, 1.2vw, 1.5rem);
+    }
+    .svc-front {
+        min-height: clamp(280px, 36vh, 420px);
+    }
+    .tools-section .svc-front {
+        min-height: clamp(160px, 22vh, 260px);
+    }
+    .cs-article {
+        max-width: 52rem;
+    }
+}
+
 /* ==========================================================================
    15. CHROMA LIQUID GLASS BUTTONS
    ========================================================================== */
@@ -5376,13 +5312,13 @@ footer {
 
 .tools-section {
   padding: 0 clamp(24px, 4vw, 80px);
-  max-width: 90vw;
+  max-width: 1200px;
   margin: 0 auto 6vh;
 }
 
 .tools-section .svc-grid {
-  width: 90vw;
-  max-width: 90vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   grid-auto-rows: 1fr;
   border-top: none;
@@ -5798,13 +5734,16 @@ footer {
     inset 0 2px 0 rgba(255, 255, 255, 0.5),
     inset 0 -2px 0 rgba(0, 0, 0, 0.12);
   transform: translateY(-100%);
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.5s var(--ease), visibility 0s 0.5s;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .svc-toggle:checked + .svc-front + .svc-slide {
   transform: translateY(0);
   pointer-events: auto;
+  visibility: visible;
+  transition: transform 0.5s var(--ease), visibility 0s 0s;
 }
 
 .svc-slide--orange {

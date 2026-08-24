@@ -930,6 +930,24 @@ function initScrollAnimations() {
       },
     );
   }
+
+  // Skills grid (static pills — staggered entrance, fires once)
+  const skillsGrid = document.querySelector(".skills-grid");
+  if (skillsGrid) {
+    const pills = skillsGrid.querySelectorAll(".skill-pill");
+    gsap.fromTo(
+      pills,
+      { y: 16, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.025,
+        immediateRender: true,
+        ...defaults,
+        scrollTrigger: createTrigger(skillsGrid, "top 88%"),
+      },
+    );
+  }
 }
 
 // ===================================

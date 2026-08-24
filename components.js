@@ -167,7 +167,7 @@ function pixelGridHTML() {
 	      <span class="px-icon"><svg><use href="#ic-codepen"/></svg></span>
 	      <span class="px-label">CodePen</span>
 	    </span>
-	<span class="px-tip">My experiments</span>
+	<span class="px-tip">My web experiments</span>
 	  </a>
 	  <a href="https://contra.com/viktorsekovski_8r714jwo/about?r=viktorsekovski_8r714jwo"
 	    class="px-link" style="--px-color:#f48f6e"
@@ -176,7 +176,7 @@ function pixelGridHTML() {
 	      <span class="px-icon"><svg><use href="#ic-contra"/></svg></span>
 	      <span class="px-label">Contra</span>
 	    </span>
-	    <span class="px-tip">Hire me here</span>
+	    <span class="px-tip">Hire me here?</span>
 	  </a>
 	  <a href="https://www.instagram.com/visaintstudio/" class="px-link" style="--px-color:#e1306c"
 	    target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -184,7 +184,7 @@ function pixelGridHTML() {
 	      <span class="px-icon"><svg><use href="#ic-instagram"/></svg></span>
 	      <span class="px-label">Instagram</span>
 	    </span>
-	    <span class="px-tip">Follow my art</span>
+	    <span class="px-tip">The Video Feed</span>
 	  </a>
 	  <a href="https://mastodon.social/@vis7" class="px-link" style="--px-color:#6364FF"
 	    target="_blank" rel="noopener noreferrer" aria-label="Mastodon">
@@ -192,7 +192,7 @@ function pixelGridHTML() {
 	      <span class="px-icon"><svg><use href="#ic-mastodon"/></svg></span>
 	      <span class="px-label">Mastodon</span>
 	    </span>
-	    <span class="px-tip">Find me on Mastodon</span>
+	    <span class="px-tip">Find me Fedi</span>
 	  </a>
 	  <a href="https://x.com/visaintstudio" class="px-link" style="--px-color:#8b949e"
 	    target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
@@ -200,7 +200,7 @@ function pixelGridHTML() {
 	      <span class="px-icon"><svg><use href="#ic-x"/></svg></span>
 	      <span class="px-label">X</span>
 	    </span>
-	    <span class="px-tip">Follow me on X</span>
+	    <span class="px-tip">Sadly Y'all Here </span>
 	  </a>
 	  <a href="https://notes.visaint.space/blog/" class="px-link px-link--wide" style="--px-color:#ee8198"
 	    target="_blank" rel="noopener noreferrer" aria-label="Blog">
